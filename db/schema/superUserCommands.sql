@@ -1,0 +1,3 @@
+CREATE LANGUAGE plpgsql;
+CREATE EXTENSION pgcrypto;
+
