@@ -51,7 +51,7 @@ func TeacherLogin(resp http.ResponseWriter, req *http.Request) {
 
 	if checkQuery(err) {
 		session := sessions.GetSession(req)
-		session.Set("teacher", t)
+		session.Set("teacher", &t)
 		teacherJson := types.TeacherJson{types.CreateStandardJson(req), t}
 		RenderJson(resp, teacherJson)
 	} else {
