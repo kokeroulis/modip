@@ -5,7 +5,6 @@ import (
 	"net/url"
 	"io/ioutil"
 	"encoding/json"
-	"fmt"
 )
 
 func NewRequest(url string, form url.Values) []byte {
@@ -49,7 +48,6 @@ func GetToJson(path string, v interface{}) {
 
 func PostToJson(path string, form url.Values, v interface{}) {
 	body := NewRequest(path, form)
-	fmt.Println(string(body))
 	err := json.Unmarshal(body, v)
 	if err != nil {
 		panic(err)
