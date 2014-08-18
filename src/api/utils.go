@@ -3,6 +3,7 @@ package api
 import (
 	"net/http"
 	"database/sql"
+	"fmt"
 )
 
 func RenderJson(resp http.ResponseWriter, json interface{}) {
@@ -10,7 +11,10 @@ func RenderJson(resp http.ResponseWriter, json interface{}) {
 }
 
 func checkQuery(err error) (bool) {
-	if err == sql.ErrNoRows || err != nil {
+	if err == sql.ErrNoRows {
+		return false
+	} else if err != nil {
+		fmt.Println(err)
 		return false
 	} else {
 		return true
