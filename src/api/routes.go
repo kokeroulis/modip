@@ -2,20 +2,18 @@ package api
 
 import (
 	"github.com/codegangsta/negroni"
-	"github.com/goincremental/negroni-sessions"
 	"github.com/gorilla/mux"
 	"net/http"
+	"types"
 )
 
-type Handler func(resp http.ResponseWriter, req *http.Request)
-
-type Authorize struct {
+type authorize struct {
 	handler func(resp http.ResponseWriter, req *http.Request)
 }
 
-func (auth *Authorize) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
-	session := sessions.GetSession(req)
-	if session.Get("foo") == nil {
+func (auth authorize) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
+	teacher := types.GetTeacherFromSession(req)
+	if teacher.Id == 0 {
 		Render.JSON(resp, http.StatusForbidden, map[string]string{"error": "Access denied"})
 		return
 	}
@@ -28,6 +26,7 @@ func setupRoutes(n *negroni.Negroni) {
 
 	router.HandleFunc("/", Login).Methods("GET")
 	router.HandleFunc("/teacher/login",TeacherLogin).Methods("POST")
+	router.Handle("/paper/add", authorize{PaperAdd}).Methods("POST")
 
 	n.UseHandler(router)
 }
