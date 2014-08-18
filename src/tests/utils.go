@@ -3,20 +3,33 @@ package tests
 import (
 	"net/http"
 	"net/url"
+	"net/http/cookiejar"
 	"io/ioutil"
 	"encoding/json"
+	"types"
 )
 
-func NewRequest(url string, form url.Values) []byte {
+func testTeacher() types.Teacher {
+	return types.Teacher{1, "superteacher1", "superteacher1@teilar.gr",
+						 types.Department{1, "T.P.T."}}
+}
 
-	client := http.Client{}
+func testAuthJson() types.AuthJson {
+	return types.AuthJson{1, "superteacher1@teilar.gr"}
+}
+
+func testOkCommonJson() types.CommonJson {
+	return types.CommonJson{testAuthJson(), types.ErrorJson{}}
+}
+
+func NewRequest(client *http.Client, path string, form url.Values) []byte {
 	var resp *http.Response
 	var err error
 
 	if len(form) == 0 {
-		resp, err = client.Get(url);
+		resp, err = client.Get(path);
 	} else {
-		resp, err = client.PostForm(url, form)
+		resp, err = client.PostForm(path, form)
 	}
 
 	if (err != nil) {
@@ -35,7 +48,7 @@ func NewRequest(url string, form url.Values) []byte {
 
 func Get(path string) []byte {
 	form := url.Values{}
-	return NewRequest(path, form)
+	return NewRequest(&http.Client{}, path, form)
 }
 
 func GetToJson(path string, v interface{}) {
@@ -47,7 +60,24 @@ func GetToJson(path string, v interface{}) {
 }
 
 func PostToJson(path string, form url.Values, v interface{}) {
-	body := NewRequest(path, form)
+	body := NewRequest(&http.Client{}, path, form)
+	err := json.Unmarshal(body, v)
+	if err != nil {
+		panic(err)
+	}
+}
+
+func PostToJsonAsTeacher(path string, form url.Values, v interface{}) {
+	cookieJar, _ := cookiejar.New(nil)
+    client := &http.Client{Jar: cookieJar}
+
+	f := url.Values{}
+	f.Add("username", "superteacher1@teilar.gr")
+	f.Add("password", "superteacher1")
+
+	_ = NewRequest(client, "http://localhost:3001/teacher/login", f)
+
+	body := NewRequest(client, path, form)
 	err := json.Unmarshal(body, v)
 	if err != nil {
 		panic(err)
