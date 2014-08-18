@@ -11,3 +11,7 @@ func AuthFailed() ErrorJson {
 	return ErrorJson{http.StatusUnauthorized, "Authorization Failed"}
 }
 
+func AlreadyExists() ErrorJson {
+	return ErrorJson{http.StatusOK, "AlreadyExists"}
+}
+

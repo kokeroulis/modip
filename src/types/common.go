@@ -3,6 +3,7 @@ package types
 import (
 	"net/http"
 	"github.com/goincremental/negroni-sessions"
+	"fmt"
 )
 
 type AuthJson struct {
@@ -15,18 +16,23 @@ type CommonJson struct {
 	Error ErrorJson `json:"error"`
 }
 
-func createAuth(req *http.Request) AuthJson {
+func GetTeacherFromSession(req *http.Request) Teacher {
 	t := sessions.GetSession(req).Get("teacher")
-
-	teacher := Teacher{}
+	teacher := &Teacher{}
 	if t != nil {
 		ok := false
-		teacher, ok = t.(Teacher)
-
+		teacher, ok = t.(*Teacher)
 		if !ok {
-			panic("Type assertion failed")
+			fmt.Println("Type assertion failed")
+			fmt.Println("Unauthorized request")
 		}
 	}
+
+	return *teacher
+}
+
+func createAuth(req *http.Request) AuthJson {
+	teacher := GetTeacherFromSession(req)
 
 	auth := AuthJson{teacher.Id, teacher.Email}
 
