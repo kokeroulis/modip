@@ -12,7 +12,7 @@ func teacherLogin(username string, password string, result interface{}, expected
 	form.Add("username", username)
 	form.Add("password", password)
 
-	PostToJson("http://localhost:3000/teacher/login", form, result)
+	PostToJson("http://localhost:3001/teacher/login", form, result)
 
 	So(result, ShouldResemble, expected)
 }
