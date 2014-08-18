@@ -32,7 +32,7 @@ func init() {
 	// types which aren't supported by default
 	// from the god package so we have to
 	// register it manually
-	gob.Register(&types.TeacherJson{})
+	gob.Register(&types.Teacher{})
 }
 
 func TeacherLogin(resp http.ResponseWriter, req *http.Request) {
@@ -41,21 +41,23 @@ func TeacherLogin(resp http.ResponseWriter, req *http.Request) {
         return
     }
 
-	j := types.TeacherJson{}
+	t := types.Teacher{}
 	query := `SELECT id, name, email, departmentId, departmentName
 			  FROM teacher_auth($1, $2)`
 
-	err := Db.QueryRow(query, teacherForm.Username, teacherForm.Password).Scan(&j.Id,
-																			   &j.Name,
-																			   &j.Email,
-																			   &j.Department.Id,
-																			   &j.Department.Name)
+	err := Db.QueryRow(query, teacherForm.Username, teacherForm.Password).
+		   Scan(&t.Id, &t.Name, &t.Email, &t.Department.Id, &t.Department.Name)
+
+
 	if checkQuery(err) {
 		session := sessions.GetSession(req)
-		session.Set("teacher", j)
-		RenderJson(resp, j)
+		session.Set("teacher", t)
+		teacherJson := types.TeacherJson{types.CreateStandardJson(req), t}
+		RenderJson(resp, teacherJson)
 	} else {
-		RenderError(authFailed, resp)
+		errorJson := types.AuthFailed()
+		teacherJson := types.TeacherJson{types.CreateStandardJsonErrorJson(req, errorJson), t}
+		Render.JSON(resp, errorJson.Code, teacherJson)
 	}
 }
 
