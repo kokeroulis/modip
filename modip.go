@@ -9,6 +9,6 @@ func main() {
 	n := negroni.Classic()
 
 	api.SetupApi(n)
-	n.Run(":3000")
+	n.Run(":3001")
 }
 
