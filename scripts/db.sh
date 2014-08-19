@@ -26,6 +26,9 @@ DATABASE_FILES=("schema/department.sql"
 
                 "schema/paper.sql"
                 "api/paper.sql"
+
+                "schema/book.sql"
+                "api/book.sql"
 )
 
 if [ $1 == "development" ]; then
