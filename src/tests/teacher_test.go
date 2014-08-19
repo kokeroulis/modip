@@ -22,6 +22,10 @@ func TestTeacher(t *testing.T) {
 			Convey("Should Fail", func() { addBookFail() })
 		})
 
+		Convey("Info", func() {
+			Convey("Should succeed", func() { teacherInfoOk() })
+		})
+
     })
 }
 

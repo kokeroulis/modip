@@ -47,3 +47,8 @@ func CreateStandardJsonErrorJson(req *http.Request, errorJson ErrorJson) CommonJ
 	return CommonJson{createAuth(req), errorJson}
 }
 
+type BookOrPaperInfo struct {
+	Id    int    `json:"id"`
+	Title string `json:"title"`
+}
+

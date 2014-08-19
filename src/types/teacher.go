@@ -12,3 +12,14 @@ type TeacherJson struct {
 	Teacher Teacher `json:"teacher"`
 }
 
+type TeacherInfo struct {
+	Teacher Teacher           `json:"teacher"`
+	Books   []BookOrPaperInfo `json:"books"`
+	Papers  []BookOrPaperInfo `json:"papers"`
+}
+
+type TeacherInfoJson struct {
+	CommonJson  CommonJson
+	TeacherInfo TeacherInfo `json:"teacher"`
+}
+

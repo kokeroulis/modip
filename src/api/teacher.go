@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"encoding/gob"
 	"types"
+	"fmt"
 )
 
 type TeacherForm struct {
@@ -59,5 +60,50 @@ func TeacherLogin(resp http.ResponseWriter, req *http.Request) {
 		teacherJson := types.TeacherJson{types.CreateStandardJsonErrorJson(req, errorJson), t}
 		Render.JSON(resp, errorJson.Code, teacherJson)
 	}
+}
+
+func retrieveInfo(teacherId int, query string, channel chan []types.BookOrPaperInfo) {
+	list := []types.BookOrPaperInfo{}
+	rows, err := Db.Query(query, teacherId)
+
+   if err != nil {
+		fmt.Println(err)
+    }
+
+    defer rows.Close()
+
+	for rows.Next() {
+		it := types.BookOrPaperInfo{}
+
+		if err := rows.Scan(&it.Id, &it.Title); err != nil {
+			fmt.Println(err)
+		} else {
+			list = append(list, it)
+		}
+    }
+
+	if err := rows.Err(); err != nil {
+		fmt.Println(err)
+    }
+
+	channel <- list
+}
+
+func TeacherInfo(resp http.ResponseWriter, req *http.Request) {
+	teacher := types.GetTeacherFromSession(req)
+
+	books := make(chan []types.BookOrPaperInfo)
+	booksQuery := `SELECT id, title FROM book WHERE teacher = $1`
+
+	papers := make(chan []types.BookOrPaperInfo)
+	papersQuery := `SELECT id, title FROM paper WHERE teacher = $1`
+
+	go retrieveInfo(teacher.Id, booksQuery, books)
+	go retrieveInfo(teacher.Id, papersQuery, papers)
+
+	info := types.TeacherInfo{teacher, <-books, <-papers}
+	infoJson := types.TeacherInfoJson{types.CreateStandardJson(req), info}
+
+	RenderJson(resp, infoJson)
 }
 

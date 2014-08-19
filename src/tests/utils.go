@@ -67,17 +67,34 @@ func PostToJson(path string, form url.Values, v interface{}) {
 	}
 }
 
-func PostToJsonAsTeacher(path string, form url.Values, v interface{}) {
-	cookieJar, _ := cookiejar.New(nil)
-    client := &http.Client{Jar: cookieJar}
-
+func loginAsTeacher(client *http.Client) {
 	f := url.Values{}
 	f.Add("username", "superteacher1@teilar.gr")
 	f.Add("password", "superteacher1")
 
 	_ = NewRequest(client, "http://localhost:3001/teacher/login", f)
+}
+
+func PostToJsonAsTeacher(path string, form url.Values, v interface{}) {
+	cookieJar, _ := cookiejar.New(nil)
+    client := &http.Client{Jar: cookieJar}
+
+	loginAsTeacher(client)
 
 	body := NewRequest(client, path, form)
+	err := json.Unmarshal(body, v)
+	if err != nil {
+		panic(err)
+	}
+}
+
+func GetToJsonAsTeacher(path string, v interface{}) {
+	cookieJar, _ := cookiejar.New(nil)
+    client := &http.Client{Jar: cookieJar}
+
+	loginAsTeacher(client)
+
+	body := NewRequest(client, path, url.Values{})
 	err := json.Unmarshal(body, v)
 	if err != nil {
 		panic(err)
