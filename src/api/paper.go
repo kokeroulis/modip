@@ -39,7 +39,10 @@ func PaperAdd(resp http.ResponseWriter, req *http.Request) {
 	err := Db.QueryRow(query, paperForm.Title, teacher.Id).
 		   Scan(&p.Id, &p.Title, &alreadyExists)
 
-	if !checkQuery(err) || alreadyExists {
+
+	var dbError, noRows = checkQuery(err, resp, req, query)
+
+	if dbError || noRows || alreadyExists {
 		errorJson := types.AlreadyExists()
 		paperJson = types.PaperJson{types.CreateStandardJsonErrorJson(req, errorJson), types.Paper{}}
 		Render.JSON(resp, errorJson.Code, paperJson)

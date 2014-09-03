@@ -39,7 +39,9 @@ func BookAdd(resp http.ResponseWriter, req *http.Request) {
 	err := Db.QueryRow(query, BookForm.Title, teacher.Id).
 		   Scan(&b.Id, &b.Title, &alreadyExists)
 
-	if !checkQuery(err) || alreadyExists {
+	var dbError, noRows = checkQuery(err, resp, req, query)
+
+	if dbError || noRows || alreadyExists {
 		errorJson := types.AlreadyExists()
 		bookJson = types.BookJson{types.CreateStandardJsonErrorJson(req, errorJson), types.Book{}}
 		Render.JSON(resp, errorJson.Code, bookJson)
