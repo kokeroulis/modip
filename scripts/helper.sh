@@ -30,13 +30,17 @@ install() {
         echo "Installing: $i"
         GOPATH=$gopath go get gopkg.in/$i
     done
+
+    _build_tools
 }
 
 run() {
     GOPATH=$gopath:$PWD go run modip.go
 }
 
-build_tools() {
+_build_tools() {
+    echo "Installing build tools"
+
     GOPATH=$gopath GOBIN=$gopath/bin go install tools/modip-importer.go
 }
 
@@ -53,8 +57,6 @@ if [ $1 == "install" ]; then
     install
 elif [ $1 == "run" ]; then
     run
-elif [ $1 == "build-tools" ]; then
-    build_tools
 elif [ $1 == "test" ]; then
     _gopath=$gopath:$PWD
 

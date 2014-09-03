@@ -6,10 +6,6 @@ install:
 	@./scripts/helper.sh install
 .PHONY: install
 
-build-tools:
-	@./scripts/helper.sh build-tools
-.PHONY: build-tools
-
 test:
 	@./scripts/helper.sh test
 .PHONY: test
