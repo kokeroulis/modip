@@ -15,3 +15,7 @@ func AlreadyExists() ErrorJson {
 	return ErrorJson{http.StatusOK, "AlreadyExists"}
 }
 
+func DbError() ErrorJson {
+	return ErrorJson{http.StatusOK, "DbError"}
+}
+
