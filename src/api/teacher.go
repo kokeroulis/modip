@@ -43,15 +43,21 @@ func TeacherLogin(resp http.ResponseWriter, req *http.Request) {
     }
 
 	t := types.Teacher{}
-	query := `SELECT id, name, email, departmentId, departmentName
+	query := `SELECT id, name, email, departmentId, departmentName, authFailed
 			  FROM teacher_auth($1, $2)`
 
+	var authFailed bool
+
 	err := Db.QueryRow(query, teacherForm.Username, teacherForm.Password).
-		   Scan(&t.Id, &t.Name, &t.Email, &t.Department.Id, &t.Department.Name)
+		   Scan(&t.Id, &t.Name, &t.Email, &t.Department.Id, &t.Department.Name, &authFailed)
 
 	var dbError, noRows = checkQuery(err, resp, req, query)
 
-	if !dbError && !noRows {
+	if dbError {
+		return
+	}
+
+	if !noRows && !authFailed {
 		session := sessions.GetSession(req)
 		session.Set("teacher", &t)
 		teacherJson := types.TeacherJson{types.CreateStandardJson(req), t}

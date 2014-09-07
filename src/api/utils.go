@@ -27,6 +27,7 @@ func checkQuery(err error, resp http.ResponseWriter,
 		fmt.Println(err)
 		dbError = true
 		noRows = true
+		renderDbError(resp, req)
 	} else {
 		noRows = false
 		dbError = false
