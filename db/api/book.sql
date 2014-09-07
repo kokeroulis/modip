@@ -4,6 +4,9 @@ CREATE OR REPLACE FUNCTION book_add(bookTitle text, teacherId int, OUT id int,
 DECLARE
     bookRecord record;
 BEGIN
+	id := 0;
+	title:= '';
+
     PERFORM * FROM book AS p WHERE bookTitle = p.title;
 
     IF FOUND THEN

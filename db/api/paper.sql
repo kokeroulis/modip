@@ -4,6 +4,9 @@ CREATE OR REPLACE FUNCTION paper_add(paperTitle text, teacherId int, OUT id int,
 DECLARE
     paperRecord record;
 BEGIN
+    id := 0;
+    title := '';
+
     PERFORM * FROM paper AS p WHERE paperTitle = p.title;
 
     IF FOUND THEN

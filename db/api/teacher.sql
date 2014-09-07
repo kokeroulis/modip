@@ -2,11 +2,19 @@ CREATE OR REPLACE FUNCTION teacher_auth(teacherEmail text, passwordCandidate tex
                                                                                    OUT name text,
                                                                                    OUT email text,
                                                                                    OUT departmentName text,
-                                                                                   OUT departmentId int) AS $$
+                                                                                   OUT departmentId int,
+                                                                                   OUT authFailed boolean) AS $$
 DECLARE
     teacherPassword text;
     teacherRecord record;
 BEGIN
+    id := 0;
+    name := '';
+    email := '';
+    departmentName := '';
+    departmentId := 0;
+    authFailed := TRUE;
+
     SELECT INTO teacherPassword password FROM teacher AS t WHERE teacherEmail = t.email;
 
     IF NOT FOUND THEN
@@ -26,6 +34,7 @@ BEGIN
     email := teacherRecord.email;
     departmentName := teacherRecord.departmentName;
     departmentId := teacherRecord.departmentId;
+    authFailed := FALSE;
 END;
 $$ LANGUAGE plpgsql;
 
