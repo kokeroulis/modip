@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"database/sql"
 	"fmt"
-	"types"
+	"github.com/kokeroulis/modip/types"
 )
 
 func RenderJson(resp http.ResponseWriter, json interface{}) {

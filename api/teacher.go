@@ -5,7 +5,7 @@ import (
 	"github.com/mholt/binding"
 	"net/http"
 	"encoding/gob"
-	"types"
+	"github.com/kokeroulis/modip/types"
 	"fmt"
 )
 

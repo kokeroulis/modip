@@ -3,7 +3,7 @@ package tests
 import (
 	"net/url"
 	. "github.com/smartystreets/goconvey/convey"
-	"types"
+	"github.com/kokeroulis/modip/types"
 )
 
 const bookTitle = "My Super book"

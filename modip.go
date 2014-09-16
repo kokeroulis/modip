@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/codegangsta/negroni"
-	"api"
+	"github.com/kokeroulis/modip/api"
 )
 
 func main() {

@@ -4,7 +4,7 @@ import (
 	"github.com/codegangsta/negroni"
 	"github.com/gorilla/mux"
 	"net/http"
-	"types"
+	"github.com/kokeroulis/modip/types"
 )
 
 type authorize struct {

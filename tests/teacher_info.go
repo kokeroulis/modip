@@ -2,7 +2,7 @@ package tests
 
 import (
 	. "github.com/smartystreets/goconvey/convey"
-	"types"
+	"github.com/kokeroulis/modip/types"
 )
 
 func teacherInfoOk() {

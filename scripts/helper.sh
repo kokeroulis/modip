@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
-gopath=$PWD/tmp
+gopath=$HOME/.modip-build
+gobin=$PWD/bin
+p=$gopath/src/github.com/kokeroulis
+
 
 install() {
-
-
     if [ -d $gopath ]; then
         echo "Please remove $gopath"
         exit 1
@@ -31,21 +32,21 @@ install() {
         GOPATH=$gopath go get gopkg.in/$i
     done
 
-    _build_tools
+    p=$gopath/src/github.com/kokeroulis
+
+    if [ ! -d $p ]; then
+        mkdir -p $p
+    fi
+
+    ln -sf $PWD $p/modip
 }
 
 run() {
-    GOPATH=$gopath:$PWD go run modip.go
-}
-
-_build_tools() {
-    echo "Installing build tools"
-
-    GOPATH=$gopath GOBIN=$gopath/bin go install tools/modip-importer.go
+    GOPATH=$gopath go run modip.go
 }
 
 testdata() {
-    $gopath/bin/modip-importer --data=testdata.json
+    GOPATH=$gopath go run tools/modip-importer.go --data=testdata.json
 }
 
 if [ -z $1 ]; then
@@ -58,10 +59,8 @@ if [ $1 == "install" ]; then
 elif [ $1 == "run" ]; then
     run
 elif [ $1 == "test" ]; then
-    _gopath=$gopath:$PWD
-
-    pushd src/ > /dev/null
-    GOPATH=$_gopath go test -v tests
+    pushd $p > /dev/null
+    GOPATH=$gopath go test -v github.com/kokeroulis/modip/tests
     popd > /dev/null
 elif [ $1 == "testdata" ]; then
     testdata

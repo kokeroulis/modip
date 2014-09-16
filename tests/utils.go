@@ -6,7 +6,7 @@ import (
 	"net/http/cookiejar"
 	"io/ioutil"
 	"encoding/json"
-	"types"
+	"github.com/kokeroulis/modip/types"
 )
 
 func testTeacher() types.Teacher {

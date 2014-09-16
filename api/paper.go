@@ -3,7 +3,7 @@ package api
 import (
 	"github.com/mholt/binding"
 	"net/http"
-	"types"
+	"github.com/kokeroulis/modip/types"
 )
 
 type PaperForm struct {
