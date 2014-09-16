@@ -10,6 +10,10 @@ test:
 	@./scripts/helper.sh test
 .PHONY: test
 
+test-web:
+	@./scripts/helper.sh test-web
+.PHONY: test-web
+
 db-create-development:
 	@./scripts/db.sh development
 	@./scripts/helper.sh testdata

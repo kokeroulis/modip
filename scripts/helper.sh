@@ -64,5 +64,7 @@ elif [ $1 == "test" ]; then
     popd > /dev/null
 elif [ $1 == "testdata" ]; then
     testdata
+elif [ $1 == "test-web" ]; then
+    GOPATH=$gopath $gopath/bin/goconvey
 fi
 
