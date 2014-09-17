@@ -1,8 +1,8 @@
 package api
 
 import (
-	"net/http"
 	"io/ioutil"
+	"net/http"
 )
 
 func Index(resp http.ResponseWriter, req *http.Request) {
@@ -14,4 +14,3 @@ func Index(resp http.ResponseWriter, req *http.Request) {
 
 	resp.Write(indexContents)
 }
-

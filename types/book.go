@@ -8,6 +8,5 @@ type Book struct {
 
 type BookJson struct {
 	Common CommonJson
-	Book   Book       `json:"book"`
+	Book   Book `json:"book"`
 }
-

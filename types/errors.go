@@ -18,4 +18,3 @@ func AlreadyExists() ErrorJson {
 func DbError() ErrorJson {
 	return ErrorJson{http.StatusOK, "DbError"}
 }
-

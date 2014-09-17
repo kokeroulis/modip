@@ -1,10 +1,10 @@
 package tests
 
 import (
-	"net/url"
-	. "github.com/smartystreets/goconvey/convey"
+	_ "fmt"
 	"github.com/kokeroulis/modip/types"
-	_"fmt"
+	. "github.com/smartystreets/goconvey/convey"
+	"net/url"
 )
 
 func teacherLogin(username string, password string, result interface{}, expected interface{}) {
@@ -19,7 +19,7 @@ func teacherLogin(username string, password string, result interface{}, expected
 
 func teacherLoginOk() {
 	t := types.Teacher{1, "superteacher1", "superteacher1@teilar.gr",
-					   types.Department{1, "T.P.T."}}
+		types.Department{1, "T.P.T."}}
 
 	expected := &types.TeacherJson{
 		types.CommonJson{
@@ -47,4 +47,3 @@ func teacherLoginFail() {
 	result := &types.TeacherJson{}
 	teacherLogin("invalid", "invalid", result, expected)
 }
-

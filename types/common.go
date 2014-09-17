@@ -1,9 +1,9 @@
 package types
 
 import (
-	"net/http"
-	"github.com/goincremental/negroni-sessions"
 	"fmt"
+	"github.com/goincremental/negroni-sessions"
+	"net/http"
 )
 
 type AuthJson struct {
@@ -51,4 +51,3 @@ type BookOrPaperInfo struct {
 	Id    int    `json:"id"`
 	Title string `json:"title"`
 }
-

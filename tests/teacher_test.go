@@ -1,13 +1,13 @@
 package tests
 
 import (
-	"testing"
 	. "github.com/smartystreets/goconvey/convey"
+	"testing"
 )
 
 func TestTeacher(t *testing.T) {
-    Convey("Teacher", t, func() {
-        Convey("Auth", func() {
+	Convey("Teacher", t, func() {
+		Convey("Auth", func() {
 			Convey("Should succeed", func() { teacherLoginOk() })
 			Convey("Should Fail", func() { teacherLoginFail() })
 		})
@@ -26,6 +26,5 @@ func TestTeacher(t *testing.T) {
 			Convey("Should succeed", func() { teacherInfoOk() })
 		})
 
-    })
+	})
 }
-

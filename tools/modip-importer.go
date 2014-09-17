@@ -1,18 +1,18 @@
 package main
 
 import (
-	_ "github.com/lib/pq"
 	"database/sql"
-	"fmt"
-	"io/ioutil"
-	"flag"
 	"encoding/json"
+	"flag"
+	"fmt"
+	_ "github.com/lib/pq"
+	"io/ioutil"
 )
 
 type teacher struct {
-	Name       string
-	Email      string
-	Password   string
+	Name     string
+	Email    string
+	Password string
 }
 
 type teacherDb struct {
@@ -49,16 +49,16 @@ func setupDb() *sql.DB {
 	return db
 }
 
-func checkQuery(err error) (bool) {
+func checkQuery(err error) bool {
 	switch {
-    case err == sql.ErrNoRows:
+	case err == sql.ErrNoRows:
 		return false
-    case err != nil:
+	case err != nil:
 		panic(err)
 		return false
-    default:
+	default:
 		return true
-    }
+	}
 }
 
 func populateDb(data jsonData) {
@@ -66,7 +66,7 @@ func populateDb(data jsonData) {
 	for _, department := range data.Departments {
 
 		var departmentId int
-		err := db.QueryRow("SELECT id FROM department WHERE name=$1", department.Name).Scan(&departmentId);
+		err := db.QueryRow("SELECT id FROM department WHERE name=$1", department.Name).Scan(&departmentId)
 		if !checkQuery(err) {
 			// department doesn't exist, create one
 			err := db.QueryRow("INSERT INTO department (name) VALUES ($1) RETURNING id", department.Name).Scan(&departmentId)
@@ -136,4 +136,3 @@ func main() {
 
 	populateDb(j)
 }
-

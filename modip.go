@@ -11,4 +11,3 @@ func main() {
 	api.SetupApi(n)
 	n.Run(":3001")
 }
-

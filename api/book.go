@@ -1,9 +1,9 @@
 package api
 
 import (
+	"github.com/kokeroulis/modip/types"
 	"github.com/mholt/binding"
 	"net/http"
-	"github.com/kokeroulis/modip/types"
 )
 
 type BookForm struct {
@@ -11,19 +11,19 @@ type BookForm struct {
 }
 
 func (p *BookForm) FieldMap() binding.FieldMap {
-    return binding.FieldMap{
+	return binding.FieldMap{
 		&p.Title: binding.Field{
-			Form:    "title",
+			Form:     "title",
 			Required: true,
-        },
-    }
+		},
+	}
 }
 
 func BookAdd(resp http.ResponseWriter, req *http.Request) {
 	BookForm := &BookForm{}
-    if binding.Bind(req, BookForm).Handle(resp) {
-        return
-    }
+	if binding.Bind(req, BookForm).Handle(resp) {
+		return
+	}
 
 	teacher := types.GetTeacherFromSession(req)
 	b := types.Book{}
@@ -37,7 +37,7 @@ func BookAdd(resp http.ResponseWriter, req *http.Request) {
 			  FROM book_add($1, $2)`
 
 	err := Db.QueryRow(query, BookForm.Title, teacher.Id).
-		   Scan(&b.Id, &b.Title, &alreadyExists)
+		Scan(&b.Id, &b.Title, &alreadyExists)
 
 	var dbError, noRows = checkQuery(err, resp, req, query)
 
@@ -54,4 +54,3 @@ func BookAdd(resp http.ResponseWriter, req *http.Request) {
 		RenderJson(resp, bookJson)
 	}
 }
-

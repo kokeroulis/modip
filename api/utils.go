@@ -1,10 +1,10 @@
 package api
 
 import (
-	"net/http"
 	"database/sql"
 	"fmt"
 	"github.com/kokeroulis/modip/types"
+	"net/http"
 )
 
 func RenderJson(resp http.ResponseWriter, json interface{}) {
@@ -15,7 +15,7 @@ func RenderJson(resp http.ResponseWriter, json interface{}) {
 // debugging purposes.
 // So we will leave them as parameters
 func checkQuery(err error, resp http.ResponseWriter,
-				req *http.Request, query string) (bool, bool) {
+	req *http.Request, query string) (bool, bool) {
 	var noRows bool
 	var dbError bool
 
@@ -41,4 +41,3 @@ func renderDbError(resp http.ResponseWriter, req *http.Request) {
 	dbErrorJson := types.CreateStandardJsonErrorJson(req, errorJson)
 	Render.JSON(resp, errorJson.Code, dbErrorJson)
 }
-

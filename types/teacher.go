@@ -22,4 +22,3 @@ type TeacherInfoJson struct {
 	CommonJson  CommonJson
 	TeacherInfo TeacherInfo `json:"teacher"`
 }
-

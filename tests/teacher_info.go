@@ -1,8 +1,8 @@
 package tests
 
 import (
-	. "github.com/smartystreets/goconvey/convey"
 	"github.com/kokeroulis/modip/types"
+	. "github.com/smartystreets/goconvey/convey"
 )
 
 func teacherInfoOk() {
@@ -20,4 +20,3 @@ func teacherInfoOk() {
 
 	So(result, ShouldResemble, expected)
 }
-

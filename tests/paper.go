@@ -1,9 +1,9 @@
 package tests
 
 import (
-	"net/url"
-	. "github.com/smartystreets/goconvey/convey"
 	"github.com/kokeroulis/modip/types"
+	. "github.com/smartystreets/goconvey/convey"
+	"net/url"
 )
 
 const paperTitle = "My Super paper"
@@ -36,4 +36,3 @@ func addPaperFail() {
 	result := &types.PaperJson{}
 	addPaper(paperTitle, result, expected)
 }
-

@@ -1,12 +1,12 @@
 package api
 
 import (
+	"encoding/gob"
+	"fmt"
 	"github.com/goincremental/negroni-sessions"
+	"github.com/kokeroulis/modip/types"
 	"github.com/mholt/binding"
 	"net/http"
-	"encoding/gob"
-	"github.com/kokeroulis/modip/types"
-	"fmt"
 )
 
 type TeacherForm struct {
@@ -15,16 +15,16 @@ type TeacherForm struct {
 }
 
 func (t *TeacherForm) FieldMap() binding.FieldMap {
-    return binding.FieldMap{
+	return binding.FieldMap{
 		&t.Username: binding.Field{
 			Form:     "username",
 			Required: true,
-        },
+		},
 		&t.Password: binding.Field{
 			Form:     "password",
 			Required: true,
-        },
-    }
+		},
+	}
 }
 
 func init() {
@@ -38,9 +38,9 @@ func init() {
 
 func TeacherLogin(resp http.ResponseWriter, req *http.Request) {
 	teacherForm := &TeacherForm{}
-    if binding.Bind(req, teacherForm).Handle(resp) {
-        return
-    }
+	if binding.Bind(req, teacherForm).Handle(resp) {
+		return
+	}
 
 	t := types.Teacher{}
 	query := `SELECT id, name, email, departmentId, departmentName, authFailed
@@ -49,7 +49,7 @@ func TeacherLogin(resp http.ResponseWriter, req *http.Request) {
 	var authFailed bool
 
 	err := Db.QueryRow(query, teacherForm.Username, teacherForm.Password).
-		   Scan(&t.Id, &t.Name, &t.Email, &t.Department.Id, &t.Department.Name, &authFailed)
+		Scan(&t.Id, &t.Name, &t.Email, &t.Department.Id, &t.Department.Name, &authFailed)
 
 	var dbError, noRows = checkQuery(err, resp, req, query)
 
@@ -73,11 +73,11 @@ func retrieveInfo(teacherId int, query string, channel chan []types.BookOrPaperI
 	list := []types.BookOrPaperInfo{}
 	rows, err := Db.Query(query, teacherId)
 
-   if err != nil {
+	if err != nil {
 		fmt.Println(err)
-    }
+	}
 
-    defer rows.Close()
+	defer rows.Close()
 
 	for rows.Next() {
 		it := types.BookOrPaperInfo{}
@@ -87,11 +87,11 @@ func retrieveInfo(teacherId int, query string, channel chan []types.BookOrPaperI
 		} else {
 			list = append(list, it)
 		}
-    }
+	}
 
 	if err := rows.Err(); err != nil {
 		fmt.Println(err)
-    }
+	}
 
 	channel <- list
 }
@@ -113,4 +113,3 @@ func TeacherInfo(resp http.ResponseWriter, req *http.Request) {
 
 	RenderJson(resp, infoJson)
 }
-

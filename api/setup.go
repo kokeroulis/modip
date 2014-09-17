@@ -1,12 +1,12 @@
 package api
 
 import (
-	"github.com/codegangsta/negroni"
-	"github.com/goincremental/negroni-sessions"
-	"gopkg.in/unrolled/render.v1"
-	_ "github.com/lib/pq"
 	"database/sql"
 	"fmt"
+	"github.com/codegangsta/negroni"
+	"github.com/goincremental/negroni-sessions"
+	_ "github.com/lib/pq"
+	"gopkg.in/unrolled/render.v1"
 )
 
 var Db *sql.DB
@@ -48,4 +48,3 @@ func setupDb(n *negroni.Negroni) {
 
 	Db = d
 }
-

@@ -1,17 +1,17 @@
 package tests
 
 import (
-	"net/http"
-	"net/url"
-	"net/http/cookiejar"
-	"io/ioutil"
 	"encoding/json"
 	"github.com/kokeroulis/modip/types"
+	"io/ioutil"
+	"net/http"
+	"net/http/cookiejar"
+	"net/url"
 )
 
 func testTeacher() types.Teacher {
 	return types.Teacher{1, "superteacher1", "superteacher1@teilar.gr",
-						 types.Department{1, "T.P.T."}}
+		types.Department{1, "T.P.T."}}
 }
 
 func testAuthJson() types.AuthJson {
@@ -27,12 +27,12 @@ func NewRequest(client *http.Client, path string, form url.Values) []byte {
 	var err error
 
 	if len(form) == 0 {
-		resp, err = client.Get(path);
+		resp, err = client.Get(path)
 	} else {
 		resp, err = client.PostForm(path, form)
 	}
 
-	if (err != nil) {
+	if err != nil {
 		panic(err)
 	}
 
@@ -77,7 +77,7 @@ func loginAsTeacher(client *http.Client) {
 
 func PostToJsonAsTeacher(path string, form url.Values, v interface{}) {
 	cookieJar, _ := cookiejar.New(nil)
-    client := &http.Client{Jar: cookieJar}
+	client := &http.Client{Jar: cookieJar}
 
 	loginAsTeacher(client)
 
@@ -90,7 +90,7 @@ func PostToJsonAsTeacher(path string, form url.Values, v interface{}) {
 
 func GetToJsonAsTeacher(path string, v interface{}) {
 	cookieJar, _ := cookiejar.New(nil)
-    client := &http.Client{Jar: cookieJar}
+	client := &http.Client{Jar: cookieJar}
 
 	loginAsTeacher(client)
 
@@ -100,4 +100,3 @@ func GetToJsonAsTeacher(path string, v interface{}) {
 		panic(err)
 	}
 }
-

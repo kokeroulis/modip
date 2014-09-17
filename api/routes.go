@@ -3,8 +3,8 @@ package api
 import (
 	"github.com/codegangsta/negroni"
 	"github.com/gorilla/mux"
-	"net/http"
 	"github.com/kokeroulis/modip/types"
+	"net/http"
 )
 
 type authorize struct {
@@ -24,9 +24,9 @@ func (auth authorize) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 func setupRoutes(n *negroni.Negroni) {
 	router := mux.NewRouter()
 
-	router.HandleFunc("/",Index).Methods("GET")
+	router.HandleFunc("/", Index).Methods("GET")
 
-	router.HandleFunc("/teacher/login",TeacherLogin).Methods("POST")
+	router.HandleFunc("/teacher/login", TeacherLogin).Methods("POST")
 	router.Handle("/teacher/info", authorize{TeacherInfo}).Methods("GET")
 
 	router.Handle("/paper/add", authorize{PaperAdd}).Methods("POST")
@@ -34,4 +34,3 @@ func setupRoutes(n *negroni.Negroni) {
 
 	n.UseHandler(router)
 }
-
