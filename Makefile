@@ -23,3 +23,6 @@ db-create:
 	@./scripts/db.sh production
 .PHONY: db-create
 
+fmt:
+	@gofmt -d=true -w=true .
+.PHONY: fmt
