@@ -26,3 +26,7 @@ db-create:
 fmt:
 	@gofmt -d=true -w=true .
 .PHONY: fmt
+
+vet:
+	@go vet ./...
+.PHONY: vet
