@@ -42,6 +42,8 @@ install() {
 }
 
 run() {
+    arch=$(go version | awk '{print $4}')
+    rm -rf $gopath/pkg/$arch/github.com/kokeroulis/modip
     GOPATH=$gopath go run modip.go
 }
 
