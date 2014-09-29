@@ -30,3 +30,7 @@ fmt:
 vet:
 	@go vet ./...
 .PHONY: vet
+
+cover:
+	@./scripts/helper.sh cover
+.PHONY: cover

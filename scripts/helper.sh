@@ -60,11 +60,14 @@ elif [ $1 == "run" ]; then
     run
 elif [ $1 == "test" ]; then
     pushd $p > /dev/null
-    GOPATH=$gopath go test -v github.com/kokeroulis/modip/tests
+    GOPATH=$gopath go test -v  -coverprofile=c.out github.com/kokeroulis/modip/tests
     popd > /dev/null
 elif [ $1 == "testdata" ]; then
     testdata
 elif [ $1 == "test-web" ]; then
     GOPATH=$gopath $gopath/bin/goconvey
+elif [ $1 == "cover" ]; then
+    GOPATH=$gopath go tool cover -html=$p/c.out -o .coverage.html
+    xdg-open $PWD/.coverage.html
 fi
 
