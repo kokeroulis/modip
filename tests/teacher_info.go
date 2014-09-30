@@ -2,7 +2,6 @@ package tests
 
 import (
 	"github.com/kokeroulis/modip/types"
-	. "github.com/smartystreets/goconvey/convey"
 )
 
 func teacherInfoOk() {
@@ -13,10 +12,9 @@ func teacherInfoOk() {
 	papers = append(papers, types.BookOrPaperInfo{1, "My Super paper"})
 	info := types.TeacherInfo{testTeacher(), books, papers}
 
-	expected := &types.TeacherInfoJson{testOkCommonJson(), info}
+	expected := types.JsonData{testOkCommonJson(), info}
 
-	result := &types.TeacherInfoJson{}
-	GetToJsonAsTeacher("http://localhost:3001/teacher/info", result)
+	result := GetToJsonAsTeacher("http://localhost:3001/teacher/info")
 
-	So(result, ShouldResemble, expected)
+	CompareJson(result, expected)
 }

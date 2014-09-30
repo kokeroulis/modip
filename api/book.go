@@ -29,8 +29,6 @@ func BookAdd(resp http.ResponseWriter, req *http.Request) {
 	b := types.Book{}
 	b.Teacher = teacher
 
-	bookJson := types.BookJson{}
-
 	var alreadyExists bool
 
 	query := `SELECT id, title, alreadyExists
@@ -47,10 +45,8 @@ func BookAdd(resp http.ResponseWriter, req *http.Request) {
 
 	if noRows || alreadyExists {
 		errorJson := types.AlreadyExists()
-		bookJson = types.BookJson{types.CreateStandardJsonErrorJson(req, errorJson), types.Book{}}
-		Render.JSON(resp, errorJson.Code, bookJson)
+		RenderErrorJson(resp, req, errorJson, types.Book{})
 	} else {
-		bookJson := types.BookJson{types.CreateStandardJson(req), b}
-		RenderJson(resp, bookJson)
+		RenderJson2(resp, req, b)
 	}
 }

@@ -16,6 +16,11 @@ type CommonJson struct {
 	Error ErrorJson `json:"error"`
 }
 
+type JsonData struct {
+	Common CommonJson
+	Data   interface{} `json:"data"`
+}
+
 func GetTeacherFromSession(req *http.Request) Teacher {
 	t := sessions.GetSession(req).Get("teacher")
 	teacher := &Teacher{}

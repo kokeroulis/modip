@@ -1,49 +1,39 @@
 package tests
 
 import (
-	_ "fmt"
 	"github.com/kokeroulis/modip/types"
-	. "github.com/smartystreets/goconvey/convey"
 	"net/url"
 )
 
-func teacherLogin(username string, password string, result interface{}, expected interface{}) {
+func teacherLogin(username string, password string, expected types.JsonData) {
 	form := url.Values{}
 	form.Add("username", username)
 	form.Add("password", password)
 
-	PostToJson("http://localhost:3001/teacher/login", form, result)
+	result := PostToJson("http://localhost:3001/teacher/login", form)
 
-	So(result, ShouldResemble, expected)
+	CompareJson(result, expected)
 }
 
 func teacherLoginOk() {
 	t := types.Teacher{1, "superteacher1", "superteacher1@teilar.gr",
 		types.Department{1, "T.P.T."}}
 
-	expected := &types.TeacherJson{
-		types.CommonJson{
-			types.AuthJson{1, "superteacher1@teilar.gr"},
-			types.ErrorJson{},
-		},
-		t,
+	expected := types.JsonData{
+		Common: types.CommonJson{types.AuthJson{1, "superteacher1@teilar.gr"}, types.ErrorJson{}},
+		Data:   t,
 	}
 
-	result := &types.TeacherJson{}
-	teacherLogin("superteacher1@teilar.gr", "superteacher1", result, expected)
+	teacherLogin("superteacher1@teilar.gr", "superteacher1", expected)
 }
 
 func teacherLoginFail() {
 	t := types.Teacher{}
 
-	expected := &types.TeacherJson{
-		types.CommonJson{
-			types.AuthJson{},
-			types.AuthFailed(),
-		},
-		t,
+	expected := types.JsonData{
+		Common: types.CommonJson{types.AuthJson{},types.AuthFailed()},
+		Data:   t,
 	}
 
-	result := &types.TeacherJson{}
-	teacherLogin("invalid", "invalid", result, expected)
+	teacherLogin("invalid", "invalid", expected)
 }

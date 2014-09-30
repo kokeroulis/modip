@@ -11,6 +11,24 @@ func RenderJson(resp http.ResponseWriter, json interface{}) {
 	Render.JSON(resp, http.StatusOK, json)
 }
 
+func RenderJson2(resp http.ResponseWriter, req *http.Request, j interface{}) {
+	data := types.JsonData{
+		Common: types.CreateStandardJson(req),
+		Data:   j,
+	}
+
+	Render.JSON(resp, http.StatusOK, data)
+}
+
+func RenderErrorJson(resp http.ResponseWriter, req *http.Request, errorJson types.ErrorJson, j interface{}) {
+	data := types.JsonData{
+		Common: types.CreateStandardJsonErrorJson(req, errorJson),
+		Data:   j,
+	}
+
+	Render.JSON(resp, errorJson.Code, data)
+}
+
 // we don't really use resp or req but they are usefull for
 // debugging purposes.
 // So we will leave them as parameters

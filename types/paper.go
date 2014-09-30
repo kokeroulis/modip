@@ -6,7 +6,3 @@ type Paper struct {
 	Teacher Teacher `json:"teacher"`
 }
 
-type PaperJson struct {
-	Common CommonJson
-	Paper  Paper `json:"paper"`
-}

@@ -29,7 +29,6 @@ func PaperAdd(resp http.ResponseWriter, req *http.Request) {
 	p := types.Paper{}
 	p.Teacher = teacher
 
-	paperJson := types.PaperJson{}
 
 	var alreadyExists bool
 
@@ -47,10 +46,8 @@ func PaperAdd(resp http.ResponseWriter, req *http.Request) {
 
 	if noRows || alreadyExists {
 		errorJson := types.AlreadyExists()
-		paperJson = types.PaperJson{types.CreateStandardJsonErrorJson(req, errorJson), types.Paper{}}
-		Render.JSON(resp, errorJson.Code, paperJson)
+		RenderErrorJson(resp, req, errorJson, types.Paper{})
 	} else {
-		paperJson := types.PaperJson{types.CreateStandardJson(req), p}
-		RenderJson(resp, paperJson)
+		RenderJson2(resp, req, p)
 	}
 }

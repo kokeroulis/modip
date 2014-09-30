@@ -2,37 +2,34 @@ package tests
 
 import (
 	"github.com/kokeroulis/modip/types"
-	. "github.com/smartystreets/goconvey/convey"
 	"net/url"
 )
 
 const bookTitle = "My Super book"
 
-func addbook(title string, result interface{}, expected interface{}) {
+func addbook(expected types.JsonData) {
 	form := url.Values{}
-	form.Add("title", title)
+	form.Add("title", bookTitle)
 
-	PostToJsonAsTeacher("http://localhost:3001/book/add", form, result)
+	result := PostToJsonAsTeacher("http://localhost:3001/book/add", form)
 
-	So(result, ShouldResemble, expected)
+	CompareJson(result, expected)
 }
 
 func addBookOk() {
 	b := types.Book{1, bookTitle, testTeacher()}
 
-	expected := &types.BookJson{testOkCommonJson(), b}
+	expected := testTeacherOkJson(b)
 
-	result := &types.BookJson{}
-	addbook(bookTitle, result, expected)
+	addbook(expected)
 }
 
 func addBookFail() {
 
-	expected := &types.BookJson{
-		types.CommonJson{testAuthJson(), types.AlreadyExists()},
-		types.Book{},
+	expected := types.JsonData{
+		Common: types.CommonJson{testAuthJson(), types.AlreadyExists()},
+		Data:   types.Book{},
 	}
 
-	result := &types.BookJson{}
-	addbook(bookTitle, result, expected)
+	addbook(expected)
 }

@@ -3,6 +3,7 @@ package tests
 import (
 	"encoding/json"
 	"github.com/kokeroulis/modip/types"
+	. "github.com/smartystreets/goconvey/convey"
 	"io/ioutil"
 	"net/http"
 	"net/http/cookiejar"
@@ -20,6 +21,17 @@ func testAuthJson() types.AuthJson {
 
 func testOkCommonJson() types.CommonJson {
 	return types.CommonJson{testAuthJson(), types.ErrorJson{}}
+}
+
+func testTeacherOkJson(bar interface{}) types.JsonData {
+
+	common := types.CommonJson{testAuthJson(), types.ErrorJson{}}
+	jsonData := types.JsonData{
+		Common: common,
+		Data:   bar,
+	}
+
+	return jsonData
 }
 
 func NewRequest(client *http.Client, path string, form url.Values) []byte {
@@ -51,20 +63,14 @@ func Get(path string) []byte {
 	return NewRequest(&http.Client{}, path, form)
 }
 
-func GetToJson(path string, v interface{}) {
+func GetToJson(path string) string {
 	body := Get(path)
-	err := json.Unmarshal(body, v)
-	if err != nil {
-		panic(err)
-	}
+	return string(body)
 }
 
-func PostToJson(path string, form url.Values, v interface{}) {
+func PostToJson(path string, form url.Values) string {
 	body := NewRequest(&http.Client{}, path, form)
-	err := json.Unmarshal(body, v)
-	if err != nil {
-		panic(err)
-	}
+	return string(body)
 }
 
 func loginAsTeacher(client *http.Client) {
@@ -75,28 +81,34 @@ func loginAsTeacher(client *http.Client) {
 	_ = NewRequest(client, "http://localhost:3001/teacher/login", f)
 }
 
-func PostToJsonAsTeacher(path string, form url.Values, v interface{}) {
+func PostToJsonAsTeacher(path string, form url.Values) string {
 	cookieJar, _ := cookiejar.New(nil)
 	client := &http.Client{Jar: cookieJar}
 
 	loginAsTeacher(client)
 
 	body := NewRequest(client, path, form)
-	err := json.Unmarshal(body, v)
-	if err != nil {
-		panic(err)
-	}
+
+	return string(body)
 }
 
-func GetToJsonAsTeacher(path string, v interface{}) {
+func GetToJsonAsTeacher(path string) string {
 	cookieJar, _ := cookiejar.New(nil)
 	client := &http.Client{Jar: cookieJar}
 
 	loginAsTeacher(client)
 
 	body := NewRequest(client, path, url.Values{})
-	err := json.Unmarshal(body, v)
+	return string(body)
+}
+
+func CompareJson(result string, expected types.JsonData) {
+	expectedJson, err := json.Marshal(expected)
+
 	if err != nil {
 		panic(err)
 	}
+
+	So(result, ShouldResemble, string(expectedJson))
 }
+

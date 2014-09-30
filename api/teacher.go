@@ -60,12 +60,10 @@ func TeacherLogin(resp http.ResponseWriter, req *http.Request) {
 	if !noRows && !authFailed {
 		session := sessions.GetSession(req)
 		session.Set("teacher", &t)
-		teacherJson := types.TeacherJson{types.CreateStandardJson(req), t}
-		RenderJson(resp, teacherJson)
+		RenderJson2(resp, req, t)
 	} else {
 		errorJson := types.AuthFailed()
-		teacherJson := types.TeacherJson{types.CreateStandardJsonErrorJson(req, errorJson), t}
-		Render.JSON(resp, errorJson.Code, teacherJson)
+		RenderErrorJson(resp, req, errorJson, t)
 	}
 }
 
@@ -109,7 +107,6 @@ func TeacherInfo(resp http.ResponseWriter, req *http.Request) {
 	go retrieveInfo(teacher.Id, papersQuery, papers)
 
 	info := types.TeacherInfo{teacher, <-books, <-papers}
-	infoJson := types.TeacherInfoJson{types.CreateStandardJson(req), info}
 
-	RenderJson(resp, infoJson)
+	RenderJson2(resp, req, info)
 }
