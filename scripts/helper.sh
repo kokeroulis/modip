@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-gopath=$HOME/.modip-build
+gopath=$PWD/.vendor
 gobin=$PWD/bin
 p=$gopath/src/github.com/kokeroulis
 
