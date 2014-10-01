@@ -1,4 +1,4 @@
-package types
+package models
 
 type Teacher struct {
 	Id         int        `json:"id"`

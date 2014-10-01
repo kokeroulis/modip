@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/kokeroulis/modip/types"
+	"github.com/kokeroulis/modip/models"
 	"github.com/mholt/binding"
 	"net/http"
 )
@@ -25,8 +25,8 @@ func PaperAdd(resp http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	teacher := types.GetTeacherFromSession(req)
-	p := types.Paper{}
+	teacher := models.GetTeacherFromSession(req)
+	p := models.Paper{}
 	p.Teacher = teacher
 
 
@@ -45,8 +45,8 @@ func PaperAdd(resp http.ResponseWriter, req *http.Request) {
 	}
 
 	if noRows || alreadyExists {
-		errorJson := types.AlreadyExists()
-		RenderErrorJson(resp, req, errorJson, types.Paper{})
+		errorJson := models.AlreadyExists()
+		RenderErrorJson(resp, req, errorJson, models.Paper{})
 	} else {
 		RenderJson2(resp, req, p)
 	}

@@ -4,7 +4,7 @@ import (
 	"encoding/gob"
 	"fmt"
 	"github.com/goincremental/negroni-sessions"
-	"github.com/kokeroulis/modip/types"
+	"github.com/kokeroulis/modip/models"
 	"github.com/mholt/binding"
 	"net/http"
 )
@@ -30,10 +30,10 @@ func (t *TeacherForm) FieldMap() binding.FieldMap {
 func init() {
 	// later we will try to save to our
 	// session a struct. Structs are complex
-	// types which aren't supported by default
+	// models which aren't supported by default
 	// from the god package so we have to
 	// register it manually
-	gob.Register(&types.Teacher{})
+	gob.Register(&models.Teacher{})
 }
 
 func TeacherLogin(resp http.ResponseWriter, req *http.Request) {
@@ -42,7 +42,7 @@ func TeacherLogin(resp http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	t := types.Teacher{}
+	t := models.Teacher{}
 	query := `SELECT id, name, email, departmentId, departmentName, authFailed
 			  FROM teacher_auth($1, $2)`
 
@@ -62,13 +62,13 @@ func TeacherLogin(resp http.ResponseWriter, req *http.Request) {
 		session.Set("teacher", &t)
 		RenderJson2(resp, req, t)
 	} else {
-		errorJson := types.AuthFailed()
+		errorJson := models.AuthFailed()
 		RenderErrorJson(resp, req, errorJson, t)
 	}
 }
 
-func retrieveInfo(teacherId int, query string, channel chan []types.BookOrPaperInfo) {
-	list := []types.BookOrPaperInfo{}
+func retrieveInfo(teacherId int, query string, channel chan []models.BookOrPaperInfo) {
+	list := []models.BookOrPaperInfo{}
 	rows, err := Db.Query(query, teacherId)
 
 	if err != nil {
@@ -78,7 +78,7 @@ func retrieveInfo(teacherId int, query string, channel chan []types.BookOrPaperI
 	defer rows.Close()
 
 	for rows.Next() {
-		it := types.BookOrPaperInfo{}
+		it := models.BookOrPaperInfo{}
 
 		if err := rows.Scan(&it.Id, &it.Title); err != nil {
 			fmt.Println(err)
@@ -95,18 +95,18 @@ func retrieveInfo(teacherId int, query string, channel chan []types.BookOrPaperI
 }
 
 func TeacherInfo(resp http.ResponseWriter, req *http.Request) {
-	teacher := types.GetTeacherFromSession(req)
+	teacher := models.GetTeacherFromSession(req)
 
-	books := make(chan []types.BookOrPaperInfo)
+	books := make(chan []models.BookOrPaperInfo)
 	booksQuery := `SELECT id, title FROM book WHERE teacher = $1`
 
-	papers := make(chan []types.BookOrPaperInfo)
+	papers := make(chan []models.BookOrPaperInfo)
 	papersQuery := `SELECT id, title FROM paper WHERE teacher = $1`
 
 	go retrieveInfo(teacher.Id, booksQuery, books)
 	go retrieveInfo(teacher.Id, papersQuery, papers)
 
-	info := types.TeacherInfo{teacher, <-books, <-papers}
+	info := models.TeacherInfo{teacher, <-books, <-papers}
 
 	RenderJson2(resp, req, info)
 }

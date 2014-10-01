@@ -3,7 +3,7 @@ package api
 import (
 	"database/sql"
 	"fmt"
-	"github.com/kokeroulis/modip/types"
+	"github.com/kokeroulis/modip/models"
 	"net/http"
 )
 
@@ -12,17 +12,17 @@ func RenderJson(resp http.ResponseWriter, json interface{}) {
 }
 
 func RenderJson2(resp http.ResponseWriter, req *http.Request, j interface{}) {
-	data := types.JsonData{
-		Common: types.CreateStandardJson(req),
+	data := models.JsonData{
+		Common: models.CreateStandardJson(req),
 		Data:   j,
 	}
 
 	Render.JSON(resp, http.StatusOK, data)
 }
 
-func RenderErrorJson(resp http.ResponseWriter, req *http.Request, errorJson types.ErrorJson, j interface{}) {
-	data := types.JsonData{
-		Common: types.CreateStandardJsonErrorJson(req, errorJson),
+func RenderErrorJson(resp http.ResponseWriter, req *http.Request, errorJson models.ErrorJson, j interface{}) {
+	data := models.JsonData{
+		Common: models.CreateStandardJsonErrorJson(req, errorJson),
 		Data:   j,
 	}
 
@@ -55,7 +55,7 @@ func checkQuery(err error, resp http.ResponseWriter,
 }
 
 func renderDbError(resp http.ResponseWriter, req *http.Request) {
-	errorJson := types.DbError()
-	dbErrorJson := types.CreateStandardJsonErrorJson(req, errorJson)
+	errorJson := models.DbError()
+	dbErrorJson := models.CreateStandardJsonErrorJson(req, errorJson)
 	Render.JSON(resp, errorJson.Code, dbErrorJson)
 }

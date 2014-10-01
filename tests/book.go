@@ -1,13 +1,13 @@
 package tests
 
 import (
-	"github.com/kokeroulis/modip/types"
+	"github.com/kokeroulis/modip/models"
 	"net/url"
 )
 
 const bookTitle = "My Super book"
 
-func addbook(expected types.JsonData) {
+func addbook(expected models.JsonData) {
 	form := url.Values{}
 	form.Add("title", bookTitle)
 
@@ -17,7 +17,7 @@ func addbook(expected types.JsonData) {
 }
 
 func addBookOk() {
-	b := types.Book{1, bookTitle, testTeacher()}
+	b := models.Book{1, bookTitle, testTeacher()}
 
 	expected := testTeacherOkJson(b)
 
@@ -26,9 +26,9 @@ func addBookOk() {
 
 func addBookFail() {
 
-	expected := types.JsonData{
-		Common: types.CommonJson{testAuthJson(), types.AlreadyExists()},
-		Data:   types.Book{},
+	expected := models.JsonData{
+		Common: models.CommonJson{testAuthJson(), models.AlreadyExists()},
+		Data:   models.Book{},
 	}
 
 	addbook(expected)

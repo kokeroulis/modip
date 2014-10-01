@@ -2,7 +2,7 @@ package tests
 
 import (
 	"encoding/json"
-	"github.com/kokeroulis/modip/types"
+	"github.com/kokeroulis/modip/models"
 	. "github.com/smartystreets/goconvey/convey"
 	"io/ioutil"
 	"net/http"
@@ -10,23 +10,23 @@ import (
 	"net/url"
 )
 
-func testTeacher() types.Teacher {
-	return types.Teacher{1, "superteacher1", "superteacher1@teilar.gr",
-		types.Department{1, "T.P.T."}}
+func testTeacher() models.Teacher {
+	return models.Teacher{1, "superteacher1", "superteacher1@teilar.gr",
+		models.Department{1, "T.P.T."}}
 }
 
-func testAuthJson() types.AuthJson {
-	return types.AuthJson{1, "superteacher1@teilar.gr"}
+func testAuthJson() models.AuthJson {
+	return models.AuthJson{1, "superteacher1@teilar.gr"}
 }
 
-func testOkCommonJson() types.CommonJson {
-	return types.CommonJson{testAuthJson(), types.ErrorJson{}}
+func testOkCommonJson() models.CommonJson {
+	return models.CommonJson{testAuthJson(), models.ErrorJson{}}
 }
 
-func testTeacherOkJson(bar interface{}) types.JsonData {
+func testTeacherOkJson(bar interface{}) models.JsonData {
 
-	common := types.CommonJson{testAuthJson(), types.ErrorJson{}}
-	jsonData := types.JsonData{
+	common := models.CommonJson{testAuthJson(), models.ErrorJson{}}
+	jsonData := models.JsonData{
 		Common: common,
 		Data:   bar,
 	}
@@ -102,7 +102,7 @@ func GetToJsonAsTeacher(path string) string {
 	return string(body)
 }
 
-func CompareJson(result string, expected types.JsonData) {
+func CompareJson(result string, expected models.JsonData) {
 	expectedJson, err := json.Marshal(expected)
 
 	if err != nil {

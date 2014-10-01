@@ -3,7 +3,7 @@ package api
 import (
 	"github.com/codegangsta/negroni"
 	"github.com/gorilla/mux"
-	"github.com/kokeroulis/modip/types"
+	"github.com/kokeroulis/modip/models"
 	"net/http"
 )
 
@@ -12,7 +12,7 @@ type authorize struct {
 }
 
 func (auth authorize) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
-	teacher := types.GetTeacherFromSession(req)
+	teacher := models.GetTeacherFromSession(req)
 	if teacher.Id == 0 {
 		Render.JSON(resp, http.StatusForbidden, map[string]string{"error": "Access denied"})
 		return

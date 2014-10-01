@@ -1,11 +1,11 @@
 package tests
 
 import (
-	"github.com/kokeroulis/modip/types"
+	"github.com/kokeroulis/modip/models"
 	"net/url"
 )
 
-func teacherLogin(username string, password string, expected types.JsonData) {
+func teacherLogin(username string, password string, expected models.JsonData) {
 	form := url.Values{}
 	form.Add("username", username)
 	form.Add("password", password)
@@ -16,11 +16,11 @@ func teacherLogin(username string, password string, expected types.JsonData) {
 }
 
 func teacherLoginOk() {
-	t := types.Teacher{1, "superteacher1", "superteacher1@teilar.gr",
-		types.Department{1, "T.P.T."}}
+	t := models.Teacher{1, "superteacher1", "superteacher1@teilar.gr",
+		models.Department{1, "T.P.T."}}
 
-	expected := types.JsonData{
-		Common: types.CommonJson{types.AuthJson{1, "superteacher1@teilar.gr"}, types.ErrorJson{}},
+	expected := models.JsonData{
+		Common: models.CommonJson{models.AuthJson{1, "superteacher1@teilar.gr"}, models.ErrorJson{}},
 		Data:   t,
 	}
 
@@ -28,10 +28,10 @@ func teacherLoginOk() {
 }
 
 func teacherLoginFail() {
-	t := types.Teacher{}
+	t := models.Teacher{}
 
-	expected := types.JsonData{
-		Common: types.CommonJson{types.AuthJson{},types.AuthFailed()},
+	expected := models.JsonData{
+		Common: models.CommonJson{models.AuthJson{},models.AuthFailed()},
 		Data:   t,
 	}
 

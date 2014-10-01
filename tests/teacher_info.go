@@ -1,18 +1,18 @@
 package tests
 
 import (
-	"github.com/kokeroulis/modip/types"
+	"github.com/kokeroulis/modip/models"
 )
 
 func teacherInfoOk() {
-	books := []types.BookOrPaperInfo{}
-	books = append(books, types.BookOrPaperInfo{1, "My Super book"})
+	books := []models.BookOrPaperInfo{}
+	books = append(books, models.BookOrPaperInfo{1, "My Super book"})
 
-	papers := []types.BookOrPaperInfo{}
-	papers = append(papers, types.BookOrPaperInfo{1, "My Super paper"})
-	info := types.TeacherInfo{testTeacher(), books, papers}
+	papers := []models.BookOrPaperInfo{}
+	papers = append(papers, models.BookOrPaperInfo{1, "My Super paper"})
+	info := models.TeacherInfo{testTeacher(), books, papers}
 
-	expected := types.JsonData{testOkCommonJson(), info}
+	expected := models.JsonData{testOkCommonJson(), info}
 
 	result := GetToJsonAsTeacher("http://localhost:3001/teacher/info")
 
