@@ -7,11 +7,7 @@ import (
 	"net/http"
 )
 
-func RenderJson(resp http.ResponseWriter, json interface{}) {
-	Render.JSON(resp, http.StatusOK, json)
-}
-
-func RenderJson2(resp http.ResponseWriter, req *http.Request, j interface{}) {
+func RenderJson(resp http.ResponseWriter, req *http.Request, j interface{}) {
 	data := models.JsonData{
 		Common: models.CreateStandardJson(req),
 		Data:   j,

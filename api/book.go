@@ -47,6 +47,6 @@ func BookAdd(resp http.ResponseWriter, req *http.Request) {
 		errorJson := models.AlreadyExists()
 		RenderErrorJson(resp, req, errorJson, models.Book{})
 	} else {
-		RenderJson2(resp, req, b)
+		RenderJson(resp, req, b)
 	}
 }

@@ -48,6 +48,6 @@ func PaperAdd(resp http.ResponseWriter, req *http.Request) {
 		errorJson := models.AlreadyExists()
 		RenderErrorJson(resp, req, errorJson, models.Paper{})
 	} else {
-		RenderJson2(resp, req, p)
+		RenderJson(resp, req, p)
 	}
 }

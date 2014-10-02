@@ -60,7 +60,7 @@ func TeacherLogin(resp http.ResponseWriter, req *http.Request) {
 	if !noRows && !authFailed {
 		session := sessions.GetSession(req)
 		session.Set("teacher", &t)
-		RenderJson2(resp, req, t)
+		RenderJson(resp, req, t)
 	} else {
 		errorJson := models.AuthFailed()
 		RenderErrorJson(resp, req, errorJson, t)
@@ -108,5 +108,5 @@ func TeacherInfo(resp http.ResponseWriter, req *http.Request) {
 
 	info := models.TeacherInfo{teacher, <-books, <-papers}
 
-	RenderJson2(resp, req, info)
+	RenderJson(resp, req, info)
 }
