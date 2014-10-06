@@ -43,21 +43,9 @@ func TeacherLogin(resp http.ResponseWriter, req *http.Request) {
 	}
 
 	t := models.Teacher{}
-	query := `SELECT id, name, email, departmentId, departmentName, authFailed
-			  FROM teacher_auth($1, $2)`
+	auth := t.Login(teacherForm.Username, teacherForm.Password)
 
-	var authFailed bool
-
-	err := Db.QueryRow(query, teacherForm.Username, teacherForm.Password).
-		Scan(&t.Id, &t.Name, &t.Email, &t.Department.Id, &t.Department.Name, &authFailed)
-
-	var dbError, noRows = checkQuery(err, resp, req, query)
-
-	if dbError {
-		return
-	}
-
-	if !noRows && !authFailed {
+	if auth {
 		session := sessions.GetSession(req)
 		session.Set("teacher", &t)
 		RenderJson(resp, req, t)
@@ -97,16 +85,6 @@ func retrieveInfo(teacherId int, query string, channel chan []models.BookOrPaper
 func TeacherInfo(resp http.ResponseWriter, req *http.Request) {
 	teacher := models.GetTeacherFromSession(req)
 
-	books := make(chan []models.BookOrPaperInfo)
-	booksQuery := `SELECT id, title FROM book WHERE teacher = $1`
-
-	papers := make(chan []models.BookOrPaperInfo)
-	papersQuery := `SELECT id, title FROM paper WHERE teacher = $1`
-
-	go retrieveInfo(teacher.Id, booksQuery, books)
-	go retrieveInfo(teacher.Id, papersQuery, papers)
-
-	info := models.TeacherInfo{teacher, <-books, <-papers}
-
+	info := teacher.Info()
 	RenderJson(resp, req, info)
 }

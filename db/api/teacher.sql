@@ -3,7 +3,7 @@ CREATE OR REPLACE FUNCTION teacher_auth(teacherEmail text, passwordCandidate tex
                                                                                    OUT email text,
                                                                                    OUT departmentName text,
                                                                                    OUT departmentId int,
-                                                                                   OUT authFailed boolean) AS $$
+                                                                                   OUT auth boolean) AS $$
 DECLARE
     teacherPassword text;
     teacherRecord record;
@@ -13,7 +13,7 @@ BEGIN
     email := '';
     departmentName := '';
     departmentId := 0;
-    authFailed := TRUE;
+    auth := FALSE;
 
     SELECT INTO teacherPassword password FROM teacher AS t WHERE teacherEmail = t.email;
 
@@ -34,7 +34,7 @@ BEGIN
     email := teacherRecord.email;
     departmentName := teacherRecord.departmentName;
     departmentId := teacherRecord.departmentId;
-    authFailed := FALSE;
+    auth := TRUE;
 END;
 $$ LANGUAGE plpgsql;
 
