@@ -4,8 +4,7 @@ gopath=$PWD/.vendor
 gobin=$PWD/bin
 p=$gopath/src/github.com/kokeroulis
 
-
-install() {
+install_go() {
     if [ -d $gopath ]; then
         echo "Please remove $gopath"
         exit 1
@@ -41,6 +40,26 @@ install() {
     ln -sf $PWD $p/modip
 }
 
+install_js() {
+    if [ -d node_modules ]; then
+        echo "Please remove node_modules"
+        exit 1
+    fi
+
+    if [ -d public/bower_components/angular ]; then
+        echo "Please remove public/bower_components/"
+        exit 1
+    fi
+
+    npm install
+    ./node_modules/bower/bin/bower install -o
+}
+
+install() {
+    install_go
+    install_js
+}
+
 run() {
     arch=$(go version | awk '{print $4}')
     rm -rf $gopath/pkg/$arch/github.com/kokeroulis/modip
@@ -58,6 +77,10 @@ fi
 
 if [ $1 == "install" ]; then
     install
+elif [ $1 == "install-go" ]; then
+    install_go
+elif [ $1 == "install-js" ]; then
+    install_js
 elif [ $1 == "run" ]; then
     run
 elif [ $1 == "test" ]; then

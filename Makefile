@@ -6,6 +6,14 @@ install:
 	@./scripts/helper.sh install
 .PHONY: install
 
+install-go:
+	@./scripts/helper.sh install-go
+.PHONY: install-go
+
+install-js:
+	@./scripts/helper.sh install-js
+.PHONY: install-js
+
 test:
 	@./scripts/helper.sh test
 .PHONY: test
