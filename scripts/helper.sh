@@ -52,7 +52,7 @@ install_js() {
     fi
 
     npm install
-    ./node_modules/bower/bin/bower install -o
+    ./node_modules/bower/bin/bower install
 }
 
 install() {

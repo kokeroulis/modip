@@ -3,7 +3,8 @@
 // Declare app level module which depends on views, and components
 var modipApp = angular.module('modipApp', [
   'ngRoute',
-  'modipControllers'
+  'modipControllers',
+  'modipServices'
 ]);
 
 modipApp.config(['$routeProvider',
