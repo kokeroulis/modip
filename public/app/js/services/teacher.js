@@ -10,14 +10,20 @@ modipServices.factory('TeacherService', ['$http', '$q', function($http, $q) {
     };
 
     var deffered = $q.defer();
-    $http.post('http://localhost:3001/teacher/login', data).success(function (result) {
-      return deffered.resolve(result.data);
-    }).error(function(error, status) {
-      return deffered.reject(error);
+    $http.post('teacher/login', data).success(function (result) {
+      deffered.resolve(result.data);
+    }).error(function(data, status) {
+      deffered.reject({
+        body: data.Common.error,
+        status: status
+      });
     });
+    return deffered.promise;
   }
 
-  return {
+  var service = {
     login: login
-  }
+  };
+
+  return service;
 }]);

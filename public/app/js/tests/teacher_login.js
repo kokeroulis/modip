@@ -1,8 +1,8 @@
-describe('When calling SUT', function () {
+describe('Teacher', function () {
 
-  var tester, service;
+  describe('Login', function() {
 
-  describe('with midway tester', function() {
+    var tester, service;
 
     beforeEach(function(){
       tester = ngMidwayTester('modipApp');
@@ -14,11 +14,24 @@ describe('When calling SUT', function () {
       tester = null;
     });
 
-    it('should make a real XHR GET for http-hello.html', function() {
-      var expected = "Hello, $http!";
-      console.log("real GET http-hello.html test");
-      console.log(service.login('sadsdads', 'dsasadsad'))
+    it('should make a real XHR GET for http-hello.html', function(done) {
+      var expected = {
+        id:1,
+        name:"superteacher1",
+        email:"superteacher1@teilar.gr",
+        department: {
+          id:1,
+          name: "T.P.T."
+        }
+      };
+
+      service.login('superteacher1@teilar.gr', 'superteacher1').then(function(data) {
+        expect(data).toEqual(expected)
+        done();
+      })
     });
+
   });
+
 });
 
