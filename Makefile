@@ -14,14 +14,6 @@ install-js:
 	@./scripts/helper.sh install-js
 .PHONY: install-js
 
-test:
-	@./scripts/helper.sh test
-.PHONY: test
-
-test-web:
-	@./scripts/helper.sh test-web
-.PHONY: test-web
-
 db-create-development:
 	@./scripts/helper.sh db-create development
 	@./scripts/helper.sh testdata
@@ -39,6 +31,3 @@ vet:
 	@go vet ./...
 .PHONY: vet
 
-cover:
-	@./scripts/helper.sh cover
-.PHONY: cover
