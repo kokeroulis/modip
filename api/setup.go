@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/codegangsta/negroni"
 	"github.com/goincremental/negroni-sessions"
+	"github.com/kokeroulis/modip/config"
 	_ "github.com/lib/pq"
 	"gopkg.in/unrolled/render.v1"
 )

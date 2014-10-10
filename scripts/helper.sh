@@ -18,6 +18,7 @@ install() {
                  "lib/pq"
                  "smartystreets/goconvey"
                  "jacobsa/oglematchers"
+                 "vaughan0/go-ini"
     )
 
     gopkg_deps=("unrolled/render.v1")
