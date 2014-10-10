@@ -60,10 +60,38 @@ install() {
     install_js
 }
 
-run() {
+clean() {
     arch=$(go version | awk '{print $4}')
     rm -rf $gopath/pkg/$arch/github.com/kokeroulis/modip
-    GOPATH=$gopath go run modip.go
+}
+
+run() {
+    clean
+    GOPATH=$gopath go run modip.go --start
+}
+
+function readConfigurationValue()
+{
+    local key=$1
+    awk -v key="$key" -F "=" '$0 ~ key  {print $2}' modip.conf
+}
+
+setup_db() {
+
+    DATABASE_ADMIN=$(readConfigurationValue "database_admin")
+    DATABASE_USER=$(readConfigurationValue "database_user")
+    DATABASE=$(readConfigurationValue "database_name")
+
+    if [ $1 == "development" ]; then
+        dropdb -U $DATABASE_ADMIN $DATABASE
+    else
+        dropdb -i -U $DATABASE_ADMIN $DATABASE
+    fi
+
+    createdb -U $DATABASE_ADMIN -O $DATABASE_USER $DATABASE
+
+    clean
+    GOPATH=$gopath go run modip.go --setup-db=true
 }
 
 testdata() {
@@ -94,5 +122,7 @@ elif [ $1 == "test-web" ]; then
 elif [ $1 == "cover" ]; then
     GOPATH=$gopath go tool cover -html=$p/c.out -o .coverage.html
     xdg-open $PWD/.coverage.html
+elif [ $1 == "db-create" ]; then
+    setup_db $2
 fi
 

@@ -1,3 +1,6 @@
+package DbApi
+
+const TeacherLogin = `
 CREATE OR REPLACE FUNCTION teacher_auth(teacherEmail text, passwordCandidate text, OUT id int,
                                                                                    OUT name text,
                                                                                    OUT email text,
@@ -37,4 +40,4 @@ BEGIN
     auth := TRUE;
 END;
 $$ LANGUAGE plpgsql;
-
+`

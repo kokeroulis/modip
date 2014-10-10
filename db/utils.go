@@ -1,32 +1,12 @@
-package models
+package Db
 
 import (
 	"database/sql"
 	"fmt"
 	"reflect"
-	_ "github.com/lib/pq"
 )
 
-var Db *sql.DB
-
-func init() {
-	d, err := sql.Open("postgres", "postgres://tsiapaliokas:@localhost/modip_db?sslmode=disable")
-
-	if err != nil {
-		fmt.Println("Can't connect to postgresql")
-		panic(err)
-	}
-
-	pingErr := d.Ping()
-	if pingErr != nil {
-		fmt.Println("Can't connect to postgresql")
-		panic(pingErr)
-	}
-
-	Db = d
-}
-
-func checkQuery(err error, query string) {
+func CheckQuery(err error, query string) {
 	if err == sql.ErrNoRows {
 		panic("No rows in query! Something is wrong with the db")
 	} else if err != nil {
@@ -37,10 +17,10 @@ func checkQuery(err error, query string) {
 	}
 }
 
-func sqlRowsToArray(query string, args []interface{}, iterator interface{}) []interface{} {
+func SqlRowsToArray(query string, args []interface{}, iterator interface{}) []interface{} {
 	var results []interface{}
 
-	rows, err := Db.Query(query, args...)
+	rows, err := Database.Query(query, args...)
 
 	if err != nil {
 		fmt.Println(err)

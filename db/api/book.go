@@ -1,3 +1,6 @@
+package DbApi
+
+const BookAdd = `
 CREATE OR REPLACE FUNCTION book_add(bookTitle text, teacherId int, OUT id int,
                                                                    OUT title text,
                                                                    OUT alreadyExists boolean) AS $$
@@ -23,4 +26,4 @@ BEGIN
     title := bookRecord.title;
 END;
 $$ LANGUAGE plpgsql;
-
+`

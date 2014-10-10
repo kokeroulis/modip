@@ -4,12 +4,12 @@ describe('Teacher', function () {
 
     var tester, service;
 
-    beforeEach(function(){
+    beforeEach(function() {
       tester = ngMidwayTester('modipApp');
       service = tester.inject('TeacherService');
     });
 
-    afterEach(function(){
+    afterEach(function() {
       tester.destroy();
       tester = null;
     });

@@ -2,7 +2,6 @@ package api
 
 import (
 	"encoding/gob"
-	"fmt"
 	"github.com/goincremental/negroni-sessions"
 	"github.com/kokeroulis/modip/models"
 	"github.com/mholt/binding"
@@ -53,33 +52,6 @@ func TeacherLogin(resp http.ResponseWriter, req *http.Request) {
 		errorJson := models.AuthFailed()
 		RenderErrorJson(resp, req, errorJson, t)
 	}
-}
-
-func retrieveInfo(teacherId int, query string, channel chan []models.BookOrPaperInfo) {
-	list := []models.BookOrPaperInfo{}
-	rows, err := Db.Query(query, teacherId)
-
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	defer rows.Close()
-
-	for rows.Next() {
-		it := models.BookOrPaperInfo{}
-
-		if err := rows.Scan(&it.Id, &it.Title); err != nil {
-			fmt.Println(err)
-		} else {
-			list = append(list, it)
-		}
-	}
-
-	if err := rows.Err(); err != nil {
-		fmt.Println(err)
-	}
-
-	channel <- list
 }
 
 func TeacherInfo(resp http.ResponseWriter, req *http.Request) {

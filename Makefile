@@ -23,12 +23,12 @@ test-web:
 .PHONY: test-web
 
 db-create-development:
-	@./scripts/db.sh development
+	@./scripts/helper.sh db-create development
 	@./scripts/helper.sh testdata
 .PHONY: db-create-development
 
 db-create:
-	@./scripts/db.sh production
+	@./scripts/helper.sh db-create
 .PHONY: db-create
 
 fmt:

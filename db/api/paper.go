@@ -1,3 +1,6 @@
+package DbApi
+
+const PaperAdd = `
 CREATE OR REPLACE FUNCTION paper_add(paperTitle text, teacherId int, OUT id int,
                                                                      OUT title text,
                                                                      OUT alreadyExists boolean) AS $$
@@ -23,4 +26,4 @@ BEGIN
     title := paperRecord.title;
 END;
 $$ LANGUAGE plpgsql;
-
+`
