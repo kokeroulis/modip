@@ -14,23 +14,38 @@ describe('Teacher', function () {
       tester = null;
     });
 
-    it('should make a real XHR GET for http-hello.html', function(done) {
+    it('should succeed', function(done) {
       var expected = {
         id:1,
-        name:"superteacher1",
-        email:"superteacher1@teilar.gr",
+        name:'superteacher1',
+        email:'superteacher1@teilar.gr',
         department: {
           id:1,
-          name: "T.P.T."
+          name: 'T.P.T.'
         }
       };
 
       service.login('superteacher1@teilar.gr', 'superteacher1').then(function(data) {
         expect(data).toEqual(expected)
         done();
-      })
+      });
     });
 
+    it('should fail', function(done) {
+      var expected = {
+        body: {
+          Code: 401,
+          Name: 'Authorization Failed'
+        },
+        status: 401
+      };
+
+      service.login('superteacher1@teilar.gr', 'superteacher12').then(function(data) {},
+      function(error) {
+        expect(error).toEqual(expected)
+        done();
+      });
+    });
   });
 
 });
