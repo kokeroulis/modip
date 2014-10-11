@@ -30,5 +30,10 @@ func setupRoutes(n *negroni.Negroni) {
 	router.HandleFunc("/teacher/login", TeacherLogin).Methods("POST")
 	router.Handle("/teacher/info", authorize{TeacherInfo}).Methods("GET")
 
+	router.Handle("/teacher/asset/add", authorize{AssetAdd}).Methods("POST")
+	router.Handle("/teacher/asset/remove", authorize{AssetAdd}).Methods("POST")
+	router.Handle("/teacher/asset/move", authorize{AssetAdd}).Methods("POST")
+	router.Handle("/teacher/asset/modify", authorize{AssetAdd}).Methods("POST")
+
 	n.UseHandler(router)
 }

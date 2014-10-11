@@ -18,3 +18,8 @@ func AlreadyExists() ErrorJson {
 func DbError() ErrorJson {
 	return ErrorJson{http.StatusOK, "DbError"}
 }
+
+func InvalidAsset() ErrorJson {
+	return ErrorJson{http.StatusOK, "InvalidAsset"}
+}
+
