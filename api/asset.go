@@ -38,12 +38,12 @@ func AssetAdd(resp http.ResponseWriter, req *http.Request) {
 		Teacher:   models.GetTeacherFromSession(req),
 	}
 
-	isValid := a.Add()
+	alreadyExists := a.Add()
 
-	if isValid {
+	if !alreadyExists {
 		RenderJson(resp, req, a)
 	} else {
-		errorJson := models.InvalidAsset()
+		errorJson := models.AlreadyExists()
 		RenderErrorJson(resp, req, errorJson, &models.Asset{})
 	}
 }
