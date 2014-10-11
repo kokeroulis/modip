@@ -11,8 +11,8 @@ modipApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/', {
-        templateUrl: 'app/templates/view1/view1.html',
-        controller: 'View1Ctrl'
+        templateUrl: 'app/templates/home/home.html',
+        controller: 'HomeCtrl'
       }).
       otherwise({redirectTo: '/'})
   }

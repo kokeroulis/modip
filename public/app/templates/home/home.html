@@ -1,0 +1,58 @@
+<div ng-controller="HomeCtrl">
+  <div class="row">
+    <div class="large-12 columns">
+      <h1> Modip EIKONA + BACKGROUND. NEEDS SASS</h1>
+      <hr/>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="large-12 large-offset-2 columns">
+
+      <div class="row">
+        <div class="large-6  large-offset-2 columns">
+          <div ng-repeat="alert in alerts" ng-class="alert.type" class="alert-box round text-center">
+            {{alert.msg}}
+          </div>
+        </div>
+      </div>
+
+<form name="myForm">
+  <div class="row">
+    <div class="large-9  columns">
+      <label>Όνομα Χρήστη: </label>
+        <input name="username" type="text" ng-model="username" placeholder="Εισάγετε το όνομα λογαριασμού σας για το Πληροφοριακό Σύστημα Αξιολόγησης Προγραμμάτων Σπουδών." required/>
+      </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-9 columns">
+      <label>Συνθηματικό: </label>
+        <input name="password" type="password" ng-model="password" placeholder="Εισάγετε το συνθηματικό εισόδου που συνοδεύει το όνομα λογαριασμού σας." required/>
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div ng-class="{'large-offset-4': !myForm.$error.required, 'large-offset-1': !!myForm.$error.required}" class="large-6 columns">
+      <button type="submit" ng-click="(username && password) ? loginTeacher(username, password) : return" ng-class="{disabled: myForm.$error.required}"> {{myForm.$error.required ? 'Παρακαλώ συμπληρώστε την φόρμα σωστά για να συνεχίσεται' :'Είσοδος'}}</button>
+    </div>
+  </div>
+</form>
+    </div>
+  </div>
+
+
+
+
+
+
+  <footer class="row">
+    <div class="large-12 columns">
+     <hr/>
+      <h1>Modip BACKGROUND, NEEDS SASSS!
+    </div>
+  </footer>
+
+</div>

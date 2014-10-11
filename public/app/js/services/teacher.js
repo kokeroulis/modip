@@ -44,14 +44,14 @@ modipServices.factory('TeacherService', ['$http', '$q', function($http, $q) {
       },
       assetTypes: [
         {
-          id :1
+          id :1,
           name: 'books',
           count: 10,
           assets: [
             {
               id: 1,
-              assetType: 1
-              content: 'Super Book'
+              assetType: 1,
+              content: 'Super Book',
             }
           ]
         }
