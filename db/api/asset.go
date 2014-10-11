@@ -91,7 +91,7 @@ END;
 $$ LANGUAGE plpgsql;
 `
 const AssetModify = `
-CREATE OR REPLACE FUNCTION asset_remove(assetId int, newContent text, OUT id int,
+CREATE OR REPLACE FUNCTION asset_modify(assetId int, newContent text, OUT id int,
                                                                       OUT content text,
 												                      OUT assetTypeId int,
                                                                       OUT isvalid boolean) AS $$
