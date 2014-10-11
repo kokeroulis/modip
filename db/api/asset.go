@@ -10,7 +10,7 @@ BEGIN
 	id := 0;
 	content := '';
 
-    PERFORM * FROM asset AS a WHERE assetContent = content;
+    PERFORM * FROM asset AS a WHERE assetContent = a.content;
 
     IF FOUND THEN
         alreadyExists := TRUE;
@@ -29,14 +29,12 @@ END;
 $$ LANGUAGE plpgsql;
 `
 const AssetRemove = `
-CREATE OR REPLACE FUNCTION asset_remove(assetId int, OUT id int,
-                                                     OUT content text,
+CREATE OR REPLACE FUNCTION asset_remove(assetId int, OUT content text,
 													 OUT assetTypeId int,
                                                      OUT isvalid boolean) AS $$
 DECLARE
     assetRecord record;
 BEGIN
-	id := 0;
 	content := '';
 	assetTypeId := 0;
 
@@ -52,7 +50,6 @@ BEGIN
 	DELETE FROM asset WHERE id = assetId
     RETURNING * INTO assetRecord;
 
-    id := assetRecord.id;
     content := assetRecord.content;
 	assetTypeId := assetRecord.assettype;
 END;
