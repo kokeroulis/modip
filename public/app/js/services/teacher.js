@@ -51,7 +51,7 @@ modipServices.factory('TeacherService', ['$http', '$q', function($http, $q) {
             {
               id: 1,
               assetType: 1,
-              content: 'Super Book',
+              content: 'Super Book'
             }
           ]
         }
@@ -60,6 +60,24 @@ modipServices.factory('TeacherService', ['$http', '$q', function($http, $q) {
   }
 
   function deleteAsset(assetId) {
+    var deffered = $q.defer();
+
+    var data = {
+      assetId: assetId
+    };
+
+    $http.post('teacher/asset/remove', data).success(function (result) {
+      deffered.resolve(result.data);
+    }).error(function(data, status) {
+      deffered.reject({
+        body: data.Common.error,
+        status: status
+      });
+    });
+
+    return deffered.promise;
+
+
     return {
       id: 1,
       content: 'Super Book',
@@ -84,11 +102,35 @@ modipServices.factory('TeacherService', ['$http', '$q', function($http, $q) {
   }
 
   function addAsset(content, assetTypeId) {
-    return {
-      id: 2,
-      content: 'Uber Book',
-      assetType: 1
-    }
+    var deffered = $q.defer();
+
+    var data = {
+      content: content,
+      assettype: assetTypeId
+    };
+
+    $http.post('teacher/asset/add', data).success(function (result) {
+      console.log(result)
+      if (result.Common.error.Name == 'AlreadyExists') {
+        deffered.reject({
+          body: {
+            Code: 200,
+            Name: 'AlreadyExists'
+          },
+          status: 200
+        })
+      } else {
+        deffered.resolve(result.data);
+      }
+    }).error(function(data, status) {
+      console.log(data)
+      deffered.reject({
+        body: data.Common.error,
+        status: status
+      });
+    });
+
+    return deffered.promise;
   }
 
   var service = {
