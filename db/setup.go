@@ -41,14 +41,16 @@ func CreateDb() {
 	schemaList := []string{
 		DbSchema.Department,
 		DbSchema.Teacher,
-		DbSchema.Paper,
-		DbSchema.Book,
+		DbSchema.AssetType,
+		DbSchema.Asset,
 	}
 
 	apiList := []string{
-		DbApi.BookAdd,
-		DbApi.PaperAdd,
 		DbApi.TeacherLogin,
+		DbApi.AssetAdd,
+		DbApi.AssetRemove,
+		DbApi.AssetMove,
+		DbApi.AssetModify,
 	}
 
 	runQuery(schemaList)
