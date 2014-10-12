@@ -12,6 +12,22 @@ modipServices.factory('TeacherService', ['$http', '$q', function($http, $q) {
     };
   }
 
+  function assetOperation(url, data) {
+    var deffered = $q.defer();
+
+    $http.post(url, data).success(function (result) {
+      if (result.Common.error.Name == 'InvalidAsset') {
+        deffered.reject(reportErrorObj('InvalidAsset'));
+      } else {
+        deffered.resolve(result.data);
+      }
+    }).error(function(data, status) {
+      deffered.reject(reportErrorObj(data.Common.error.Name, status));
+    });
+
+    return deffered.promise;
+  }
+
   function login(username, password) {
     var data = {
       username: username,
@@ -86,29 +102,24 @@ modipServices.factory('TeacherService', ['$http', '$q', function($http, $q) {
     });
 
     return deffered.promise;
-
-
-    return {
-      id: 1,
-      content: 'Super Book',
-      assetType: 1
-    }
   }
 
   function moveAsset(assetId, newAssetTypeId) {
-    return {
-      id: 1,
-      content: 'Super Book',
-      assetType: 2
-    }
+    var data = {
+      assetId: assetId,
+      assetTypeId: newAssetTypeId
+    };
+
+    return assetOperation('teacher/asset/move', data);
   }
 
   function modifyAsset(assetId, newContent) {
-    return {
-      id: 1,
-      content: 'Modified Awesome Book',
-      assetType: 1
-    }
+    var data = {
+      assetId: assetId,
+      content: newContent
+    };
+
+    return assetOperation('teacher/asset/modify', data);
   }
 
   function addAsset(content, assetTypeId) {

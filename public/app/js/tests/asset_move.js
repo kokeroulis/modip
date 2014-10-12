@@ -1,6 +1,6 @@
 describe('Teacher', function () {
 
-  describe('Asset Delete', function() {
+  describe('Asset Move', function() {
 
     var tester, service;
 
@@ -17,7 +17,7 @@ describe('Teacher', function () {
     it('should succeed', function(done) {
       var expected = {
         id: 1,
-        content: 'Awesome book',
+        content: 'Super Book',
         teacher: {
           id: 1,
           name: 'superteacher1',
@@ -30,7 +30,8 @@ describe('Teacher', function () {
         assetType: 2
       };
 
-      service.deleteAsset(1).then(function(data) {
+      service.moveAsset(1, 2).then(function(data) {
+        console.log(data)
         expect(data).toEqual(expected)
         done();
       });
@@ -44,7 +45,7 @@ describe('Teacher', function () {
         }
       };
 
-      service.deleteAsset(1000).then(function(data) {},
+      service.moveAsset(1000, 2).then(function(data) {},
       function(error) {
         expect(error).toEqual(expected)
         done();

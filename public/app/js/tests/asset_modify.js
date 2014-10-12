@@ -1,6 +1,6 @@
 describe('Teacher', function () {
 
-  describe('Asset Delete', function() {
+  describe('Asset Modify', function() {
 
     var tester, service;
 
@@ -30,7 +30,7 @@ describe('Teacher', function () {
         assetType: 2
       };
 
-      service.deleteAsset(1).then(function(data) {
+      service.modifyAsset(1,'Awesome book').then(function(data) {
         expect(data).toEqual(expected)
         done();
       });
@@ -44,7 +44,7 @@ describe('Teacher', function () {
         }
       };
 
-      service.deleteAsset(1000).then(function(data) {},
+      service.modifyAsset(1000, 'Awesome book').then(function(data) {},
       function(error) {
         expect(error).toEqual(expected)
         done();
