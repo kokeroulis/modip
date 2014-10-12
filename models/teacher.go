@@ -64,7 +64,7 @@ func (t *TeacherInfo) takeAssets() {
 func (t *Teacher) takeAssetTypes() []AssetType {
 	assetTypes := []AssetType{}
 
-	queryAllAssetTypes := `SELECT id, name FROM assetTypes`
+	queryAllAssetTypes := `SELECT id, name FROM assetType`
 	rows, err := Db.Database.Query(queryAllAssetTypes)
 
 	if err != nil {
