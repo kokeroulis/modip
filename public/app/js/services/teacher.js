@@ -45,32 +45,6 @@ modipServices.factory('TeacherService', ['$http', '$q', function($http, $q) {
       deffered.reject(reportErrorObj(data.Common.error.Name, status));
     });
     return deffered.promise;
-
-    return {
-      teacher: {
-        id:1,
-        name:'superteacher1',
-        email:'superteacher1@teilar.gr',
-        department: {
-          id:1,
-          name: 'T.P.T.'
-        }
-      },
-      assetTypes: [
-        {
-          id :1,
-          name: 'books',
-          count: 10,
-          assets: [
-            {
-              id: 1,
-              assetType: 1,
-              content: 'Super Book'
-            }
-          ]
-        }
-      ]
-    }
   }
 
   function deleteAsset(assetId) {
