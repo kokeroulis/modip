@@ -159,7 +159,7 @@ func AssetModify(resp http.ResponseWriter, req *http.Request) {
 		Teacher: models.GetTeacherFromSession(req),
 	}
 
-	isValid := a.Move()
+	isValid := a.Modify()
 
 	if isValid {
 		RenderJson(resp, req, a)
