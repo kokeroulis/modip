@@ -36,8 +36,7 @@ describe('Teacher', function () {
         body: {
           Code: 401,
           Name: 'Authorization Failed'
-        },
-        status: 401
+        }
       };
 
       service.login('superteacher1@teilar.gr', 'superteacher12').then(function(data) {},

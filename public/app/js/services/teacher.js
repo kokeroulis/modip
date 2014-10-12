@@ -34,16 +34,7 @@ modipServices.factory('TeacherService', ['$http', '$q', function($http, $q) {
       password: password
     };
 
-    var deffered = $q.defer();
-    $http.post('teacher/login', data).success(function (result) {
-      deffered.resolve(result.data);
-    }).error(function(data, status) {
-      deffered.reject({
-        body: data.Common.error,
-        status: status
-      });
-    });
-    return deffered.promise;
+    return assetOperation('teacher/login', data);
   }
 
   function info() {
@@ -91,17 +82,7 @@ modipServices.factory('TeacherService', ['$http', '$q', function($http, $q) {
       assetId: assetId
     };
 
-    $http.post('teacher/asset/remove', data).success(function (result) {
-      if (result.Common.error.Name == 'InvalidAsset') {
-        deffered.reject(reportErrorObj('InvalidAsset'));
-      } else {
-        deffered.resolve(result.data);
-      }
-    }).error(function(data, status) {
-      deffered.reject(reportErrorObj(data.Common.error.Name, status));
-    });
-
-    return deffered.promise;
+    return assetOperation('teacher/asset/remove', data);
   }
 
   function moveAsset(assetId, newAssetTypeId) {
