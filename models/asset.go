@@ -51,7 +51,7 @@ func (a *Asset) Move() bool {
 func (a *Asset) Modify() bool {
 	var isValid bool
 	query := `SELECT assetTypeId, isvalid
-			  FROM asset_move($1, $2)`
+			  FROM asset_modify($1, $2)`
 
 	err := Db.Database.QueryRow(query, a.Id, a.Content).
 		Scan(&a.AssetType, &isValid)
