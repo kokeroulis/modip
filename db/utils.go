@@ -8,10 +8,12 @@ import (
 
 func CheckQuery(err error, query string) {
 	if err == sql.ErrNoRows {
+		fmt.Println(query)
 		panic("No rows in query! Something is wrong with the db")
 	} else if err != nil {
 		// print the error
 		// TODO use logger
+		fmt.Println(query)
 		fmt.Println(err)
 		panic("Db Error")
 	}
