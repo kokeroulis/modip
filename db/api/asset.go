@@ -57,14 +57,12 @@ $$ LANGUAGE plpgsql;
 `
 
 const AssetMove = `
-CREATE OR REPLACE FUNCTION asset_move(assetId int, newAssetTypeId int, OUT id int,
-                                                                       OUT content text,
+CREATE OR REPLACE FUNCTION asset_move(assetId int, newAssetTypeId int, OUT content text,
 												                       OUT assetTypeId int,
                                                                        OUT isvalid boolean) AS $$
 DECLARE
     assetRecord record;
 BEGIN
-	id := 0;
 	content := '';
 	assetTypeId := 0;
 
@@ -81,21 +79,18 @@ BEGIN
 	WHERE id = assetId
     RETURNING * INTO assetRecord;
 
-    id := assetRecord.id;
     content := assetRecord.content;
 	assetTypeId := assetRecord.assettype;
 END;
 $$ LANGUAGE plpgsql;
 `
 const AssetModify = `
-CREATE OR REPLACE FUNCTION asset_modify(assetId int, newContent text, OUT id int,
-                                                                      OUT content text,
+CREATE OR REPLACE FUNCTION asset_modify(assetId int, newContent text, OUT content text,
 												                      OUT assetTypeId int,
                                                                       OUT isvalid boolean) AS $$
 DECLARE
     assetRecord record;
 BEGIN
-	id := 0;
 	content := '';
 	assetTypeId := 0;
 
@@ -112,7 +107,6 @@ BEGIN
 	WHERE id = assetId
     RETURNING * INTO assetRecord;
 
-    id := assetRecord.id;
     content := assetRecord.content;
 	assetTypeId := assetRecord.assettype;
 END;
