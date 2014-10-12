@@ -42,8 +42,7 @@ describe('Teacher', function () {
         body: {
           Code: 200,
           Name: 'AlreadyExists'
-        },
-        status: 200
+        }
       };
 
       service.addAsset(superBook, 1).then(function(data) {},

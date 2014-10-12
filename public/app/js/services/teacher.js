@@ -3,6 +3,15 @@
 var modipServices = angular.module('modipServices', []);
 
 modipServices.factory('TeacherService', ['$http', '$q', function($http, $q) {
+  function reportErrorObj(errorName, errorStatus) {
+    return {
+      body: {
+        Code: errorStatus ? errorStatus : 200,
+        Name: errorName
+      }
+    };
+  }
+
   function login(username, password) {
     var data = {
       username: username,
@@ -67,12 +76,13 @@ modipServices.factory('TeacherService', ['$http', '$q', function($http, $q) {
     };
 
     $http.post('teacher/asset/remove', data).success(function (result) {
-      deffered.resolve(result.data);
+      if (result.Common.error.Name == 'InvalidAsset') {
+        deffered.reject(reportErrorObj('InvalidAsset'));
+      } else {
+        deffered.resolve(result.data);
+      }
     }).error(function(data, status) {
-      deffered.reject({
-        body: data.Common.error,
-        status: status
-      });
+      deffered.reject(reportErrorObj(data.Common.error.Name, status));
     });
 
     return deffered.promise;
@@ -110,24 +120,13 @@ modipServices.factory('TeacherService', ['$http', '$q', function($http, $q) {
     };
 
     $http.post('teacher/asset/add', data).success(function (result) {
-      console.log(result)
       if (result.Common.error.Name == 'AlreadyExists') {
-        deffered.reject({
-          body: {
-            Code: 200,
-            Name: 'AlreadyExists'
-          },
-          status: 200
-        })
+        deffered.reject(reportErrorObj('AlreadyExists'));
       } else {
         deffered.resolve(result.data);
       }
     }).error(function(data, status) {
-      console.log(data)
-      deffered.reject({
-        body: data.Common.error,
-        status: status
-      });
+      deffered.reject(reportErrorObj(deffered, data.Common.error.Name));
     });
 
     return deffered.promise;

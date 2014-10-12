@@ -18,6 +18,15 @@ describe('Teacher', function () {
       var expected = {
         id: 1,
         content: 'Super Book',
+        teacher: {
+          id: 1,
+          name: 'superteacher1',
+          email: 'superteacher1@teilar.gr',
+          department: {
+            id: 1,
+            name: 'T.P.T.'
+          }
+        },
         assetType: 1
       };
 
@@ -31,9 +40,8 @@ describe('Teacher', function () {
       var expected = {
         body: {
           Code: 200,
-          Name: 'Invalid Asset'
-        },
-        status: 200
+          Name: 'InvalidAsset'
+        }
       };
 
       service.deleteAsset(1000).then(function(data) {},
