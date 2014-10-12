@@ -38,16 +38,14 @@ modipServices.factory('TeacherService', ['$http', '$q', function($http, $q) {
   }
 
   function info() {
-    /*var deffered = $q.defer();
+    var deffered = $q.defer();
     $http.get('teacher/info').success(function (result) {
       deffered.resolve(result.data);
     }).error(function(data, status) {
-      deffered.reject({
-        body: data.Common.error,
-        status: status
-      });
+      deffered.reject(reportErrorObj(data.Common.error.Name, status));
     });
-    return deffered.promise;*/
+    return deffered.promise;
+
     return {
       teacher: {
         id:1,
