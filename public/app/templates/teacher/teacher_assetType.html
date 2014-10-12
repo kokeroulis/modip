@@ -1,0 +1,26 @@
+<table>
+  <thead>
+    <tr>
+      <th class="text-center" width="200">Τίτλος</th>
+      <th class="text-center">Ενέργειες</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="asset in info.assets">
+      <td>{{asset.content}}</td>
+      <td ng-show="!asset.editable && !asset.removable">
+        <a ng-click="asset.removable = !asset.removable" class="button alert">Διαγραφή</a>
+        <a ng-click="asset.editable = !asset.editable" class="button">Επεξεργασία</a>
+      </td>
+      <td ng-show="asset.removable">
+        <a ng-click="" class="button alert">Οριστική Διαγραφή του {{asset.content}}</a>
+        <a ng-click="asset.removable = false" class="button secondary">Ακύρωση</a>
+      </td>
+      <td ng-show="asset.editable">
+        <input type="text" ng-init="asset.oldName=asset.content" ng-model="asset.content" placeholder="Καινούργιο Όνομα"></input>
+        <a ng-click="asset.editable = false" class="button">Αποθύκευση</a>
+        <a ng-click="asset.editable = false; asset.content=asset.oldName" class="button secondary">Ακύρωση</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

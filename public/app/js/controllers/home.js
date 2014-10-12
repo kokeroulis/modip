@@ -2,12 +2,12 @@
 
 var modipControllers = angular.module('modipControllers', []);
 
-modipControllers.controller('HomeCtrl', ['$scope', 'TeacherService',
-  function($scope, TeacherService) {
+modipControllers.controller('HomeCtrl', ['$scope', 'TeacherService', '$state',
+  function($scope, TeacherService, $state) {
     $scope.alerts = [];
     $scope.loginTeacher = function(username, password) {
       TeacherService.login(username, password).then(function(result) {
-        //it should redirect
+        $state.go('teacher');
       }, function(error) {
         //clear our alerts
         $scope.alerts = [];

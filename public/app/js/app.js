@@ -17,6 +17,15 @@ modipApp.config(['$stateProvider', '$urlRouterProvider',
         url: '/',
         templateUrl: 'app/templates/home/home.html',
         controller: 'HomeCtrl'
+      }).
+      state('teacher', {
+        url: '/teacher',
+        templateUrl: 'app/templates/teacher/teacher.html',
+        controller: 'TeacherCtrl'
+      }).
+      state('teacher.assetType', {
+        url: '/assetType/{assetTypeId}',
+        templateUrl: 'app/templates/teacher/teacher_assetType.html'
       })
   }
 ]);

@@ -1,0 +1,39 @@
+<div ng-controller="TeacherCtrl">
+  <div class="row">
+    <div class="large-12 columns">
+      <h1> Modip EIaaaKONA + BACKGROUND. NEEDS SASS</h1>
+      <hr/>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="large-12 large-offset-2 columns">
+
+      <div class="row">
+        <div class="large-6  large-offset-2 columns">
+          <div ng-repeat="alert in alerts" ng-class="alert.type" class="alert-box round text-center">
+            {{alert.msg}}
+          </div>
+        </div>
+      </div>
+
+      <div ng-repeat="info in teacherInfo.assetTypes">
+      <ul class="button-group">
+        <li><a class="button" ui-sref-active="success" ui-sref="teacher.assetType({assetTypeId: info.id })"> {{info.name}}</a></li>
+      </ul>
+      <div ui-view></div>
+    </div>
+
+    </div>
+  </div>
+
+
+  <footer class="row">
+    <div class="large-12 columns">
+     <hr/>
+      <h1>Modip BACKGROUND, NEEDS SASSS!
+    </div>
+  </footer>
+
+</div>
