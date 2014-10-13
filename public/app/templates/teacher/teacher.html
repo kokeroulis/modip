@@ -1,18 +1,4 @@
 <div ng-controller="TeacherCtrl">
-  <div class="row modip-header">
-    <div class="large-2 columns">
-      <a href="/">
-        <img src="http://data.modip.teilar.gr/sites/default/files/color/bartik-c819a95e/logo.png" alt="Αρχική">
-      </a>
-      <br/>
-    </div>
-    <div class="large-10 columns">
-        <p></p>
-        <p>Πληροφοριακό Σύστημα Αξιολόγησης Προγραμμάτων Σπουδών</p>
-        <p>ΜοΔιΠ - Μονάδα Διασφάλισης Ποιότητας Τ.Ε.Ι. Θεσσαλίας</p>
-    </div>
-  </div>
-
 
   <div class="row">
     <p></p>
@@ -26,21 +12,15 @@
         </div>
       </div>
 
-      <div ng-repeat="info in teacherInfo.assetTypes">
+      <div>
       <ul class="button-group">
-        <li><a class="button" ui-sref-active="success" ui-sref="teacher.assetType({assetTypeId: info.id })"> {{info.name}}</a></li>
+        <li ng-repeat="info in teacherInfo.assetTypes"  ><a class="button" ui-sref-active="success" ui-sref="teacher.assetType({assetTypeId: info.id })"> {{info.name}}</a></li>
       </ul>
+
       <div ui-view></div>
     </div>
 
     </div>
   </div>
-
-
-  <footer class="row modip-footer">
-    <div class="large-12 columns">
-      <h1>Modip BACKGROUND, NEEDS SASSS!
-    </div>
-  </footer>
 
 </div>
