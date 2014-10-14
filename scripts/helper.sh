@@ -16,6 +16,7 @@ install_go() {
                  "gorilla/mux"
                  "lib/pq"
                  "jacobsa/oglematchers"
+                 "vaughan0/go-ini"
     )
 
     gopkg_deps=("unrolled/render.v1")
