@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	_ "github.com/lib/pq"
+	"github.com/kokeroulis/modip/db"
 	"io/ioutil"
 )
 
@@ -33,23 +33,6 @@ type jsonData struct {
 	AssetTypes  []string
 }
 
-func setupDb() *sql.DB {
-	db, err := sql.Open("postgres", "postgres://tsiapaliokas:@localhost/modip_db?sslmode=disable")
-
-	if err != nil {
-		fmt.Println("Can't connect to postgresql")
-		panic(err)
-	}
-
-	pingErr := db.Ping()
-	if pingErr != nil {
-		fmt.Println("Can't connect to postgresql")
-		panic(pingErr)
-	}
-
-	return db
-}
-
 func checkQuery(err error) bool {
 	switch {
 	case err == sql.ErrNoRows:
@@ -63,7 +46,9 @@ func checkQuery(err error) bool {
 }
 
 func populateDb(data jsonData) {
-	db := setupDb()
+	Db.Connect()
+	db := Db.Database
+
 	for _, department := range data.Departments {
 
 		var departmentId int
