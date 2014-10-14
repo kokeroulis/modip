@@ -6,12 +6,14 @@ import (
 	_ "github.com/lib/pq"
 	"github.com/kokeroulis/modip/db/api"
 	"github.com/kokeroulis/modip/db/schema"
+	"github.com/kokeroulis/modip/config"
 )
 
 var Database *sql.DB
 
 func Connect() {
-	d, err := sql.Open("postgres", "postgres://tsiapaliokas:@localhost/modip_db?sslmode=disable")
+	c := config.NewConfig()
+	d, err := sql.Open("postgres", c.PgConnectionString())
 
 	if err != nil {
 		fmt.Println("Can't connect to postgresql")

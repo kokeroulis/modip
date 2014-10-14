@@ -20,7 +20,8 @@ func SetupApi(n *negroni.Negroni) {
 }
 
 func setupRedis(n *negroni.Negroni) {
-	store, err := sessions.NewRediStore(10, "tcp", ":6379", "", []byte("secret-key"))
+	c := config.NewConfig()
+	store, err := sessions.NewRediStore(10, "tcp", c.RedisPort, "", c.RedisSecret)
 
 	if err != nil {
 		fmt.Println("Can't connect to redis")
