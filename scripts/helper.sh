@@ -89,6 +89,7 @@ setup_db() {
     fi
 
     createdb -U $DATABASE_ADMIN -O $DATABASE_USER $DATABASE
+    PGOPTIONS='--client-min-messages=warning' psql -U $DATABASE_ADMIN $DATABASE -f $PWD/db/schema/superUserCommands.sql
 
     clean
     GOPATH=$gopath go run modip.go --setup-db=true
