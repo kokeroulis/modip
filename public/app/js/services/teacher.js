@@ -51,7 +51,7 @@ modipServices.factory('TeacherService', ['$http', '$q', function($http, $q) {
     var deffered = $q.defer();
 
     var data = {
-      assetId: assetId
+      assetId: parseInt(assetId)
     };
 
     return assetOperation('teacher/asset/remove', data);
