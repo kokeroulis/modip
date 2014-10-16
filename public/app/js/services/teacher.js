@@ -80,7 +80,7 @@ modipServices.factory('TeacherService', ['$http', '$q', function($http, $q) {
 
     var data = {
       content: content,
-      assettype: assetTypeId
+      assettype: parseInt(assetTypeId)
     };
 
     console.log(data)

@@ -12,12 +12,10 @@ modipControllers.controller('TeacherCtrl', ['$scope', 'TeacherService', '$state'
 
     $scope.createNewAsset = function(newContent, assetTypeId) {
       TeacherService.addAsset(newContent, $state.params.assetTypeId).then(function(result) {
-        console.log("result")
         $scope.alerts = [];
         $scope.alerts.push({msg: "Η καινούργια εγγραφή προστέθηκε επιτυχώς", type: 'success'});
       }, function(error, status) {
-        console.log(error)
-        console.log(status)
+        $scope.alerts.push({msg: 'Σφάλμα συστήματος ' + error.body.Name, type:'danger'});
       });
     }
 
