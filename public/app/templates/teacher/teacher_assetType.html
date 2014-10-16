@@ -18,7 +18,7 @@
       </td>
       <td ng-show="asset.editable">
         <input type="text" ng-init="asset.oldName=asset.content" ng-model="asset.content" placeholder="Καινούργιο Όνομα"></input>
-        <a ng-click="asset.editable = false" class="button">Αποθύκευση</a>
+        <a ng-click="asset.editable = false; modifyAsset(asset.content, asset.Id)" class="button">Ολοκλήρωση Επεξεργασίας</a>
         <a ng-click="asset.editable = false; asset.content=asset.oldName" class="button secondary">Ακύρωση</a>
       </td>
     </tr>
@@ -30,7 +30,7 @@
     <tr ng-show="asset.createNew">
       <td>
         <input type="text" ng-model="asset.newContent" placeholder="Όνομα εγγραφής"></input>
-        <a ng-click="asset.createNew = false; createNewAsset(asset.newContent, asset.Id)" class="button">Δημιουργεία</a>
+        <a ng-click="asset.createNew = false; createNewAsset(asset.newContent, asset.Id)" class="button">Δημιουργία</a>
         <a ng-click="asset.createNew = false; asset.newContent=''" class="button secondary">Ακύρωση</a>
       </td>
     </tr>

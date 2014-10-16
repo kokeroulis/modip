@@ -18,5 +18,18 @@ modipControllers.controller('TeacherCtrl', ['$scope', 'TeacherService', '$state'
         $scope.alerts.push({msg: 'Σφάλμα συστήματος ' + error.body.Name, type:'danger'});
       });
     }
+
+    $scope.modifyAsset = function(newContent, assetTypeId) {
+      TeacherService.modifyAsset($state.params.assetTypeId, newContent).then(function(result) {
+        $scope.alerts = [];
+        $scope.alerts.push({msg: "Η εγγραφή επεξεργάστηκε επιτυχώς", type: 'success'});
+        //update our table
+        TeacherService.info().then(function(data) {
+          $scope.teacherInfo = data;
+        });
+      }, function(error, status) {
+        $scope.alerts.push({msg: 'Σφάλμα συστήματος ' + error.body.Name, type:'danger'});
+      });
+    }
   }
 ]);

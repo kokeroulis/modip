@@ -68,7 +68,7 @@ modipServices.factory('TeacherService', ['$http', '$q', function($http, $q) {
 
   function modifyAsset(assetId, newContent) {
     var data = {
-      assetId: assetId,
+      assetId: parseInt(assetId),
       content: newContent
     };
 
@@ -83,7 +83,6 @@ modipServices.factory('TeacherService', ['$http', '$q', function($http, $q) {
       assettype: parseInt(assetTypeId)
     };
 
-    console.log(data)
     $http.post('teacher/asset/add', data).success(function (result) {
       if (result.Common.error.Name == 'AlreadyExists') {
         deffered.reject(reportErrorObj('AlreadyExists'));
@@ -91,7 +90,6 @@ modipServices.factory('TeacherService', ['$http', '$q', function($http, $q) {
         deffered.resolve(result.data);
       }
     }).error(function(data, status) {
-      console.log(data)
       deffered.reject(reportErrorObj(deffered, data.Common.error.Name));
     });
 
