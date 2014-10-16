@@ -25,7 +25,10 @@ modipApp.config(['$stateProvider', '$urlRouterProvider',
       }).
       state('teacher.assetType', {
         url: '/assetType/{assetTypeId}',
-        templateUrl: 'app/templates/teacher/teacher_assetType.html'
+        templateUrl: 'app/templates/teacher/teacher_assetType.html',
+        controller: ['$scope', '$state', function($scope, $state) {
+          $scope.currentAssetType = $state.params.assetTypeId;
+        }]
       })
   }
 ]);

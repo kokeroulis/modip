@@ -18,7 +18,5 @@ modipControllers.controller('TeacherCtrl', ['$scope', 'TeacherService', '$state'
         $scope.alerts.push({msg: 'Σφάλμα συστήματος ' + error.body.Name, type:'danger'});
       });
     }
-
-
   }
 ]);

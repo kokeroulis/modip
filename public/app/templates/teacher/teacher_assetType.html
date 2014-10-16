@@ -6,7 +6,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="asset in info.assets">
+    <tr ng-repeat="asset in teacherInfo.assetTypes[currentAssetType - 1].assets">
       <td>{{asset.content}}</td>
       <td ng-show="!asset.editable && !asset.removable">
         <a ng-click="asset.removable = !asset.removable" class="button alert">Διαγραφή</a>
