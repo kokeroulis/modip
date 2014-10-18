@@ -4,12 +4,7 @@ gopath=$PWD/.gopath
 gobin=$PWD/bin
 p=$gopath/src/github.com/kokeroulis
 
-install_go() {
-    if [ -d $gopath ]; then
-        echo "Please remove $gopath"
-        exit 1
-    fi
-
+update_deps() {
     github_deps=("codegangsta/negroni"
                  "mholt/binding"
                  "gorilla/mux"
@@ -31,14 +26,35 @@ install_go() {
         echo "Installing: $i"
         GOPATH=$gopath go get gopkg.in/$i
     done
+}
 
-    p=$gopath/src/github.com/kokeroulis
+install_go() {
+    if [ -d $gopath ]; then
+        echo "Please remove $gopath"
+       # exit 1
+    fi
+
+    mkdir -p $gopath/src/github.com
+    mkdir -p $gopath/src/gopkg.in
+
+    ln -sfv $PWD/vendor/github.com/* $gopath/src/github.com
+    ln -sfv $PWD/vendor/gopkg.in/* $gopath/src/gopkg.in
+
+    p=$gopath/src/github.com/kokeroulis/modip
 
     if [ ! -d $p ]; then
         mkdir -p $p
     fi
 
-    ln -sf $PWD $p/modip
+    my_packages=("api"
+                 "db"
+                 "models"
+                 "config"
+    )
+
+    for i in ${my_packages[@]}; do
+        ln -sfv $PWD/$i $p/$i
+    done
 }
 
 install_js() {
