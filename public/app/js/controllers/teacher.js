@@ -48,5 +48,23 @@ modipControllers.controller('TeacherCtrl', ['$scope', 'TeacherService', '$state'
         $scope.alerts.push({msg: 'Σφάλμα συστήματος ' + error.body.Name, type:'danger'});
       });
     }
+
+    $scope.moveAsset = function(assetId, newAssetTypeId) {
+      if (newAssetTypeId === undefined) {
+        //our user hasn't selected a new category
+        return;
+      }
+
+      TeacherService.moveAsset(assetId, newAssetTypeId.id).then(function(result) {
+        $scope.alerts = [];
+        $scope.alerts.push({msg: "Η εγγραφή μετακινήθηκε επιτυχώς σε καινούργια κατηγορία", type: 'success'});
+        //update our table
+        TeacherService.info().then(function(data) {
+          $scope.teacherInfo = data;
+        });
+      }, function(error, status) {
+        $scope.alerts.push({msg: 'Σφάλμα συστήματος ' + error.body.Name, type:'danger'});
+      });
+    }
   }
 ]);

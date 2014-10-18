@@ -18,7 +18,10 @@
       </td>
       <td ng-show="asset.editable">
         <input type="text" ng-init="asset.oldName=asset.content" ng-model="asset.content" placeholder="Καινούργιο Όνομα"></input>
-        <a ng-click="asset.editable = false; modifyAsset(asset.content, asset.id)" class="button">Ολοκλήρωση Επεξεργασίας</a>
+        <select ng-model="newCategory" ng-options="category.name for category in teacherInfo.assetTypes">
+          <option value="">-- Μετακίνηση σε Καινούργια κατηγορία --</option>
+        </select>
+        <a ng-click="asset.editable = false; modifyAsset(asset.content, asset.id); moveAsset(asset.id, newCategory)" class="button">Ολοκλήρωση Επεξεργασίας</a>
         <a ng-click="asset.editable = false; asset.content=asset.oldName" class="button secondary">Ακύρωση</a>
       </td>
     </tr>

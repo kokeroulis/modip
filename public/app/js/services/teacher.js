@@ -59,8 +59,8 @@ modipServices.factory('TeacherService', ['$http', '$q', function($http, $q) {
 
   function moveAsset(assetId, newAssetTypeId) {
     var data = {
-      assetId: assetId,
-      assetTypeId: newAssetTypeId
+      assetId: parseInt(assetId),
+      assetTypeId: parseInt(newAssetTypeId)
     };
 
     return assetOperation('teacher/asset/move', data);
