@@ -3,3 +3,10 @@
 node_modules
 npm-debug.log
 public/bower_components/
+
+#sass tmp files
+/bower_components/*
+/.sass-cache/*
+*.DS_Store
+/stylesheets/*
+
