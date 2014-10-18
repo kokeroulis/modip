@@ -1,5 +1,6 @@
 .coverage.html
 .vendor
+.gopath
 node_modules
 npm-debug.log
 public/bower_components/

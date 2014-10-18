@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-gopath=$PWD/.vendor
+gopath=$PWD/.gopath
 gobin=$PWD/bin
 p=$gopath/src/github.com/kokeroulis
 
@@ -11,9 +11,10 @@ install_go() {
     fi
 
     github_deps=("codegangsta/negroni"
-                 "goincremental/negroni-sessions"
                  "mholt/binding"
                  "gorilla/mux"
+                 "gorilla/sessions"
+                 "boj/redistore"
                  "lib/pq"
                  "jacobsa/oglematchers"
                  "vaughan0/go-ini"

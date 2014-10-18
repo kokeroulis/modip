@@ -1,33 +1,18 @@
 package api
 
 import (
-	"fmt"
 	"github.com/codegangsta/negroni"
-	"github.com/goincremental/negroni-sessions"
-	"github.com/kokeroulis/modip/config"
-	_ "github.com/lib/pq"
+	"github.com/kokeroulis/modip/models"
 	"gopkg.in/unrolled/render.v1"
 )
 
 var Render *render.Render
 
 func SetupApi(n *negroni.Negroni) {
-	setupRedis(n)
+	models.SetupRedis()
 
 	Render = render.New(render.Options{})
 
 	setupRoutes(n)
-}
-
-func setupRedis(n *negroni.Negroni) {
-	c := config.NewConfig()
-	store, err := sessions.NewRediStore(10, "tcp", c.RedisPort, "", c.RedisSecret)
-
-	if err != nil {
-		fmt.Println("Can't connect to redis")
-		panic(err)
-	}
-
-	n.Use(sessions.Sessions("my_session", store))
 }
 

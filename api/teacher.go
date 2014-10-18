@@ -2,7 +2,6 @@ package api
 
 import (
 	"encoding/gob"
-	"github.com/goincremental/negroni-sessions"
 	"github.com/kokeroulis/modip/models"
 	"github.com/mholt/binding"
 	"net/http"
@@ -45,8 +44,9 @@ func TeacherLogin(resp http.ResponseWriter, req *http.Request) {
 	auth := t.Login(teacherForm.Username, teacherForm.Password)
 
 	if auth {
-		session := sessions.GetSession(req)
-		session.Set("teacher", &t)
+		session := models.GetSession(req)
+		session.Values["teacher"] = &t
+		session.Save(req, resp)
 		RenderJson(resp, req, t)
 	} else {
 		errorJson := models.AuthFailed()

@@ -2,9 +2,13 @@ package models
 
 import (
 	"fmt"
-	"github.com/goincremental/negroni-sessions"
+	"github.com/gorilla/sessions"
+	"github.com/boj/redistore"
+	"github.com/kokeroulis/modip/config"
 	"net/http"
 )
+
+var redisStore *redistore.RediStore
 
 type AuthJson struct {
 	Id       int    `json:"id"`
@@ -21,8 +25,33 @@ type JsonData struct {
 	Data   interface{} `json:"data"`
 }
 
+func SetupRedis() {
+	c := config.NewConfig()
+
+	var err error
+	redisStore, err = redistore.NewRediStore(10, "tcp", c.RedisPort, "", c.RedisSecret)
+
+	if err != nil {
+		fmt.Println("Can't connect to redis")
+		panic(err)
+	}
+}
+
+func GetSession(req *http.Request) *sessions.Session {
+	session, err := redisStore.Get(req, "my_cookie")
+
+	if err != nil {
+		fmt.Println("Error at getting session!!!")
+		fmt.Println(err)
+	}
+
+	return session
+}
+
 func GetTeacherFromSession(req *http.Request) Teacher {
-	t := sessions.GetSession(req).Get("teacher")
+	session := GetSession(req)
+
+	t := session.Values["teacher"]
 	teacher := &Teacher{}
 	if t != nil {
 		ok := false
@@ -32,7 +61,6 @@ func GetTeacherFromSession(req *http.Request) Teacher {
 			fmt.Println("Unauthorized request")
 		}
 	}
-
 	return *teacher
 }
 
