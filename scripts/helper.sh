@@ -31,7 +31,7 @@ update_deps() {
 install_go() {
     if [ -d $gopath ]; then
         echo "Please remove $gopath"
-       # exit 1
+        exit 1
     fi
 
     mkdir -p $gopath/src/github.com
