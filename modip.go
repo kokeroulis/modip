@@ -4,6 +4,7 @@ import (
 	"github.com/codegangsta/negroni"
 	"github.com/kokeroulis/modip/api"
 	"github.com/kokeroulis/modip/db"
+	"github.com/kokeroulis/modip/models/categories"
 	"flag"
 )
 
@@ -18,6 +19,7 @@ func main() {
 
 	if *setupDb == true {
 		Db.CreateDb()
+		categories.CreateCategories()
 	}
 
 	if *start {
