@@ -45,6 +45,7 @@ func CreateDb() {
 		DbSchema.Teacher,
 		DbSchema.AssetType,
 		DbSchema.Asset,
+		DbSchema.Category,
 	}
 
 	apiList := []string{
@@ -53,6 +54,7 @@ func CreateDb() {
 		DbApi.AssetRemove,
 		DbApi.AssetMove,
 		DbApi.AssetModify,
+		DbApi.CategoryAdd,
 	}
 
 	runQuery(schemaList)
