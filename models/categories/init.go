@@ -29,7 +29,6 @@ func newCategory(id int, name string) *models.Category {
 
 func CreateCategories() {
 	init1()
-	init2()
 
 	for _, g := range groupList {
 		g.Create()
