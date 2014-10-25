@@ -31,7 +31,6 @@ describe('Teacher', function () {
       };
 
       service.moveAsset(1, 2).then(function(data) {
-        console.log(data)
         expect(data).toEqual(expected)
         done();
       });
