@@ -2,9 +2,9 @@ package categories
 
 import "github.com/kokeroulis/modip/models"
 
-var categoriesList []*models.Category
+var groupList []models.CategoryGroup
 
-func newParentCategoryForTeacher(id int, name string) *models.Category {
+func newParentCategoryForTeacher(id int, name string, group models.CategoryGroup) *models.Category {
 	c := newCategory(id, name)
 
 	c.AuthActions = models.CategoryAuthActions{
@@ -12,7 +12,8 @@ func newParentCategoryForTeacher(id int, name string) *models.Category {
 		TeacherCanEdit: true,
 	}
 
-	categoriesList = append(categoriesList, c)
+	group.AddCategory(c)
+	groupList = append(groupList, group)
 
 	return c
 }
@@ -30,9 +31,8 @@ func CreateCategories() {
 	init1()
 	init2()
 
-	for _, c := range categoriesList {
-		c.Create()
-		c.Load()
+	for _, g := range groupList {
+		g.Create()
 	}
 }
 

@@ -5,6 +5,67 @@ import (
 	"encoding/json"
 )
 
+type CategoryGroup struct {
+	Id         int         `json:"id"`
+	Name       string      `json:"name"`
+	Categories []*Category `json:"categories"`
+}
+
+func (g *CategoryGroup) AddCategory(c *Category) {
+	g.Categories = append(g.Categories, c)
+}
+
+func (g *CategoryGroup) Create() {
+	var alreadyExists bool
+	query := `SELECT alreadyExists
+			  FROM category_group_add($1, $2)`
+
+	for _, category := range g.Categories {
+		category.Create()
+
+		err := Db.Database.QueryRow(query, category.Id, g.Name).
+		Scan(&alreadyExists)
+
+		Db.CheckQuery(err, query)
+
+		if alreadyExists {
+			panic("The Category is already in group!!")
+		}
+	}
+}
+
+func (g *CategoryGroup) Load() {
+	query := `SELECT name, category
+			  FROM categorygroup WHERE id = $1`
+
+	rows, err := Db.Database.Query(query, g.Id)
+
+	if err != nil {
+		panic(err)
+	}
+
+	defer rows.Close()
+
+	for rows.Next() {
+		var categoryId int
+
+		if err := rows.Scan(&g.Name, &categoryId); err != nil {
+			panic(err)
+		} else {
+			c := &Category{
+				Id: categoryId,
+			}
+
+			c.Load()
+			g.AddCategory(c)
+		}
+	}
+
+	if rowsErr := rows.Err(); rowsErr != nil {
+		panic(err)
+	}
+}
+
 type CategoryAuthActions struct {
 	IsVisibleToTeacher bool `json:"is_visible_to_teacher"`
 	TeacherCanEdit     bool `json:"teacher_can_edit"`
@@ -13,7 +74,7 @@ type CategoryAuthActions struct {
 type Category struct {
 	Id          int                 `json:"id"`
 	Name        string              `json:"name"`
-	Parent      *Category           `json:"parent"`
+	Parent      *Category           `json:"-"`
 	Children    []*Category         `json:"children"`
 	Data        interface{}         `json:"data"`
 	AuthActions CategoryAuthActions `json:"authActions"`
@@ -101,16 +162,46 @@ func (c *Category) Load() {
 
 	for rows.Next() {
 		it := &Category{}
-
-			if err := rows.Scan(&it.Id, &it.Name, &it.Data); err != nil {
-				panic(err)
-			} else {
-				c.AddChild(it)
-			}
+		if err := rows.Scan(&it.Id, &it.Name, &it.Data); err != nil {
+			panic(err)
+		} else {
+			c.AddChild(it)
 		}
+	}
 
 	if rowsErr := rows.Err(); rowsErr != nil {
 		panic(err)
 	}
+}
+
+func ListAllCategories() []CategoryGroup {
+	var groupList []CategoryGroup
+	query := `SELECT id	FROM categorygroup`
+
+	rows, err := Db.Database.Query(query)
+
+	if err != nil {
+		panic(err)
+	}
+
+	defer rows.Close()
+
+	for rows.Next() {
+		it := CategoryGroup{}
+
+		if err := rows.Scan(&it.Id); err != nil {
+			panic(err)
+		} else {
+			it.Load()
+
+			groupList = append(groupList, it)
+		}
+	}
+
+	if rowsErr := rows.Err(); rowsErr != nil {
+		panic(err)
+	}
+
+	return groupList
 }
 

@@ -28,3 +28,25 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 `
+const CategoryGroupAdd = `
+CREATE OR REPLACE FUNCTION category_group_add(categoryId int, groupName text, OUT alreadyExists boolean) AS $$
+DECLARE
+BEGIN
+	PERFORM * FROM categorygroup
+	WHERE category = categoryId;
+
+	IF FOUND THEN
+		alreadyExists := TRUE;
+		RETURN;
+	ELSE
+		alreadyExists := FALSE;
+	END IF;
+
+	INSERT INTO categorygroup
+	(name, category)
+	VALUES (groupName, categoryId);
+
+END;
+$$ LANGUAGE plpgsql;
+`
+

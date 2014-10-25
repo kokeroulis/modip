@@ -46,6 +46,7 @@ func CreateDb() {
 		DbSchema.AssetType,
 		DbSchema.Asset,
 		DbSchema.Category,
+		DbSchema.CategoryGroup,
 	}
 
 	apiList := []string{
@@ -55,6 +56,7 @@ func CreateDb() {
 		DbApi.AssetMove,
 		DbApi.AssetModify,
 		DbApi.CategoryAdd,
+		DbApi.CategoryGroupAdd,
 	}
 
 	runQuery(schemaList)

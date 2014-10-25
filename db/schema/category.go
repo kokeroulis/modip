@@ -10,3 +10,15 @@ CREATE TABLE category
 	authactions json  not null
 );
 `
+
+const CategoryGroup = `
+CREATE SEQUENCE seq_categorygroupIds;
+
+CREATE TABLE categorygroup
+(
+	id       int   primary key default nextval('seq_categorygroupIds') ,
+	name     text  not null,
+	category int   not null references category(id) on delete cascade
+);
+`
+
