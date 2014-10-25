@@ -96,13 +96,24 @@ modipServices.factory('TeacherService', ['$http', '$q', function($http, $q) {
     return deffered.promise;
   }
 
+  function categoryList() {
+    var deffered = $q.defer();
+    $http.get('category/list').success(function (result) {
+      deffered.resolve(result.data);
+    }).error(function(data, status) {
+      deffered.reject(reportErrorObj(data.Common.error.Name, status));
+    });
+    return deffered.promise;
+  }
+
   var service = {
     login: login,
     info: info,
     deleteAsset: deleteAsset,
     moveAsset: moveAsset,
     modifyAsset: modifyAsset,
-    addAsset: addAsset
+    addAsset: addAsset,
+    categoryList: categoryList
   };
 
   return service;
