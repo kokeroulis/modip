@@ -6,7 +6,7 @@ CREATE TABLE category
 	id          int   primary key not null,
 	name        text  not null,
 	parent      int   default 0,
-	data        json,
+	data        text  default '',
 	authactions json  not null
 );
 `

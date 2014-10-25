@@ -1,7 +1,7 @@
 package DbApi
 
 const CategoryAdd = `
-CREATE OR REPLACE FUNCTION category_add(categoryId int, categoryName text, parentId int, categoryData json,
+CREATE OR REPLACE FUNCTION category_add(categoryId int, categoryName text, parentId int,
                                         categoryAuthActions json, OUT alreadyExists boolean) AS $$
 DECLARE
 BEGIN
@@ -17,12 +17,12 @@ BEGIN
 
 	IF parentId > 0 THEN
 		INSERT INTO category
-		(id, name, parent, data, authactions)
-		VALUES (categoryId, categoryName, parentId, categoryData, categoryAuthActions);
+		(id, name, parent, authactions)
+		VALUES (categoryId, categoryName, parentId, categoryAuthActions);
 	ELSE
 		INSERT INTO category
-		(id, name, data, authactions)
-		VALUES (categoryId, categoryName, categoryData, categoryAuthActions);
+		(id, name, authactions)
+		VALUES (categoryId, categoryName, categoryAuthActions);
 	END IF;
 
 END;

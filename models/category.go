@@ -76,16 +76,15 @@ type Category struct {
 	Name        string              `json:"name"`
 	Parent      *Category           `json:"-"`
 	Children    []*Category         `json:"children"`
-	Data        interface{}         `json:"data"`
+	Data        string              `json:"data,omitempty"`
 	AuthActions CategoryAuthActions `json:"authActions"`
 }
 
 func (c *Category) Create() {
-	jsonData, jsonErr := json.Marshal(c.Data)
 	authActionsData, authActionErr := json.Marshal(c.AuthActions)
 
-	if jsonErr != nil || authActionErr != nil {
-		panic(jsonErr)
+	if authActionErr != nil {
+		panic(authActionErr)
 	}
 
 	var parentId int = -1
@@ -95,9 +94,9 @@ func (c *Category) Create() {
 
 	var alreadyExists bool
 	query := `SELECT alreadyExists
-			  FROM category_add($1, $2, $3, $4, $5)`
+			  FROM category_add($1, $2, $3, $4)`
 
-	err := Db.Database.QueryRow(query, c.Id, c.Name, parentId, jsonData, authActionsData).
+	err := Db.Database.QueryRow(query, c.Id, c.Name, parentId, authActionsData).
 		Scan(&alreadyExists)
 
 	Db.CheckQuery(err, query)
