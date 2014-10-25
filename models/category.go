@@ -128,7 +128,18 @@ func (c *Category) FindChildById(childId int) *Category {
 }
 
 func (c *Category) Save() {
+	var notExists bool
+	query := `SELEC notExists
+			  FROM category_save($1, $2)`
 
+	err := Db.Database.QueryRow(query, c.Id, c.Data).
+	Scan(&notExists)
+
+	Db.CheckQuery(err, query)
+
+	if !notExists {
+		panic("The Category is already in group!!")
+	}
 }
 
 func (c *Category) Load() {

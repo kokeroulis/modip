@@ -3,6 +3,7 @@ package api
 import (
 	"github.com/kokeroulis/modip/models"
 	"github.com/gorilla/mux"
+	"github.com/mholt/binding"
 	"net/http"
 	"strconv"
 )
@@ -23,5 +24,40 @@ func CategoryList(resp http.ResponseWriter, req *http.Request) {
 	}
 
 	c.Load()
+	RenderJson(resp, req, c)
+}
+
+type CategorySaveForm struct {
+	CategoryId int
+	Data       string
+}
+
+func (c *CategorySaveForm) FieldMap() binding.FieldMap {
+	return binding.FieldMap{
+		&c.CategoryId: binding.Field{
+			Form:     "id",
+			Required: true,
+		},
+		&c.Data: binding.Field{
+			Form:     "data",
+			Required: true,
+		},
+	}
+}
+
+func CategorySave(resp http.ResponseWriter, req *http.Request) {
+	categorySaveForm := &CategorySaveForm{}
+	if binding.Bind(req, categorySaveForm).Handle(resp) {
+		return
+	}
+
+	c := models.Category{
+		Id: categorySaveForm.CategoryId,
+		Data: categorySaveForm.Data,
+	}
+
+	c.Save()
+	c.Load()
+
 	RenderJson(resp, req, c)
 }

@@ -57,6 +57,7 @@ func CreateDb() {
 		DbApi.AssetModify,
 		DbApi.CategoryAdd,
 		DbApi.CategoryGroupAdd,
+		DbApi.CategorySave,
 	}
 
 	runQuery(schemaList)

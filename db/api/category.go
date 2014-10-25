@@ -28,6 +28,27 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 `
+
+const CategorySave = `
+CREATE OR REPLACE FUNCTION category_save(categoryId int, categoryData text, OUT notExists boolean) AS $$
+DECLARE
+BEGIN
+	PERFORM * FROM category
+	WHERE id = categoryId;
+
+	IF FOUND THEN
+		notExists := FALSE;
+	ELSE
+		notExists := TRUE;
+		RETURN;
+	END IF;
+
+	UPDATE category SET data = categoryData WHERE id = categoryId;
+
+END;
+$$ LANGUAGE plpgsql;
+`
+
 const CategoryGroupAdd = `
 CREATE OR REPLACE FUNCTION category_group_add(categoryId int, groupName text, OUT alreadyExists boolean) AS $$
 DECLARE
