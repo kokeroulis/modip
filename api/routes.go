@@ -3,7 +3,7 @@ package api
 import (
 	"github.com/codegangsta/negroni"
 	"github.com/gorilla/mux"
-//	"github.com/kokeroulis/modip/models"
+	"github.com/kokeroulis/modip/models"
 	"net/http"
 )
 
