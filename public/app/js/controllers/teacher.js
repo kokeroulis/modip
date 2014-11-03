@@ -4,8 +4,16 @@ modipControllers.controller('TeacherCtrl', ['$scope', 'TeacherService', '$state'
   function($scope, TeacherService, $state) {
     $scope.alerts = [];
     $scope.teacherInfo = null;
+    $scope.teacherCategoryList = null;
+
     TeacherService.info().then(function(result) {
       $scope.teacherInfo = result;
+    }, function(error, status) {
+      $scope.alerts.push({msg: 'Σφάλμα συστήματος ' + error.body.Name, type: 'alert'})
+    });
+
+    TeacherService.categoryList().then(function(result) {
+      $scope.teacherCategoryList = result;
     }, function(error, status) {
       $scope.alerts.push({msg: 'Σφάλμα συστήματος ' + error.body.Name, type: 'alert'})
     });

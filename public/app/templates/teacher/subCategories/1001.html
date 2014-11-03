@@ -1,0 +1,32 @@
+<table class="fullWidth">
+  <thead>
+    <tr>
+      <th>Συγγραφέας</th>
+      <th>Τίτλος</th>
+      <th>Περιοδικό</th>
+      <th>Εκδότης</th>
+      <th>Ημερομηνία Δημοσίευσης</th>
+      <th>Τύπος</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="item in dataJson">
+      <td><input type="text" placeholder="Καινούργιος Συγγραφέας" ng-model="item.author"></input></td>
+      <td><input type="text" placeholder="Καινούργιος Τίτλος" ng-model="item.title"></input></td>
+      <td><input type="checkbox" ng-model="item.magazine"></input></td>
+      <td><input type="text" placeholder="Καινούργιος Εκδότης" ng-model="item.publicator"></input></td>
+      <td><input type="date" ng-model="item.publicationDate"></input></td>
+      <td>
+        <select ng-model="item.type" ng-options="type.name for type in dataTypes">
+          <option value="">Επιλέξτε Τύπο</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td><a ng-click="createNewData()" class="button">Προσθήκη Καινούργιου</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+{{dataJson | json}}

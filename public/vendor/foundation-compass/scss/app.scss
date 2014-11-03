@@ -17,9 +17,15 @@
 }
 
 .wrapFooter {
+    @include grid-row();
     margin-top: 120px;
     margin-bottom: 80px;
   /* Negative indent footer by it's height */
+}
+
+.fullWidth {
+    width: 55rem;
+  max-width: 100%;
 }
 
 .modipFooter {

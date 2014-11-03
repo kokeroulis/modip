@@ -1,28 +1,22 @@
 <div ng-controller="TeacherCtrl">
 
   <div class="row">
-    <p></p>
-    <div class="large-12 large-offset-2 columns">
 
-      <div class="row">
-        <div class="large-6  large-offset-2 columns">
-          <div ng-repeat="alert in alerts" ng-class="alert.type" class="alert-box round text-center">
-            {{alert.msg}}
-          </div>
+    <div class="large-3 columns">
+      <ul class="side-nav">
+        <div ng-repeat="categories in teacherCategoryList">
+          <li class="heading">{{categories.name}}</li>
+          <li><a ui-sref-active="active" ui-sref="teacher.category({categoryId: category.id})" ng-repeat="category in categories.categories">{{category.name}}</a></li>
+
+          <li class="divider"></li>
         </div>
-      </div>
-
-      <div>
-      <ul class="button-group">
-        <li ng-repeat="info in teacherInfo.assetTypes"  >
-          <a class="button" ui-sref-active="success" ui-sref="teacher.assetType({assetTypeId: info.id })"> {{info.name}}</a>
-        </li>
       </ul>
+    </div>
 
+    <div class="large-9 columns">
       <div ui-view></div>
     </div>
 
-    </div>
   </div>
 
 </div>

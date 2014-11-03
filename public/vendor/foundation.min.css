@@ -9088,12 +9088,33 @@ th.hide-for-touch {
 
 /* line 19, ../scss/app.scss */
 .wrapFooter {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  max-width: 62.5rem;
   margin-top: 120px;
   margin-bottom: 80px;
   /* Negative indent footer by it's height */
 }
+/* line 172, ../bower_components/foundation/scss/foundation/components/_global.scss */
+.wrapFooter:before, .wrapFooter:after {
+  content: " ";
+  display: table;
+}
+/* line 173, ../bower_components/foundation/scss/foundation/components/_global.scss */
+.wrapFooter:after {
+  clear: both;
+}
 
-/* line 25, ../scss/app.scss */
+/* line 26, ../scss/app.scss */
+.fullWidth {
+  width: 55rem;
+  max-width: 100%;
+}
+
+/* line 31, ../scss/app.scss */
 .modipFooter {
   width: 100%;
   margin-left: auto;
