@@ -1,0 +1,21 @@
+<form name="myForm">
+  <label>Ερευνητικά προγράμματα και έργα (ως Επιστημονικός Υπεύθυνος)
+    <input type="number"ng-model"resultJson2.epistimonikos_ypeu8inos" placeholder="Ακέραιος αριθμός" />
+  </label>
+  <small>Αριθμός - Σε πόσα ερευνητικά προγράμματα ή/και έργα που υλοποιήθηκαν (ή βρίσκονται σε εξέλιξη κατά το ακαδημαϊκό έτος), είστε Επιστημονικός Υπέυθυνος;</small>
+
+  <label>Ερευνητικά προγράμματα και έργα (απλή συμμετοχή)
+    <input type="number"ng-model="resultJson2.apli_sumetoxi" placeholder="Ακέραιος αριθμός" />
+  </label>
+  <small>Αριθμός - Σε πόσα απλώς συμμετέχετε;</small>
+
+  <label>Συμμετοχή εξωτερικών συνεργατών στα ερευνητικά έργα
+    <textarea rows="4"ng-model="resultJson2.sumetoxi_sunergaton" placeholder=""></textarea>
+  </label>
+
+  <label>Συμμετοχή φοιτητών στα ερευνητικά έργα
+    <textarea rows="4"ng-model="resultJson2.epeksigiseis" placeholder=""></textarea>
+  </label>
+
+  <a ng-click="saveData(resultJson2)" class="button">Αποθύκευση</a>
+</form>

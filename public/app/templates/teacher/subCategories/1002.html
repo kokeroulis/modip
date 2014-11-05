@@ -1,47 +1,48 @@
 <form name="myForm">
   <label>Ετεροαναφορές
-    <input type="number"ng-model="eteroamafores" placeholder="Ακέραιος αριθμός" />
+    <input type="number"ng-model"resultJson.eteroamafores" placeholder="Ακέραιος αριθμός" />
   </label>
 
   <label>Αναφορές του Ειδικού / Επιστημονικού Τύπου
-    <input type="number"ng-model="anaforaeidikouepisthmonikoutypou" placeholder="Ακέραιος αριθμός" />
+    <input type="number"ng-model="resultJson.anaforaeidikouepisthmonikoutypou" placeholder="Ακέραιος αριθμός" />
   </label>
 
   <label>Βιβλιοκρισίες
-    <input type="number"ng-model="bibliokrisies" placeholder="Ακέραιος αριθμός" />
+    <input type="number"ng-model="resultJson.bibliokrisies" placeholder="Ακέραιος αριθμός" />
   </label>
 
   <label>Συμμετοχές σε Επιτροπές Επιστημονικών Συνεδρίων
-    <input type="number"ng-model="sumetoxesseepitropesepistimonikonsunedrion" placeholder="Ακέραιος αριθμός" />
+    <input type="number"ng-model="resultJson.sumetoxesseepitropesepistimonikonsunedrion" placeholder="Ακέραιος αριθμός" />
   </label>
 
   <label>Συμμετοχές σε συντακτικές επιτροπές επιστημονικών περιοδικών
-    <input type="number"ng-model="sumetoxessesuntaktikesepitropesepistimonikonperiodikon" placeholder="Ακέραιος αριθμός" />
+    <input type="number"ng-model="resultJson.sumetoxessesuntaktikesepitropesepistimonikonperiodikon" placeholder="Ακέραιος αριθμός" />
   </label>
 
 
   <label>Κριτής σε Επιστημονικά Περιοδικά
-    <input type="number"ng-model="kritisseepisthmonikaperiodika" placeholder="Ακέραιος αριθμός" />
+    <input type="number"ng-model="resultJson.kritisseepisthmonikaperiodika" placeholder="Ακέραιος αριθμός" />
   </label>
 
   <label>Προσκλήσεις για διαλέξεις σε διεθνή συνέδρια
-    <input type="number"ng-model="proskliseisgiadialekseisediethnhsunedria" placeholder="Ακέραιος αριθμός" />
+    <input type="number"ng-model="resultJson.proskliseisgiadialekseisediethnhsunedria" placeholder="Ακέραιος αριθμός" />
   </label>
 
 
   <label>Διπλώματα ευρεσιτεχνίας
-    <input type="number"ng-model="diplomataeuresitexnias" placeholder="Ακέραιος αριθμός" />
+    <input type="number"ng-model="resultJson.diplomataeuresitexnias" placeholder="Ακέραιος αριθμός" />
   </label>
 
   <label>Βραβεία
-    <input type="number"ng-model="brabeia" placeholder="Ακέραιος αριθμός" />
+    <input type="number"ng-model="resultJson.brabeia" placeholder="Ακέραιος αριθμός" />
   </label>
 
   <label>Τιμητικοί τίτλοι
-    <input type="number"ng-model="timhtikoititloi" placeholder="Ακέραιος αριθμός" />
+    <input type="number"ng-model="resultJson.timhtikoititloi" placeholder="Ακέραιος αριθμός" />
   </label>
 
   <label>Επεξηγήσεις
-    <textarea rows="4"ng-model="epeksigiseis" placeholder="Ακέραιος αριθμός"></textarea>
+    <textarea rows="4"ng-model="resultJson.epeksigiseis" placeholder="Ακέραιος αριθμός"></textarea>
   </label>
+  <a ng-click="saveData(resultJson)" class="button">Αποθύκευση</a>
 </form>

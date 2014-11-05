@@ -106,6 +106,21 @@ modipServices.factory('TeacherService', ['$http', '$q', function($http, $q) {
     return deffered.promise;
   }
 
+  function categorySave(subCategoryId, data) {
+    var data = {
+      data: angular.toJson(data),
+      id: parseInt(subCategoryId)
+    }
+
+    var deffered = $q.defer();
+    $http.post('category/save', data).success(function (result) {
+      deffered.resolve(result.data);
+    }).error(function(data, status) {
+      deffered.reject(reportErrorObj(data.Common.error.Name, status));
+    });
+    return deffered.promise;
+  }
+
   var service = {
     login: login,
     info: info,
@@ -113,7 +128,8 @@ modipServices.factory('TeacherService', ['$http', '$q', function($http, $q) {
     moveAsset: moveAsset,
     modifyAsset: modifyAsset,
     addAsset: addAsset,
-    categoryList: categoryList
+    categoryList: categoryList,
+    categorySave: categorySave
   };
 
   return service;

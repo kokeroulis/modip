@@ -3,14 +3,7 @@
 modipControllers.controller('TeacherCtrl', ['$scope', 'TeacherService', '$state',
   function($scope, TeacherService, $state) {
     $scope.alerts = [];
-    $scope.teacherInfo = null;
     $scope.teacherCategoryList = null;
-
-    TeacherService.info().then(function(result) {
-      $scope.teacherInfo = result;
-    }, function(error, status) {
-      $scope.alerts.push({msg: 'Σφάλμα συστήματος ' + error.body.Name, type: 'alert'})
-    });
 
     TeacherService.categoryList().then(function(result) {
       $scope.teacherCategoryList = result;
@@ -18,61 +11,35 @@ modipControllers.controller('TeacherCtrl', ['$scope', 'TeacherService', '$state'
       $scope.alerts.push({msg: 'Σφάλμα συστήματος ' + error.body.Name, type: 'alert'})
     });
 
-    $scope.createNewAsset = function(newContent) {
-      TeacherService.addAsset(newContent, $state.params.assetTypeId).then(function(result) {
-        $scope.alerts = [];
-        $scope.alerts.push({msg: "Η καινούργια εγγραφή προστέθηκε επιτυχώς", type: 'success'});
-        //update our table
-        TeacherService.info().then(function(data) {
-          $scope.teacherInfo = data;
-        });
-      }, function(error, status) {
-        $scope.alerts.push({msg: 'Σφάλμα συστήματος ' + error.body.Name, type:'danger'});
-      });
+    $scope.currentSubCategoryId = $state.params.subCategoryId;
+    $scope.dataJson = []
+    $scope.dataTypes = [
+      {id: 1, name: "Βιβλία-Mονογραφίες"},
+      {id: 2, name: "Επιστημονικά Περιοδικά με Κριτές"},
+      {id: 3, name: "Επιστημονικά Περιοδικά Χωρίς Κριτές"},
+      {id: 4, name: "Πρακτικά Διεθνών Συνεδρίων με Kριτές"},
+      {id: 5, name: "Πρακτικά Εθνικών Συνεδρίων με Kριτές"},
+      {id: 6, name: "Ανακοινώσεις σε Διεθνή Επιστημονικά Συνέδρια"},
+      {id: 7, name: "Ανακοινώσεις σε Εθνικά Επιστημονικά Συνέδρια"},
+      {id: 8, name: "Άλλες Εργασίες"},
+      {id: 9, name: "Κεφάλαια σε Συλλογικούς Τόμους"},
+      {id: 10, name: "Άλλα"},
+    ];
+
+    $scope.createNewData = function() {
+      $scope.dataJson.push(
+        {
+        author: '',
+        title: '',
+        magazine: false,
+        publicator: '',
+        publicationDate: null,
+        type: 0
+      })
     }
 
-    $scope.modifyAsset = function(newContent, assetTypeId) {
-      TeacherService.modifyAsset(assetTypeId, newContent).then(function(result) {
-        $scope.alerts = [];
-        $scope.alerts.push({msg: "Η εγγραφή επεξεργάστηκε επιτυχώς", type: 'success'});
-        //update our table
-        TeacherService.info().then(function(data) {
-          $scope.teacherInfo = data;
-        });
-      }, function(error, status) {
-        $scope.alerts.push({msg: 'Σφάλμα συστήματος ' + error.body.Name, type:'danger'});
-      });
-    }
-
-    $scope.deleteAsset = function(assetTypeId) {
-      TeacherService.deleteAsset(assetTypeId).then(function(result) {
-        $scope.alerts = [];
-        $scope.alerts.push({msg: "Η εγγραφή διαγράφτηκε επιτυχώς", type: 'success'});
-        //update our table
-        TeacherService.info().then(function(data) {
-          $scope.teacherInfo = data;
-        });
-      }, function(error, status) {
-        $scope.alerts.push({msg: 'Σφάλμα συστήματος ' + error.body.Name, type:'danger'});
-      });
-    }
-
-    $scope.moveAsset = function(assetId, newAssetTypeId) {
-      if (newAssetTypeId === undefined) {
-        //our user hasn't selected a new category
-        return;
-      }
-
-      TeacherService.moveAsset(assetId, newAssetTypeId.id).then(function(result) {
-        $scope.alerts = [];
-        $scope.alerts.push({msg: "Η εγγραφή μετακινήθηκε επιτυχώς σε καινούργια κατηγορία", type: 'success'});
-        //update our table
-        TeacherService.info().then(function(data) {
-          $scope.teacherInfo = data;
-        });
-      }, function(error, status) {
-        $scope.alerts.push({msg: 'Σφάλμα συστήματος ' + error.body.Name, type:'danger'});
-      });
+    $scope.saveData = function(data) {
+      TeacherService.categorySave($state.params.subCategoryId, data)
     }
   }
 ]);
