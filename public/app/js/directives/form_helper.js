@@ -17,6 +17,14 @@ modipDirectives.directive('formHelper', function() {
           $scope.templateData = data;
         })
 
+      $scope.removeData = function(index) {
+        if ($scope.templateData.tableModels.data.length === 1) {
+          //we cannot remove the entire table
+          return;
+        }
+        $scope.templateData.tableModels.data.splice(index,1);
+      }
+
       $scope.createNewData = function() {
         var copyOriginal = [];
         angular.copy($scope.templateData.tableModels.data[0], copyOriginal)
@@ -26,7 +34,7 @@ modipDirectives.directive('formHelper', function() {
           value.data = '';
         });
 
-        $scope.templateData.tableModels.data.push(copyOriginal)
+        $scope.templateData.tableModels.data.push(copyOriginal);
       }
     },
 
