@@ -9,7 +9,7 @@ modipDirectives.directive('formHelper', function() {
       subCategoryId: '='
     },
 
-    controller: function($scope, $attrs, $http) {
+    controller: function($scope, $attrs, $http, TeacherService) {
       $scope.templateData;
       $scope.resultJson ;
       $http.get('app/data_json/' + $attrs.subcategoryid + '.json').
@@ -23,6 +23,15 @@ modipDirectives.directive('formHelper', function() {
           return;
         }
         $scope.templateData.tableModels.data.splice(index,1);
+      }
+
+      $scope.saveData = function() {
+        TeacherService.categorySave($attrs.subcategoryid, $scope.templateData).then(function(data) {
+          console.log(data)
+        }, function(error, status) {
+          console.log(status)
+          console.log(error)
+        });
       }
 
       $scope.createNewData = function() {
