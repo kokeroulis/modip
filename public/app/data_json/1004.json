@@ -1,0 +1,49 @@
+{
+    "type": "form",
+    "formModels": {
+        "username": {
+            "type": "date",
+            "comment": "Name of the user",
+            "description": "This is the name"
+        },
+        "lastName": {
+            "type": "text",
+            "comment": "Name of the user",
+            "description": "This is the name"
+        },
+        "combobox": {
+            "type": "select",
+            "comment": "Name of the user",
+            "description": "This is the name",
+            "options": ["aaaa", "bbbb", "ccccc", "ddddd"]
+        },
+        "combobox2": {
+            "type": "textarea",
+            "comment": "Name of the user",
+            "description": "This is the name"
+        }
+    },
+
+
+    "tableModels": {
+        "headers": ["aaaaaaaaaaaaa", "bbbbbbbbbbbbb", "ccccccccccccc", "dddddddddddd"],
+        "data": [[
+        {
+            "type": "text"
+        },
+        {
+
+            "type": "number"
+        },
+        {
+
+            "type": "text"
+        },
+        {
+            "type": "select",
+            "options": ["aaaa", "bbbb", "ccccc", "ddddd"]
+        }
+        ]
+        ]
+    }
+}

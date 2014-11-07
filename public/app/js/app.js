@@ -4,7 +4,8 @@
 var modipApp = angular.module('modipApp', [
   'ui.router',
   'modipControllers',
-  'modipServices'
+  'modipServices',
+  'modipDirectives'
 ]);
 
 modipApp.config(['$stateProvider', '$urlRouterProvider',

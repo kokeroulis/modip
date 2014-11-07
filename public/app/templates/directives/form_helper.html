@@ -1,0 +1,38 @@
+<form ng-show="templateData.formModels">
+  <div ng-repeat="item in templateData.formModels" class="row">
+    <div class="large-12 columns">
+      <label>{{item.comment}} {{item.type}}
+        <input ng-show="item.type !== 'select' && item.type !=='textarea'" type="{{item.type}}" ng-model="item.data" />
+        <select ng-show="item.type == 'select'" ng-model="item.data" ng-options="option for option  in item.options">
+          <option value="">Επιλέξτε Τύπο</option>
+        </select>
+        <textarea rows="4" ng-show="item.type == 'textarea'" ng-model="item.data"></textarea>
+      </label>
+    </div>
+  </div>
+</form>
+
+
+<hr />
+<table ng-show="templateData.tableModels" class="fullWidth">
+  <thead>
+    <tr>
+      <th ng-repeat="item in templateData.tableModels.headers">{{item}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="r in templateData.tableModels.data track by $index">
+      <td ng-repeat="item in r track by $index">
+        <input ng-show="item.type !== 'select'" type="{{item.type}}" placeholder="Συμπληρώστε την εγγραφή" ng-model="item.data"></input>
+        <select ng-show="item.type == 'select'" ng-model="item.data" ng-options="option for option in item.options">
+          <option value="">Επιλέξτε Τύπο</option>
+        </select>
+      </td>
+
+    </tr>
+    <tr>
+      <td><a ng-click="createNewData()" class="button">Προσθήκη Καινούργιου</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
