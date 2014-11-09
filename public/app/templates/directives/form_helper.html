@@ -17,7 +17,7 @@
 <table ng-show="templateData.tableModels" class="fullWidth">
   <thead>
     <tr>
-      <th >Διαγραφή</th>
+      <th width="20">Διαγραφή</th>
       <th ng-repeat="item in templateData.tableModels.headers">{{item}}</th>
     </tr>
   </thead>
@@ -31,13 +31,8 @@
         </select>
       </td>
     </tr>
-
-    <tr>
-      <td><a ng-click="createNewData()" class="button">Προσθήκη Καινούργιου</a>
-      </td>
-    </tr>
   </tbody>
 </table>
-
+<a ng-click="createNewData()" class="button">Προσθήκη Καινούργιου</a>
 <a ng-click="saveData()" class="button">Αποθύκευση</a>
 
