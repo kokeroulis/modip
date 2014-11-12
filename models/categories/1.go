@@ -14,5 +14,14 @@ func init1() {
 	parent.AddChild(newCategory(1004, "Ερευνητικές Υποδομές"))
 	parent.AddChild(newCategory(1005, "Σύνδεση με την κοινωνία"))
 	parent.AddChild(newCategory(1999, "For testing"))
+
+	parent2 := newParentCategoryForTeacher(2, " Α.Δ. Μαθημάτων Π.Π.Σ. | Doesn't work on modip", g)
+	parent2.AddChild(newCategory(2001, "Doesn't work on modip"))
+
+	parent3 := newParentCategoryForTeacher(3, " Α.Δ.Μαθημάτων Π.M.Σ. | Doesn't work on modip", g)
+	parent3.AddChild(newCategory(3001, "Doesn't work on modip"))
+
+	parent4 := newParentCategoryForTeacher(4, " Α.Δ. Ερευν. Προγραμ.", g)
+	parent4.AddChild(newCategory(4001, "Αναλυτικά Στοιχεία Προγράμματος"))
 }
 
