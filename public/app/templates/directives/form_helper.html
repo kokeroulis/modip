@@ -1,7 +1,7 @@
 <form ng-show="templateData.formModels">
   <div ng-repeat="item in templateData.formModels" class="row">
     <div class="large-12 columns">
-      <label>{{item.comment}} {{item.type}}
+      <label>{{item.comment}}
         <input ng-show="item.type !== 'select' && item.type !=='textarea'" type="{{item.type}}" ng-model="item.data" />
         <select ng-show="item.type == 'select'" ng-model="item.data" ng-options="option for option  in item.options">
           <option value="">Επιλέξτε Τύπο</option>
