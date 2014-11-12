@@ -4,23 +4,27 @@
         "username": {
             "type": "date",
             "comment": "Name of the user",
-            "description": "This is the name"
+            "description": "This is the name",
+            "placeholder": ""
         },
         "lastName": {
             "type": "text",
             "comment": "Name of the user",
-            "description": "This is the name"
+            "description": "This is the name",
+            "placeholder": ""
         },
         "combobox": {
             "type": "select",
             "comment": "Name of the user",
             "description": "This is the name",
-            "options": ["aaaa", "bbbb", "ccccc", "ddddd"]
+            "options": ["aaaa", "bbbb", "ccccc", "ddddd"],
+            "placeholder": ""
         },
         "combobox2": {
             "type": "textarea",
             "comment": "Name of the user",
-            "description": "This is the name"
+            "description": "This is the name",
+            "placeholder": ""
         }
     },
 
