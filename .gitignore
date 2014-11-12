@@ -1,6 +1,7 @@
 .coverage.html
 .vendor
 .gopath
+modip.conf
 node_modules
 npm-debug.log
 public/bower_components/
