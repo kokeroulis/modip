@@ -1,0 +1,11 @@
+{
+    "type": "form",
+    "formModels": {
+        "sindesi_me_tin_koinonia": {
+            "type": "textarea",
+            "comment": "Σύνδεση με την κοινωνία",
+            "description": "Αναφέρατε άλλες δραστηριότητες που αποτελούν προσφορά υπηρεσιών στο κοινωνικό σύνολο",
+            "placeholder": ""
+        }
+    }
+}
