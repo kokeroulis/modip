@@ -8,10 +8,10 @@
             "placeholder": ""
         },
         "foreas_xrimatodotisis": {
-        "type": "select",
-        "comment": "Φορέας Χρηματοδότησης",
-        "options": ["Εθνικός (Δημόσιος)", "Εθνικός (Ιδιωτικός)", "Διεθνής (Δημόσιος)", "Διεθνής (Ιδιωτικός)"]
-        },          
+            "type": "select",
+            "comment": "Φορέας Χρηματοδότησης",
+            "options": ["Εθνικός (Δημόσιος)", "Εθνικός (Ιδιωτικός)", "Διεθνής (Δημόσιος)", "Διεθνής (Ιδιωτικός)"]
+        },
         "foreas_diaxeirisis": {
             "type": "text",
             "comment": "Φορέας Διαχείρισης",
@@ -28,13 +28,13 @@
             "type": "number",
             "comment": "Διάρκεια",
             "description": "",
-            "placeholder": "Μήνες)"
+            "placeholder": "Μήνες"
          },
           "imerominia": {
             "type": "date",
             "comment": "Ημερομηνία",
             "description": "",
-            "placeholder": "Π.χ., 12/11/2014)"
+            "placeholder": "Π.χ., 12/11/2014"
          },
          "sxolia": {
             "type": "textarea",
@@ -44,5 +44,5 @@
          }
      }
 }
-    
+
 
