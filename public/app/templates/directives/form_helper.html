@@ -2,7 +2,7 @@
   <div ng-repeat="item in templateData.formModels" class="row">
     <div class="large-12 columns">
       <label>{{item.comment}}
-        <input ng-show="item.type !== 'select' && item.type !=='textarea'" type="{{item.type}}" ng-model="item.data" />
+        <input ng-show="item.type !== 'select' && item.type !=='textarea'" placeholder="{{item.placeholder}}" type="{{item.type}}" ng-model="item.data" />
         <select ng-show="item.type == 'select'" ng-model="item.data" ng-options="option for option  in item.options">
           <option value="">Επιλέξτε Τύπο</option>
         </select>
@@ -25,7 +25,7 @@
     <tr ng-repeat="r in templateData.tableModels.data track by $index">
       <td ><a ng-click="removeData($index)">[X]</a></td>
       <td ng-repeat="item in r track by $index">
-        <input ng-show="item.type !== 'select'" type="{{item.type}}" placeholder="Συμπληρώστε την εγγραφή" ng-model="item.data"></input>
+        <input ng-show="item.type !== 'select'" type="{{item.type}}" placeholder="{{item.placeholder? item.placeholder : 'Συμπληρώστε την εγγραφή'}}" ng-model="item.data"></input>
         <select ng-show="item.type == 'select'" ng-model="item.data" ng-options="option for option in item.options">
           <option value="">Επιλέξτε Τύπο</option>
         </select>

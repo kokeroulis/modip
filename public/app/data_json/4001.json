@@ -22,7 +22,7 @@
             "type": "number",
             "comment": "Προϋπολογισμός",
             "description": "",
-            "placeholder": "Σε ευρώ)"
+            "placeholder": "Σε ευρώ"
         },
         "diarkeia": {
             "type": "number",
