@@ -13,5 +13,6 @@ func init1() {
 	parent.AddChild(newCategory(1003, "Ερευνητικά προγράμματα και έργα"))
 	parent.AddChild(newCategory(1004, "Ερευνητικές Υποδομές"))
 	parent.AddChild(newCategory(1005, "Σύνδεση με την κοινωνία"))
+	parent.AddChild(newCategory(1999, "For testing"))
 }
 
