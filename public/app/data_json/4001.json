@@ -1,0 +1,48 @@
+{
+    "type": "form",
+    "formModels": {
+        "ilopoiisi": {
+            "type": "checkbox",
+            "comment": "Υλοποίηση",
+            "description": "",
+            "placeholder": ""
+        },
+        "foreas_xrimatodotisis": {
+        "type": "select",
+        "comment": "Φορέας Χρηματοδότησης",
+        "options": ["Εθνικός (Δημόσιος)", "Εθνικός (Ιδιωτικός)", "Διεθνής (Δημόσιος)", "Διεθνής (Ιδιωτικός)"]
+        },          
+        "foreas_diaxeirisis": {
+            "type": "text",
+            "comment": "Φορέας Διαχείρισης",
+            "description": "",
+            "placeholder": ""
+        },
+         "proipologismos": {
+            "type": "number",
+            "comment": "Προϋπολογισμός",
+            "description": "",
+            "placeholder": "Σε ευρώ)"
+        },
+        "diarkeia": {
+            "type": "number",
+            "comment": "Διάρκεια",
+            "description": "",
+            "placeholder": "Μήνες)"
+         },
+          "imerominia": {
+            "type": "date",
+            "comment": "Ημερομηνία",
+            "description": "",
+            "placeholder": "Π.χ., 12/11/2014)"
+         },
+         "sxolia": {
+            "type": "textarea",
+            "comment": "Σχόλια",
+            "description": "",
+            "placeholder": ""
+         }
+     }
+}
+    
+
