@@ -109,13 +109,13 @@ modipServices.factory('TeacherService', ['$http', '$q', function($http, $q) {
   function categorySave(subCategoryId, data) {
     var data = {
       data: angular.toJson(data),
-      id: parseInt(subCategoryId)
+      categoryid: parseInt(subCategoryId)
     }
 
     var deffered = $q.defer();
     $http.post('category/save', data).success(function (result) {
       deffered.resolve(result.data);
-    }).error(function(data, status) {
+    }).error(function(data, status, headers, config) {
       deffered.reject(reportErrorObj(data.Common.error.Name, status));
     });
     return deffered.promise;

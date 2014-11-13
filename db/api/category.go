@@ -30,7 +30,7 @@ $$ LANGUAGE plpgsql;
 `
 
 const CategorySave = `
-CREATE OR REPLACE FUNCTION category_save(categoryId int, categoryData text, OUT notExists boolean) AS $$
+CREATE OR REPLACE FUNCTION category_save(categoryId int, categoryData text, teacherId int, OUT notExists boolean) AS $$
 DECLARE
 BEGIN
 	PERFORM * FROM category
@@ -43,7 +43,17 @@ BEGIN
 		RETURN;
 	END IF;
 
-	UPDATE category SET data = categoryData WHERE id = categoryId;
+	PERFORM * FROM categoryData
+	WHERE categoryId = category AND teacher = teacherId;
+
+	IF FOUND THEN
+		UPDATE categoryData SET data = categoryData
+		WHERE category = categoryId AND teacher = teacherId;
+	ELSE
+		INSERT INTO categoryData
+		(category, data, teacher)
+		VALUES (categoryId, categoryData, teacherId);
+	END IF;
 
 END;
 $$ LANGUAGE plpgsql;

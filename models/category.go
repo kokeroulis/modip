@@ -36,9 +36,9 @@ func (g *CategoryGroup) Create() {
 
 func (g *CategoryGroup) Load() {
 	query := `SELECT name, category
-			  FROM categorygroup WHERE id = $1`
+			  FROM categorygroup`
 
-	rows, err := Db.Database.Query(query, g.Id)
+	rows, err := Db.Database.Query(query)
 
 	if err != nil {
 		panic(err)
@@ -55,7 +55,6 @@ func (g *CategoryGroup) Load() {
 			c := &Category{
 				Id: categoryId,
 			}
-
 			c.Load()
 			g.AddCategory(c)
 		}
@@ -127,17 +126,17 @@ func (c *Category) FindChildById(childId int) *Category {
 	return nil
 }
 
-func (c *Category) Save() {
+func (c *Category) Save(teacherId int) {
 	var notExists bool
-	query := `SELEC notExists
-			  FROM category_save($1, $2)`
+	query := `SELECT notExists
+			  FROM category_save($1, $2, $3)`
 
-	err := Db.Database.QueryRow(query, c.Id, c.Data).
+	err := Db.Database.QueryRow(query, c.Id, c.Data, teacherId).
 	Scan(&notExists)
 
 	Db.CheckQuery(err, query)
 
-	if !notExists {
+	if notExists {
 		panic("The Category is already in group!!")
 	}
 }
@@ -147,7 +146,7 @@ func (c *Category) Load() {
 	var query string
 
 	query = `SELECT name, parent, data
-			 FROM category WHERE id = $1`
+             FROM category WHERE id = $1`
 
 	err := Db.Database.QueryRow(query, c.Id).
 		Scan(&c.Name, &parentId, &c.Data)
@@ -158,11 +157,14 @@ func (c *Category) Load() {
 		panic("Only the parent categories should use this func")
 	}
 
-	query = `SELECT id, name, data
-			 FROM category WHERE parent = $1`
+	query = `SELECT id, name, cd.data
+			 FROM category AS c
+			 LEFT JOIN CategoryData AS cd
+			 ON cd.category = c.id
+			 WHERE parent = $1
+			 ORDER BY id`
 
-
-	 rows, err := Db.Database.Query(query, c.Id)
+	rows, err := Db.Database.Query(query, c.Id)
 
 	if err != nil {
 		panic(err)
@@ -172,9 +174,15 @@ func (c *Category) Load() {
 
 	for rows.Next() {
 		it := &Category{}
-		if err := rows.Scan(&it.Id, &it.Name, &it.Data); err != nil {
+		var dataInterface interface{}
+		if err := rows.Scan(&it.Id, &it.Name, &dataInterface); err != nil {
 			panic(err)
 		} else {
+			data, ok:= dataInterface.(string)
+			if ok {
+				it.Data = data
+			}
+
 			c.AddChild(it)
 		}
 	}
@@ -186,31 +194,14 @@ func (c *Category) Load() {
 
 func ListAllCategories() []CategoryGroup {
 	var groupList []CategoryGroup
-	query := `SELECT id	FROM categorygroup`
 
-	rows, err := Db.Database.Query(query)
-
-	if err != nil {
-		panic(err)
+	g := CategoryGroup {
+		Id: 1,
 	}
 
-	defer rows.Close()
+	g.Load()
 
-	for rows.Next() {
-		it := CategoryGroup{}
-
-		if err := rows.Scan(&it.Id); err != nil {
-			panic(err)
-		} else {
-			it.Load()
-
-			groupList = append(groupList, it)
-		}
-	}
-
-	if rowsErr := rows.Err(); rowsErr != nil {
-		panic(err)
-	}
+	groupList = append(groupList, g)
 
 	return groupList
 }

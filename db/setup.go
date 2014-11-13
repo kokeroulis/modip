@@ -46,6 +46,7 @@ func CreateDb() {
 		DbSchema.AssetType,
 		DbSchema.Asset,
 		DbSchema.Category,
+		DbSchema.CategoryData,
 		DbSchema.CategoryGroup,
 	}
 

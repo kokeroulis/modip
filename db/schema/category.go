@@ -10,6 +10,14 @@ CREATE TABLE category
 	authactions json  not null
 );
 `
+const CategoryData = `
+CREATE TABLE categoryData
+(
+	category int  not null references category(id) on delete cascade,
+	data     text default '',
+	teacher  int  references teacher(id)
+);
+`
 
 const CategoryGroup = `
 CREATE SEQUENCE seq_categorygroupIds;

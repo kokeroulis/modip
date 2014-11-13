@@ -35,7 +35,7 @@ type CategorySaveForm struct {
 func (c *CategorySaveForm) FieldMap() binding.FieldMap {
 	return binding.FieldMap{
 		&c.CategoryId: binding.Field{
-			Form:     "id",
+			Form:     "categoryid",
 			Required: true,
 		},
 		&c.Data: binding.Field{
@@ -56,8 +56,7 @@ func CategorySave(resp http.ResponseWriter, req *http.Request) {
 		Data: categorySaveForm.Data,
 	}
 
-	c.Save()
-	c.Load()
+	c.Save(models.GetTeacherFromSession(req).Id)
 
 	RenderJson(resp, req, c)
 }
