@@ -94,6 +94,10 @@ function readConfigurationValue()
 }
 
 setup_db() {
+    if [ ! -f modip.conf ]; then
+        echo "modip.conf doesn't exist"
+        exit 1
+    fi
 
     DATABASE_ADMIN=$(readConfigurationValue "database_admin")
     DATABASE_USER=$(readConfigurationValue "database_user")
