@@ -3,7 +3,6 @@ import (
 	"github.com/kokeroulis/modip/models"
 	"github.com/gorilla/schema"
 	"net/http"
-	"fmt"
 )
 
 
