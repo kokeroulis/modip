@@ -43,3 +43,33 @@ func (d *Department) LoadLessons(postDegree bool) {
 	}
 }
 
+func ListAllDepartments(loadLessons bool) []Department {
+	var departmentList []Department
+
+	query := `SELECT id, name FROM department`
+
+	rows, err := Db.Database.Query(query)
+
+	if err != nil {
+		panic(err)
+	}
+
+	defer rows.Close()
+
+	for rows.Next() {
+		it := Department{}
+
+		if err := rows.Scan(&it.Id, &it.Name); err != nil {
+			panic(err)
+		} else {
+			departmentList = append(departmentList, it)
+		}
+	}
+
+	if rowsErr := rows.Err(); rowsErr != nil {
+		panic(err)
+	}
+
+	return departmentList
+}
+

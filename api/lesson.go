@@ -1,4 +1,5 @@
 package api
+
 import (
 	"github.com/kokeroulis/modip/models"
 	"github.com/gorilla/schema"
@@ -8,7 +9,7 @@ import (
 
 func LessonListPreDegree(resp http.ResponseWriter, req *http.Request) {
 	var helpers []string
-	RenderTemplate("lesson/list", helpers, resp, models.ListLessonsPreDegree())
+	RenderTemplate("lesson/list", helpers, resp, models.ListAllDepartments(false))
 }
 
 func LessonListPostDegree(resp http.ResponseWriter, req *http.Request) {
