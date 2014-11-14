@@ -17,7 +17,7 @@ func LessonListPostDegree(resp http.ResponseWriter, req *http.Request) {
 	RenderTemplate("lesson/list", helpers, resp, models.ListLessonsPostDegree())
 }
 
-type LessonSaveForm struct {
+type LessonCreateForm struct {
 	LessonName   string `schema:"lesson_name"`
 	Department   int    `schema:"department"`
 	IsPostDegree bool   `schema:"is_post_degree"`
@@ -29,15 +29,14 @@ func LessonCreate(resp http.ResponseWriter, req *http.Request) {
 		panic(err)
 	}
 
-	lessonSaveForm := &LessonSaveForm{}
+	form := &LessonCreateForm{}
 	decoder := schema.NewDecoder()
-	err = decoder.Decode(lessonSaveForm, req.PostForm)
+	err = decoder.Decode(form, req.PostForm)
 
 	if err != nil {
 		panic(err)
 	}
 
-	fmt.Println(lessonSaveForm)
 }
 
 func GetLessonPreDegreeCreate (resp http.ResponseWriter, req *http.Request) {
