@@ -1,5 +1,8 @@
+{{template "header.tmpl"}}
 <B> This is a fking list with 1 element</B>
 {{range .}}
 <p>Id: {{.Id}}</p>
 <p>Name: {{.Name}} </p>
 {{end}}
+
+{{template "footer.tmpl"}}
