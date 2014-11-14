@@ -9,6 +9,7 @@ update_deps() {
                  "mholt/binding"
                  "gorilla/mux"
                  "gorilla/sessions"
+                 "gorilla/schema"
                  "boj/redistore"
                  "lib/pq"
                  "jacobsa/oglematchers"
