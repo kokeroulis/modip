@@ -25,10 +25,18 @@ func RenderErrorJson(resp http.ResponseWriter, req *http.Request, errorJson mode
 	Render.JSON(resp, errorJson.Code, data)
 }
 
-func RenderTemplate(name string, resp http.ResponseWriter, data interface{}) {
+func RenderTemplate(name string, helpers []string, resp http.ResponseWriter, data interface{}) {
 	templateFile := "templates/" + name + ".tmpl"
 
-	tmpl, err := template.New("").ParseFiles(templateFile, "templates/base/header.tmpl", "templates/base/footer.tmpl", "templates/base/sidebar.tmpl")
+	var templates []string
+	templates = append(templates, templateFile)
+
+	templates = append(templates, "templates/base/header.tmpl")
+	templates = append(templates, "templates/base/footer.tmpl")
+	templates = append(templates, "templates/base/sidebar.tmpl")
+
+
+	tmpl, err := template.New("").ParseFiles(templates...)
 
 	if err != nil {
 		panic(err)

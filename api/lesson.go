@@ -1,57 +1,47 @@
 package api
 import (
 	"github.com/kokeroulis/modip/models"
-	"github.com/mholt/binding"
+	"github.com/gorilla/schema"
 	"net/http"
 	"fmt"
 )
 
 
 func LessonListPreDegree(resp http.ResponseWriter, req *http.Request) {
-	RenderTemplate("lesson/list", resp, models.ListLessonsPreDegree())
+	var helpers []string
+	RenderTemplate("lesson/list", helpers, resp, models.ListLessonsPreDegree())
 }
 
 func LessonListPostDegree(resp http.ResponseWriter, req *http.Request) {
-	RenderTemplate("lesson/list", resp, models.ListLessonsPostDegree())
+	var helpers []string
+	RenderTemplate("lesson/list", helpers, resp, models.ListLessonsPostDegree())
 }
 
 type LessonSaveForm struct {
-	LessonName   string
-	Department   int
-	IsPostDegree bool
-}
-
-func (l *LessonSaveForm) FieldMap() binding.FieldMap {
-	return binding.FieldMap{
-		&l.LessonName: binding.Field{
-			Form:     "lesson_name",
-			Required: true,
-		},
-		&l.Department: binding.Field{
-			Form:     "department",
-			Required: true,
-		},
-		&l.IsPostDegree: binding.Field{
-			Form:     "is_post_degree",
-			Required: true,
-		},
-	}
+	LessonName   string `schema:"lesson_name"`
+	Department   int    `schema:"department"`
+	IsPostDegree bool   `schema:"is_post_degree"`
 }
 
 func LessonCreate(resp http.ResponseWriter, req *http.Request) {
+	err := req.ParseForm()
+	if err != nil {
+		panic(err)
+	}
+
 	lessonSaveForm := &LessonSaveForm{}
-	fmt.Println("here")
-	if binding.Bind(req, lessonSaveForm).Handle(resp) {
-		return
+	decoder := schema.NewDecoder()
+	err = decoder.Decode(lessonSaveForm, req.PostForm)
+
+	if err != nil {
+		panic(err)
 	}
 
-	l := models.Lesson{
-		Name: lessonSaveForm.LessonName,
-		Department: lessonSaveForm.Department,
-		IsPostDegree: lessonSaveForm.IsPostDegree,
-	}
-
-	fmt.Println(l)
-
-	http.Redirect(resp, req, "/", 200)
+	fmt.Println(lessonSaveForm)
 }
+
+func GetLessonPreDegreeCreate (resp http.ResponseWriter, req *http.Request) {
+	var helpers []string
+	RenderTemplate("lesson/create/create", helpers, resp, models.ListLessonsPreDegree())
+}
+

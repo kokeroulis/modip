@@ -40,14 +40,12 @@ func setupRoutes(n *negroni.Negroni) {
 
 	router.Handle("/category/save", authorize{CategorySave}).Methods("POST")
 
-	router.Handle("/foo", authorize{Foo}).Methods("GET")
-
 	router.Handle("/lesson/list/pre/degree", authorize{LessonListPreDegree}).Methods("GET")
 	router.Handle("/lesson/list/post/degree", authorize{LessonListPostDegree}).Methods("GET")
 
-	router.Handle("/lesson/create", authorize{LessonCreate}).Methods("POST")
+	router.Handle("/lesson/pre/degree/create", authorize{GetLessonPreDegreeCreate}).Methods("GET")
 
-	router.Handle("/foo", authorize{Foo}).Methods("GET")
+	router.Handle("/lesson/create", authorize{LessonCreate}).Methods("POST")
 
 	n.UseHandler(router)
 }
