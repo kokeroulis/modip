@@ -38,6 +38,11 @@
   height: 60px; /* choose any height */
 }
 
+.tabs.vertical.lesson-tab-fix-size {
+    max-width: 27%;
+    width: 27%;
+}
+
 // Or selectively include components
 // @import
 //   "foundation/components/accordion",

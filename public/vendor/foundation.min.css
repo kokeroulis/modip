@@ -9138,3 +9138,9 @@ th.hide-for-touch {
 .modipFooter:after {
   clear: both;
 }
+
+/* line 41, ../scss/app.scss */
+.tabs.vertical.lesson-tab-fix-size {
+  max-width: 27%;
+  width: 27%;
+}
