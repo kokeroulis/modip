@@ -43,6 +43,10 @@
     width: 27%;
 }
 
+.tabs.lesson-tab dd.active a {
+    background-color: #008cba
+}
+
 // Or selectively include components
 // @import
 //   "foundation/components/accordion",

@@ -9144,3 +9144,8 @@ th.hide-for-touch {
   max-width: 27%;
   width: 27%;
 }
+
+/* line 46, ../scss/app.scss */
+.tabs.lesson-tab dd.active a {
+  background-color: #008cba;
+}
