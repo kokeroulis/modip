@@ -3,8 +3,8 @@ package api
 import (
 	"github.com/kokeroulis/modip/models"
 	"net/http"
-	"io/ioutil"
 	"html/template"
+	"strings"
 )
 
 func RenderJson(resp http.ResponseWriter, req *http.Request, j interface{}) {
@@ -26,24 +26,19 @@ func RenderErrorJson(resp http.ResponseWriter, req *http.Request, errorJson mode
 }
 
 func RenderTemplate(name string, resp http.ResponseWriter, data interface{}) {
-	templateName := "templates/" + name + ".tmpl"
-	contents, err := ioutil.ReadFile(templateName)
+	templateFile := "templates/" + name + ".tmpl"
+
+	tmpl, err := template.New("").ParseFiles(templateFile, "templates/base/header.tmpl")
 
 	if err != nil {
-		panic("Can't find template")
+		panic(err)
 	}
 
-	tmpl, err := template.New("foo").Parse(string(contents))
+	tmplListPath := strings.Split(name, "/")
+	err = tmpl.ExecuteTemplate(resp, tmplListPath[len(tmplListPath) - 1] + ".tmpl", data)
 
 	if err != nil {
-		panic("Can't parse the template")
+		panic(err)
 	}
-
-	err = tmpl.Execute(resp, data)
-
-	if err != nil {
-		panic("Something is wrong with executing the template!")
-	}
-
 }
 
