@@ -3,13 +3,35 @@ package api
 import (
 	"github.com/kokeroulis/modip/models"
 	"github.com/gorilla/schema"
+	"github.com/gorilla/mux"
 	"net/http"
+	"strconv"
 )
 
 
 func LessonListPreDegree(resp http.ResponseWriter, req *http.Request) {
 	var helpers []string
 	RenderTemplate("lesson/list", helpers, resp, models.ListAllDepartments(false))
+}
+
+func LessonListPreDegreeDepartment(resp http.ResponseWriter, req *http.Request) {
+	vars := mux.Vars(req)
+	id, ok := vars["id"]
+
+	departmentId, err := strconv.Atoi(id)
+
+	if err != nil || !ok {
+		return
+	}
+
+	d := models.Department{
+		Id: departmentId,
+	}
+
+	d.LoadLessons(false)
+
+	var helpers []string
+	RenderTemplate("lesson/list_department", helpers, resp, d.Lessons)
 }
 
 func LessonListPostDegree(resp http.ResponseWriter, req *http.Request) {
