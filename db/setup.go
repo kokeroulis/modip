@@ -48,6 +48,7 @@ func CreateDb() {
 		DbSchema.Category,
 		DbSchema.CategoryData,
 		DbSchema.CategoryGroup,
+		DbSchema.Lesson,
 	}
 
 	apiList := []string{
