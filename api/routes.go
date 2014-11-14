@@ -40,5 +40,7 @@ func setupRoutes(n *negroni.Negroni) {
 
 	router.Handle("/category/save", authorize{CategorySave}).Methods("POST")
 
+	router.Handle("/foo", authorize{Foo}).Methods("GET")
+
 	n.UseHandler(router)
 }
