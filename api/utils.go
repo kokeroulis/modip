@@ -28,7 +28,7 @@ func RenderErrorJson(resp http.ResponseWriter, req *http.Request, errorJson mode
 func RenderTemplate(name string, resp http.ResponseWriter, data interface{}) {
 	templateFile := "templates/" + name + ".tmpl"
 
-	tmpl, err := template.New("").ParseFiles(templateFile, "templates/base/header.tmpl")
+	tmpl, err := template.New("").ParseFiles(templateFile, "templates/base/header.tmpl", "templates/base/footer.tmpl")
 
 	if err != nil {
 		panic(err)
