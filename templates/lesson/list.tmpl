@@ -5,21 +5,32 @@
 <p>Name: {{.Name}} </p>
 {{end}}
 
-<form method="POST" action="">
+<form method="POST" action="/lesson/create">
+
   <div class="row">
     <div class="large-12 columns">
-      <label>Input Label
-        <input type="text" placeholder="large-12.columns">
+      <label>Name
+        <input type="text" name="lesson_name" placeholder="large-12.columns">
       </label>
     </div>
   </div>
+
   <div class="row">
     <div class="large-12 columns">
-      <label>Input Label
-        <input type="text" placeholder="large-12.columns">
+      <label>Department
+        <input type="number" placeholder="large-12.columns">
       </label>
     </div>
   </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Post degree
+        <input type="checkbox" placeholder="large-12.columns">
+      </label>
+    </div>
+  </div>
+
   <div class="row">
     <div class="large-12 columns">
       <button type="submit" class="medium button green">Submit</button>

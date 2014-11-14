@@ -44,6 +44,9 @@ func setupRoutes(n *negroni.Negroni) {
 
 	router.Handle("/lesson/list/pre/degree", authorize{LessonListPreDegree}).Methods("GET")
 	router.Handle("/lesson/list/post/degree", authorize{LessonListPostDegree}).Methods("GET")
+
+	router.Handle("/lesson/create", authorize{LessonCreate}).Methods("POST")
+
 	router.Handle("/foo", authorize{Foo}).Methods("GET")
 
 	n.UseHandler(router)
