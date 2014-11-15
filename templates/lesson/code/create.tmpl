@@ -1,1 +1,32 @@
-<p>create</p>
+{{template "header.tmpl"}}
+<form method="POST" action="/lesson/code/create">
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Κωδ. Μαθήματος
+        <input type="text" name="lesson_code_create_lesson_code" placeholder="" required />
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Μάθημα
+        <input type="text" name="lesson_code_create_lesson_name" placeholder="" required />
+      </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <label>CourseCode (Cardisoft)
+        <input type="text" name="lesson_code_create_lesson_cardisoft_code" placeholder="" required />
+      </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <button type="submit">Αποθύκευση</button>
+    </div>
+  </div>
+</form>
+
+{{template "footer.tmpl"}}
