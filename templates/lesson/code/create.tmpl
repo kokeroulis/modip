@@ -1,6 +1,11 @@
 {{template "header.tmpl"}}
 <form method="POST" action="/lesson/code/create">
-  <div class="row">
+ {{range .}}
+   <p>{{.Id}}</p>
+   <p>{{.Name}}</p>
+ {{end}}
+
+ <div class="row">
     <div class="large-12 columns">
       <label>Κωδ. Μαθήματος
         <input type="text" name="lesson_code_create_lesson_code" placeholder="" required />

@@ -1,7 +1,7 @@
 package api
 
 import (
-	_"github.com/kokeroulis/modip/models"
+	"github.com/kokeroulis/modip/models"
 	"github.com/gorilla/schema"
 	"net/http"
 )
@@ -31,8 +31,7 @@ func LessonCodeCreate(resp http.ResponseWriter, req *http.Request) {
 
 func GetLessonCodeCreate(resp http.ResponseWriter, req *http.Request) {
 	var helpers []string
-	var data interface{}
-	RenderTemplate("lesson/code/create", helpers, resp, data)
+	RenderTemplate("lesson/code/create", helpers, resp, models.ListAllDepartments(false))
 }
 
 func LessonCodeList(resp http.ResponseWriter, req *http.Request) {
