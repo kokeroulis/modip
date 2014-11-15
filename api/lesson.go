@@ -63,17 +63,17 @@ func LessonCreate(resp http.ResponseWriter, req *http.Request) {
 
 func GetLessonPreDegreeCreate (resp http.ResponseWriter, req *http.Request) {
 	helpers := []string{
-		"templates/lesson/create/perigrafi.tmpl",
-		"templates/lesson/create/didaskalia.tmpl",
-		"templates/lesson/create/enhmerwsi.tmpl",
-        "templates/lesson/create/didaktea_yli.tmpl",
-        "templates/lesson/create/didaktika_boh8imata.tmpl",
-        "templates/lesson/create/epikoinonia.tmpl",
-        "templates/lesson/create/alles_ekpedeutikes_drastiriotites.tmpl",
-        "templates/lesson/create/summetoxi_spoudaston.tmpl",
-        "templates/lesson/create/aksiologisi_ths_epidosis.tmpl",
+		"templates/lesson/create_report/perigrafi.tmpl",
+		"templates/lesson/create_report/didaskalia.tmpl",
+		"templates/lesson/create_report/enhmerwsi.tmpl",
+        "templates/lesson/create_report/didaktea_yli.tmpl",
+        "templates/lesson/create_report/didaktika_boh8imata.tmpl",
+        "templates/lesson/create_report/epikoinonia.tmpl",
+        "templates/lesson/create_report/alles_ekpedeutikes_drastiriotites.tmpl",
+        "templates/lesson/create_report/summetoxi_spoudaston.tmpl",
+        "templates/lesson/create_report/aksiologisi_ths_epidosis.tmpl",
 	}
 
-	RenderTemplate("lesson/create/create", helpers, resp, models.ListLessonsPreDegree())
+	RenderTemplate("lesson/create_report/create_report", helpers, resp, models.ListLessonsPreDegree())
 }
 
