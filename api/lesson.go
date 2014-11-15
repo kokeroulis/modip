@@ -66,6 +66,12 @@ func GetLessonPreDegreeCreate (resp http.ResponseWriter, req *http.Request) {
 		"templates/lesson/create/perigrafi.tmpl",
 		"templates/lesson/create/didaskalia.tmpl",
 		"templates/lesson/create/enhmerwsi.tmpl",
+        "templates/lesson/create/didaktea_yli.tmpl",
+        "templates/lesson/create/didaktika_boh8imata.tmpl",
+        "templates/lesson/create/epikoinonia.tmpl",
+        "templates/lesson/create/alles_ekpedeutikes_drastiriotites.tmpl",
+        "templates/lesson/create/summetoxi_spoudaston.tmpl",
+        "templates/lesson/create/aksiologisi_ths_epidosis.tmpl",
 	}
 
 	RenderTemplate("lesson/create/create", helpers, resp, models.ListLessonsPreDegree())
