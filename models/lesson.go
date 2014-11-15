@@ -17,7 +17,7 @@ func (l *Lesson) Create() {
 	query := `SELECT alreadyExists
 			  FROM lesson_create($1, $2, $3, $4, $5)`
 
-	err := Db.Database.QueryRow(query, l.Id, l.Name, l.Department, l.IsPostDegree, c.CourseCode).
+	err := Db.Database.QueryRow(query, l.Id, l.Name, l.Department, l.IsPostDegree, l.CourseCode).
 		Scan(&alreadyExists)
 
 	Db.CheckQuery(err, query)
