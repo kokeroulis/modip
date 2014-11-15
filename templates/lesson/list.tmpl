@@ -5,38 +5,5 @@
 <p>Name: {{.Name}} </p>
 {{end}}
 
-<form method="POST" action="/lesson/create">
-
-  <div class="row">
-    <div class="large-12 columns">
-      <label>Name
-        <input type="text" name="lesson_name" placeholder="large-12.columns">
-      </label>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="large-12 columns">
-      <label>Department
-        <input type="number" name="department" placeholder="large-12.columns">
-      </label>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="large-12 columns">
-      <label>Post degree
-        <input type="checkbox" name="is_post_degree" placeholder="large-12.columns">
-      </label>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="large-12 columns">
-      <button type="submit" class="medium button green">Submit</button>
-    </div>
-  </div>
-</form>
-
-<a class="button" href="/lesson/pre/degree/create">New Entry</a>
+<a class="button" href="/lesson/pre/degree/create/report">Νέα Εγγραφή</a>
 {{template "footer.tmpl"}}
