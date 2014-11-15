@@ -7,14 +7,15 @@ import (
 )
 
 type LessonCodeCreateForm struct {
-	LessonName   string `schema:"lesson_name"`
-	Department   int    `schema:"department"`
-	IsPostDegree bool   `schema:"is_post_degree"`
-	CourseCode   string   `schema:course_code`
+	LessonName    string `schema:"lesson_code_create_lesson_name"`
+	Department    int    `schema:"lesson_code_create_lesson_department"`
+	CourseCode    string `schema:"lesson_code_create_lesson_code"`
+	CardisoftCode string `schema:"lesson_code_create_lesson_cardisoft_code"`
 }
 
 func LessonCodeCreate(resp http.ResponseWriter, req *http.Request) {
 	err := req.ParseForm()
+	fmt.Println(req.Form)
 	if err != nil {
 		panic(err)
 	}
