@@ -1,11 +1,18 @@
 {{template "header.tmpl"}}
 <form method="POST" action="/lesson/code/create">
- {{range .}}
-   <p>{{.Id}}</p>
-   <p>{{.Name}}</p>
- {{end}}
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Τμήμα
+        <select>
+          {{range .}}
+            <option value="{{.Id}}">{{.Name}}</option>
+          {{end}}
+        </select>
+      </label>
+    </div>
+  </div>
 
- <div class="row">
+  <div class="row">
     <div class="large-12 columns">
       <label>Κωδ. Μαθήματος
         <input type="text" name="lesson_code_create_lesson_code" placeholder="" required />
@@ -33,5 +40,13 @@
     </div>
   </div>
 </form>
+
+<select>
+<option value="sydney">Sydney</option>
+<option value="melbourne">Melbourne</option>
+<option value="cromwell" selected="">Cromwell</option>
+<option value="queenstown">Queenstown</option>
+</select>
+
 
 {{template "footer.tmpl"}}
