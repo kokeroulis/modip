@@ -34,10 +34,7 @@ func RenderTemplate(name string, helpers []string, resp http.ResponseWriter, dat
 	templates = append(templates, "templates/base/header.tmpl")
 	templates = append(templates, "templates/base/footer.tmpl")
 	templates = append(templates, "templates/base/sidebar.tmpl")
-	templates = append(templates, "templates/lesson/create/perigrafi.tmpl")
-	templates = append(templates, "templates/lesson/create/didaskalia.tmpl")
-	templates = append(templates, "templates/lesson/create/enhmerwsi.tmpl")
-
+	templates = append(templates, helpers...)
 
 	tmpl, err := template.New("").ParseFiles(templates...)
 

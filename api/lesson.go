@@ -62,7 +62,12 @@ func LessonCreate(resp http.ResponseWriter, req *http.Request) {
 }
 
 func GetLessonPreDegreeCreate (resp http.ResponseWriter, req *http.Request) {
-	var helpers []string
+	helpers := []string{
+		"templates/lesson/create/perigrafi.tmpl",
+		"templates/lesson/create/didaskalia.tmpl",
+		"templates/lesson/create/enhmerwsi.tmpl",
+	}
+
 	RenderTemplate("lesson/create/create", helpers, resp, models.ListLessonsPreDegree())
 }
 
