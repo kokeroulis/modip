@@ -54,9 +54,3 @@ func TeacherLogin(resp http.ResponseWriter, req *http.Request) {
 	}
 }
 
-func TeacherInfo(resp http.ResponseWriter, req *http.Request) {
-	teacher := models.GetTeacherFromSession(req)
-
-	info := teacher.Info()
-	RenderJson(resp, req, info)
-}

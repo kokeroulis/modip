@@ -30,7 +30,6 @@ type department struct {
 
 type jsonData struct {
 	Departments []department
-	AssetTypes  []string
 }
 
 func checkQuery(err error) bool {
@@ -63,23 +62,6 @@ func populateDb(data jsonData) {
 		}
 
 		createTeachers(db, department.Teachers, departmentId)
-	}
-	createAssetTypes(db, data.AssetTypes)
-}
-
-func createAssetTypes(db *sql.DB, assetTypes []string) {
-	for _, it := range assetTypes {
-
-		var assetTypeId int
-		err := db.QueryRow("SELECT id FROM assettype WHERE name=$1", it).Scan(&assetTypeId)
-		if !checkQuery(err) {
-			// assettype doesn't exist, create one
-			err := db.QueryRow("INSERT INTO assettype (name) VALUES ($1) RETURNING id", it).Scan(&assetTypeId)
-			if !checkQuery(err) {
-				fmt.Println("Error %s", err)
-				panic("WRONG QUERY!")
-			}
-		}
 	}
 }
 

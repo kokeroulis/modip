@@ -43,20 +43,15 @@ func CreateDb() {
 	schemaList := []string{
 		DbSchema.Department,
 		DbSchema.Teacher,
-		DbSchema.AssetType,
-		DbSchema.Asset,
 		DbSchema.Category,
 		DbSchema.CategoryData,
 		DbSchema.CategoryGroup,
 		DbSchema.Lesson,
+		DbSchema.LessonCreateForm,
 	}
 
 	apiList := []string{
 		DbApi.TeacherLogin,
-		DbApi.AssetAdd,
-		DbApi.AssetRemove,
-		DbApi.AssetMove,
-		DbApi.AssetModify,
 		DbApi.CategoryAdd,
 		DbApi.CategoryGroupAdd,
 		DbApi.CategorySave,
