@@ -5,18 +5,19 @@ import (
 )
 
 type Lesson struct {
-	Id           int    `json:"id"`
-	Name         string `json:"name"`
-	Department   int    `json:"-"`
-	IsPostDegree bool   `json:"is_post_degree"`
+	Id           int
+	Name         string
+	Department   int
+	IsPostDegree bool
+	CourseCode   string
 }
 
 func (l *Lesson) Create() {
 	var alreadyExists bool
 	query := `SELECT alreadyExists
-			  FROM lesson_create($1, $2, $3, $4)`
+			  FROM lesson_create($1, $2, $3, $4, $5)`
 
-	err := Db.Database.QueryRow(query, l.Id, l.Name, l.Department, l.IsPostDegree).
+	err := Db.Database.QueryRow(query, l.Id, l.Name, l.Department, l.IsPostDegree, c.CourseCode).
 		Scan(&alreadyExists)
 
 	Db.CheckQuery(err, query)
