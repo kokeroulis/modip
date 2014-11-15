@@ -30,10 +30,14 @@ func LessonCodeCreate(resp http.ResponseWriter, req *http.Request) {
 }
 
 func GetLessonCodeCreate(resp http.ResponseWriter, req *http.Request) {
-//	var helpers []string
-//	RenderTemplate("lesson/list_department", helpers, resp, d.Lessons)
+	var helpers []string
+	var data interface{}
+	RenderTemplate("lesson/code/list", helpers, resp, data)
 }
 
 func LessonCodeList(resp http.ResponseWriter, req *http.Request) {
+	var helpers []string
+	var data interface{}
+	RenderTemplate("lesson/code/create", helpers, resp, data)
 }
 
