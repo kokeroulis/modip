@@ -1,7 +1,7 @@
 package DbSchema
 
-const LessonCreateForm =`
-CREATE TABLE lesson_create_form
+const LessonCreateReportForm =`
+CREATE TABLE lesson_create_report_form
 (
 	lesson   int not null unique references lesson(id) on delete cascade,
 

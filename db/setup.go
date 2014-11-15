@@ -47,7 +47,7 @@ func CreateDb() {
 		DbSchema.CategoryData,
 		DbSchema.CategoryGroup,
 		DbSchema.Lesson,
-		DbSchema.LessonCreateForm,
+		DbSchema.LessonCreateReportForm,
 	}
 
 	apiList := []string{
