@@ -1,10 +1,11 @@
 package DbApi
 
 const LessonCreate = `
-CREATE OR REPLACE FUNCTION lesson_create(lessonId int, lessonName text, departmentId int,
-                                         boolean is_post_degree, text courseCodeLesson
+CREATE OR REPLACE FUNCTION lesson_create(lessonName text, departmentId int,
+                                         is_post_degree boolean, courseCodeLesson text,
 										 cdCode text, OUT alreadyExists boolean) AS $$
 DECLARE
+	lessonId int;
 BEGIN
 	PERFORM * FROM lesson
 	WHERE id = lessonId AND department = departmentId;
@@ -17,8 +18,12 @@ BEGIN
 	END IF;
 
 	INSERT INTO lesson
-	(id, name, department, isPostDegree, courseCode, cardisoftCode)
-	VALUES (lessonId, lessonName, departmentId, is_post_degree, courseCodeLesson, cdCode);
+	(name, department, isPostDegree, courseCode, cardisoftCode)
+	VALUES (lessonName, departmentId, is_post_degree, courseCodeLesson, cdCode)
+	RETURNING id INTO lessonId;
+
+	INSERT INTO lesson_create_report_form
+	(lesson) VALUES (lessonId);
 
 END;
 $$ LANGUAGE plpgsql;

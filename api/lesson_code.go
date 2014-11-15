@@ -15,7 +15,6 @@ type LessonCodeCreateForm struct {
 
 func LessonCodeCreate(resp http.ResponseWriter, req *http.Request) {
 	err := req.ParseForm()
-	fmt.Println(req.Form)
 	if err != nil {
 		panic(err)
 	}
@@ -28,6 +27,16 @@ func LessonCodeCreate(resp http.ResponseWriter, req *http.Request) {
 		panic(err)
 	}
 
+	l := models.Lesson{
+		Name:          form.LessonName,
+		Department:    form.Department,
+		CourseCode:    form.CourseCode,
+		CardisoftCode: form.CardisoftCode,
+		IsPostDegree:  false,
+	}
+
+	l.Create()
+	http.Redirect(resp, req, "/lesson/code/list", http.StatusMovedPermanently)
 }
 
 func GetLessonCodeCreate(resp http.ResponseWriter, req *http.Request) {

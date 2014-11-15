@@ -55,6 +55,7 @@ func CreateDb() {
 		DbApi.CategoryAdd,
 		DbApi.CategoryGroupAdd,
 		DbApi.CategorySave,
+		DbApi.LessonCreate,
 	}
 
 	runQuery(schemaList)

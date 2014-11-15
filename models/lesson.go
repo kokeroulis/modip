@@ -16,9 +16,9 @@ type Lesson struct {
 func (l *Lesson) Create() {
 	var alreadyExists bool
 	query := `SELECT alreadyExists
-			  FROM lesson_create($1, $2, $3, $4, $5, $6)`
+			  FROM lesson_create($1, $2, $3, $4, $5)`
 
-	err := Db.Database.QueryRow(query, l.Id, l.Name, l.Department,
+	err := Db.Database.QueryRow(query, l.Name, l.Department,
 								l.IsPostDegree, l.CourseCode, l.CardisoftCode).
 		Scan(&alreadyExists)
 
