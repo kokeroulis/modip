@@ -49,6 +49,13 @@ func GetLessonPreDegreeCreateReport (resp http.ResponseWriter, req *http.Request
         "templates/lesson/create_report/alles_ekpedeutikes_drastiriotites.tmpl",
         "templates/lesson/create_report/summetoxi_spoudaston.tmpl",
         "templates/lesson/create_report/aksiologisi_ths_epidosis.tmpl",
+        "templates/lesson/create_report/dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos.tmpl",
+        "templates/lesson/create_report/aksiopoihsh_texnologion_pliroforikhs_kai_epikoinonion.tmpl",
+        "templates/lesson/create_report/ekpedeutika_mesa.tmpl",
+        "templates/lesson/create_report/statistoika_stoixeia_spoudaston.tmpl",
+        "templates/lesson/create_report/katanomi_ba8mon_spoudaston.tmpl",
+        "templates/lesson/create_report/apopsi_spoudaston_gia_to_ma8ima.tmpl",
+        "templates/lesson/create_report/sxolia.tmpl",
 	}
 
 	RenderTemplate("lesson/create_report/create_report", helpers, resp, models.ListLessonsPreDegree())
