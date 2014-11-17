@@ -22,9 +22,21 @@ BEGIN
 	VALUES (lessonName, departmentId, is_post_degree, courseCodeLesson, cdCode)
 	RETURNING id INTO lessonId;
 
-	INSERT INTO lesson_create_report_form
+	INSERT INTO LessonCreateReportFormEntry1
 	(lesson) VALUES (lessonId);
 
+	INSERT INTO LessonCreateReportFormEntry2
+	(lesson) VALUES (lessonId);
+
+	INSERT INTO LessonCreateReportFormEntry3
+	(lesson) VALUES (lessonId);
+
+	INSERT INTO LessonCreateReportFormEntry4
+	(lesson) VALUES (lessonId);
+
+	INSERT INTO LessonCreateReportFormEntry5
+	(lesson) VALUES (lessonId);
 END;
 $$ LANGUAGE plpgsql;
 `
+
