@@ -34,7 +34,7 @@ func init() {
 }
 
 func findStruct(line string) {
-	pattern := "^type ([A-Z]|[a-z])+"
+	pattern := "^type ([A-Z]|[a-z]|[0-9])+"
 	matched, _ := regexp.MatchString(pattern, line)
 
 	if !matched {
@@ -55,7 +55,7 @@ type Entry struct {
 var entries []Entry
 
 func (e *Entry) findName(line string) {
-	pattern := "Field([1-9]+|_|[0-9])+"
+	pattern := "([A-Z]|[a-z]|[1-9]+|_|[0-9])+"
 	matched, _ := regexp.MatchString(pattern, line)
 
 	if !matched {
