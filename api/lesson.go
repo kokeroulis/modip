@@ -129,7 +129,7 @@ func LessonPreDegreeCreateReport (resp http.ResponseWriter, req *http.Request) {
 		panic(err)
 	}
 
-	url := "/lesson/pre/degree/create/report/" + id
+	url := "/lesson/pre/degree/create/report/" + id2
 	http.Redirect(resp, req, url , http.StatusMovedPermanently)
 }
 
