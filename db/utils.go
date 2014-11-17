@@ -19,6 +19,16 @@ func CheckQuery(err error, query string) {
 	}
 }
 
+func CheckQueryWithNoRows(err error, query string) {
+	if err != sql.ErrNoRows && err != nil {
+		// print the error
+		// TODO use logger
+		fmt.Println(query)
+		fmt.Println(err)
+		panic("Db Error")
+	}
+}
+
 func SqlRowsToArray(query string, args []interface{}, iterator interface{}) []interface{} {
 	var results []interface{}
 
