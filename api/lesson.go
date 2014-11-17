@@ -41,6 +41,21 @@ func LessonListPostDegree(resp http.ResponseWriter, req *http.Request) {
 }
 
 func GetLessonPreDegreeCreateReport (resp http.ResponseWriter, req *http.Request) {
+	vars := mux.Vars(req)
+	id, ok := vars["lesson_id"]
+
+	lessonId, paramErr := strconv.Atoi(id)
+
+	if paramErr != nil || !ok {
+		panic(paramErr)
+	}
+
+	l := forms.LessonCreateReportForm{
+		LessonId: lessonId,
+	}
+
+	l.Load()
+
 	helpers := []string{
 		"templates/lesson/create_report/perigrafi.tmpl",
 		"templates/lesson/create_report/didaskalia.tmpl",
@@ -60,7 +75,7 @@ func GetLessonPreDegreeCreateReport (resp http.ResponseWriter, req *http.Request
         "templates/lesson/create_report/sxolia.tmpl",
 	}
 
-	RenderTemplate("lesson/create_report/create_report", helpers, resp, models.ListLessonsPreDegree())
+	RenderTemplate("lesson/create_report/create_report", helpers, resp, l)
 }
 
 func LessonPreDegreeCreateReport (resp http.ResponseWriter, req *http.Request) {
