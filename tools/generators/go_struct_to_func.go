@@ -154,11 +154,11 @@ func createUpdateFunc() string {
 	result += "WHERE " + whereSqlCommand + "`"
 
 	result += "\n\n"
-	result += "err := Db.Database.Exec(query, \n"
+	result += "_, err := Db.Database.Exec(query, \n"
 
 	for index, e := range entries {
 		result += "\t"
-		result += e.Key
+		result += e.Name
 
 		if len(entries) -1 != index {
 			result += ", "
