@@ -1,0 +1,13 @@
+package DbSchema
+
+const LessonCreateReportFormEntry5 = `
+CREATE TABLE LessonCreateReportFormEntry5 (
+	lesson int references lesson(id) on delete cascade,
+	lesson_didaktika_boi8imata_boi8imata_pou_dianemontai_stous_foithtes text,
+	lesson_didaktika_boi8imata_epikairopoihsh_ton_boh8imaton text,
+	lesson_didaktika_boi8imata_pososto_didaskomenis_ylis_pou_kaliptete text,
+	lesson_didaktika_boi8imata_prostheti_bibliografia text,
+	lesson_didaktika_boi8imata_epikairopoihsh_ylis text,
+	lesson_didaktika_boi8imata_gnostopoihsh_ylis_stous_foithtes text
+)
+`
