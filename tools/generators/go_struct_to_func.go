@@ -241,15 +241,19 @@ func main() {
 		}
 	}
 
-	fmt.Println("=============== Start create table")
-	fmt.Println(createPostgresTable())
-	fmt.Println("=============== End Create table")
+	var out string
+	out = "=============== Start create table\n"
+	out += createPostgresTable() + "\n"
+	out += "=============== End Create table\n"
 
-	fmt.Println("=============== Start create update func")
-	fmt.Println(createUpdateFunc())
-	fmt.Println("=============== End Create update func")
+	out += "=============== Start create update func\n"
+	out += createUpdateFunc() + "\n"
+	out += "=============== End Create update func\n"
 
-	fmt.Println("=============== Start create select func")
-	fmt.Println(createSelectFunc())
-	fmt.Println("=============== End Create select func")
+	out += "=============== Start create select func\n"
+	out += createSelectFunc() + "\n"
+	out += "=============== End Create select func\n"
+
+	ioutil.WriteFile("out.txt", []byte(out), 0644)
+	fmt.Println(out)
 }
