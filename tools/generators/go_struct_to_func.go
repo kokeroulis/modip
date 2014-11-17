@@ -197,9 +197,12 @@ func createSelectFunc() string {
 	result += "WHERE " + whereSqlCommand + "`"
 	result += "\n\n"
 
-	result += "err := Db.Database.QueryRow(query, \n"
+	result += "err := Db.Database.QueryRow(query, TODO). \n"
+	result += "\tScan("
 	for index, e := range entries {
-		result += "\t\t\t"
+		if index != 0 {
+			result += "\t\t"
+		}
 		result += "&f."
 		result += e.Name
 
