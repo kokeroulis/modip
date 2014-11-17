@@ -9,7 +9,7 @@ import (
 
 var globalFuncs template.FuncMap
 
-func add (x, y int) int {
+func add(x, y int) int {
 	return x + y
 }
 

@@ -13,7 +13,7 @@ type LessonCreateReportFormEntry2 struct {
 	Field5  string `schema:"lesson_didaskalia_typos_ma8iomatos5"`
 }
 
-func (f *LessonCreateReportFormEntry2) Update (lessonId int) {
+func (f *LessonCreateReportFormEntry2) Update(lessonId int) {
 	query := `UPDATE LessonCreateReportFormEntry2 SET
 			 lesson_didaskalia_typos_ma8iomatos1 = $1,
 			 lesson_didaskalia_typos_ma8iomatos2 = $2,
@@ -33,7 +33,7 @@ func (f *LessonCreateReportFormEntry2) Update (lessonId int) {
 	Db.CheckQueryWithNoRows(err, query)
 }
 
-func (f *LessonCreateReportFormEntry2) Load (lessonId int) {
+func (f *LessonCreateReportFormEntry2) Load(lessonId int) {
 query := `SELECT
 		 lesson_didaskalia_typos_ma8iomatos1,
 		 lesson_didaskalia_typos_ma8iomatos2,

@@ -135,7 +135,7 @@ func findCorrectType(e Entry) string {
 
 func createUpdateFunc() string {
 	result := "func (f *" + structName + ") "
-	result += "Update (" + funcParameter + ") {"
+	result += "Update(" + funcParameter + ") {"
 	result += "\n"
 	result += "query := `UPDATE " + structName + " SET \n"
 	for index, e := range entries {
@@ -178,7 +178,7 @@ func createUpdateFunc() string {
 
 func createSelectFunc() string {
 	result := "func (f *" + structName + ") "
-	result += "Load (" + funcParameter + ") {"
+	result += "Load(" + funcParameter + ") {"
 	result += "\n"
 
 	result += "query := `SELECT \n"
