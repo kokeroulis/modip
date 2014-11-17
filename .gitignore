@@ -12,3 +12,6 @@ public/bower_components/
 *.DS_Store
 /stylesheets/*
 
+
+tools/generators/input.txt
+tools/generators/out.txt
