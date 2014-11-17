@@ -130,7 +130,7 @@ func findCorrectType(e Entry) string {
 
 func createUpdateFunc() string {
 	result := "func (f *" + structName + ") "
-	result += "Update(" + funcParameter + ") {"
+	result += "Update (" + funcParameter + ") {"
 	result += "\n"
 	result += "query := `UPDATE " + structName + " SET \n"
 	for index, e := range entries {
@@ -148,7 +148,7 @@ func createUpdateFunc() string {
 
 	result += "WHERE " + whereSqlCommand + "`"
 
-	result += "\n"
+	result += "\n\n"
 	result += "err := Db.Database.Exec(query, \n"
 
 	for index, e := range entries {
@@ -172,7 +172,11 @@ func createUpdateFunc() string {
 }
 
 func createSelectFunc() string {
-	result := "query := `SELECT \n"
+	result := "func (f *" + structName + ") "
+	result += "Load (" + funcParameter + ") {"
+	result += "\n"
+
+	result += "query := `SELECT \n"
 	for index, e := range entries {
 		result += "\t"
 		result += e.Key
@@ -186,6 +190,28 @@ func createSelectFunc() string {
 
 	result += "FROM " + structName + "\n"
 	result += "WHERE " + whereSqlCommand + "`"
+	result += "\n\n"
+
+	result += "err := Db.Database.QueryRow(query, \n"
+	for index, e := range entries {
+		result += "\t\t\t"
+		result += "&f."
+		result += e.Name
+
+		if len(entries) -1 != index {
+			result += ","
+		}
+
+		result += "\n"
+	}
+
+	result += ")"
+	result += "\n\n"
+	result += "Db.CheckQueryWithNoRows(err, query)"
+
+	result += "\n"
+	result += "}"
+
 	return result
 }
 
