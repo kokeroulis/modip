@@ -14,7 +14,7 @@ type authorize struct {
 func (auth authorize) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 	teacher := models.GetTeacherFromSession(req)
 	if teacher.Id == 0 {
-		Render.JSON(resp, http.StatusForbidden, map[string]string{"error": "Access denied"})
+		panic("TODO!!!!!!!!!!!!!!1")
 		return
 	}
 
