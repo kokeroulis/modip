@@ -8,6 +8,9 @@ import (
 	"strconv"
 )
 
+const funcParameter = "lessonId int" //""
+const whereSqlCommand = "lesson = $" //""
+
 var structName string
 var contents string
 
@@ -16,6 +19,14 @@ func init() {
 
 	if err != nil {
 		panic(err)
+	}
+
+	if funcParameter == "" {
+		panic("Please change the funcParameter")
+	}
+
+	if whereSqlCommand == "" {
+		panic("Please change the whereSqlCommand")
 	}
 
 	contents = string(b)
@@ -79,7 +90,7 @@ func (e *Entry) findType(line string) {
 }
 
 func createPostgresTable() string {
-	result := "CREATE TABLE foo ("
+	result := "CREATE TABLE " + structName + " ("
 	result += "\n"
 
 	for index, e := range entries {
@@ -118,7 +129,10 @@ func findCorrectType(e Entry) string {
 }
 
 func createUpdateFunc() string {
-	result := "UPDATE FOO SET \n"
+	result := "func (f *" + structName + ") "
+	result += "Update(" + funcParameter + ") {"
+	result += "\n"
+	result += "query := `UPDATE " + structName + " SET \n"
 	for index, e := range entries {
 		result += "\t"
 		result += e.Key
@@ -132,12 +146,33 @@ func createUpdateFunc() string {
 		result += "\n"
 	}
 
-	result += "WHERE id = $;"
+	result += "WHERE " + whereSqlCommand + "`"
+
+	result += "\n"
+	result += "err := Db.Database.Exec(query, \n"
+
+	for index, e := range entries {
+		result += "\t"
+		result += e.Key
+
+		if len(entries) -1 != index {
+			result += ", "
+		}
+
+		result += "\n"
+	}
+
+	result += ")"
+	result += "\n\n"
+	result += "Db.CheckQueryWithNoRows(err, query)"
+	result += "\n"
+	result += "}"
+
 	return result
 }
 
 func createSelectFunc() string {
-	result := "SELECT \n"
+	result := "query := `SELECT \n"
 	for index, e := range entries {
 		result += "\t"
 		result += e.Key
@@ -149,12 +184,10 @@ func createSelectFunc() string {
 		result += "\n"
 	}
 
-	result += "FROM BAR \n"
-	result += "WHERE id = $;"
+	result += "FROM " + structName + "\n"
+	result += "WHERE " + whereSqlCommand + "`"
 	return result
 }
-
-
 
 func main() {
 	l := strings.Split(contents, "\n")
@@ -174,7 +207,15 @@ func main() {
 		}
 	}
 
+	fmt.Println("=============== Start create table")
 	fmt.Println(createPostgresTable())
+	fmt.Println("=============== End Create table")
+
+	fmt.Println("=============== Start create update func")
 	fmt.Println(createUpdateFunc())
+	fmt.Println("=============== End Create update func")
+
+	fmt.Println("=============== Start create select func")
 	fmt.Println(createSelectFunc())
+	fmt.Println("=============== End Create select func")
 }
