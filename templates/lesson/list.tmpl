@@ -1,9 +1,20 @@
 {{template "header.tmpl"}}
-<B> This is a fking list with 1 element</B>
-{{range .}}
-<p>Id: {{.Id}}</p>
-<p>Name: {{.Name}} </p>
-{{end}}
+
+<form method="POST">
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Τμήμα
+        <select id="lessonMoveToDepartment" name="lesson_code_create_lesson_department">
+          <option selected>-- Παρακαλώ Διαλέξτε τμήμα</option>
+          {{range .}}
+            <option value="/lesson/list/pre/degree/{{.Id}}">{{.Name}}</option>
+          {{end}}
+        </select>
+      </label>
+    </div>
+  </div>
+</form>
+
 
 <a class="button" href="/lesson/pre/degree/create/report">Νέα Εγγραφή</a>
 {{template "footer.tmpl"}}
