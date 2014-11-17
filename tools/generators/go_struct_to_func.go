@@ -10,6 +10,7 @@ import (
 
 const funcParameter = "lessonId int" //""
 const whereSqlCommand = "lesson = $" //""
+const sqlTableReference = "lesson int references lesson(id) on delete cascade,"//""
 
 var structName string
 var contents string
@@ -91,6 +92,10 @@ func (e *Entry) findType(line string) {
 
 func createPostgresTable() string {
 	result := "CREATE TABLE " + structName + " ("
+	result += "\n"
+
+	result += "\t"
+	result += sqlTableReference
 	result += "\n"
 
 	for index, e := range entries {
