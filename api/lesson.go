@@ -2,6 +2,8 @@ package api
 
 import (
 	"github.com/kokeroulis/modip/models"
+	"github.com/kokeroulis/modip/models/forms"
+	"github.com/gorilla/schema"
 	"github.com/gorilla/mux"
 	"net/http"
 	"strconv"
@@ -62,5 +64,58 @@ func GetLessonPreDegreeCreateReport (resp http.ResponseWriter, req *http.Request
 }
 
 func LessonPreDegreeCreateReport (resp http.ResponseWriter, req *http.Request) {
+	vars := mux.Vars(req)
+	id, ok := vars["id"]
+//	id2, ok2 := vars["lesson_id"]
+
+	formNumber, paramErr := strconv.Atoi(id)
+//	lessonId, paramErr2 := strconv.Atoi(id)
+
+	lessonId := 1
+	if paramErr != nil || !ok {
+		panic(paramErr)
+	}
+
+/*	if !ok2 || paramErr2 != nil {
+		panic(paramErr)
+	}*/
+
+	decoder := schema.NewDecoder()
+
+	var err error
+
+	switch formNumber {
+	case 1:
+		form := &forms.LessonCreateReportFormEntry1{}
+		err = decoder.Decode(form, req.PostForm)
+		form.Update(lessonId)
+	case 2:
+		form := &forms.LessonCreateReportFormEntry2{}
+		err = decoder.Decode(form, req.PostForm)
+		form.Update(lessonId)
+	case 3:
+		form := &forms.LessonCreateReportFormEntry3{}
+		err = decoder.Decode(form, req.PostForm)
+		form.Update(lessonId)
+	case 4:
+		form := &forms.LessonCreateReportFormEntry4{}
+		err = decoder.Decode(form, req.PostForm)
+		form.Update(lessonId)
+	case 5:
+		form := &forms.LessonCreateReportFormEntry5{}
+		err = decoder.Decode(form, req.PostForm)
+		form.Update(lessonId)
+	default:
+		unknownErr := "Unknown form: " + id
+		panic(unknownErr)
+	}
+
+	if err != nil {
+		panic(err)
+	}
+
+	id2 := "1"
+	url := "/lesson/pre/degree/create/report/" + id + "/" + id2
+	http.Redirect(resp, req, url , http.StatusMovedPermanently)
 }
 
