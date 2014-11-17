@@ -48,6 +48,11 @@ func CreateDb() {
 		DbSchema.CategoryGroup,
 		DbSchema.Lesson,
 		DbSchema.LessonCreateReportForm,
+		DbSchema.LessonCreateReportFormEntry1,
+		DbSchema.LessonCreateReportFormEntry2,
+		DbSchema.LessonCreateReportFormEntry3,
+		DbSchema.LessonCreateReportFormEntry4,
+		DbSchema.LessonCreateReportFormEntry5,
 	}
 
 	apiList := []string{
