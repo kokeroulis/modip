@@ -7,6 +7,18 @@ import (
 	"strings"
 )
 
+var globalFuncs template.FuncMap
+
+func add (x, y int) int {
+	return x + y
+}
+
+func init() {
+	globalFuncs= template.FuncMap{
+		"add": add,
+	}
+}
+
 func RenderJson(resp http.ResponseWriter, req *http.Request, j interface{}) {
 	data := models.JsonData{
 		Common: models.CreateStandardJson(req),
@@ -42,6 +54,7 @@ func RenderTemplate(name string, helpers []string, resp http.ResponseWriter, dat
 		panic(err)
 	}
 
+	tmpl.Funcs(globalFuncs)
 	tmplListPath := strings.Split(name, "/")
 	err = tmpl.ExecuteTemplate(resp, tmplListPath[len(tmplListPath) - 1] + ".tmpl", data)
 
