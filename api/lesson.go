@@ -81,21 +81,21 @@ func GetLessonPreDegreeCreateReport (resp http.ResponseWriter, req *http.Request
 func LessonPreDegreeCreateReport (resp http.ResponseWriter, req *http.Request) {
 	vars := mux.Vars(req)
 	id, ok := vars["id"]
-//	id2, ok2 := vars["lesson_id"]
+	id2, ok2 := vars["lesson_id"]
 
 	formNumber, paramErr := strconv.Atoi(id)
-//	lessonId, paramErr2 := strconv.Atoi(id)
+	lessonId, paramErr2 := strconv.Atoi(id2)
 
-	lessonId := 1
 	if paramErr != nil || !ok {
 		panic(paramErr)
 	}
 
-/*	if !ok2 || paramErr2 != nil {
+	if !ok2 || paramErr2 != nil {
 		panic(paramErr)
-	}*/
+	}
 
 	decoder := schema.NewDecoder()
+	req.ParseForm()
 
 	var err error
 
