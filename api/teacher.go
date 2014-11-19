@@ -6,9 +6,7 @@ import (
 	"github.com/kokeroulis/modip/models/forms"
 	"github.com/mholt/binding"
 	"github.com/gorilla/schema"
-	"github.com/gorilla/mux"
 	"net/http"
-	"strconv"
 )
 
 type TeacherForm struct {
@@ -74,29 +72,16 @@ func TeacherCreateReport1(resp http.ResponseWriter, req *http.Request) {
 
 	req.ParseForm()
 
-	form := forms.TeacherCreateReportFormEntry1{}
+	form := &forms.TeacherCreateReportFormEntry1{}
+	parseTeacherCreateReportFormEntry1(form, req)
 
-	decoder := schema.NewDecoder()
-	err := decoder.Decode(form, req.PostForm)
 	form.Create(teacherId)
-
-	if err != nil {
-		panic(err)
-	}
 }
 
 func TeacherCreateReport(resp http.ResponseWriter, req *http.Request) {
 	req.ParseForm()
 
-	vars := mux.Vars(req)
-	id, ok := vars["id"]
-
-	formNumber, paramErr := strconv.Atoi(id)
-
-	if paramErr != nil || !ok {
-		panic(paramErr)
-	}
-
+	formNumber, id := getId(req)
 //	teacherId := models.GetTeacherFromSession(req).Id
 
 	switch formNumber {
@@ -123,7 +108,8 @@ func TeacherCreateReport1Edit(resp http.ResponseWriter, req *http.Request) {
 	form := &forms.TeacherCreateReportFormEntry1{}
 	parseTeacherCreateReportFormEntry1(form, req)
 
-	form.Id = getId(req)
+	id, _ := getId(req)
+	form.Id = id
 	form.Update()
 }
 
@@ -138,15 +124,3 @@ func parseTeacherCreateReportFormEntry1(form *forms.TeacherCreateReportFormEntry
 	}
 }
 
-func getId(req *http.Request) int {
-	vars := mux.Vars(req)
-	id, ok := vars["id"]
-
-	res, err := strconv.Atoi(id)
-
-	if err != nil || !ok {
-		panic(err)
-	}
-
-	return res
-}

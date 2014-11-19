@@ -2,6 +2,8 @@ package api
 
 import (
 	"github.com/kokeroulis/modip/models"
+	"github.com/gorilla/mux"
+	"strconv"
 	"encoding/json"
 	"net/http"
 	"html/template"
@@ -63,3 +65,15 @@ func RenderTemplate(name string, helpers []string, resp http.ResponseWriter, dat
 	}
 }
 
+func getId(req *http.Request) (int, string) {
+	vars := mux.Vars(req)
+	id, ok := vars["id"]
+
+	res, err := strconv.Atoi(id)
+
+	if err != nil || !ok {
+		panic(err)
+	}
+
+	return res, id
+}
