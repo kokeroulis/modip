@@ -17,9 +17,9 @@ type TeacherCreateReportFormEntry1 struct {
 
 func (f *TeacherCreateReportFormEntry1) Create(teacherId int) {
 	query := `INSERT INTO TeacherCreateReportFormEntry1
-			  (author, title, is_magazine, publisher, publication_date, type)
-			  VALUES($1, $2, $3, $4, $5, $6)
-			  WHERE teacher = $3`
+			  (author, title, is_magazine, publisher,
+			   publication_date, type, teacher)
+			  VALUES($1, $2, $3, $4, $5, $6, $7)`
 
 	_, err := Db.Database.Exec(query,
 								f.Field1,
@@ -38,9 +38,9 @@ func (f *TeacherCreateReportFormEntry1) Update(teacherId int) {
 			  SET author = $1, title = $2, is_magazine $3,
 			  publisher = $4,
 			  publication_date = $5, type = $5
-			  WHERE teacher = $1 AND id = $2`
+			  WHERE id = $2`
 
-	err := Db.Database.QueryRow(query, teacherId, f.Id).
+	err := Db.Database.QueryRow(query, f.Id).
 		Scan(&f.Field1,
 			 &f.Field2,
 			 &f.Field3,
