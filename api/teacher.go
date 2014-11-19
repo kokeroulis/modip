@@ -58,14 +58,16 @@ func TeacherLogin(resp http.ResponseWriter, req *http.Request) {
 	}
 }
 
+<<<<<<< HEAD
 func GetTeacherReport(resp http.ResponseWriter, req *http.Request) {
     helpers := []string{
         "templates/teacher/anagnorish_epistomonikou_ergou.tmpl",
         "templates/teacher/eureunitika_programmata_kai_erga.tmpl",
         "templates/teacher/sundesi_me_tin_koinonia.tmpl",
     }
-	var data interface{}
-	RenderTemplate("teacher/report", helpers, resp, data)
+
+	RenderTemplate("teacher/report", helpers, resp,
+					forms.ListAllTeacherCreateReportForm1(teacherId))
 }
 
 func TeacherCreateReport1(resp http.ResponseWriter, req *http.Request) {

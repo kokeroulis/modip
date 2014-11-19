@@ -17,7 +17,7 @@ type TeacherCreateReportFormEntry1 struct {
 
 func (f *TeacherCreateReportFormEntry1) Create(teacherId int) {
 	query := `INSERT INTO TeacherCreateReportFormEntry1
-			  (author, title, is_magazine, publisher, publication_datei, type)
+			  (author, title, is_magazine, publisher, publication_date, type)
 			  VALUES($1, $2, $3, $4, $5, $6)
 			  WHERE teacher = $3`
 
@@ -51,3 +51,43 @@ func (f *TeacherCreateReportFormEntry1) Update(teacherId int) {
 	Db.CheckQueryWithNoRows(err, query)
 }
 
+func ListAllTeacherCreateReportForm1(teacherId int) []TeacherCreateReportFormEntry1 {
+	var formList []TeacherCreateReportFormEntry1
+
+	query := `SELECT TeacherCreateReportFormEntry1
+			  id, author, title, is_magazine,
+			  publisher, publication_date
+			  FROM TeacherCreateReportFormEntry1
+			  WHERE teacher $1`
+
+	rows, err := Db.Database.Query(query, teacherId)
+
+	if err != nil {
+		panic(err)
+	}
+
+	defer rows.Close()
+
+
+	for rows.Next() {
+		it := TeacherCreateReportFormEntry1{}
+
+		if err := rows.Scan(&it.Id,
+							&it.Field1,
+							&it.Field2,
+							&it.Field3,
+							&it.Field4,
+							&it.Field5,
+							&it.Field6); err != nil {
+			panic(err)
+		} else {
+			formList = append(formList, it)
+		}
+	}
+
+	if rowsErr := rows.Err(); rowsErr != nil {
+		panic(err)
+	}
+
+	return formList
+}
