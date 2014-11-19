@@ -33,7 +33,7 @@ func (f *TeacherCreateReportFormEntry1) Create(teacherId int) {
 	Db.CheckQueryWithNoRows(err, query)
 }
 
-func (f *TeacherCreateReportFormEntry1) Update(teacherId int) {
+func (f *TeacherCreateReportFormEntry1) Update() {
 	query := `UPDATE TeacherCreateReportFormEntry1
 			  SET author = $1, title = $2, is_magazine $3,
 			  publisher = $4,

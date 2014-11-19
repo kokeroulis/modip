@@ -111,3 +111,42 @@ func TeacherCreateReport(resp http.ResponseWriter, req *http.Request) {
 
 
 }
+
+func GetTeacherCreateReport1Edit(resp http.ResponseWriter, req *http.Request) {
+	var helpers []string
+	var data interface{}
+
+	RenderTemplate("teacher/report_edit", helpers, resp, data)
+}
+
+func TeacherCreateReport1Edit(resp http.ResponseWriter, req *http.Request) {
+	form := &forms.TeacherCreateReportFormEntry1{}
+	parseTeacherCreateReportFormEntry1(form, req)
+
+	form.Id = getId(req)
+	form.Update()
+}
+
+func parseTeacherCreateReportFormEntry1(form *forms.TeacherCreateReportFormEntry1,
+										req *http.Request) {
+	req.ParseForm()
+	decoder := schema.NewDecoder()
+	err := decoder.Decode(form, req.PostForm)
+
+	if err != nil {
+		panic(err)
+	}
+}
+
+func getId(req *http.Request) int {
+	vars := mux.Vars(req)
+	id, ok := vars["id"]
+
+	res, err := strconv.Atoi(id)
+
+	if err != nil || !ok {
+		panic(err)
+	}
+
+	return res
+}
