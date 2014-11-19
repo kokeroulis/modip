@@ -4,7 +4,9 @@ import (
 	"encoding/gob"
 	"github.com/kokeroulis/modip/models"
 	"github.com/mholt/binding"
+	"github.com/gorilla/mux"
 	"net/http"
+	"strconv"
 )
 
 type TeacherForm struct {
@@ -62,4 +64,33 @@ func GetTeacherReport(resp http.ResponseWriter, req *http.Request) {
     }
 	var data interface{}
 	RenderTemplate("teacher/report", helpers, resp, data)
+}
+
+func TeacherCreateReport1(resp http.ResponseWriter, req *http.Request) {
+
+}
+
+func TeacherCreateReport(resp http.ResponseWriter, req *http.Request) {
+	vars := mux.Vars(req)
+	id, ok := vars["id"]
+
+	formNumber, paramErr := strconv.Atoi(id)
+
+	if paramErr != nil || !ok {
+		panic(paramErr)
+	}
+
+//	teacherId := models.GetTeacherFromSession(req).Id
+
+	switch formNumber {
+	case 2:
+		//form := &forms.TeacherCreateReportFormEntry2}
+		//err = decoder.Decode(form, req.PostForm)
+		//form.Create(teacherId)
+	default:
+		unknownErr := "Unknown form: " + id
+		panic(unknownErr)
+	}
+
+
 }

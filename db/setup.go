@@ -46,6 +46,7 @@ func CreateDb() {
 		DbSchema.Category,
 		DbSchema.CategoryData,
 		DbSchema.CategoryGroup,
+
 		DbSchema.Lesson,
 		DbSchema.LessonCreateReportForm,
 		DbSchema.LessonCreateReportFormEntry1,
@@ -53,6 +54,9 @@ func CreateDb() {
 		DbSchema.LessonCreateReportFormEntry3,
 		DbSchema.LessonCreateReportFormEntry4,
 		DbSchema.LessonCreateReportFormEntry5,
+
+		DbSchema.TeacherCreateReportFormEntry1,
+
 	}
 
 	apiList := []string{
