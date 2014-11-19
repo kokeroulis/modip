@@ -1,0 +1,52 @@
+<div class="large-6 columns">
+
+<form method="POST" action="/teacher/report/3">
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Ερευνητικά προγράμματα και έργα (ως Επιστημονικός Υπεύθυνος)
+        <input name="ereunikita_programmata_kai_erga_episthmonikos_ypeu8inos" value="{{.Entry3.Field1}}" type="number" placeholder="">
+      </label>
+      <small>Αριθμός - Σε πόσα ερευνητικά προγράμματα ή/και έργα που υλοποιήθηκαν (ή βρίσκονται σε εξέλιξη κατά το ακαδημαϊκό έτος), είστε Επιστημονικός Υπέυθυνος;</small>
+    </div>
+  </div>
+  <br/>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Ερευνητικά προγράμματα και έργα (απλή συμμετοχή)
+        <input name="ereunikita_programmata_kai_erga_apli_summetoxi" value="{{.Entry3.Field2}}" type="number" placeholder="">
+      </label>
+      <small>Αριθμός - Σε πόσα απλώς συμμετέχετε;</small>
+    </div>
+  </div>
+  <br/>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Συμμετοχή εξωτερικών συνεργατών στα ερευνητικά έργα
+        <textarea rows="4" name="ereunikita_programmata_kai_erga_summetoxi_eksoterikon_sunergaton" placeholder="">{{.Entry3.Field3}}</textarea>
+      </label>
+      <small>Συμμετέχουν εξωτερικοί συνεργάτες ή/και μεταδιδακτορικοί ερευνητές στα ερευνητικά αυτά προγράμματα ή/και έργα;</small>
+    </div>
+  </div>
+  <br/>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Συμμετοχή φοιτητών στα ερευνητικά έργα
+        <textarea rows="4" name="ereunikita_programmata_kai_erga_summetoxi_foithton" placeholder="">{{.Entry3.Field4}}</textarea>
+      </label>
+      <small>Πόσοι προπτυχιακοί φοιτητές συμμετέχουν στις ερευνητικές σας δραστηριότητες το τελευταίο έτος; Πόσοι μεταπτυχιακοί και πόσοι υποψήφιοι διδάκτορες;</small>
+    </div>
+  </div>
+  <br/>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <button type="submit">Αποθύκευση</a>
+    </div>
+  </div>
+</form>
+
+</div>

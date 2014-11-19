@@ -1,3 +1,25 @@
 {{template "header.tmpl"}}
-<p>KOKER</p>
+<dl class="tabs vertical lesson-tab-fix-size lesson-tab" data-tab>
+  <dd class="active"><a href="#panel1">Αριθμός Δημοσιεύσεων</a></dd>
+  <dd><a href="#panel2">Αναγνώριση του επιστημονικού και άλλου έργου</a></dd>
+  <dd><a href="#panel3">Ερευνητικά προγράμματα και έργα</a></dd>
+  <dd><a href="#panel4">Ερευνητικές Υποδομές</a></dd>
+  <dd><a href="#panel5">Σύνδεση με την κοινωνία</a></dd>
+ </dl>
+<div class="tabs-content">
+  <div class="content active" id="panel1">
+  </div>
+  <div class="content" id="panel2">
+    {{template "anagnorish_epistomonikou_ergou.tmpl" .}}
+  </div>
+  <div class="content" id="panel3">
+    {{template "eureunitika_programmata_kai_erga.tmpl" . }}
+  </div>
+  <div class="content" id="panel4">
+  </div>
+  <div class="content" id="panel5">
+    {{template "sundesi_me_tin_koinonia.tmpl" . }}
+  </div>
+</div>
+
 {{template "footer.tmpl"}}
