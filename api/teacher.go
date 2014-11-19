@@ -58,7 +58,6 @@ func TeacherLogin(resp http.ResponseWriter, req *http.Request) {
 	}
 }
 
-<<<<<<< HEAD
 func GetTeacherReport(resp http.ResponseWriter, req *http.Request) {
     helpers := []string{
         "templates/teacher/anagnorish_epistomonikou_ergou.tmpl",
