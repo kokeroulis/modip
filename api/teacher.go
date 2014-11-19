@@ -3,7 +3,9 @@ package api
 import (
 	"encoding/gob"
 	"github.com/kokeroulis/modip/models"
+	"github.com/kokeroulis/modip/models/forms"
 	"github.com/mholt/binding"
+	"github.com/gorilla/schema"
 	"github.com/gorilla/mux"
 	"net/http"
 	"strconv"
@@ -67,10 +69,24 @@ func GetTeacherReport(resp http.ResponseWriter, req *http.Request) {
 }
 
 func TeacherCreateReport1(resp http.ResponseWriter, req *http.Request) {
+	teacherId := models.GetTeacherFromSession(req).Id
 
+	req.ParseForm()
+
+	form := forms.TeacherCreateReportFormEntry1{}
+
+	decoder := schema.NewDecoder()
+	err := decoder.Decode(form, req.PostForm)
+	form.Create(teacherId)
+
+	if err != nil {
+		panic(err)
+	}
 }
 
 func TeacherCreateReport(resp http.ResponseWriter, req *http.Request) {
+	req.ParseForm()
+
 	vars := mux.Vars(req)
 	id, ok := vars["id"]
 
