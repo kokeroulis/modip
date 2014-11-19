@@ -4,8 +4,8 @@ import (
 	 _"github.com/kokeroulis/modip/db"
 )
 
-type LessonCreateReportFormEntry5 struct {
-	// 
+type LessonCreateReportFormEntry9 struct {
+	// Αξιολόγηση της επίδοσης των μαθητών στο μάθημα 
 	Field1 bool `schema:"lesson_aksiologisi_ths_epidosis_grapti_eksetasi"`
 	Field2 bool `schema:"lesson_aksiologisi_ths_epidosis_proforiki_eksetasi"`
 	Field3 bool `schema:"lesson_aksiologisi_ths_epidosis_proodos"`
