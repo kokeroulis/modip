@@ -15,3 +15,67 @@ type LessonCreateReportFormEntry14 struct {
     Field7 int `schema:"katanomi_ba8mon_spoudaston_mesos_oros_ba8mologias_sunolo_spoudaston"`
 }
 
+
+=============== Start create table
+CREATE TABLE LessonCreateReportFormEntry14 (
+	lesson int references lesson(id) on delete cascade,
+	katanomi_ba8mon_spoudaston_0_39 int,
+	katanomi_ba8mon_spoudaston_4_49 int,
+	katanomi_ba8mon_spoudaston_5_59 int,
+	katanomi_ba8mon_spoudaston_6_69 int,
+	katanomi_ba8mon_spoudaston_7_84 int,
+	katanomi_ba8mon_spoudaston_85_10 int,
+	katanomi_ba8mon_spoudaston_mesos_oros_ba8mologias_sunolo_spoudaston int
+)
+=============== End Create table
+=============== Start create update func
+func (f *LessonCreateReportFormEntry14) Update(lessonId int) {
+query := `UPDATE LessonCreateReportFormEntry14 SET
+	katanomi_ba8mon_spoudaston_0_39 = $1,
+	katanomi_ba8mon_spoudaston_4_49 = $2,
+	katanomi_ba8mon_spoudaston_5_59 = $3,
+	katanomi_ba8mon_spoudaston_6_69 = $4,
+	katanomi_ba8mon_spoudaston_7_84 = $5,
+	katanomi_ba8mon_spoudaston_85_10 = $6,
+	katanomi_ba8mon_spoudaston_mesos_oros_ba8mologias_sunolo_spoudaston = $7
+WHERE lesson = $`
+
+_, err := Db.Database.Exec(query,
+	Field1,
+	Field2,
+	Field3,
+	Field4,
+	Field5,
+	Field6,
+	Field7
+)
+
+Db.CheckQueryWithNoRows(err, query)
+}
+=============== End Create update func
+=============== Start create select func
+func (f *LessonCreateReportFormEntry14) Load(lessonId int) {
+query := `SELECT
+	katanomi_ba8mon_spoudaston_0_39,
+	katanomi_ba8mon_spoudaston_4_49,
+	katanomi_ba8mon_spoudaston_5_59,
+	katanomi_ba8mon_spoudaston_6_69,
+	katanomi_ba8mon_spoudaston_7_84,
+	katanomi_ba8mon_spoudaston_85_10,
+	katanomi_ba8mon_spoudaston_mesos_oros_ba8mologias_sunolo_spoudaston
+FROM LessonCreateReportFormEntry14
+WHERE lesson = $`
+
+err := Db.Database.QueryRow(query, TODO).
+	Scan(&f.Field1,
+		&f.Field2,
+		&f.Field3,
+		&f.Field4,
+		&f.Field5,
+		&f.Field6,
+		&f.Field7
+)
+
+Db.CheckQueryWithNoRows(err, query)
+}
+=============== End Create select func
