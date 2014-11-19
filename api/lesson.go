@@ -58,7 +58,6 @@ func GetLessonPreDegreeCreateReport (resp http.ResponseWriter, req *http.Request
 
 	helpers := []string{
 		"templates/lesson/create_report/perigrafi.tmpl",
-		"templates/lesson/create_report/didaskalia.tmpl",
 		"templates/lesson/create_report/enhmerwsi.tmpl",
         "templates/lesson/create_report/didaktea_yli.tmpl",
         "templates/lesson/create_report/didaktika_boh8imata.tmpl",
@@ -104,10 +103,11 @@ func LessonPreDegreeCreateReport (resp http.ResponseWriter, req *http.Request) {
 		form := &forms.LessonCreateReportFormEntry1{}
 		err = decoder.Decode(form, req.PostForm)
 		form.Update(lessonId)
-	case 2:
+	/*case 2:
 		form := &forms.LessonCreateReportFormEntry2{}
 		err = decoder.Decode(form, req.PostForm)
 		form.Update(lessonId)
+    */
 	case 3:
 		form := &forms.LessonCreateReportFormEntry3{}
 		err = decoder.Decode(form, req.PostForm)
