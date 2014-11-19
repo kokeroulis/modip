@@ -33,6 +33,9 @@ func setupRoutes(n *negroni.Negroni) {
 
 	router.Handle("/category/save", authorize{CategorySave}).Methods("POST")
 
+	// Α.Δ. Εκπ. Προσωπικού
+	router.Handle("/teacher/report", authorize{GetTeacherReport}).Methods("GET")
+
 	// Α.Δ. Μαθημάτων Π.Π.Σ.
 	router.Handle("/lesson/list/pre/degree", authorize{LessonListPreDegree}).Methods("GET")
 	router.Handle("/lesson/list/pre/degree/{id:[1-9]+}", authorize{LessonListPreDegreeDepartment}).Methods("GET")

@@ -54,3 +54,8 @@ func TeacherLogin(resp http.ResponseWriter, req *http.Request) {
 	}
 }
 
+func GetTeacherReport(resp http.ResponseWriter, req *http.Request) {
+	var helpers []string
+	var data interface{}
+	RenderTemplate("teacher/report", helpers, resp, data)
+}
