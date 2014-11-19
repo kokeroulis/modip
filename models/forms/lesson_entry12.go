@@ -1,7 +1,7 @@
 package forms
 
 import (
-	 "github.com/kokeroulis/modip/db"
+	 _"github.com/kokeroulis/modip/db"
 )
 
 type LessonCreateReportFormEntry12 struct {
