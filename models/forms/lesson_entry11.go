@@ -43,15 +43,14 @@ query := `SELECT
 	aksiopoihsh_texnologion_pliroforikhs_kai_epikoinonion_xrhsimopoiountai_TPE_sthn_aksiologisi_ton_spoudaston_pws,
 	aksiopoihsh_texnologion_pliroforikhs_kai_epikoinonion_xrhsimopoiountai_TPT_sthn_epikoinonia_sas_me_tous_spoudastes_pws
 FROM LessonCreateReportFormEntry11
-WHERE lesson = $`
+WHERE lesson = $1`
 
-err := Db.Database.QueryRow(query, TODO).
+err := Db.Database.QueryRow(query, lessonId).
 	Scan(&f.Field1,
 		&f.Field2,
 		&f.Field3,
 		&f.Field4,
-		&f.Field5
-)
+		&f.Field5)
 
 Db.CheckQueryWithNoRows(err, query)
 }
