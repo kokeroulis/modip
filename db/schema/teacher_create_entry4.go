@@ -1,4 +1,4 @@
-package Db
+package DbSchema
 
 const TeacherCreateReportFormEntry4 =`
 CREATE SEQUENCE seq_TeacherCreateReportFormEntry4Ids;
@@ -19,9 +19,7 @@ CREATE TABLE TeacherCreateReportFormEntry4 (
 )
 `
 const TeacherCreateReportFormEntry4Helper =`
-CREATE SEQUENCE seq_TeacherCreateReportFormEntry4Ids;
-
-CREATE TABLE TeacherCreateReportFormEntry4 (
+CREATE TABLE TeacherCreateReportFormEntry4Helper (
 	form    int references TeacherCreateReportFormEntry4(id) on delete cascade,
 	content text default ' '
 )

@@ -37,7 +37,7 @@ func (f *TeacherCreateReportFormEntry4) Update(teacherId int) {
 				ereunitikes_ypodomes_praktiki_akiopoihsh_ton_ereunitikon_apotelesmaton = $9,
 			 WHERE id = $10 AND teacher = $11`
 
-	err := Db.Database.Exec(query,
+	_, err := Db.Database.Exec(query,
 							f.Field1,
 							f.Field2,
 							f.Field3,
@@ -58,7 +58,7 @@ func (f *TeacherCreateReportFormEntry4) Update(teacherId int) {
 			query = `INSERT INTO TeacherCreateReportFormEntry4Helper
 					 (form, content) VALUES ($1, $2)`
 
-			err := Db.Database.Exec(query, f.Id, it.Content)
+			_, err := Db.Database.Exec(query, f.Id, it.Content)
 
 			Db.CheckQueryWithNoRows(err, query)
 		}
@@ -94,14 +94,14 @@ func (f *TeacherCreateReportFormEntry4) Load(teacherId int) {
 
 	var helpers []TeacherCreateReportFormEntry4Helper
 
-	query := `SELECT content
+	query = `SELECT content
 			  FROM TeacherCreateReportFormEntry4Helper
 			  WHERE form = $1`
 
-	rows, err = Db.Database.Query(query, f.Id)
+	rows, err2 := Db.Database.Query(query, f.Id)
 
-	if err != nil {
-		panic(err)
+	if err2 != nil {
+		panic(err2)
 	}
 
 	defer rows.Close()

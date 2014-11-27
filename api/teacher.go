@@ -82,8 +82,11 @@ func TeacherCreateReport(resp http.ResponseWriter, req *http.Request) {
 	req.ParseForm()
 
 	formNumber, id := getId(req)
-//	teacherId := models.GetTeacherFromSession(req).Id
+	teacherId := models.GetTeacherFromSession(req).Id
 
+	decoder := schema.NewDecoder()
+
+	var err error
 	switch formNumber {
 	case 2:
 		//form := &forms.TeacherCreateReportFormEntry2}
@@ -98,7 +101,9 @@ func TeacherCreateReport(resp http.ResponseWriter, req *http.Request) {
 		panic(unknownErr)
 	}
 
-
+	if err != nil {
+		panic(err)
+	}
 }
 
 func GetTeacherCreateReport1Edit(resp http.ResponseWriter, req *http.Request) {

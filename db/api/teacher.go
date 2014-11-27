@@ -61,10 +61,10 @@ BEGIN
 		alreadyExists := FALSE;
 	END IF;
 
-	INSERT INTO lesson
+	INSERT INTO teacher
 	(name, password, email, department)
 	VALUES (teacherName, teacherPassword, teacherEmail, departmentId)
-	RETURNING id INTO lessonId;
+	RETURNING id INTO teacherId;
 
 	INSERT INTO TeacherCreateReportFormEntry4
 	(teacher) VALUES (teacherId);

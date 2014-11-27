@@ -84,16 +84,16 @@ func createTeachers(db *sql.DB, teachers []teacher, departmentId int) {
 			// teacher doesn't exist, create one
 
 			d := models.Department{
-				Id: teacherDepartment,
+				Id: departmentId,
 			}
 
 			t := models.Teacher{
-				Name:       teacherName,
-				Email:      teacherName,
-				Department: d
+				Name:       teacher.Name,
+				Email:      teacher.Email,
+				Department: d,
 			}
 
-			t.Create(teacherPassword)
+			t.Create(teacher.Password)
 		}
 	}
 }
