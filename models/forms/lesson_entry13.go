@@ -1,7 +1,7 @@
 package forms
 
 import (
-	_ "github.com/kokeroulis/modip/db"
+	"github.com/kokeroulis/modip/db"
 )
 
 type LessonCreateReportFormEntry13 struct {
@@ -15,7 +15,7 @@ func (f *LessonCreateReportFormEntry13) Update(lessonId int) {
 		WHERE lesson = $2`
 
 	_, err := Db.Database.Exec(query,
-		Field1,
+		f.Field1,
 		lessonId)
 
 	Db.CheckQueryWithNoRows(err, query)

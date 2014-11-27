@@ -1,7 +1,7 @@
 package forms
 
 import (
-	_ "github.com/kokeroulis/modip/db"
+	 "github.com/kokeroulis/modip/db"
 )
 
 type LessonCreateReportFormEntry12 struct {
@@ -11,7 +11,7 @@ type LessonCreateReportFormEntry12 struct {
 	Field3 string `schema:"ekpedeutika_mesa_anafora_elleipseon_ekpedeutikon_meson"`
 }
 
-func (f *lessoncreatereportformentry12) Update(lessonId int) {
+func (f *LessonCreateReportFormEntry12) Update(lessonId int) {
 	query := `UPDATE lessoncreatereportformentry12 SET
 	ekpedeutika_mesa_xrhsh_ekpedeutikon_meson = $1,
 	ekpedeutika_mesa_eparkeia_ekpedeutikon_meson = $2,
@@ -19,15 +19,15 @@ func (f *lessoncreatereportformentry12) Update(lessonId int) {
 	WHERE lesson = $4`
 
 	_, err := Db.Database.Exec(query,
-		field1,
-		field2,
-		field3,
+		f.Field1,
+		f.Field2,
+		f.Field3,
 		lessonId)
 
 	Db.CheckQueryWithNoRows(err, query)
 }
 
-func (f *lessoncreatereportformentry12) Load(lessonId int) {
+func (f *LessonCreateReportFormEntry12) Load(lessonId int) {
 	query := `SELECT
 			ekpedeutika_mesa_xrhsh_ekpedeutikon_meson,
 			ekpedeutika_mesa_eparkeia_ekpedeutikon_meson,
@@ -36,9 +36,9 @@ func (f *lessoncreatereportformentry12) Load(lessonId int) {
 		WHERE lesson = $1`
 
 	err := Db.Database.QueryRow(query, lessonId).
-		Scan(&f.field1,
-		&f.field2,
-		&f.field3)
+		Scan(&f.Field1,
+		&f.Field2,
+		&f.Field3)
 
 	Db.CheckQueryWithNoRows(err, query)
 }
