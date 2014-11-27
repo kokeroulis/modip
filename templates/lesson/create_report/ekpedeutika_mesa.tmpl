@@ -5,8 +5,8 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Τρόποι Αξιολόγησης</label>
-      <label for="checkbox1"><input type="checkbox" id="ekpedeutika_mesa_xrhsh_ekpedeutikon_meson" required=""> Χρήση Εκπ/ων Μέσων (Επιλέξτε αν γίνεται Χρήση Εκπ/ων Μέσων)</label>
-      <label for="checkbox1"><input type="checkbox" id="ekpedeutika_mesa_eparkeia_ekpedeutikon_meson" required=""> Επάρκεια Εκπ/ων Μέσων (Επιλέξτε αν θεωρείτε ότι υπάρχει Επάρκεια Εκπ/ων Μέσων)</label>
+      <label for="checkbox1"><input type="checkbox" value="{{.Entry12.Field1}}" name="ekpedeutika_mesa_xrhsh_ekpedeutikon_meson"> Χρήση Εκπ/ων Μέσων (Επιλέξτε αν γίνεται Χρήση Εκπ/ων Μέσων)</label>
+      <label for="checkbox1"><input type="checkbox" value="{{.Entry12.Field2}}" name="ekpedeutika_mesa_eparkeia_ekpedeutikon_meson"> Επάρκεια Εκπ/ων Μέσων (Επιλέξτε αν θεωρείτε ότι υπάρχει Επάρκεια Εκπ/ων Μέσων)</label>
     </div>
   </div>
 
@@ -14,7 +14,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Αναφορά Ελλείψεων Εκπ/ων Μέσων
-        <textarea rows="4" name="ekpedeutika_mesa_anafora_elleipseon_ekpedeutikon_meson" type="text" placeholder="">{{.Entry12.Field2}}</textarea>
+        <textarea rows="4" name="ekpedeutika_mesa_anafora_elleipseon_ekpedeutikon_meson" type="text" placeholder="">{{.Entry12.Field3}}</textarea>
       </label>
     </div>
   </div>

@@ -58,7 +58,7 @@ func ListAllTeacherCreateReportForm1(teacherId int) []TeacherCreateReportFormEnt
 			  id, author, title, is_magazine,
 			  publisher, publication_date
 			  FROM TeacherCreateReportFormEntry1
-			  WHERE teacher $1`
+			  WHERE teacher = $1`
 
 	rows, err := Db.Database.Query(query, teacherId)
 
