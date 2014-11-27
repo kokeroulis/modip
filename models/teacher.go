@@ -21,3 +21,14 @@ func (t *Teacher) Login(username string, password string) bool {
 	return auth
 }
 
+func (t *Teacher) Create(password string) bool {
+	var alreadyExists bool
+	query := `SELECT alreadyExists
+			  FROM teacher_create($1, $2, $3, $4)`
+	err := Db.Database.QueryRow(query, t.Name, password, t.Email, t.Department.Id).
+		Scan(&alreadyExists)
+
+	Db.CheckQuery(err, query)
+
+	return alreadyExists
+}

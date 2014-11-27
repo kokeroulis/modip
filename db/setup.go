@@ -63,6 +63,7 @@ func CreateDb() {
 
 	apiList := []string{
 		DbApi.TeacherLogin,
+		DbApi.TeacherCreate,
 		DbApi.CategoryAdd,
 		DbApi.CategoryGroupAdd,
 		DbApi.CategorySave,
