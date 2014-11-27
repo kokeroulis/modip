@@ -10,7 +10,7 @@ type LessonCreateReportFormEntry3 struct {
 	Field2 string `schema:"lesson_enhmerwsi_website"`
 	Field3 bool   `schema:"lesson_enhmerwsi_aksiologisi_E"`
 	Field4 bool   `schema:"lesson_enhmerwsi_aksiologisi_8"`
-	Field5 bool   `schema:"lesson_enhmerwsi_ari8mos_spoudaston_pou_aksiologisan_to_ma8ima"`
+	Field5 int   `schema:"lesson_enhmerwsi_ari8mos_spoudaston_pou_aksiologisan_to_ma8ima"`
 }
 
 func (f *LessonCreateReportFormEntry3) Update(lessonId int) {

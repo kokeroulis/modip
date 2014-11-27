@@ -7,6 +7,6 @@ CREATE TABLE LessonCreateReportFormEntry3 (
 	lesson_enhmerwsi_website                                       text default ' ',
 	lesson_enhmerwsi_aksiologisi_E                                 boolean default false,
 	lesson_enhmerwsi_aksiologisi_8                                 boolean default false,
-	lesson_enhmerwsi_ari8mos_spoudaston_pou_aksiologisan_to_ma8ima boolean default false
+	lesson_enhmerwsi_ari8mos_spoudaston_pou_aksiologisan_to_ma8ima int default 0
 )
 `
