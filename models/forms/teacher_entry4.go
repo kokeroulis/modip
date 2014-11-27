@@ -23,7 +23,7 @@ type TeacherCreateReportFormEntry4 struct {
 	Helpers []TeacherCreateReportFormEntry4Helper
 }
 
-func (f *TeacherCreateReportFormEntry4) Update() {
+func (f *TeacherCreateReportFormEntry4) Update(teacherId int) {
 	query := `UPDATE TeacherCreateReportFormEntry4
 			  SET
 				ereunitikes_ypodomes_arithmos_kai_xwritikotita_ereunitikon_ergasthrion_pou_xrisimopoieitai = $1,
@@ -35,7 +35,7 @@ func (f *TeacherCreateReportFormEntry4) Update() {
 				ereunitikes_ypodomes_ananeosi_ereunitikon_ypodomon = $7,
 				ereunitikes_ypodomes_pws_epidiokete_th_xrimatodothsh_gia_promi8eia = $8,
 				ereunitikes_ypodomes_praktiki_akiopoihsh_ton_ereunitikon_apotelesmaton = $9,
-			 WHERE id = $10`
+			 WHERE id = $10 AND teacher = $11`
 
 	err := Db.Database.Exec(query,
 							f.Field1,
@@ -47,7 +47,8 @@ func (f *TeacherCreateReportFormEntry4) Update() {
 							f.Field7,
 							f.Field8,
 							f.Field9,
-							f.Id)
+							f.Id,
+							teacherId)
 
 	Db.CheckQueryWithNoRows(err, query)
 
