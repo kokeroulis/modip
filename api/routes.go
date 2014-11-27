@@ -36,7 +36,7 @@ func setupRoutes(n *negroni.Negroni) {
 	// Α.Δ. Εκπ. Προσωπικού
 	router.Handle("/teacher/report", authorize{GetTeacherCreateReport}).Methods("GET")
 	router.Handle("/teacher/report/1", authorize{TeacherCreateReport1}).Methods("POST")
-	router.Handle("/teacher/report/1/edit", authorize{GetTeacherCreateReport1Edit}).Methods("GET")
+	router.Handle("/teacher/report/1/edit/{id:[0-9]}", authorize{GetTeacherCreateReport1Edit}).Methods("GET")
 	router.Handle("/teacher/report/1/edit/{id:[0-9]}", authorize{TeacherCreateReport1Edit}).Methods("POST")
 
 

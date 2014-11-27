@@ -1,0 +1,97 @@
+<div class="large-6 columns">
+<table>
+  <thead>
+    <tr>
+      <th>Συγγραφέας</th>
+      <th>Τίτλος</th>
+      <th>Περιοδικό</th>
+      <th>Εκδότης</th>
+      <th>Ημερομηνία Δημοσίευσης</th>
+      <th>Τύπος</th>
+      <th>Ενέργειες</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{range .}}
+      <tr>
+        <td>{{.Field1}}</td>
+        <td>{{.Field2}}</td>
+        <td>{{if .Field3}} NAI {{else}} OXI {{end}}</td>
+        <td>{{.Field4}}</td>
+        <td>{{.Field4}}</td>
+        <td>{{.Field5}}</td>
+        <td><a href="/teacher/report/1/edit/{{.Id}}">Επεξεργασία</a></td>
+      </tr>
+    {{end}}
+  </tbody>
+</table>
+
+<h2 class="subheader">Προσθήκη Καινούργιου</h2>
+<form method="POST" action="/teacher/report/1">
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Συγγραφέας
+        <input name="author" type="text" placeholder="">
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Τίτλος
+        <input name="title" type="text" placeholder="">
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Περιοδικό
+        <input name="is_magazine" type="checkbox" placeholder="">
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Εκδότης
+        <input name="publisher" type="text" placeholder="">
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Ημερομηνία Δημοσίευσης
+        <input name="publication_date" type="text" placeholder="">
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Τύπος
+        <select>
+          <option name="type" value="Βιβλία-Mονογραφίες">Βιβλία-Mονογραφίες</option>
+          <option name="type" value="Επιστημονικά Περιοδικά με Κριτές">Επιστημονικά Περιοδικά με Κριτές</option>
+          <option name="type" value="Επιστημονικά Περιοδικά Χωρίς Κριτές">Επιστημονικά Περιοδικά Χωρίς Κριτές</option>
+          <option name="type" value="Πρακτικά Διεθνών Συνεδρίων με Kριτές">Πρακτικά Διεθνών Συνεδρίων με Kριτές</option>
+          <option name="type" value="Ανακοινώσεις σε Διεθνή Επιστημονικά Συνέδρια">Ανακοινώσεις σε Διεθνή Επιστημονικά Συνέδρια</option>
+          <option name="type" value="Ανακοινώσεις σε Εθνικά Επιστημονικά Συνέδρια">Ανακοινώσεις σε Εθνικά Επιστημονικά Συνέδρια</option>
+          <option name="type" value="Άλλες Εργασίες">Άλλες Εργασίες</option>
+          <option name="type" value="Κεφάλαια σε Συλλογικούς Τόμους">Κεφάλαια σε Συλλογικούς Τόμους</option>
+          <option name="type" value="Άλλα">Άλλα</option>
+        </select>
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <button type="submit">Αποθύκευση</a>
+    </div>
+  </div>
+</form>
+
+
+</div>

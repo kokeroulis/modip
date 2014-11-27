@@ -54,9 +54,9 @@ func (f *TeacherCreateReportFormEntry1) Update() {
 func ListAllTeacherCreateReportForm1(teacherId int) []TeacherCreateReportFormEntry1 {
 	var formList []TeacherCreateReportFormEntry1
 
-	query := `SELECT TeacherCreateReportFormEntry1
+	query := `SELECT
 			  id, author, title, is_magazine,
-			  publisher, publication_date
+			  publisher, publication_date, type
 			  FROM TeacherCreateReportFormEntry1
 			  WHERE teacher = $1`
 

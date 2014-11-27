@@ -61,6 +61,7 @@ func GetTeacherCreateReport(resp http.ResponseWriter, req *http.Request) {
         "templates/teacher/anagnorish_epistomonikou_ergou.tmpl",
         "templates/teacher/eureunitika_programmata_kai_erga.tmpl",
         "templates/teacher/sundesi_me_tin_koinonia.tmpl",
+        "templates/teacher/arithmos_dimosieuseon.tmpl",
     }
 
 	RenderTemplate("teacher/report", helpers, resp,
@@ -76,6 +77,8 @@ func TeacherCreateReport1(resp http.ResponseWriter, req *http.Request) {
 	parseTeacherCreateReportFormEntry1(form, req)
 
 	form.Create(teacherId)
+
+    http.Redirect(resp, req, "/teacher/report", http.StatusMovedPermanently)
 }
 
 func TeacherCreateReport(resp http.ResponseWriter, req *http.Request) {
@@ -104,13 +107,23 @@ func TeacherCreateReport(resp http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		panic(err)
 	}
+    http.Redirect(resp, req, "/teacher/report", http.StatusMovedPermanently)
 }
 
 func GetTeacherCreateReport1Edit(resp http.ResponseWriter, req *http.Request) {
+    entryId, _ := getId(req)
 	var helpers []string
-	var data interface{}
+    formsList := forms.ListAllTeacherCreateReportForm1(models.GetTeacherFromSession(req).Id)
 
-	RenderTemplate("teacher/report_edit", helpers, resp, data)
+    var data interface{}
+
+    for _, it := range formsList {
+        if it.Id == entryId {
+            data = it
+        }
+    }
+
+    RenderTemplate("teacher/report_edit", helpers, resp, data);
 }
 
 func TeacherCreateReport1Edit(resp http.ResponseWriter, req *http.Request) {
@@ -120,6 +133,7 @@ func TeacherCreateReport1Edit(resp http.ResponseWriter, req *http.Request) {
 	id, _ := getId(req)
 	form.Id = id
 	form.Update()
+    http.Redirect(resp, req, "/teacher/report", http.StatusMovedPermanently)
 }
 
 func parseTeacherCreateReportFormEntry1(form *forms.TeacherCreateReportFormEntry1,
