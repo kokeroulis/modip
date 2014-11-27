@@ -16,12 +16,12 @@ func (f *LessonCreateReportFormEntry15) Update(lessonId int) {
 query := `UPDATE LessonCreateReportFormEntry15 SET
 	apopsi_spoudaston_gia_to_ma8ima_yparxei_diadikasia_aksiologisis_tou_ma8imatos = $1,
 	apopsi_spoudaston_gia_to_ma8ima_pws_aksiopoiountai_auta_ta_apotelesmata = $2
-WHERE lesson = $`
+WHERE lesson = $3`
 
 _, err := Db.Database.Exec(query,
 	Field1,
 	Field2
-)
+    lessonId)
 
 Db.CheckQueryWithNoRows(err, query)
 }
