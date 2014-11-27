@@ -41,3 +41,34 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 `
+
+const TeacherCreate = `
+CREATE OR REPLACE FUNCTION teacher_create(teacherName text,
+										  teacherPassword text,
+										  teacherEmail text,
+										  departmentId int,
+										  OUT alreadyExists boolean) AS $$
+DECLARE
+	teacherId int;
+BEGIN
+	PERFORM * FROM teacher
+	WHERE name = teacherName;
+
+	IF FOUND THEN
+		alreadyExists := TRUE;
+		RETURN;
+	ELSE
+		alreadyExists := FALSE;
+	END IF;
+
+	INSERT INTO teacher
+	(name, password, email, department)
+	VALUES (teacherName, teacherPassword, teacherEmail, departmentId)
+	RETURNING id INTO teacherId;
+
+	INSERT INTO TeacherCreateReportFormEntry4
+	(teacher) VALUES (teacherId);
+END;
+$$ LANGUAGE plpgsql;
+`
+

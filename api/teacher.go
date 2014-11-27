@@ -82,19 +82,28 @@ func TeacherCreateReport(resp http.ResponseWriter, req *http.Request) {
 	req.ParseForm()
 
 	formNumber, id := getId(req)
-//	teacherId := models.GetTeacherFromSession(req).Id
+	teacherId := models.GetTeacherFromSession(req).Id
 
+	decoder := schema.NewDecoder()
+
+	var err error
 	switch formNumber {
 	case 2:
 		//form := &forms.TeacherCreateReportFormEntry2}
 		//err = decoder.Decode(form, req.PostForm)
 		//form.Create(teacherId)
+	case 4:
+		form := &forms.TeacherCreateReportFormEntry4{}
+		err = decoder.Decode(form, req.PostForm)
+		form.Update(teacherId)
 	default:
 		unknownErr := "Unknown form: " + id
 		panic(unknownErr)
 	}
 
-
+	if err != nil {
+		panic(err)
+	}
 }
 
 func GetTeacherCreateReport1Edit(resp http.ResponseWriter, req *http.Request) {

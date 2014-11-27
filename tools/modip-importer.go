@@ -6,6 +6,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/kokeroulis/modip/db"
+	"github.com/kokeroulis/modip/models"
 	"io/ioutil"
 )
 
@@ -81,14 +82,18 @@ func createTeachers(db *sql.DB, teachers []teacher, departmentId int) {
 
 		if !checkQuery(err) {
 			// teacher doesn't exist, create one
-			query := `INSERT INTO teacher (name, email, password, department)
-					  VALUES ($1, $2, $3, $4)
-					  RETURNING id, name, email, password, department`
-			err := db.QueryRow(query, teacher.Name, teacher.Email, teacher.Password, departmentId).Scan(&teacherId, &teacherName, &teacherEmail, &teacherPassword, &teacherDepartment)
-			if !checkQuery(err) {
-				fmt.Println("Error %s", err)
-				panic("WRONG QUERY!")
+
+			d := models.Department{
+				Id: departmentId,
 			}
+
+			t := models.Teacher{
+				Name:       teacher.Name,
+				Email:      teacher.Email,
+				Department: d,
+			}
+
+			t.Create(teacher.Password)
 		}
 	}
 }
