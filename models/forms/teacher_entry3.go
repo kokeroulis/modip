@@ -13,15 +13,6 @@ type TeacherCreateReportFormEntry3 struct {
 }
 
 
-=============== Start create table
-CREATE TABLE TeacherCreateReportFormEntry3 (
-	lesson int references lesson(id) on delete cascade,
-	ereunikita_programmata_kai_erga_episthmonikos_ypeu8inos int,
-	ereunikita_programmata_kai_erga_apli_summetoxi int,
-	ereunikita_programmata_kai_erga_summetoxi_eksoterikon_sunergaton text,
-	ereunikita_programmata_kai_erga_summetoxi_foithton text
-)
-=============== End Create table
 =============== Start create update func
 func (f *TeacherCreateReportFormEntry3) Update(lessonId int) {
 query := `UPDATE TeacherCreateReportFormEntry3 SET
@@ -29,14 +20,14 @@ query := `UPDATE TeacherCreateReportFormEntry3 SET
 	ereunikita_programmata_kai_erga_apli_summetoxi = $2,
 	ereunikita_programmata_kai_erga_summetoxi_eksoterikon_sunergaton = $3,
 	ereunikita_programmata_kai_erga_summetoxi_foithton = $4
-WHERE lesson = $`
+WHERE lesson = $5`
 
 _, err := Db.Database.Exec(query,
 	Field1,
 	Field2,
 	Field3,
 	Field4
-)
+    lessonId)
 
 Db.CheckQueryWithNoRows(err, query)
 }
