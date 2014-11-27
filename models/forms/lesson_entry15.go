@@ -32,12 +32,11 @@ query := `SELECT
 	apopsi_spoudaston_gia_to_ma8ima_yparxei_diadikasia_aksiologisis_tou_ma8imatos,
 	apopsi_spoudaston_gia_to_ma8ima_pws_aksiopoiountai_auta_ta_apotelesmata
 FROM LessonCreateReportFormEntry15
-WHERE lesson = $`
+WHERE lesson = $1`
 
-err := Db.Database.QueryRow(query, TODO).
+err := Db.Database.QueryRow(query, lessonId).
 	Scan(&f.Field1,
-		&f.Field2
-)
+		&f.Field2)
 
 Db.CheckQueryWithNoRows(err, query)
 }
