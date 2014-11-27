@@ -1,7 +1,7 @@
 package forms
 
 import (
-	 _"github.com/kokeroulis/modip/db"
+	_ "github.com/kokeroulis/modip/db"
 )
 
 type LessonCreateReportFormEntry12 struct {
@@ -11,38 +11,34 @@ type LessonCreateReportFormEntry12 struct {
 	Field3 string `schema:"ekpedeutika_mesa_anafora_elleipseon_ekpedeutikon_meson"`
 }
 
-
-=============== Start create update func
 func (f *lessoncreatereportformentry12) Update(lessonId int) {
-query := `UPDATE lessoncreatereportformentry12 SET
+	query := `UPDATE lessoncreatereportformentry12 SET
 	ekpedeutika_mesa_xrhsh_ekpedeutikon_meson = $1,
 	ekpedeutika_mesa_eparkeia_ekpedeutikon_meson = $2,
 	ekpedeutika_mesa_anafora_elleipseon_ekpedeutikon_meson = $3
-WHERE lesson = $4`
+	WHERE lesson = $4`
 
-_, err := Db.Database.Exec(query,
-	field1,
-	field2,
-	field3
-    lessonId)
+	_, err := Db.Database.Exec(query,
+		field1,
+		field2,
+		field3,
+		lessonId)
 
-Db.CheckQueryWithNoRows(err, query)
+	Db.CheckQueryWithNoRows(err, query)
 }
-=============== End Create update func
-=============== Start create select func
-func (f *lessoncreatereportformentry12) Load(lessonId int) {
-query := `SELECT
-	ekpedeutika_mesa_xrhsh_ekpedeutikon_meson,
-	ekpedeutika_mesa_eparkeia_ekpedeutikon_meson,
-	ekpedeutika_mesa_anafora_elleipseon_ekpedeutikon_meson
-FROM lessoncreatereportformentry12
-WHERE lesson = $1`
 
-err := Db.Database.QueryRow(query, lessonId).
-	Scan(&f.field1,
+func (f *lessoncreatereportformentry12) Load(lessonId int) {
+	query := `SELECT
+			ekpedeutika_mesa_xrhsh_ekpedeutikon_meson,
+			ekpedeutika_mesa_eparkeia_ekpedeutikon_meson,
+			ekpedeutika_mesa_anafora_elleipseon_ekpedeutikon_meson
+		FROM lessoncreatereportformentry12
+		WHERE lesson = $1`
+
+	err := Db.Database.QueryRow(query, lessonId).
+		Scan(&f.field1,
 		&f.field2,
 		&f.field3)
 
-Db.CheckQueryWithNoRows(err, query)
+	Db.CheckQueryWithNoRows(err, query)
 }
-=============== End Create select func
