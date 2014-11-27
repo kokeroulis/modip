@@ -32,7 +32,7 @@ query := `UPDATE TeacherCreateReportFormEntry2 SET
 	anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_brabeia = $8,
 	anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_timitikoi_titloi = $9,
 	anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_epeksigiseis = $10
-WHERE lesson = $`
+WHERE lesson = $11`
 
 _, err := Db.Database.Exec(query,
 	Field1,
@@ -45,7 +45,7 @@ _, err := Db.Database.Exec(query,
 	Field8,
 	Field9,
 	Field10
-)
+    lessonId)
 
 Db.CheckQueryWithNoRows(err, query)
 }
