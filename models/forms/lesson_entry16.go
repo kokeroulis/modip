@@ -28,11 +28,10 @@ func (f *LessonCreateReportFormEntry16) Load(lessonId int) {
 query := `SELECT
 	sxolia_sxolia
 FROM LessonCreateReportFormEntry16
-WHERE lesson = $`
+WHERE lesson = $1`
 
-err := Db.Database.QueryRow(query, TODO).
-	Scan(&f.Field1
-)
+err := Db.Database.QueryRow(query, lessonId).
+	Scan(&f.Field1)
 
 Db.CheckQueryWithNoRows(err, query)
 }
