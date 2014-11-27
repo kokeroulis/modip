@@ -11,6 +11,20 @@ type LessonCreateReportFormEntry2 struct {
 	Field3  string `schema:"lesson_didaskalia_typos_ma8iomatos3"`
 	Field4  string `schema:"lesson_didaskalia_typos_ma8iomatos4"`
 	Field5  string `schema:"lesson_didaskalia_typos_ma8iomatos5"`
+    Field6 string  `schema:"lesson_didaskalia_wres_didaskaliasi_8"`
+    Field7 string  `schema:"lesson_didaskalia_wres_didaskalias_AP"`
+    Field8 string  `schema:"lesson_didaskalia_wres_didaskalias_E"`
+    Field9 string  `schema:"lesson_didaskalia_monadesECTS_8AP"`
+    Field10 string `schema:"lesson_didaskalia_monadesECTS_E"`
+    Field11 string `schema:"lesson_didaskalia_wres_didaskalias_ana_bdomada"`
+    Field12 bool   `schema:"lesson_didaskalia_wres_ergasthriou_askhshs"`
+    Field13 string `schema:"lesson_didaskalia_wres_ergasthriou_ana_bdomada"`
+    Field14 string `schema:"lesson_didaskalia_problepomenes_wres_ergasthriou_ana_eksamino"`
+    Field15 string `schema:"lesson_didaskalia_problepomenes_wres_didaskalias_mikron_omadon_ana_eksamino"`
+    Field16 string `schema:"lesson_didaskalia_problepomenes_wres_didaskalias_ana_eksamino_alli"`
+    Field17 bool   `schema:"lesson_didaskalia_pollapli_bibiografia"`
+    Field18 bool   `schema:"lesson_didaskalia_diati8ete_ergasia_proodos"`
+    Field19 bool   `schema:"lesson_didaskalia_ypoxreotiki_ergasia_proodos"`
 }
 
 func (f *LessonCreateReportFormEntry2) Update(lessonId int) {
