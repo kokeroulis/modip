@@ -19,21 +19,6 @@ type TeacherCreateReportFormEntry2 struct {
 }
 
 
-=============== Start create table
-CREATE TABLE TeacherCreateReportFormEntry2 (
-	lesson int references lesson(id) on delete cascade,
-	anagnorish_tou_episthmonikou_kai_allou_ergou_eteroanafores int,
-	anagnorish_tou_episthmonikou_kai_allou_ergou_anafores_tou_eidikou_episthmonikou_typou int,
-	anagnorish_tou_episthmonikou_kai_allou_ergou_summetoxes_se_epitropes_episthmonikon_sunedrion int,
-	anagnorish_tou_episthmonikou_kai_allou_ergou_summetoxes_se_suntaktikes_epitropes_episthmonikon_sunedrion int,
-	anagnorish_tou_episthmonikou_kai_allou_ergou_kritis_se_episthmonika_periodika int,
-	anagnorish_tou_episthmonikou_kai_allou_ergou_proskliseis_gia_dialekseis_se_die8nh_sunedria int,
-	anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_euresitexnias int,
-	anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_brabeia int,
-	anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_timitikoi_titloi int,
-	anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_epeksigiseis text
-)
-=============== End Create table
 =============== Start create update func
 func (f *TeacherCreateReportFormEntry2) Update(lessonId int) {
 query := `UPDATE TeacherCreateReportFormEntry2 SET
