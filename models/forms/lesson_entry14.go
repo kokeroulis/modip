@@ -26,7 +26,7 @@ query := `UPDATE LessonCreateReportFormEntry14 SET
 	katanomi_ba8mon_spoudaston_7_84 = $5,
 	katanomi_ba8mon_spoudaston_85_10 = $6,
 	katanomi_ba8mon_spoudaston_mesos_oros_ba8mologias_sunolo_spoudaston = $7
-WHERE lesson = $`
+WHERE lesson = $8`
 
 _, err := Db.Database.Exec(query,
 	Field1,
@@ -36,7 +36,7 @@ _, err := Db.Database.Exec(query,
 	Field5,
 	Field6,
 	Field7
-)
+    lessonId)
 
 Db.CheckQueryWithNoRows(err, query)
 }
