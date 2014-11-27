@@ -36,13 +36,12 @@ query := `SELECT
 	ekpedeutika_mesa_eparkeia_ekpedeutikon_meson,
 	ekpedeutika_mesa_anafora_elleipseon_ekpedeutikon_meson
 FROM lessoncreatereportformentry12
-WHERE lesson = $`
+WHERE lesson = $1`
 
-err := Db.Database.QueryRow(query, TODO).
+err := Db.Database.QueryRow(query, lessonId).
 	Scan(&f.field1,
 		&f.field2,
-		&f.field3
-)
+		&f.field3)
 
 Db.CheckQueryWithNoRows(err, query)
 }
