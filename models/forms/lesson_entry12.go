@@ -18,13 +18,13 @@ query := `UPDATE lessoncreatereportformentry12 SET
 	ekpedeutika_mesa_xrhsh_ekpedeutikon_meson = $1,
 	ekpedeutika_mesa_eparkeia_ekpedeutikon_meson = $2,
 	ekpedeutika_mesa_anafora_elleipseon_ekpedeutikon_meson = $3
-WHERE lesson = $`
+WHERE lesson = $4`
 
 _, err := Db.Database.Exec(query,
 	field1,
 	field2,
 	field3
-)
+    lessonId)
 
 Db.CheckQueryWithNoRows(err, query)
 }
