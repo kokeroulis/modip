@@ -89,6 +89,10 @@ func TeacherCreateReport(resp http.ResponseWriter, req *http.Request) {
 		//form := &forms.TeacherCreateReportFormEntry2}
 		//err = decoder.Decode(form, req.PostForm)
 		//form.Create(teacherId)
+	case 4:
+		form := &forms.TeacherCreateReportFormEntry4{}
+		err = decoder.Decode(form, req.PostForm)
+		form.Update(teacherId)
 	default:
 		unknownErr := "Unknown form: " + id
 		panic(unknownErr)
