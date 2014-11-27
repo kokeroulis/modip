@@ -1,7 +1,7 @@
 package forms
 
 import (
-	_"github.com/kokeroulis/modip/db"
+	"github.com/kokeroulis/modip/db"
 )
 
 type LessonCreateReportFormEntry10 struct {
@@ -16,22 +16,8 @@ type LessonCreateReportFormEntry10 struct {
 	Field8 string `schema:"dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_"`
 }
 
-=============== Start create table
-CREATE TABLE LessonCreateReportFormEntry10 (
-	lesson int references lesson(id) on delete cascade,
-	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_ai8ouses_didaskalias_pou_xrisimopoiountai text,
-	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_ergasthria_pou_xrhsimopoiountai_gia_to_sugkekrimeno_ma8ima text,
-	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_einai_dia8esima_ta_ergasthria_tou_ma8imatos_gia_xrisi_ektos_programmatismenon_wrwn text,
-	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_spoudasthria text,
-	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_xrhsimopoihtai_ekpedeutiko_logismiko_kai_poio text,
-	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_yparxei_ikanopoihtiki_ypostiriksi_tou_ma8imatos_apo_tin_biblio8iki text,
-	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_pws_krinete_sunolika_tin_dia8esimi_ekpedeutiki_ypodomi text,
-	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_ text
-)
-=============== End Create table
-=============== Start create update func
 func (f *LessonCreateReportFormEntry10) Update(lessonId int) {
-query := `UPDATE LessonCreateReportFormEntry10 SET 
+query := `UPDATE LessonCreateReportFormEntry10 SET
 	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_ai8ouses_didaskalias_pou_xrisimopoiountai = $1,
 	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_ergasthria_pou_xrhsimopoiountai_gia_to_sugkekrimeno_ma8ima = $2,
 	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_einai_dia8esima_ta_ergasthria_tou_ma8imatos_gia_xrisi_ektos_programmatismenon_wrwn = $3,
@@ -42,23 +28,22 @@ query := `UPDATE LessonCreateReportFormEntry10 SET
 	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_ = $8
 WHERE lesson = $`
 
-_, err := Db.Database.Exec(query, 
-	Field1, 
-	Field2, 
-	Field3, 
-	Field4, 
-	Field5, 
-	Field6, 
-	Field7, 
-	Field8
-)
+_, err := Db.Database.Exec(query,
+	f.Field1,
+	f.Field2,
+	f.Field3,
+	f.Field4,
+	f.Field5,
+	f.Field6,
+	f.Field7,
+	f.Field8,
+	lessonId)
 
 Db.CheckQueryWithNoRows(err, query)
 }
-=============== End Create update func
-=============== Start create select func
+
 func (f *LessonCreateReportFormEntry10) Load(lessonId int) {
-query := `SELECT 
+query := `SELECT
 	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_ai8ouses_didaskalias_pou_xrisimopoiountai,
 	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_ergasthria_pou_xrhsimopoiountai_gia_to_sugkekrimeno_ma8ima,
 	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_einai_dia8esima_ta_ergasthria_tou_ma8imatos_gia_xrisi_ektos_programmatismenon_wrwn,
@@ -68,9 +53,9 @@ query := `SELECT
 	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_pws_krinete_sunolika_tin_dia8esimi_ekpedeutiki_ypodomi,
 	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_
 FROM LessonCreateReportFormEntry10
-WHERE lesson = $`
+WHERE lesson = $10`
 
-err := Db.Database.QueryRow(query, TODO). 
+err := Db.Database.QueryRow(query, lessonId).
 	Scan(&f.Field1,
 		&f.Field2,
 		&f.Field3,
@@ -78,9 +63,7 @@ err := Db.Database.QueryRow(query, TODO).
 		&f.Field5,
 		&f.Field6,
 		&f.Field7,
-		&f.Field8
-)
+		&f.Field8)
 
 Db.CheckQueryWithNoRows(err, query)
 }
-=============== End Create select func
