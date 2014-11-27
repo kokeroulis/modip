@@ -21,15 +21,15 @@ query := `UPDATE LessonCreateReportFormEntry11 SET
 	aksiopoihsh_texnologion_pliroforikhs_kai_epikoinonion_xrhsimopoiountai_TPE_sthn_ergasthriaki_ekpedeusi = $3,
 	aksiopoihsh_texnologion_pliroforikhs_kai_epikoinonion_xrhsimopoiountai_TPE_sthn_aksiologisi_ton_spoudaston_pws = $4,
 	aksiopoihsh_texnologion_pliroforikhs_kai_epikoinonion_xrhsimopoiountai_TPT_sthn_epikoinonia_sas_me_tous_spoudastes_pws = $5
-WHERE lesson = $`
+WHERE lesson = $6`
 
 _, err := Db.Database.Exec(query,
 	Field1,
 	Field2,
 	Field3,
 	Field4,
-	Field5
-)
+	Field5,
+    lessonId)
 
 Db.CheckQueryWithNoRows(err, query)
 }
