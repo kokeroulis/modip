@@ -9,21 +9,15 @@ type TeacherCreateReportFormEntry5 struct {
 	Field1 string        `schema:"sundesi_me_thn_koinonia_sundesi_me_tin_koinonia"`
 }
 
-=============== Start create table
-CREATE TABLE  (
-	lesson int references lesson(id) on delete cascade,
-	sundesi_me_thn_koinonia_sundesi_me_tin_koinonia text
-)
-=============== End Create table
 =============== Start create update func
 func (f *) Update(lessonId int) {
 query := `UPDATE  SET
 	sundesi_me_thn_koinonia_sundesi_me_tin_koinonia = $1
-WHERE lesson = $`
+WHERE lesson = $2`
 
 _, err := Db.Database.Exec(query,
 	Field1
-)
+    lessonId)
 
 Db.CheckQueryWithNoRows(err, query)
 }
