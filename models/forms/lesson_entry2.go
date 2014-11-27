@@ -11,10 +11,10 @@ type LessonCreateReportFormEntry2 struct {
 	Field3  string `schema:"lesson_didaskalia_typos_ma8iomatos3"`
 	Field4  string `schema:"lesson_didaskalia_typos_ma8iomatos4"`
 	Field5  string `schema:"lesson_didaskalia_typos_ma8iomatos5"`
-    Field6 string  `schema:"lesson_didaskalia_wres_didaskaliasi_8"`
-    Field7 string  `schema:"lesson_didaskalia_wres_didaskalias_AP"`
-    Field8 string  `schema:"lesson_didaskalia_wres_didaskalias_E"`
-    Field9 string  `schema:"lesson_didaskalia_monadesECTS_8AP"`
+    Field6  string `schema:"lesson_didaskalia_wres_didaskaliasi_8"`
+    Field7  string `schema:"lesson_didaskalia_wres_didaskalias_AP"`
+    Field8  string `schema:"lesson_didaskalia_wres_didaskalias_E"`
+    Field9  string `schema:"lesson_didaskalia_monadesECTS_8AP"`
     Field10 string `schema:"lesson_didaskalia_monadesECTS_E"`
     Field11 string `schema:"lesson_didaskalia_wres_didaskalias_ana_bdomada"`
     Field12 bool   `schema:"lesson_didaskalia_wres_ergasthriou_askhshs"`
