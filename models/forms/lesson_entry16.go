@@ -14,11 +14,11 @@ type LessonCreateReportFormEntry16 struct {
 func (f *LessonCreateReportFormEntry16) Update(lessonId int) {
 query := `UPDATE LessonCreateReportFormEntry16 SET
 	sxolia_sxolia = $1
-WHERE lesson = $`
+WHERE lesson = $2`
 
 _, err := Db.Database.Exec(query,
 	Field1
-)
+    lessonId)
 
 Db.CheckQueryWithNoRows(err, query)
 }
