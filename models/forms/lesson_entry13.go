@@ -9,12 +9,6 @@ type LessonCreateReportFormEntry13 struct {
 	Field1 string  `schema:"statistoika_stoixeia_koinopoieitai_katologos_ton_spoudaston_pou_einai_grammenoi_sto_ma8ima"`
 }
 
-=============== Start create table
-CREATE TABLE LessonCreateReportFormEntry13 (
-	lesson int references lesson(id) on delete cascade,
-	statistoika_stoixeia_koinopoieitai_katologos_ton_spoudaston_pou_einai_grammenoi_sto_ma8ima text
-)
-=============== End Create table
 =============== Start create update func
 func (f *LessonCreateReportFormEntry13) Update(lessonId int) {
 query := `UPDATE LessonCreateReportFormEntry13 SET

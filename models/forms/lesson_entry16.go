@@ -10,12 +10,6 @@ type LessonCreateReportFormEntry16 struct {
 }
 
 
-=============== Start create table
-CREATE TABLE LessonCreateReportFormEntry16 (
-	lesson int references lesson(id) on delete cascade,
-	sxolia_sxolia text
-)
-=============== End Create table
 =============== Start create update func
 func (f *LessonCreateReportFormEntry16) Update(lessonId int) {
 query := `UPDATE LessonCreateReportFormEntry16 SET

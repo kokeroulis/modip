@@ -12,14 +12,6 @@ type LessonCreateReportFormEntry12 struct {
 }
 
 
-=============== Start create table
-CREATE TABLE lessoncreatereportformentry12 (
-	lesson int references lesson(id) on delete cascade,
-	ekpedeutika_mesa_xrhsh_ekpedeutikon_meson boolean,
-	ekpedeutika_mesa_eparkeia_ekpedeutikon_meson boolean,
-	ekpedeutika_mesa_anafora_elleipseon_ekpedeutikon_meson text
-)
-=============== End Create table
 =============== Start create update func
 func (f *lessoncreatereportformentry12) Update(lessonId int) {
 query := `UPDATE lessoncreatereportformentry12 SET

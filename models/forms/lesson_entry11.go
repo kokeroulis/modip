@@ -13,16 +13,6 @@ type LessonCreateReportFormEntry11 struct {
     Field5 string   `schema:"aksiopoihsh_texnologion_pliroforikhs_kai_epikoinonion_xrhsimopoiountai_TPT_sthn_epikoinonia_sas_me_tous_spoudastes_pws"`
 }
 
-=============== Start create table
-CREATE TABLE LessonCreateReportFormEntry11 (
-	lesson int references lesson(id) on delete cascade,
-	aksiopoihsh_texnologion_pliroforikhs_kai_epikoinonion_xrhsimopoiountai_TPE_sth_didaskalia_tou_ma8imatos text,
-	aksiopoihsh_texnologion_pliroforikhs_kai_epikoinonion_xrhsimopoiountai_ma8isiaka_boh8imata_basismena_se_TPE text,
-	aksiopoihsh_texnologion_pliroforikhs_kai_epikoinonion_xrhsimopoiountai_TPE_sthn_ergasthriaki_ekpedeusi text,
-	aksiopoihsh_texnologion_pliroforikhs_kai_epikoinonion_xrhsimopoiountai_TPE_sthn_aksiologisi_ton_spoudaston_pws text,
-	aksiopoihsh_texnologion_pliroforikhs_kai_epikoinonion_xrhsimopoiountai_TPT_sthn_epikoinonia_sas_me_tous_spoudastes_pws text
-)
-=============== End Create table
 =============== Start create update func
 func (f *LessonCreateReportFormEntry11) Update(lessonId int) {
 query := `UPDATE LessonCreateReportFormEntry11 SET

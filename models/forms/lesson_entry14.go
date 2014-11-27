@@ -16,18 +16,6 @@ type LessonCreateReportFormEntry14 struct {
 }
 
 
-=============== Start create table
-CREATE TABLE LessonCreateReportFormEntry14 (
-	lesson int references lesson(id) on delete cascade,
-	katanomi_ba8mon_spoudaston_0_39 int,
-	katanomi_ba8mon_spoudaston_4_49 int,
-	katanomi_ba8mon_spoudaston_5_59 int,
-	katanomi_ba8mon_spoudaston_6_69 int,
-	katanomi_ba8mon_spoudaston_7_84 int,
-	katanomi_ba8mon_spoudaston_85_10 int,
-	katanomi_ba8mon_spoudaston_mesos_oros_ba8mologias_sunolo_spoudaston int
-)
-=============== End Create table
 =============== Start create update func
 func (f *LessonCreateReportFormEntry14) Update(lessonId int) {
 query := `UPDATE LessonCreateReportFormEntry14 SET
