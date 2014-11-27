@@ -42,6 +42,14 @@ func setupRoutes(n *negroni.Negroni) {
 
 	router.Handle("/teacher/report/{id:[2-5]}", authorize{TeacherCreateReport}).Methods("POST")
 
+	// Α.Δ. Ερευν. Προγραμ.
+	router.Handle("/research/program", authorize{GetResearchProgram}).Methods("GET")
+	router.Handle("/research/program/create/report", authorize{GetResearchProgramCreateReport}).Methods("GET")
+	router.Handle("/research/program/create/report", authorize{ResearchProgramCreateReport}).Methods("POST")
+
+	router.Handle("/research/program/edit/report/{id:[0-9]}", authorize{GetResearchProgramEditReport}).Methods("GET")
+	router.Handle("/research/program/edit/report/{id:[0-9]}", authorize{ResearchProgramEditReport}).Methods("POST")
+
 	// Α.Δ. Μαθημάτων Π.Π.Σ.
 	router.Handle("/lesson/list/pre/degree", authorize{LessonListPreDegree}).Methods("GET")
 	router.Handle("/lesson/list/pre/degree/{id:[1-9]+}", authorize{LessonListPreDegreeDepartment}).Methods("GET")
