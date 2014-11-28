@@ -38,15 +38,16 @@ func (f *TeacherCreateReportFormEntry1) Update() {
 			  SET author = $1, title = $2, is_magazine = $3,
 			  publisher = $4,
 			  publication_date = $5, type = $6
-			  WHERE id = $2`
+			  WHERE id = $7`
 
-	err := Db.Database.QueryRow(query, f.Id).
-		Scan(&f.Field1,
-			 &f.Field2,
-			 &f.Field3,
-			 &f.Field4,
-			 &f.Field5,
-			 &f.Field6)
+	_, err := Db.Database.Exec(query,
+							f.Field1,
+							f.Field2,
+							f.Field3,
+							f.Field4,
+							f.Field5,
+							f.Field6,
+							f.Id)
 
 	Db.CheckQueryWithNoRows(err, query)
 }
