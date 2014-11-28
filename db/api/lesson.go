@@ -8,7 +8,7 @@ DECLARE
 	lessonId int;
 BEGIN
 	PERFORM * FROM lesson
-	WHERE id = lessonId AND department = departmentId;
+	WHERE name = lessonName AND department = departmentId;
 
 	IF FOUND THEN
 		alreadyExists := TRUE;

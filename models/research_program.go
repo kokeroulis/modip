@@ -7,10 +7,10 @@ import (
 type ResearchProgramCreateReportForm struct {
     //Α.Δ. Ερευν. Προγραμ.
 	Field1  string `schema:"analutika_stoixeia_programmatos_titlos_programmatos"`
-	Field2  bool `schema:"analutika_stoixeia_programmatos_ylopoihsh"`
+	Field2  bool   `schema:"analutika_stoixeia_programmatos_ylopoihsh"`
 	Field3  string `schema:"analutika_stoixeia_programmatos_foreas_xrimatodotisis"`
-	Field4  int `schema:"analutika_stoixeia_programmatos_proupologismos"`
-	Field5  int `schema:"analutika_stoixeia_programmatos_diarkia"`
+	Field4  int    `schema:"analutika_stoixeia_programmatos_proupologismos"`
+	Field5  int    `schema:"analutika_stoixeia_programmatos_diarkia"`
 	Field6  string `schema:"analutika_stoixeia_programmatos_hmerominia"`
 	Field7  string `schema:"analutika_stoixeia_programmatos_sxolia"`
 }
@@ -98,10 +98,10 @@ func ListAllResearchPrograms(teacherId int) []ResearchProgramCreateReportForm {
 	return formList
 }
 
-func (r *ResearchProgramCreateReportForm) Create() {
+func (r *ResearchProgramCreateReportForm) Create(teacherId int) {
 	var alreadyExists bool
 	query := `SELECT alreadyExists
-			  FROM research_program_create($1, $2, $3, $4, $5, $6, $7)`
+			  FROM research_program_create($1, $2, $3, $4, $5, $6, $7, $8)`
 
 	err := Db.Database.QueryRow(query,
               r.Field1,
@@ -110,7 +110,8 @@ func (r *ResearchProgramCreateReportForm) Create() {
               r.Field4,
               r.Field5,
               r.Field6,
-              r.Field7).
+              r.Field7,
+              teacherId).
 		Scan(&alreadyExists)
 
 	Db.CheckQuery(err, query)

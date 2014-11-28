@@ -4,7 +4,6 @@ import (
 	"github.com/kokeroulis/modip/models"
 	"github.com/gorilla/schema"
 	"net/http"
-    "fmt"
 )
 
 func GetResearchProgram(resp http.ResponseWriter, req *http.Request) {
@@ -27,26 +26,15 @@ func ResearchProgramCreateReport(resp http.ResponseWriter, req *http.Request) {
 		panic(err)
 	}
 
-	form := &models.ResearchProgramCreateReportForm{}
+	r := &models.ResearchProgramCreateReportForm{}
 	decoder := schema.NewDecoder()
-	err = decoder.Decode(form, req.PostForm)
+	err = decoder.Decode(r, req.PostForm)
 
 	if err != nil {
 		panic(err)
 	}
 
-    fmt.Println(form)
-	l := models.ResearchProgramCreateReportForm{
-        analutika_stoixeia_programmatos_titlos_programmatos : form.analutika_stoixeia_programmatos_titlos_programmatos,
-        analutika_stoixeia_programmatos_ylopoihsh : form.analutika_stoixeia_programmatos_ylopoihsh,
-        analutika_stoixeia_programmatos_foreas_xrimatodotisis : form.analutika_stoixeia_programmatos_foreas_xrimatodotisis,
-        analutika_stoixeia_programmatos_proupologismos : form.analutika_stoixeia_programmatos_proupologismos,
-        analutika_stoixeia_programmatos_diarkia : form.analutika_stoixeia_programmatos_diarkia,
-        analutika_stoixeia_programmatos_hmerominia : form.analutika_stoixeia_programmatos_hmerominia,
-        analutika_stoixeia_programmatos_sxolia : form.analutika_stoixeia_programmatos_sxolia,
-	}
-
-	l.Create()
+	r.Create(models.GetTeacherFromSession(req).Id)
 
 	http.Redirect(resp, req, "/research/program", http.StatusMovedPermanently)
 }
