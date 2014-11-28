@@ -24,10 +24,10 @@
       <label>Φορέας Χρηματοδότησης
         <select name="analutika_stoixeia_programmatos_foreas_xrimatodotisis">
           <option >- Κανένα -</option>
-          <option value="Εθνικός (Δημόσιος)">Εθνικός (Δημόσιος)</option>
-          <option value="Εθνικός (Ιδιωτικός)">Εθνικός (Ιδιωτικός)</option>
-          <option value="Διεθνής (Δημόσιος)">Διεθνής (Δημόσιος)</option>
-          <option value="Διεθνής (Ιδιωτικός)">Διεθνής (Ιδιωτικός)</option>
+          <option {{if eq .Field3 "Εθνικός (Δημόσιος)"}} selected {{end}} value="Εθνικός (Δημόσιος)">Εθνικός (Δημόσιος)</option>
+          <option {{if eq .Field3 "Εθνικός (Ιδιωτικός)"}} selected {{end}} value="Εθνικός (Ιδιωτικός)">Εθνικός (Ιδιωτικός)</option>
+          <option {{if eq .Field3 "Διεθνής (Δημόσιος)"}} selected {{end}} value="Διεθνής (Δημόσιος)">Διεθνής (Δημόσιος)</option>
+          <option {{if eq .Field3 "Διεθνής (Ιδιωτικός)"}} selected {{end}} value="Διεθνής (Ιδιωτικός)">Διεθνής (Ιδιωτικός)</option>
         </select>
       </label>
     </div>
