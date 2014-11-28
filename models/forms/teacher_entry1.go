@@ -35,9 +35,9 @@ func (f *TeacherCreateReportFormEntry1) Create(teacherId int) {
 
 func (f *TeacherCreateReportFormEntry1) Update() {
 	query := `UPDATE TeacherCreateReportFormEntry1
-			  SET author = $1, title = $2, is_magazine $3,
+			  SET author = $1, title = $2, is_magazine = $3,
 			  publisher = $4,
-			  publication_date = $5, type = $5
+			  publication_date = $5, type = $6
 			  WHERE id = $2`
 
 	err := Db.Database.QueryRow(query, f.Id).
