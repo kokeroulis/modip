@@ -14,7 +14,7 @@ func (f *LessonCreateReportFormEntry4) Update(lessonId int) {
 	query := `UPDATE LessonCreateReportFormEntry4 SET
 			  lesson_didaktea_yli_anaprosarmogi_mathimatos = $1,
 			  lesson_didaktea_yli_epikalipsi_ylis_me_alla_ma8imata = $2
-			  WHERE lesson = $`
+			  WHERE lesson = $3`
 
 	_, err := Db.Database.Exec(query,
 									f.Field1,
