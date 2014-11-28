@@ -42,9 +42,12 @@ func ResearchProgramCreateReport(resp http.ResponseWriter, req *http.Request) {
 
 func GetResearchProgramEditReport(resp http.ResponseWriter, req *http.Request) {
 	var helpers []string
-	var data interface{}
 
-	RenderTemplate("research_program/edit_report", helpers, resp, data)
+    r := &models.ResearchProgramCreateReportForm{}
+    researchProgramId, _ := getId(req)
+    r.Load(researchProgramId)
+
+	RenderTemplate("research_program/edit_report", helpers, resp, r)
 }
 
 func ResearchProgramEditReport(resp http.ResponseWriter, req *http.Request) {
