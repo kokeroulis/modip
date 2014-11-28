@@ -33,8 +33,22 @@ func (f *LessonCreateReportFormEntry2) Update(lessonId int) {
 			 lesson_didaskalia_typos_ma8iomatos2 = $2,
 			 lesson_didaskalia_typos_ma8iomatos3 = $3,
 			 lesson_didaskalia_typos_ma8iomatos4 = $4,
-			 lesson_didaskalia_typos_ma8iomatos5 = $5
-			 WHERE lesson = $6`
+			 lesson_didaskalia_typos_ma8iomatos5 = $5,
+             lesson_didaskalia_typos_ma8iomatos6 = $6,
+             lesson_didaskalia_typos_ma8iomatos7 = $7,
+             lesson_didaskalia_typos_ma8iomatos8 = $8,
+             lesson_didaskalia_typos_ma8iomatos9 = $9,
+             lesson_didaskalia_typos_ma8iomatos10 = $10,
+             lesson_didaskalia_typos_ma8iomatos11 = $11,
+             lesson_didaskalia_typos_ma8iomatos12 = $12,
+             lesson_didaskalia_typos_ma8iomatos13 = $13,
+             lesson_didaskalia_typos_ma8iomatos114 = $14,
+             lesson_didaskalia_typos_ma8iomatos115 = $15,
+             lesson_didaskalia_typos_ma8iomatos116 = $16,
+             lesson_didaskalia_typos_ma8iomatos117 = $17,
+             lesson_didaskalia_typos_ma8iomatos18 = 18,
+             lesson_didaskalia_typos_ma8iomatos1 = 19
+			 WHERE lesson = $20`
 
 	_, err := Db.Database.Exec(query,
 								f.Field1,
@@ -42,6 +56,20 @@ func (f *LessonCreateReportFormEntry2) Update(lessonId int) {
 								f.Field3,
 								f.Field4,
 								f.Field5,
+                                f.Field6,
+                                f.Field7,
+                                f.Field8,
+                                f.Field9,
+                                f.Field10,
+                                f.Field11,
+                                f.Field12,
+                                f.Field13,
+                                f.Field14,
+                                f.Field15,
+                                f.Field16,
+                                f.Field17,
+                                f.Field18,
+                                f.Field19,
 								lessonId)
 
 	Db.CheckQueryWithNoRows(err, query)
@@ -54,6 +82,20 @@ query := `SELECT
 		 lesson_didaskalia_typos_ma8iomatos3,
 		 lesson_didaskalia_typos_ma8iomatos4,
 		 lesson_didaskalia_typos_ma8iomatos5
+         lesson_didaskalia_typos_ma8iomatos6,
+         lesson_didaskalia_typos_ma8iomatos7,
+         lesson_didaskalia_typos_ma8iomatos8,
+         lesson_didaskalia_typos_ma8iomatos9,
+         lesson_didaskalia_typos_ma8iomatos10,
+         lesson_didaskalia_typos_ma8iomatos11,
+         lesson_didaskalia_typos_ma8iomatos12,
+         lesson_didaskalia_typos_ma8iomatos13,
+         lesson_didaskalia_typos_ma8iomatos14,
+         lesson_didaskalia_typos_ma8iomatos15,
+         lesson_didaskalia_typos_ma8iomatos16,
+         lesson_didaskalia_typos_ma8iomatos17,
+         lesson_didaskalia_typos_ma8iomatos18,
+         lesson_didaskalia_typos_ma8iomatos19
 		 FROM LessonCreateReportFormEntry2
 		 WHERE lesson = $1`
 
@@ -62,7 +104,21 @@ query := `SELECT
 		 &f.Field2,
 		 &f.Field3,
 		 &f.Field4,
-		 &f.Field5)
+		 &f.Field5,
+         $f.Field6,
+         $f.Field7,
+         $f.Field8,
+         $f.Field9,
+         $f.Field10,
+         $f.Field11,
+         $f.Field12,
+         $f.Field13,
+         $f.Field14,
+         $f.Field15,
+         $f.Field16,
+         $f.Field17,
+         $f.Field18,
+         $f.Field19)
 
 	Db.CheckQueryWithNoRows(err, query)
 }
