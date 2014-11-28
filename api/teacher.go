@@ -64,8 +64,13 @@ func GetTeacherCreateReport(resp http.ResponseWriter, req *http.Request) {
         "templates/teacher/arithmos_dimosieuseon.tmpl",
     }
 
-	RenderTemplate("teacher/report", helpers, resp,
-					forms.ListAllTeacherCreateReportForm1(models.GetTeacherFromSession(req).Id))
+	t := forms.TeacherCreateReportForm{
+		TeacherId: models.GetTeacherFromSession(req).Id,
+	}
+
+	t.Load()
+
+	RenderTemplate("teacher/report", helpers, resp, t)
 }
 
 func TeacherCreateReport1(resp http.ResponseWriter, req *http.Request) {
@@ -92,11 +97,19 @@ func TeacherCreateReport(resp http.ResponseWriter, req *http.Request) {
 	var err error
 	switch formNumber {
 	case 2:
-		//form := &forms.TeacherCreateReportFormEntry2}
-		//err = decoder.Decode(form, req.PostForm)
-		//form.Create(teacherId)
+		form := &forms.TeacherCreateReportFormEntry2{}
+		err = decoder.Decode(form, req.PostForm)
+		form.Update(teacherId)
+	case 3:
+		form := &forms.TeacherCreateReportFormEntry3{}
+		err = decoder.Decode(form, req.PostForm)
+		form.Update(teacherId)
 	case 4:
 		form := &forms.TeacherCreateReportFormEntry4{}
+		err = decoder.Decode(form, req.PostForm)
+		form.Update(teacherId)
+	case 5:
+		form := &forms.TeacherCreateReportFormEntry5{}
 		err = decoder.Decode(form, req.PostForm)
 		form.Update(teacherId)
 	default:
