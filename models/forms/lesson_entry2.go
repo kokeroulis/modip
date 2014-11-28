@@ -29,25 +29,25 @@ type LessonCreateReportFormEntry2 struct {
 
 func (f *LessonCreateReportFormEntry2) Update(lessonId int) {
 	query := `UPDATE LessonCreateReportFormEntry2 SET
-			 lesson_didaskalia_typos_ma8iomatos1 = $1,
-			 lesson_didaskalia_typos_ma8iomatos2 = $2,
-			 lesson_didaskalia_typos_ma8iomatos3 = $3,
-			 lesson_didaskalia_typos_ma8iomatos4 = $4,
-			 lesson_didaskalia_typos_ma8iomatos5 = $5,
-             lesson_didaskalia_typos_ma8iomatos6 = $6,
-             lesson_didaskalia_typos_ma8iomatos7 = $7,
-             lesson_didaskalia_typos_ma8iomatos8 = $8,
-             lesson_didaskalia_typos_ma8iomatos9 = $9,
-             lesson_didaskalia_typos_ma8iomatos10 = $10,
-             lesson_didaskalia_typos_ma8iomatos11 = $11,
-             lesson_didaskalia_typos_ma8iomatos12 = $12,
-             lesson_didaskalia_typos_ma8iomatos13 = $13,
-             lesson_didaskalia_typos_ma8iomatos114 = $14,
-             lesson_didaskalia_typos_ma8iomatos115 = $15,
-             lesson_didaskalia_typos_ma8iomatos116 = $16,
-             lesson_didaskalia_typos_ma8iomatos117 = $17,
-             lesson_didaskalia_typos_ma8iomatos18 = 18,
-             lesson_didaskalia_typos_ma8iomatos1 = 19
+             lesson_didaskalia_typos_ma8iomatos1 = $ 1,
+             lesson_didaskalia_typos_ma8iomatos2 = $2,
+             lesson_didaskalia_typos_ma8iomatos3 = $3,
+             lesson_didaskalia_typos_ma8iomatos4 = $4,
+             lesson_didaskalia_typos_ma8iomatos5 = $5,
+             lesson_didaskalia_wres_didaskaliasi_8 = $6,
+             lesson_didaskalia_wres_didaskalias_AP = $7,
+             lesson_didaskalia_wres_didaskalias_E = $8,
+             lesson_didaskalia_monadesECTS_8AP = $9,
+             lesson_didaskalia_monadesECTS_E = $10,
+             lesson_didaskalia_wres_didaskalias_ana_bdomada = $11,
+             lesson_didaskalia_wres_ergasthriou_askhshs = $12,
+             lesson_didaskalia_wres_ergasthriou_ana_bdomada = $13,
+             lesson_didaskalia_problepomenes_wres_ergasthriou_ana_eksamino = $14,
+             lesson_didaskalia_problepomenes_wres_didaskalias_mikron_omadon_ana_eksamino = $15,
+             lesson_didaskalia_problepomenes_wres_didaskalias_ana_eksamino_alli = $16,
+             lesson_didaskalia_pollapli_bibiografia = $17,
+             lesson_didaskalia_diati8ete_ergasia_proodos = $18,
+             lesson_didaskalia_ypoxreotiki_ergasia_proodos = $19
 			 WHERE lesson = $20`
 
 	_, err := Db.Database.Exec(query,
@@ -77,25 +77,25 @@ func (f *LessonCreateReportFormEntry2) Update(lessonId int) {
 
 func (f *LessonCreateReportFormEntry2) Load(lessonId int) {
 query := `SELECT
-		 lesson_didaskalia_typos_ma8iomatos1,
-		 lesson_didaskalia_typos_ma8iomatos2,
-		 lesson_didaskalia_typos_ma8iomatos3,
-		 lesson_didaskalia_typos_ma8iomatos4,
-		 lesson_didaskalia_typos_ma8iomatos5
-         lesson_didaskalia_typos_ma8iomatos6,
-         lesson_didaskalia_typos_ma8iomatos7,
-         lesson_didaskalia_typos_ma8iomatos8,
-         lesson_didaskalia_typos_ma8iomatos9,
-         lesson_didaskalia_typos_ma8iomatos10,
-         lesson_didaskalia_typos_ma8iomatos11,
-         lesson_didaskalia_typos_ma8iomatos12,
-         lesson_didaskalia_typos_ma8iomatos13,
-         lesson_didaskalia_typos_ma8iomatos14,
-         lesson_didaskalia_typos_ma8iomatos15,
-         lesson_didaskalia_typos_ma8iomatos16,
-         lesson_didaskalia_typos_ma8iomatos17,
-         lesson_didaskalia_typos_ma8iomatos18,
-         lesson_didaskalia_typos_ma8iomatos19
+             lesson_didaskalia_typos_ma8iomatos1 = $ 1,
+             lesson_didaskalia_typos_ma8iomatos2 = $2,
+             lesson_didaskalia_typos_ma8iomatos3 = $3,
+             lesson_didaskalia_typos_ma8iomatos4 = $4,
+             lesson_didaskalia_typos_ma8iomatos5 = $5,
+             lesson_didaskalia_wres_didaskaliasi_8 = $6,
+             lesson_didaskalia_wres_didaskalias_AP = $7,
+             lesson_didaskalia_wres_didaskalias_E = $8,
+             lesson_didaskalia_monadesECTS_8AP = $9,
+             lesson_didaskalia_monadesECTS_E = $10,
+             lesson_didaskalia_wres_didaskalias_ana_bdomada = $11,
+             lesson_didaskalia_wres_ergasthriou_askhshs = $12,
+             lesson_didaskalia_wres_ergasthriou_ana_bdomada = $13,
+             lesson_didaskalia_problepomenes_wres_ergasthriou_ana_eksamino = $14,
+             lesson_didaskalia_problepomenes_wres_didaskalias_mikron_omadon_ana_eksamino = $15,
+             lesson_didaskalia_problepomenes_wres_didaskalias_ana_eksamino_alli = $16,
+             lesson_didaskalia_pollapli_bibiografia = $17,
+             lesson_didaskalia_diati8ete_ergasia_proodos = $18,
+             lesson_didaskalia_ypoxreotiki_ergasia_proodos = $19
 		 FROM LessonCreateReportFormEntry2
 		 WHERE lesson = $1`
 
