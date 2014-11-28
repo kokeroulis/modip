@@ -5,7 +5,7 @@ type TeacherCreateReportForm struct {
 	Entry1    []TeacherCreateReportFormEntry1
 	Entry2    TeacherCreateReportFormEntry2
 	Entry3    TeacherCreateReportFormEntry3
-	Entry4    TeacherCreateReportFormEntry3
+	Entry4    TeacherCreateReportFormEntry4
 	Entry5    TeacherCreateReportFormEntry5
 }
 
