@@ -34,7 +34,7 @@ func (f *TeacherCreateReportFormEntry4) Update(teacherId int) {
 				ereunitikes_ypodomes_poso_entatiki_xrish_kanete_ton_sugkrekrimenon_ereunitikon_ypodomon = $6,
 				ereunitikes_ypodomes_ananeosi_ereunitikon_ypodomon = $7,
 				ereunitikes_ypodomes_pws_epidiokete_th_xrimatodothsh_gia_promi8eia = $8,
-				ereunitikes_ypodomes_praktiki_akiopoihsh_ton_ereunitikon_apotelesmaton = $9,
+				ereunitikes_ypodomes_praktiki_akiopoihsh_ton_ereunitikon_apotelesmaton = $9
 			 WHERE id = $10 AND teacher = $11`
 
 	_, err := Db.Database.Exec(query,
@@ -75,7 +75,7 @@ func (f *TeacherCreateReportFormEntry4) Load(teacherId int) {
 				ereunitikes_ypodomes_poso_entatiki_xrish_kanete_ton_sugkrekrimenon_ereunitikon_ypodomon,
 				ereunitikes_ypodomes_ananeosi_ereunitikon_ypodomon,
 				ereunitikes_ypodomes_pws_epidiokete_th_xrimatodothsh_gia_promi8eia,
-				ereunitikes_ypodomes_praktiki_akiopoihsh_ton_ereunitikon_apotelesmaton,
+				ereunitikes_ypodomes_praktiki_akiopoihsh_ton_ereunitikon_apotelesmaton
 			  FROM TeacherCreateReportFormEntry4
 			  WHERE id = $1 AND teacher = $2`
 
@@ -90,7 +90,7 @@ func (f *TeacherCreateReportFormEntry4) Load(teacherId int) {
 				&f.Field8,
 				&f.Field9)
 
-	Db.CheckQuery(err, query)
+	Db.CheckQueryWithNoRows(err, query)
 
 	var helpers []TeacherCreateReportFormEntry4Helper
 
