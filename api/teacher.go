@@ -58,6 +58,8 @@ func TeacherLogin(resp http.ResponseWriter, req *http.Request) {
 
 func GetTeacherCreateReport(resp http.ResponseWriter, req *http.Request) {
     helpers := []string{
+        "templates/teacher/arithmos_dimosieuseon.tmpl",
+        "templates/teacher/ereunitikes_ypodomes.tmpl",
         "templates/teacher/anagnorish_epistomonikou_ergou.tmpl",
         "templates/teacher/eureunitika_programmata_kai_erga.tmpl",
         "templates/teacher/sundesi_me_tin_koinonia.tmpl",
