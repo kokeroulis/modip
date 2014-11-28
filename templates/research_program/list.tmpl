@@ -1,31 +1,43 @@
 {{template "header.tmpl"}}
-<table>
-  <thead>
-    <tr>
-      <th>A/A</th>
-      <th>Τίτλος Προγράμματος</th>
-      <th>Φορέας Διαχείρισης</th>
-      <th>Φορέας Χρηματοδότησης</th>
-      <th>Προϋπολογισμός</th>
-      <th>Ημερ. Έναρξης</th>
-      <th>Διάρκεια</th>
-      <th>Κατάσταση</th>
-      <th>ΕΝΕΡΓΕΙΕΣ</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Content Goes Here</td>
-      <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
-      <td>Content Goes Here</td>
-      <td>Content Goes Here</td>
-      <td>Content Goes Here</td>
-      <td>This is longer content Donec id elit non mi porta gravida at eget metus.</td>
-      <td>Content Goes Here</td>
-      <td>Content Goes Here</td>
-      <td><a href="/research/program/edit/report/1">Επεξεργασία</a></td>
-    </tr>
-  </tbody>
-</table>
+{{if .}}
+  <table>
+    <thead>
+      <tr>
+        <th>A/A</th>
+        <th>Τίτλος Προγράμματος</th>
+        <th>Φορέας Διαχείρισης</th>
+        <th>Φορέας Χρηματοδότησης</th>
+        <th>Προϋπολογισμός</th>
+        <th>Ημερ. Έναρξης</th>
+        <th>Διάρκεια</th>
+        <th>Κατάσταση</th>
+        <th>ΕΝΕΡΓΕΙΕΣ</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{range $index, $element :=.}}
+        <tr>
+          <td>{{add $index 1}}</td>
+          <td>{{.Field1}}</td>
+          <td>{{if .Field2}} ΝΑΙ {{else}} ΟΧΙ {{end}}</td>
+          <td>{{.Field3}}</td>
+          <td>{{.Field4}}</td>
+          <td>{{.Field5}}</td>
+          <td>{{.Field6}}</td>
+          <td>{{.Field7}}</td>
+          <td>
+            <a href="/research/program/edit/report/{{add $index 1}}">Επεξεργασία</a>
+          </td>
+        </tr>
+      {{end}}
+    </tbody>
+  </table>
+{{else}}
+  <div data-alert="" class="alert-box alert round">
+    <p class="text-center">Δεν υπάρχουν ερευνητικα προγράμματα για αυτό το τμήμα.</p>
+  </div>
+{{end}}
+
+<a class="button" href="/research/program/create/report">Προσθήκη ερευνητικού προγράμματος</a>
 
 {{template "footer.tmpl"}}

@@ -8,8 +8,9 @@ import (
 
 func GetResearchProgram(resp http.ResponseWriter, req *http.Request) {
 	var helpers []string
-	var data interface{}
 
+    teacherId :=  models.GetTeacherFromSession(req).Id
+    data := models.ListAllResearchPrograms(teacherId)
 	RenderTemplate("research_program/list", helpers, resp, data)
 }
 
