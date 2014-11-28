@@ -28,4 +28,12 @@ func (f *LessonCreateReportForm) Load() {
 	f.Entry3.Load(f.LessonId)
 	f.Entry4.Load(f.LessonId)
 	f.Entry5.Load(f.LessonId)
+
+
+	f.Entry11.Load(f.LessonId)
+	f.Entry12.Load(f.LessonId)
+	f.Entry13.Load(f.LessonId)
+	f.Entry14.Load(f.LessonId)
+	f.Entry15.Load(f.LessonId)
+	f.Entry16.Load(f.LessonId)
 }

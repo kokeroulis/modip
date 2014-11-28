@@ -36,6 +36,25 @@ BEGIN
 
 	INSERT INTO LessonCreateReportFormEntry5
 	(lesson) VALUES (lessonId);
+
+	INSERT INTO LessonCreateReportFormEntry11
+	(lesson) VALUES (lessonId);
+
+	INSERT INTO LessonCreateReportFormEntry12
+	(lesson) VALUES (lessonId);
+
+	INSERT INTO LessonCreateReportFormEntry13
+	(lesson) VALUES (lessonId);
+
+	INSERT INTO LessonCreateReportFormEntry14
+	(lesson) VALUES (lessonId);
+
+
+	INSERT INTO LessonCreateReportFormEntry15
+	(lesson) VALUES (lessonId);
+
+	INSERT INTO LessonCreateReportFormEntry16
+	(lesson) VALUES (lessonId);
 END;
 $$ LANGUAGE plpgsql;
 `
