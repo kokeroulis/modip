@@ -66,7 +66,16 @@ BEGIN
 	VALUES (teacherName, teacherPassword, teacherEmail, departmentId)
 	RETURNING id INTO teacherId;
 
+	INSERT INTO TeacherCreateReportFormEntry2
+	(teacher) VALUES (teacherId);
+
+	INSERT INTO TeacherCreateReportFormEntry3
+	(teacher) VALUES (teacherId);
+
 	INSERT INTO TeacherCreateReportFormEntry4
+	(teacher) VALUES (teacherId);
+
+	INSERT INTO TeacherCreateReportFormEntry5
 	(teacher) VALUES (teacherId);
 END;
 $$ LANGUAGE plpgsql;
