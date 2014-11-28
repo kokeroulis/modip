@@ -120,6 +120,30 @@ func LessonPreDegreeCreateReport (resp http.ResponseWriter, req *http.Request) {
 		form := &forms.LessonCreateReportFormEntry5{}
 		err = decoder.Decode(form, req.PostForm)
 		form.Update(lessonId)
+	case 11:
+		form := &forms.LessonCreateReportFormEntry11{}
+		err = decoder.Decode(form, req.PostForm)
+		form.Update(lessonId)
+	case 12:
+		form := &forms.LessonCreateReportFormEntry12{}
+		err = decoder.Decode(form, req.PostForm)
+		form.Update(lessonId)
+	case 13:
+		form := &forms.LessonCreateReportFormEntry13{}
+		err = decoder.Decode(form, req.PostForm)
+		form.Update(lessonId)
+	case 14:
+		form := &forms.LessonCreateReportFormEntry14{}
+		err = decoder.Decode(form, req.PostForm)
+		form.Update(lessonId)
+	case 15:
+		form := &forms.LessonCreateReportFormEntry15{}
+		err = decoder.Decode(form, req.PostForm)
+		form.Update(lessonId)
+	case 16:
+		form := &forms.LessonCreateReportFormEntry16{}
+		err = decoder.Decode(form, req.PostForm)
+		form.Update(lessonId)
 	default:
 		unknownErr := "Unknown form: " + id
 		panic(unknownErr)
