@@ -30,7 +30,7 @@ func (f *TeacherCreateReportFormEntry2) Update(teacherId int) {
 	anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_brabeia = $8,
 	anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_timitikoi_titloi = $9,
 	anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_epeksigiseis = $10
-WHERE teacher = $11`
+	WHERE teacher = $11`
 
 	_, err := Db.Database.Exec(query,
 		f.Field1,
@@ -60,8 +60,8 @@ func (f *TeacherCreateReportFormEntry2) Load(teacherId int) {
 	anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_brabeia,
 	anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_timitikoi_titloi,
 	anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_epeksigiseis
-FROM TeacherCreateReportFormEntry2
-WHERE teacher = $`
+	FROM TeacherCreateReportFormEntry2
+	WHERE teacher = $1`
 
 	err := Db.Database.QueryRow(query, teacherId).
 		Scan(&f.Field1,
