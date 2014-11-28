@@ -23,7 +23,7 @@ func (f *ResearchProgramCreateReportForm) Update(researchProgramId int) {
               analutika_stoixeia_programmatos_proupologismos = $4,
               analutika_stoixeia_programmatos_diarkia = $5,
               analutika_stoixeia_programmatos_hmerominia = $6,
-              analutika_stoixeia_programmatos_sxolia = $7,
+              analutika_stoixeia_programmatos_sxolia = $7
 			  WHERE id = $8`
 
 	_, err := Db.Database.Exec(query,
