@@ -1,15 +1,14 @@
 package api
 
 import (
-	_"github.com/kokeroulis/modip/models"
+	"github.com/kokeroulis/modip/models"
 	_"github.com/gorilla/schema"
 	"net/http"
 )
 
 func GetStuffList(resp http.ResponseWriter, req *http.Request) {
     var helpers []string
-    var data interface{}
-    RenderTemplate("stuff/list", helpers, resp, data)
+    RenderTemplate("stuff/list", helpers, resp, models.ListAllStuff())
 }
 
 func GetStuffCreate(resp http.ResponseWriter, req *http.Request) {
