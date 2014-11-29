@@ -20,8 +20,8 @@ func Index(resp http.ResponseWriter, req *http.Request) {
 	}
 
 	var helpers []string
-	var data map[string]string
-	data["error"] = ""
+	data := make(map[string]string)
+	data["error"] = "NoError"
 
 	RenderTemplate("home", helpers, resp, data)
 }
@@ -51,9 +51,17 @@ func teacherLogin(l *LoginForm, resp http.ResponseWriter, req *http.Request) {
 		http.Redirect(resp, req, "/teacher/report", http.StatusMovedPermanently)
 	} else {
 		var helpers []string
-		var data map[string]string
+		data := make(map[string]string)
 		data["error"] = "Λάθος username ή password"
 
 		RenderTemplate("home", helpers, resp, data)
 	}
 }
+
+func Logout(resp http.ResponseWriter, req *http.Request) {
+	session := models.GetSession(req)
+	session.Options.MaxAge = -1
+	session.Save(req, resp)
+	http.Redirect(resp, req, "/", http.StatusTemporaryRedirect)
+}
+
