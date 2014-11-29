@@ -1,5 +1,4 @@
 {{template "header.tmpl"}}
-
 {{if .}}
   <table>
     <thead>
@@ -18,7 +17,7 @@
           <td>{{.CourseCode}}</td>
           <td>{{.Name}}</td>
           <td>
-            <a href="/lesson/pre/degree/create/report/{{.Id}}">Απογραφικό Δελτίο</a>
+            <a href="/lesson/code/list/edit/{{.Id}}">Επεξεργασία</a>
           </td>
         </tr>
       {{end}}

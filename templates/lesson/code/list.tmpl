@@ -1,34 +1,19 @@
 {{template "header.tmpl"}}
 
-{{if .}}
-  <table>
-    <thead>
-      <tr>
-        <th >A/A</th>
-        <th>Κωδ. Μαθήματος</th>
-        <th>Μάθημα</th>
-        <th>Ενέργειες</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      {{range $index, $element :=.}}
-        <tr>
-          <td>{{add $index 1}}</td>
-          <td>{{.CourseCode}}</td>
-          <td>{{.Name}}</td>
-          <td>
-            <a href="/lesson/pre/degree/create/report/{{.Id}}">Απογραφικό Δελτίο</a>
-          </td>
-        </tr>
-      {{end}}
-    </tbody>
-  </table>
-{{else}}
-  <div data-alert="" class="alert-box alert round">
-    <p class="text-center">Δεν υπάρχουν μαθήματα για αυτό το τμήμα.</p>
+<form method="POST">
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Τμήμα
+        <select id="lessonMoveToDepartment" name="lesson_code_create_lesson_department">
+          <option selected>-- Παρακαλώ Διαλέξτε τμήμα</option>
+          {{range .}}
+            <option value="/lesson/code/list/{{.Id}}">{{.Name}}</option>
+          {{end}}
+        </select>
+      </label>
+    </div>
   </div>
-{{end}}
+</form>
 
 <a class="button" href="/lesson/code/create">Νέα Εγγραφή</a>
 {{template "footer.tmpl"}}
