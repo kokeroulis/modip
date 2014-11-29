@@ -52,7 +52,7 @@ func teacherLogin(l *LoginForm, resp http.ResponseWriter, req *http.Request) {
 	} else {
 		var helpers []string
 		data := make(map[string]string)
-		data["error"] = "Λάθος username ή password"
+		data["error"] = "Ο λογαριασμός δεν βρέθηκε. Το όνομα χρήστη ή το συνθηματικό είναι λάθος."
 
 		RenderTemplate("home", helpers, resp, data)
 	}

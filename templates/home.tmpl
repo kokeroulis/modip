@@ -1,14 +1,17 @@
 {{template "header_home.tmpl"}}
 <div class="row">
-    <div class="large-12 large-offset-2 columns">
-      <div class="row">
-        <div class="large-6  large-offset-2 columns">
-          <div class="alert-box alert round text-center">
-             Το όνομα Χρήστη ή ο κωδικός είναι λάθος.
+  <div class="large-12 large-offset-3 columns">
+    {{if ne .error "NoError"}}
+      <div class="large-12 columns">
+        <div class="row">
+          <div class="large-6  large-offset-2 columns">
+            <div class="alert-box alert round text-center">
+            {{.error}}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    {{end}}
 
     <form name="myForm" method="POST" action="/login">
       <div class="row">
@@ -34,6 +37,6 @@
         </div>
       </div>
     </form>
-
+  </div>
 </div>
 {{template "footer.tmpl"}}
