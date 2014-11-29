@@ -1,6 +1,36 @@
 {{template "header.tmpl"}}
+{{if .}}
+{{range $index, $element := .}}
+  <p>Τμήμα: {{.Name}}</p>
+  <table>
+    <thead>
+      <tr>
+        <th >A/A</th>
+        <th>Βαθμίδα</th>
+        <th>Email Επικοινωνίας</th>
+        <th>Ενέργειες</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{range $index, $element2 := $element.Teachers}}
+        <tr>
+          <td>{{add $index 1}}</td>
+          <td>{{.Name}}</td>
+          <td>{{.Email}}</td>
+          <td>
+            <a href="/stuff/edit/{{.Id}}">Επεξεργασία</a>
+          </td>
+        </tr>
+      {{end}}
+    </tbody>
+  </table>
+{{else}}
+  <div data-alert="" class="alert-box alert round">
+    <p class="text-center">Δεν υπάρχει προσωπικό για αυτό το τμήμα.</p>
+  </div>
+{{end}}
+{{end}}
 
-<p>list stuffffffffffffffffff</p>
-
-<a href="/stuff/create">create</a>
+<a class="button" href="/stuff/create">Νέα Εγγραφή</a>
 {{template "footer.tmpl"}}

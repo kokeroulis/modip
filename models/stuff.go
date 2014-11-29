@@ -3,9 +3,9 @@ package models
 func ListAllStuff() []Department {
 	departmentList := ListAllDepartments(false)
 
-	for _, it := range departmentList {
-		it.LoadStuff()
+	for index, it := range departmentList {
+        it.LoadStuff();
+        departmentList[index] = it;
 	}
-
 	return departmentList
 }

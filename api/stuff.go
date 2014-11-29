@@ -8,7 +8,8 @@ import (
 
 func GetStuffList(resp http.ResponseWriter, req *http.Request) {
     var helpers []string
-    RenderTemplate("stuff/list", helpers, resp, models.ListAllStuff())
+    d := models.ListAllStuff()
+    RenderTemplate("stuff/list", helpers, resp, d)
 }
 
 func GetStuffCreate(resp http.ResponseWriter, req *http.Request) {
