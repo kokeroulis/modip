@@ -52,6 +52,7 @@ func RenderTemplate(name string, helpers []string, resp http.ResponseWriter, dat
 	templates = append(templates, templateFile)
 
 	templates = append(templates, "templates/base/header.tmpl")
+	templates = append(templates, "templates/base/header_home.tmpl")
 	templates = append(templates, "templates/base/footer.tmpl")
 	templates = append(templates, "templates/base/sidebar.tmpl")
 	templates = append(templates, helpers...)
