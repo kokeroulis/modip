@@ -29,7 +29,7 @@ update_deps() {
     done
 }
 
-install_go() {
+install() {
     if [ -d $gopath ]; then
         echo "Please remove $gopath"
         exit 1
@@ -56,26 +56,6 @@ install_go() {
     for i in ${my_packages[@]}; do
         ln -sfv $PWD/$i $p/$i
     done
-}
-
-install_js() {
-    if [ -d node_modules ]; then
-        echo "Please remove node_modules"
-        exit 1
-    fi
-
-    if [ -d public/bower_components/angular ]; then
-        echo "Please remove public/bower_components/"
-        exit 1
-    fi
-
-    npm install
-    ./node_modules/bower/bin/bower install
-}
-
-install() {
-    install_go
-    install_js
 }
 
 clean() {
@@ -128,10 +108,6 @@ fi
 
 if [ $1 == "install" ]; then
     install
-elif [ $1 == "install-go" ]; then
-    install_go
-elif [ $1 == "install-js" ]; then
-    install_js
 elif [ $1 == "run" ]; then
     run
 elif [ $1 == "testdata" ]; then

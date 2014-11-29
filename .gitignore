@@ -2,8 +2,6 @@
 .vendor
 .gopath
 modip.conf
-node_modules
-npm-debug.log
 
 #sass tmp files
 /bower_components/*
