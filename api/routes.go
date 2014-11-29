@@ -52,7 +52,8 @@ func setupRoutes(n *negroni.Negroni) {
 
 
 	// Κωδ. Μαθημάτων Π.Π.Σ.
-	router.Handle("/lesson/code/list", authorize{LessonCodeList}).Methods("GET")
+	router.Handle("/lesson/code/list", authorize{GetLessonCodeList}).Methods("GET")
+	router.Handle("/lesson/code/list/{id:[0-9]+}", authorize{GetLessonCodeListDepartment}).Methods("GET")
 	router.Handle("/lesson/code/create", authorize{GetLessonCodeCreate}).Methods("GET")
 	router.Handle("/lesson/code/create", authorize{LessonCodeCreate}).Methods("POST")
 

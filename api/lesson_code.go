@@ -44,9 +44,20 @@ func GetLessonCodeCreate(resp http.ResponseWriter, req *http.Request) {
 	RenderTemplate("lesson/code/create", helpers, resp, models.ListAllDepartments(false))
 }
 
-func LessonCodeList(resp http.ResponseWriter, req *http.Request) {
+func GetLessonCodeList(resp http.ResponseWriter, req *http.Request) {
 	var helpers []string
-	var data interface{}
-	RenderTemplate("lesson/code/list", helpers, resp, data)
+	RenderTemplate("lesson/code/list", helpers, resp, models.ListAllDepartments(false))
 }
 
+func GetLessonCodeListDepartment(resp http.ResponseWriter, req *http.Request) {
+	departmentId, _ := getId(req)
+
+	d := models.Department{
+		Id: departmentId,
+	}
+
+	d.LoadLessons(false)
+
+	var helpers []string
+	RenderTemplate("lesson/code/list_department", helpers, resp, d.Lessons)
+}
