@@ -1,16 +1,59 @@
 package api
 
 import (
-	"io/ioutil"
 	"net/http"
+	"github.com/kokeroulis/modip/models"
+	"github.com/gorilla/schema"
 )
 
-func Index(resp http.ResponseWriter, req *http.Request) {
-	indexContents, err := ioutil.ReadFile("public/app/index.html")
+type LoginForm struct {
+	Username string `schema:"username"`
+	Password string `schema:"password"`
+}
 
-	if err != nil {
-		panic("Can't render index")
+func Index(resp http.ResponseWriter, req *http.Request) {
+	teacherId := models.GetTeacherFromSession(req).Id
+
+	if teacherId != 0 {
+		http.Redirect(resp, req, "/teacher/report", http.StatusMovedPermanently)
+		return
 	}
 
-	resp.Write(indexContents)
+	var helpers []string
+	var data map[string]string
+	data["error"] = ""
+
+	RenderTemplate("home", helpers, resp, data)
+}
+
+func Login(resp http.ResponseWriter, req *http.Request) {
+	req.ParseForm()
+
+	decoder := schema.NewDecoder()
+	form := &LoginForm{}
+	err := decoder.Decode(form, req.PostForm)
+	if err != nil {
+		panic(err)
+	}
+
+	teacherLogin(form, resp, req)
+
+}
+
+func teacherLogin(l *LoginForm, resp http.ResponseWriter, req *http.Request) {
+	t := models.Teacher{}
+	auth := t.Login(l.Username, l.Password)
+
+	if auth {
+		session := models.GetSession(req)
+		session.Values["teacher"] = &t
+		session.Save(req, resp)
+		http.Redirect(resp, req, "/teacher/report", http.StatusMovedPermanently)
+	} else {
+		var helpers []string
+		var data map[string]string
+		data["error"] = "Λάθος username ή password"
+
+		RenderTemplate("home", helpers, resp, data)
+	}
 }

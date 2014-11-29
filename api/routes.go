@@ -25,8 +25,7 @@ func setupRoutes(n *negroni.Negroni) {
 	router := mux.NewRouter()
 
 	router.HandleFunc("/", Index).Methods("GET")
-
-	router.HandleFunc("/teacher/login", TeacherLogin).Methods("POST")
+	router.HandleFunc("/login", Login).Methods("POST")
 
 	router.Handle("/category/list", authorize{CategoryList}).Methods("GET")
 	router.Handle("/category/list/{id:[1-9]+}", authorize{CategoryList}).Methods("GET")

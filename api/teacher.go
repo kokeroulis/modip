@@ -36,26 +36,6 @@ func init() {
 	gob.Register(&models.Teacher{})
 }
 
-func TeacherLogin(resp http.ResponseWriter, req *http.Request) {
-	teacherForm := &TeacherForm{}
-	if binding.Bind(req, teacherForm).Handle(resp) {
-		return
-	}
-
-	t := models.Teacher{}
-	auth := t.Login(teacherForm.Username, teacherForm.Password)
-
-	if auth {
-		session := models.GetSession(req)
-		session.Values["teacher"] = &t
-		session.Save(req, resp)
-		RenderJson(resp, req, t)
-	} else {
-		errorJson := models.AuthFailed()
-		RenderErrorJson(resp, req, errorJson, t)
-	}
-}
-
 func GetTeacherCreateReport(resp http.ResponseWriter, req *http.Request) {
     helpers := []string{
         "templates/teacher/arithmos_dimosieuseon.tmpl",
