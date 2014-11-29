@@ -3,10 +3,10 @@ package models
 import "github.com/kokeroulis/modip/db"
 
 type Teacher struct {
-	Id         int        `json:"id"`
-	Name       string     `json:"name"`
-	Email      string     `json:"email"`
-	Department Department `json:"department"`
+	Id         int        `schema:"id"`
+	Name       string     `schema:"name"`
+	Email      string     `schema:"email"`
+	Department Department `schema:"department"`
 }
 
 func (t *Teacher) Login(username string, password string) bool {
@@ -32,3 +32,35 @@ func (t *Teacher) Create(password string) bool {
 
 	return alreadyExists
 }
+
+func (t *Teacher) Load() {
+	if t.Id == 0 {
+		panic("You can't use this func!!")
+	}
+
+	query := `SELECT name, email
+			  FROM teacher
+			  WHERE id = $1`
+	err := Db.Database.QueryRow(query, t.Id).
+		Scan(&t.Name, &t.Email)
+
+	Db.CheckQuery(err, query)
+}
+
+func (t *Teacher) Update() {
+	if t.Id == 0 {
+		panic("You can't use this func!!")
+	}
+
+	query := `UPDATE teacher SET
+			  name = $1, email = $2
+			  WHERE id = $3`
+
+	_, err := Db.Database.Exec(query,
+								t.Name,
+								t.Email,
+								t.Id)
+
+	Db.CheckQueryWithNoRows(err, query)
+}
+
