@@ -29,6 +29,38 @@ func (l *Lesson) Create() {
 	}
 }
 
+func (l *Lesson) Load() {
+	if l.Id == 0 {
+		panic("You can't use this func!!")
+	}
+
+	query := `SELECT courseCode, CardisoftCode, isPostDegree
+			  FROM lesson
+			  WHERE id = $1`
+	err := Db.Database.QueryRow(query, l.Id).
+		Scan(&l.CourseCode, &l.CardisoftCode, &l.IsPostDegree)
+
+	Db.CheckQuery(err, query)
+}
+
+func (l *Lesson) Update() {
+	if l.Id == 0 {
+		panic("You can't use this func!!")
+	}
+
+	query := `UPDATE lesson SET
+			  courseCode = $1, cardisoftCode = $2,
+			  isPostDegree = $3
+			  WHERE id = $4`
+
+	_, err := Db.Database.Exec(query,
+								l.CourseCode,
+								l.CardisoftCode,
+								l.IsPostDegree)
+
+	Db.CheckQueryWithNoRows(err, query)
+}
+
 func ListLessonsPreDegree() []*Department {
 	return listLessons(false)
 }
