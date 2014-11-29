@@ -15,7 +15,8 @@ func (d *Department) AddLesson(l *Lesson) {
 }
 
 func (d *Department) LoadLessons(postDegree bool) {
-	query := `SELECT id, name FROM lesson
+	query := `SELECT id, name, courseCode, cardisoftCode, isPostDegree
+			  FROM lesson
 			  WHERE department = $1 AND isPostDegree = $2`
 
 	rows, err := Db.Database.Query(query, d.Id, postDegree)
@@ -31,7 +32,11 @@ func (d *Department) LoadLessons(postDegree bool) {
 			IsPostDegree: postDegree,
 		}
 
-		if err := rows.Scan(&it.Id, &it.Name); err != nil {
+		if err := rows.Scan(&it.Id,
+							&it.Name,
+							&it.CourseCode,
+							&it.CardisoftCode,
+							&it.IsPostDegree); err != nil {
 			panic(err)
 		} else {
 			d.AddLesson(it)
