@@ -51,13 +51,14 @@ func (l *Lesson) Update() {
 
 	query := `UPDATE lesson SET
 			  courseCode = $1, cardisoftCode = $2,
-			  isPostDegree = $3
+			  name = $3
 			  WHERE id = $4`
 
 	_, err := Db.Database.Exec(query,
 								l.CourseCode,
 								l.CardisoftCode,
-								l.IsPostDegree)
+								l.Name,
+                                l.Id)
 
 	Db.CheckQueryWithNoRows(err, query)
 }
