@@ -87,7 +87,7 @@ func GetLessonEdit (resp http.ResponseWriter, req *http.Request) {
 		Id: id,
 	}
 
-	t.Load()
+	l.Load()
     RenderTemplate("lesson/edit", helpers, resp, l)
 }
 
