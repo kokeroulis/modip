@@ -5,12 +5,12 @@ import (
 )
 
 type Lesson struct {
-	Id            int
-	Name          string
-	Department    int
-	IsPostDegree  bool
-	CourseCode    string
-	CardisoftCode string
+	Id            int    `schema:"id"`
+	Name          string `schema:"name"`
+	Department    int    `schema:"department"`
+	IsPostDegree  bool   `schema:"is_post_degree"`
+	CourseCode    string `schema:"course_code"`
+	CardisoftCode string `schema:"cardisoft_code"`
 }
 
 func (l *Lesson) Create() {
