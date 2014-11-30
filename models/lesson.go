@@ -34,11 +34,12 @@ func (l *Lesson) Load() {
 		panic("You can't use this func!!")
 	}
 
-	query := `SELECT courseCode, CardisoftCode, isPostDegree
+	query := `SELECT courseCode, CardisoftCode,
+			  name, isPostDegree
 			  FROM lesson
 			  WHERE id = $1`
 	err := Db.Database.QueryRow(query, l.Id).
-		Scan(&l.CourseCode, &l.CardisoftCode, &l.IsPostDegree)
+		Scan(&l.CourseCode, &l.CardisoftCode, &l.Name, &l.IsPostDegree)
 
 	Db.CheckQuery(err, query)
 }
