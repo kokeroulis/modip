@@ -57,7 +57,7 @@ func setupRoutes(n *negroni.Negroni) {
 	router.Handle("/lesson/code/create", authorize{GetLessonCodeCreate}).Methods("GET")
 	router.Handle("/lesson/code/create", authorize{LessonCodeCreate}).Methods("POST")
 	router.Handle("/lesson/edit/{id:[0-9]+}", authorize{GetLessonEdit}).Methods("GET")
-	router.Handle("/lesson/edit/{id:[0-9]+}", authorize{LessonEdit}).Methods("POST")
+	router.Handle("/lesson/edit", authorize{LessonEdit}).Methods("POST")
 
     //Προσωπικό Μονάδας
     router.Handle("/stuff/list", authorize{GetStuffList}).Methods("GET")
