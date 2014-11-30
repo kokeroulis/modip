@@ -1,5 +1,14 @@
 {{template "header.tmpl"}}
-<form method="POST" action="/lesson/code/create">
+<form method="POST" action="/lesson/edit/">
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>
+        <input type="hidden" name="id" value="{{.Id}}" placeholder="" required />
+      </label>
+    </div>
+  </div>
+
   <div class="row">
     <div class="large-12 columns">
       <label>Κωδ. Μαθήματος
