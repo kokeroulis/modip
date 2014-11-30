@@ -32,11 +32,7 @@ func GetStuffEdit(resp http.ResponseWriter, req *http.Request) {
 }
 
 func StuffEdit(resp http.ResponseWriter, req *http.Request) {
-	id, id2 := getId(req)
-
-	t := models.Teacher{
-		Id: id,
-	}
+	t := models.Teacher{}
 
 	req.ParseForm()
 	decoder := schema.NewDecoder()
