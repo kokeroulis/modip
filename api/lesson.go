@@ -105,7 +105,7 @@ func LessonEdit (resp http.ResponseWriter, req *http.Request) {
 
 	l.Update()
 
-	url := "/lesson/edit/" + string(l.Id)
+	url := "/lesson/edit/" + strconv.Itoa(l.Id)
 	http.Redirect(resp, req, url, http.StatusMovedPermanently)
 }
 
