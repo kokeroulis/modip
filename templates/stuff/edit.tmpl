@@ -1,5 +1,43 @@
 {{template "header.tmpl"}}
+<form method="POST" action="/lesson/stuff/edit">
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Τμήμα
+        <select name="lesson_code_create_lesson_department">
+          {{range .}}
+            <option value="{{.Id}}">{{.Name}}</option>
+          {{end}}
+        </select>
+      </label>
+    </div>
+  </div>
 
-<p>edit stuffffffffffffffffff</p>
-<a href="/stuff/list">list</a>
+  <div class="row">
+    <div class="large-12 columns">
+      <input type="hidden" name="id" value="{{.Id}}" placeholder="" required />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>name
+        <input type="text" name="name" value="{{.Name}}" placeholder="" required />
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>email
+        <input type="email" name="email" value="{{.Email}}" placeholder="" required />
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <button type="submit">Αποθήκευση</button>
+    </div>
+  </div>
+</form>
 {{template "footer.tmpl"}}
