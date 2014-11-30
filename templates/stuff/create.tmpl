@@ -1,5 +1,26 @@
 {{template "header.tmpl"}}
+<form method="POST" action="/stuff/create">
 
-<p>create stuffffffffffffffffff</p>
-<a href="/stuff/edit/1">edit</a>
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Ονοματεπώνυμο
+        <input type="text" name="name" placeholder="" required />
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Email Χρήστη
+        <input type="email" name="email" placeholder="" required />
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <button type="submit">Αποθήκευση</button>
+    </div>
+  </div>
+</form>
 {{template "footer.tmpl"}}
