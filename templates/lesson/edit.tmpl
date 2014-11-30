@@ -1,0 +1,31 @@
+{{template "header.tmpl"}}
+<form method="POST" action="/lesson/code/create">
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Κωδ. Μαθήματος
+        <input type="text" name="cource_code" value="{{.CourseCode}}" placeholder="" required />
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Μάθημα
+        <input type="text" name="name" value="{{.Name}}" placeholder="" required />
+      </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <label>CourseCode (Cardisoft)
+        <input type="text" name="cardisoft_code" value={{.CardisoftCode}} placeholder="" required/>
+      </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <button type="submit">Αποθήκευση</button>
+    </div>
+  </div>
+</form>
+{{template "footer.tmpl"}}
