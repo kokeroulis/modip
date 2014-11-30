@@ -4,6 +4,7 @@ import (
 	"github.com/kokeroulis/modip/models"
 	"github.com/gorilla/schema"
 	"net/http"
+    "strconv"
 )
 
 func GetStuffList(resp http.ResponseWriter, req *http.Request) {
@@ -32,7 +33,7 @@ func GetStuffEdit(resp http.ResponseWriter, req *http.Request) {
 }
 
 func StuffEdit(resp http.ResponseWriter, req *http.Request) {
-	t := models.Teacher{}
+	t := &models.Teacher{}
 
 	req.ParseForm()
 	decoder := schema.NewDecoder()
@@ -45,7 +46,7 @@ func StuffEdit(resp http.ResponseWriter, req *http.Request) {
 
 	t.Update()
 
-	url := "/stuff/edit/" + id2
+	url := "/stuff/edit/" + strconv.Itoa(t.Id)
 	http.Redirect(resp, req, url, http.StatusMovedPermanently)
 }
 

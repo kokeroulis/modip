@@ -1,16 +1,6 @@
 {{template "header.tmpl"}}
-<form method="POST" action="/lesson/stuff/edit">
-  <div class="row">
-    <div class="large-12 columns">
-      <label>Τμήμα
-        <select name="lesson_code_create_lesson_department">
-          {{range .}}
-            <option value="{{.Id}}">{{.Name}}</option>
-          {{end}}
-        </select>
-      </label>
-    </div>
-  </div>
+<form method="POST" action="/stuff/edit">
+
 
   <div class="row">
     <div class="large-12 columns">
