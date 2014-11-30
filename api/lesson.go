@@ -78,6 +78,37 @@ func GetLessonPreDegreeCreateReport (resp http.ResponseWriter, req *http.Request
 	RenderTemplate("lesson/create_report/create_report", helpers, resp, l)
 }
 
+func GetLessonEdit (resp http.ResponseWriter, req *http.Request) {
+    var helpers []string
+
+	id, _ := getId(req)
+
+	l := models.Lesson{
+		Id: id,
+	}
+
+	t.Load()
+    RenderTemplate("lesson/edit", helpers, resp, l)
+}
+
+func LessonEdit (resp http.ResponseWriter, req *http.Request) {
+	l := &models.Lesson{}
+
+	req.ParseForm()
+	decoder := schema.NewDecoder()
+
+	err := decoder.Decode(l, req.PostForm)
+
+	if err != nil {
+		panic(err)
+	}
+
+	l.Update()
+
+	url := "lesson/edit/" + string(l.Id)
+	http.Redirect(resp, req, url, http.StatusMovedPermanently)
+}
+
 func LessonPreDegreeCreateReport (resp http.ResponseWriter, req *http.Request) {
 	vars := mux.Vars(req)
 	id, ok := vars["id"]
