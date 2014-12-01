@@ -32,7 +32,7 @@ query := `UPDATE LessonCreateReportFormEntry9 SET
         lesson_aksiologisi_ths_epidosis_parakolou8ish_spoudaston_sto_erg = $9,
         lesson_aksiologisi_ths_epidosis_sxolia_mesa_eksaminou = $10,
         lesson_aksiologisi_ths_epidosis_diafania_aksiologisis_tis_epidosis = $11
-WHERE lesson = $`
+WHERE lesson = $12`
 
 _, err := Db.Database.Exec(query,
         f.Field1,
@@ -45,7 +45,8 @@ _, err := Db.Database.Exec(query,
         f.Field8,
         f.Field9,
         f.Field10,
-        f.Field11)
+        f.Field11,
+        lessonId)
 
 Db.CheckQueryWithNoRows(err, query)
 }
@@ -63,7 +64,7 @@ query := `SELECT
         lesson_aksiologisi_ths_epidosis_sxolia_mesa_eksaminou,
         lesson_aksiologisi_ths_epidosis_diafania_aksiologisis_tis_epidosis
 FROM LessonCreateReportFormEntry9
-WHERE lesson = $`
+WHERE lesson = $1`
 
 err := Db.Database.QueryRow(query, lessonId).
         Scan(&f.Field1,

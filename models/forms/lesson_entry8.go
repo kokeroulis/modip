@@ -14,11 +14,12 @@ func (f *LessonCreateReportFormEntry8) Update(lessonId int) {
 query := `UPDATE LessonCreateReportFormEntry8 SET
 	lesson_summetoxi_spoudaston_summetoxi_stin_kanoniki_eksetasi = $1,
 	lesson_summetoxi_spoudaston_summetoxi_stin_epanaliptikh_eksetasi = $2
-WHERE lesson = $`
+WHERE lesson = $3`
 
 _, err := Db.Database.Exec(query,
 	f.Field1,
-	f.Field2)
+	f.Field2,
+        lessonId)
 
 Db.CheckQueryWithNoRows(err, query)
 }
@@ -28,7 +29,7 @@ query := `SELECT
 	lesson_summetoxi_spoudaston_summetoxi_stin_kanoniki_eksetasi,
 	lesson_summetoxi_spoudaston_summetoxi_stin_epanaliptikh_eksetasi
 FROM LessonCreateReportFormEntry8
-WHERE lesson = $`
+WHERE lesson = $1`
 
 err := Db.Database.QueryRow(query, lessonId).
 	Scan(&f.Field1,
