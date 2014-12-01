@@ -151,6 +151,26 @@ func LessonPreDegreeCreateReport (resp http.ResponseWriter, req *http.Request) {
 		form := &forms.LessonCreateReportFormEntry5{}
 		err = decoder.Decode(form, req.PostForm)
 		form.Update(lessonId)
+	case 6:
+		form := &forms.LessonCreateReportFormEntry6{}
+		err = decoder.Decode(form, req.PostForm)
+		form.Update(lessonId)
+	case 7:
+		form := &forms.LessonCreateReportFormEntry7{}
+		err = decoder.Decode(form, req.PostForm)
+		form.Update(lessonId)
+	case 8:
+		form := &forms.LessonCreateReportFormEntry8{}
+		err = decoder.Decode(form, req.PostForm)
+		form.Update(lessonId)
+	case 9:
+		form := &forms.LessonCreateReportFormEntry9{}
+		err = decoder.Decode(form, req.PostForm)
+		form.Update(lessonId)
+	case 10:
+		form := &forms.LessonCreateReportFormEntry10{}
+		err = decoder.Decode(form, req.PostForm)
+		form.Update(lessonId)
 	case 11:
 		form := &forms.LessonCreateReportFormEntry11{}
 		err = decoder.Decode(form, req.PostForm)
