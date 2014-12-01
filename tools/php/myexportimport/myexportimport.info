@@ -1,0 +1,9 @@
+; $Id$
+name = myexportimport
+description = Custom Export and Import
+package = Fields
+core = 7.x
+
+files[]=myexportimport.module
+
+
