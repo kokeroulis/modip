@@ -16,7 +16,7 @@ query := `UPDATE LessonCreateReportFormEntry7 SET
         lesson_epikoinonia_wres_grafeiou = $1,
         lesson_epikoinonia_ekepedeusi_methodos = $2,
         lesson_epikoinonia_organosi_ekpedeutikon_episkepseon = $3
-WHERE lesson = $`
+WHERE lesson = $4`
 
 _, err := Db.Database.Exec(query,
         f.Field1,

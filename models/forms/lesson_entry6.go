@@ -10,9 +10,9 @@ type LessonCreateReportFormEntry6 struct {
 }
 
 func (f *LessonCreateReportFormEntry6) Update(lessonId int) {
-    query := `UPDATE  SET
+    query := `UPDATE LessonCreateReportFormEntry6 SET
         lesson_alles_ekpedeutikes_drastiriotites_alles_drastiriotites = $1
-        WHERE lesson = $6`
+        WHERE lesson = $2`
 
     _, err := Db.Database.Exec(query,
         f.Field1,
@@ -23,8 +23,8 @@ func (f *LessonCreateReportFormEntry6) Update(lessonId int) {
 func (f *LessonCreateReportFormEntry6) Load(lessonId int) {
     query := `SELECT
                 lesson_alles_ekpedeutikes_drastiriotites_alles_drastiriotites
-                FROM
-                WHERE lesson = $`
+                FROM LessonCreateReportFormEntry6
+                WHERE lesson = $2`
 
     err := Db.Database.QueryRow(query, lessonId).
                 Scan(&f.Field1)
