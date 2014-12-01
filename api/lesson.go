@@ -196,7 +196,7 @@ func LessonPreDegreeCreateReport (resp http.ResponseWriter, req *http.Request) {
 	case 10:
 		form := &forms.LessonCreateReportFormEntry10{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId,akademicYearId)
+		form.Update(lessonId, akademicYearId)
 	case 11:
 		form := &forms.LessonCreateReportFormEntry11{}
 		err = decoder.Decode(form, req.PostForm)
