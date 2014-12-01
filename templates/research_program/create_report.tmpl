@@ -1,0 +1,76 @@
+{{template "header.tmpl"}}
+<div class="large-6 columns">
+
+<form method="POST" action="/research/program/create/report">
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Τίτλος Προγράμματος
+        <input name="analutika_stoixeia_programmatos_titlos_programmatos" value="{{.Entry1.Field1}}" type="text" placeholder="">
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Υλοποίηση
+        <input name="analutika_stoixeia_programmatos_ylopoihsh" value="{{.Entry1.Field2}}" type="checkbox" placeholder="">
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Φορέας Χρηματοδότησης
+        <select name="analutika_stoixeia_programmatos_foreas_xrimatodotisis">
+          <option >- Κανένα -</option>
+          <option value="Εθνικός (Δημόσιος)">Εθνικός (Δημόσιος)</option>
+          <option value="Εθνικός (Ιδιωτικός)">Εθνικός (Ιδιωτικός)</option>
+          <option value="Διεθνής (Δημόσιος)">Διεθνής (Δημόσιος)</option>
+          <option value="Διεθνής (Ιδιωτικός)">Διεθνής (Ιδιωτικός)</option>
+        </select>
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Προϋπολογισμός
+        <input name="analutika_stoixeia_programmatos_proupologismos" value="{{.Entry1.Field4}}" type="number" placeholder="">
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Διάρκεια (Σε Μήνες)
+        <input name="analutika_stoixeia_programmatos_diarkia" value="{{.Entry1.Field5}}" type="number" placeholder="">
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Ημερομηνία
+        <input name="analutika_stoixeia_programmatos_hmerominia" value="{{.Entry1.Field6}}" type="date" placeholder="">
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Σχόλια
+        <textarea rows="4" name="analutika_stoixeia_programmatos_sxolia">{{.Entry1.Field7}}</textarea>
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <button type="submit">Αποθύκευση</a>
+    </div>
+  </div>
+</form>
+
+</div>
+{{template "footer.tmpl"}}
