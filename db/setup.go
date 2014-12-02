@@ -73,6 +73,7 @@ func CreateDb() {
 		DbSchema.TeacherCreateReportFormEntry4,
 		DbSchema.TeacherCreateReportFormEntry4Helper,
 		DbSchema.TeacherCreateReportFormEntry5,
+		DbSchema.AkademicYear,
 	}
 
 	apiList := []string{
@@ -83,6 +84,7 @@ func CreateDb() {
 		DbApi.CategoryGroupAdd,
 		DbApi.CategorySave,
 		DbApi.LessonCreate,
+		DbApi.AkademicYear,
 	}
 
 	runQuery(schemaList)

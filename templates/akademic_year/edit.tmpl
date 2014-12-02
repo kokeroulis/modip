@@ -1,0 +1,24 @@
+{{template "header.tmpl"}}
+<form method="POST" action="/akademic/year/edit">
+
+  <div class="row">
+    <div class="large-12 columns">
+      <input type="hidden" name="id" value="{{.Id}}" placeholder="" required />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Όνομα Ακαδημαϊκού έτους
+        <input type="text" name="name" value="{{.Name}}" placeholder="" required />
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <button type="submit">Αποθήκευση</button>
+    </div>
+  </div>
+</form>
+{{template "footer.tmpl"}}

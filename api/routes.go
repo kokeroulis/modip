@@ -33,6 +33,12 @@ func setupRoutes(n *negroni.Negroni) {
 
 	router.Handle("/category/save", authorize{CategorySave}).Methods("POST")
 
+    router.Handle("/akademic/year/list", authorize{GetAkademicYearList}).Methods("GET")
+    router.Handle("/akademic/year/create", authorize{GetAkademicYearCreate}).Methods("GET")
+    router.Handle("/akademic/year/create", authorize{AkademicYearCreate}).Methods("POST")
+    router.Handle("/akademic/year/edit/{id:[1-9]+}", authorize{GetAkademicYearEdit}).Methods("GET")
+    router.Handle("/akademic/year/edit", authorize{AkademicYearEdit}).Methods("POST")
+
 	// Α.Δ. Εκπ. Προσωπικού
 	router.Handle("/teacher/report", authorize{GetTeacherCreateReport}).Methods("GET")
 	router.Handle("/teacher/report/1", authorize{TeacherCreateReport1}).Methods("POST")
