@@ -140,7 +140,7 @@ func TeacherCreateReport1Edit(resp http.ResponseWriter, req *http.Request) {
 	id, _ := getId(req)
 	form.Id = id
 	form.Update()
-    http.Redirect(resp, req, "/teacher/report", http.StatusMovedPermanently)
+    http.Redirect(resp, req, "/teacher/report/list", http.StatusMovedPermanently)
 }
 
 func parseTeacherCreateReportFormEntry1(form *forms.TeacherCreateReportFormEntry1,
