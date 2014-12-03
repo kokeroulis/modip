@@ -15,7 +15,7 @@ type LessonCreateReportFormEntry14 struct {
 	Field7 int `schema:"katanomi_ba8mon_spoudaston_mesos_oros_ba8mologias_sunolo_spoudaston"`
 }
 
-func (f *LessonCreateReportFormEntry14) Update(lessonId int) {
+func (f *LessonCreateReportFormEntry14) Update(lessonId int, akademicYearId int) {
 	query := `UPDATE LessonCreateReportFormEntry14 SET
 			katanomi_ba8mon_spoudaston_0_39 = $1,
 			katanomi_ba8mon_spoudaston_4_49 = $2,
@@ -24,7 +24,7 @@ func (f *LessonCreateReportFormEntry14) Update(lessonId int) {
 			katanomi_ba8mon_spoudaston_7_84 = $5,
 			katanomi_ba8mon_spoudaston_85_10 = $6,
 			katanomi_ba8mon_spoudaston_mesos_oros_ba8mologias_sunolo_spoudaston = $7
-			WHERE lesson = $8`
+			 WHERE lesson = $8 AND akademic_year = $9`
 
 	_, err := Db.Database.Exec(query,
 		f.Field1,
@@ -34,12 +34,13 @@ func (f *LessonCreateReportFormEntry14) Update(lessonId int) {
 		f.Field5,
 		f.Field6,
 		f.Field7,
-		lessonId)
+		lessonId,
+		akademicYearId)
 
 	Db.CheckQueryWithNoRows(err, query)
 }
 
-func (f *LessonCreateReportFormEntry14) Load(lessonId int) {
+func (f *LessonCreateReportFormEntry14) Load(lessonId int, akademicYearId int) {
 	query := `SELECT
 	katanomi_ba8mon_spoudaston_0_39,
 	katanomi_ba8mon_spoudaston_4_49,
@@ -51,7 +52,8 @@ func (f *LessonCreateReportFormEntry14) Load(lessonId int) {
 	FROM LessonCreateReportFormEntry14
 	WHERE lesson = $1`
 
-	err := Db.Database.QueryRow(query, lessonId).
+	err := Db.Database.QueryRow(query, lessonId,
+		akademicYearId).
 		Scan(&f.Field1,
 		&f.Field2,
 		&f.Field3,

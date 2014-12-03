@@ -2,7 +2,8 @@ package DbSchema
 
 const LessonCreateReportFormEntry14 = `
 CREATE TABLE LessonCreateReportFormEntry14 (
-	lesson                                  int references lesson(id) on delete cascade,
+	lesson int references lesson(id) on delete cascade,
+	akademic_year int references akademic_year(id) on delete cascade,
 	katanomi_ba8mon_spoudaston_0_39                                     int default 0,
 	katanomi_ba8mon_spoudaston_4_49                                     int default 0,
 	katanomi_ba8mon_spoudaston_5_59                                     int default 0,

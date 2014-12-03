@@ -15,11 +15,11 @@ type TeacherCreateReportFormEntry1 struct {
 	Field6  string `schema:"type"`
 }
 
-func (f *TeacherCreateReportFormEntry1) Create(teacherId int) {
+func (f *TeacherCreateReportFormEntry1) Create(teacherId int, akademicYearId int) {
 	query := `INSERT INTO TeacherCreateReportFormEntry1
 			  (author, title, is_magazine, publisher,
 			   publication_date, type, teacher)
-			  VALUES($1, $2, $3, $4, $5, $6, $7)`
+			  VALUES($1, $2, $3, $4, $5, $6, $7, $8)`
 
 	_, err := Db.Database.Exec(query,
 								f.Field1,
@@ -28,17 +28,18 @@ func (f *TeacherCreateReportFormEntry1) Create(teacherId int) {
 								f.Field4,
 								f.Field5,
 								f.Field6,
-								teacherId)
+								teacherId,
+                                akademicYearId)
 
 	Db.CheckQueryWithNoRows(err, query)
 }
 
-func (f *TeacherCreateReportFormEntry1) Update() {
+func (f *TeacherCreateReportFormEntry1) Update(akademicYearId int) {
 	query := `UPDATE TeacherCreateReportFormEntry1
 			  SET author = $1, title = $2, is_magazine = $3,
 			  publisher = $4,
 			  publication_date = $5, type = $6
-			  WHERE id = $7`
+			  WHERE id = $7 and akademic_year = $8`
 
 	_, err := Db.Database.Exec(query,
 							f.Field1,
@@ -47,21 +48,22 @@ func (f *TeacherCreateReportFormEntry1) Update() {
 							f.Field4,
 							f.Field5,
 							f.Field6,
-							f.Id)
+							f.Id,
+                            akademicYearId)
 
 	Db.CheckQueryWithNoRows(err, query)
 }
 
-func ListAllTeacherCreateReportForm1(teacherId int) []TeacherCreateReportFormEntry1 {
+func ListAllTeacherCreateReportForm1(teacherId int, akademicYearId int) []TeacherCreateReportFormEntry1 {
 	var formList []TeacherCreateReportFormEntry1
 
 	query := `SELECT
 			  id, author, title, is_magazine,
 			  publisher, publication_date, type
 			  FROM TeacherCreateReportFormEntry1
-			  WHERE teacher = $1`
+			  WHERE teacher = $1 AND akademic_year = $2`
 
-	rows, err := Db.Database.Query(query, teacherId)
+	rows, err := Db.Database.Query(query, teacherId, akademicYearId)
 
 	if err != nil {
 		panic(err)

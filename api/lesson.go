@@ -135,7 +135,7 @@ func LessonPreDegreeCreateReport (resp http.ResponseWriter, req *http.Request) {
 
 	formNumber, paramErr := strconv.Atoi(id)
 	lessonId, paramErr2 := strconv.Atoi(id2)
-    _, paramErr3 := strconv.Atoi(id3)
+    akademicYearId, paramErr3 := strconv.Atoi(id3)
 
 	if paramErr != nil || !ok {
 		panic(paramErr)
@@ -158,67 +158,67 @@ func LessonPreDegreeCreateReport (resp http.ResponseWriter, req *http.Request) {
 	case 1:
 		form := &forms.LessonCreateReportFormEntry1{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId, akademicYearId)
 	case 2:
 		form := &forms.LessonCreateReportFormEntry2{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId, akademicYearId)
 	case 3:
 		form := &forms.LessonCreateReportFormEntry3{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId, akademicYearId)
 	case 4:
 		form := &forms.LessonCreateReportFormEntry4{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId, akademicYearId)
 	case 5:
 		form := &forms.LessonCreateReportFormEntry5{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId,akademicYearId)
 	case 6:
 		form := &forms.LessonCreateReportFormEntry6{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId,akademicYearId)
 	case 7:
 		form := &forms.LessonCreateReportFormEntry7{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId,akademicYearId)
 	case 8:
 		form := &forms.LessonCreateReportFormEntry8{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId,akademicYearId)
 	case 9:
 		form := &forms.LessonCreateReportFormEntry9{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId, akademicYearId)
 	case 10:
 		form := &forms.LessonCreateReportFormEntry10{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId, akademicYearId)
 	case 11:
 		form := &forms.LessonCreateReportFormEntry11{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId, akademicYearId)
 	case 12:
 		form := &forms.LessonCreateReportFormEntry12{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId, akademicYearId)
 	case 13:
 		form := &forms.LessonCreateReportFormEntry13{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId, akademicYearId)
 	case 14:
 		form := &forms.LessonCreateReportFormEntry14{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId, akademicYearId)
 	case 15:
 		form := &forms.LessonCreateReportFormEntry15{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId, akademicYearId)
 	case 16:
 		form := &forms.LessonCreateReportFormEntry16{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId, akademicYearId)
 	default:
 		unknownErr := "Unknown form: " + id
 		panic(unknownErr)
