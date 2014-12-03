@@ -13,6 +13,6 @@ CREATE TABLE LessonCreateReportFormEntry9 (
         lesson_aksiologisi_ths_epidosis_epeksigiseis_alla                       text default ' ',
         lesson_aksiologisi_ths_epidosis_parakolou8ish_spoudaston_sto_erg        bool default false,
         lesson_aksiologisi_ths_epidosis_sxolia_mesa_eksaminou                   bool default false,
-        lesson_aksiologisi_ths_epidosis_diafania_aksiologisis_tis_epidosis      text default ' ',
+        lesson_aksiologisi_ths_epidosis_diafania_aksiologisis_tis_epidosis      text default ' '
 )
 `
