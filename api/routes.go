@@ -60,10 +60,9 @@ func setupRoutes(n *negroni.Negroni) {
 
 	// Α.Δ. Μαθημάτων Π.Π.Σ.
 	router.Handle("/lesson/list/pre/degree", authorize{LessonListPreDegree}).Methods("GET")
-	router.Handle("/lesson/list/pre/degree/{id:[1-9]+}", authorize{LessonListPreDegreeDepartment}).Methods("GET")
-	router.Handle("/lesson/pre/degree/create/report/{lesson_id:[1-9]+}", authorize{GetLessonPreDegreeCreateReport}).Methods("GET")
-	router.Handle("/lesson/pre/degree/create/report/{id:[0-9]+}/{lesson_id:[0-9]+}", authorize{LessonPreDegreeCreateReport}).Methods("POST")
-
+	router.Handle("/lesson/list/pre/degree/{id:[1-9]+}/{akademicYearId:[1-9]+}", authorize{LessonListPreDegreeDepartment}).Methods("GET")
+	router.Handle("/lesson/pre/degree/create/report/{lesson_id:[0-9]+}/{akademicYearId:[1-9]+}", authorize{GetLessonPreDegreeCreateReport}).Methods("GET")
+	router.Handle("/lesson/pre/degree/create/report/{id:[0-9]+}/{lesson_id:[0-9]+}/{akademicYearId:[1-9]+}", authorize{LessonPreDegreeCreateReport}).Methods("POST")
 	router.Handle("/lesson/list/post/degree", authorize{LessonListPostDegree}).Methods("GET")
 
 
