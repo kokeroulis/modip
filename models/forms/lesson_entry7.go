@@ -21,7 +21,8 @@ WHERE lesson = $4`
 _, err := Db.Database.Exec(query,
         f.Field1,
         f.Field2,
-        f.Field3)
+        f.Field3,
+        lessonId)
 
 Db.CheckQueryWithNoRows(err, query)
 }
@@ -32,7 +33,7 @@ query := `SELECT
         lesson_epikoinonia_ekepedeusi_methodos,
         lesson_epikoinonia_organosi_ekpedeutikon_episkepseon
 FROM LessonCreateReportFormEntry7
-WHERE lesson = $`
+WHERE lesson = $1`
 
 err := Db.Database.QueryRow(query, lessonId).
         Scan(&f.Field1,

@@ -24,7 +24,7 @@ func (f *LessonCreateReportFormEntry6) Load(lessonId int) {
     query := `SELECT
                 lesson_alles_ekpedeutikes_drastiriotites_alles_drastiriotites
                 FROM LessonCreateReportFormEntry6
-                WHERE lesson = $2`
+                WHERE lesson = $1`
 
     err := Db.Database.QueryRow(query, lessonId).
                 Scan(&f.Field1)
