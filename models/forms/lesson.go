@@ -29,7 +29,11 @@ func (f *LessonCreateReportForm) Load() {
 	f.Entry3.Load(f.LessonId, f.AkademicYearId)
 	f.Entry4.Load(f.LessonId, f.AkademicYearId)
 	f.Entry5.Load(f.LessonId, f.AkademicYearId)
-
+	f.Entry6.Load(f.LessonId, f.AkademicYearId)
+	f.Entry7.Load(f.LessonId, f.AkademicYearId)
+	f.Entry8.Load(f.LessonId, f.AkademicYearId)
+	f.Entry9.Load(f.LessonId, f.AkademicYearId)
+	f.Entry10.Load(f.LessonId, f.AkademicYearId)
 	f.Entry11.Load(f.LessonId, f.AkademicYearId)
 	f.Entry12.Load(f.LessonId, f.AkademicYearId)
 	f.Entry13.Load(f.LessonId, f.AkademicYearId)
