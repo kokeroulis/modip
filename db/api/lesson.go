@@ -51,11 +51,11 @@ BEGIN
                 INSERT INTO LessonCreateReportFormEntry9
                 (lesson, akademic_year) VALUES (lessonId, akademic_year_id);
 
-                INSERT INTO LessonCreateReportFormEntry11
+                INSERT INTO LessonCreateReportFormEntry10
                 (lesson, akademic_year) VALUES (lessonId, akademic_year_id);
 
-		INSERT INTO LessonCreateReportFormEntry11
-		(lesson, akademic_year) VALUES (lessonId, akademic_year_id);
+                INSERT INTO LessonCreateReportFormEntry11
+                (lesson, akademic_year) VALUES (lessonId, akademic_year_id);
 
 		INSERT INTO LessonCreateReportFormEntry12
 		(lesson, akademic_year) VALUES (lessonId, akademic_year_id);
