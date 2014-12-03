@@ -1,6 +1,6 @@
 {{template "header.tmpl"}}
 
-{{if .}}
+{{if .lessons}}
   <table>
     <thead>
       <tr>
@@ -12,13 +12,14 @@
       </tr>
     </thead>
     <tbody>
-      {{range $index, $element :=.}}
+      {{$akademicYearId := .akademicYearId}}
+      {{range $index, $element :=.lessons}}
         <tr>
           <td>{{add $index 1}}</td>
           <td>{{.CourseCode}}</td>
           <td>{{.Name}}</td>
           <td>
-            <a href="/lesson/pre/degree/create/report/{{.Id}}">Απογραφικό Δελτίο</a>
+            <a href="/lesson/pre/degree/create/report/{{.Id}}/{{$akademicYearId}}">Απογραφικό Δελτίο</a>
           </td>
         </tr>
       {{end}}

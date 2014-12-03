@@ -4,10 +4,25 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Τμήμα
-        <select id="lessonMoveToDepartment" name="lesson_code_create_lesson_department">
+        <select id="departmentAkademic" name="lesson_code_create_lesson_department">
           <option selected>-- Παρακαλώ Διαλέξτε τμήμα</option>
-          {{range .}}
-            <option value="/lesson/list/pre/degree/{{.Id}}">{{.Name}}</option>
+          {{range .Departments}}
+            <option value="{{.Id}}">{{.Name}}</option>
+          {{end}}
+        </select>
+      </label>
+    </div>
+  </div>
+</form>
+
+<form method="POST">
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Τμήμα
+        <select id="lessonAkademic" name="lesson_code_create_lesson_department">
+          <option selected>-- Παρακαλώ Διαλέξτε Έτος για το Απογραφικό Δελτίο</option>
+          {{range .AkademicYears}}
+            <option value="{{.Id}}">{{.Name}}</option>
           {{end}}
         </select>
       </label>
