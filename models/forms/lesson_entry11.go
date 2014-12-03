@@ -1,7 +1,7 @@
 package forms
 
 import (
-	 "github.com/kokeroulis/modip/db"
+	"github.com/kokeroulis/modip/db"
 )
 
 type LessonCreateReportFormEntry11 struct {
@@ -13,14 +13,14 @@ type LessonCreateReportFormEntry11 struct {
 	Field5 string `schema:"aksiopoihsh_texnologion_pliroforikhs_kai_epikoinonion_xrhsimopoiountai_TPT_sthn_epikoinonia_sas_me_tous_spoudastes_pws"`
 }
 
-func (f *LessonCreateReportFormEntry11) Update(lessonId int) {
+func (f *LessonCreateReportFormEntry11) Update(lessonId int, akademicYearId int) {
 	query := `UPDATE LessonCreateReportFormEntry11 SET
 			TPE_sth_didaskalia_tou_ma8imatos = $1,
 			ma8isiaka_boh8imata_basismena_se_TPE = $2,
 			TPE_sthn_ergasthriaki_ekpedeusi = $3,
 			TPE_sthn_aksiologisi_ton_spoudaston_pws = $4,
 			TPT_sthn_epikoinonia_sas_me_tous_spoudastes_pws = $5
-		WHERE lesson = $6`
+		 WHERE lesson = $6 AND akademic_year = $7`
 
 	_, err := Db.Database.Exec(query,
 		f.Field1,
@@ -28,12 +28,13 @@ func (f *LessonCreateReportFormEntry11) Update(lessonId int) {
 		f.Field3,
 		f.Field4,
 		f.Field5,
-		lessonId)
+		lessonId,
+		akademicYearId)
 
 	Db.CheckQueryWithNoRows(err, query)
 }
 
-func (f *LessonCreateReportFormEntry11) Load(lessonId int) {
+func (f *LessonCreateReportFormEntry11) Load(lessonId int, akademicYearId int) {
 	query := `SELECT
 		TPE_sth_didaskalia_tou_ma8imatos,
 		ma8isiaka_boh8imata_basismena_se_TPE,
@@ -43,7 +44,8 @@ func (f *LessonCreateReportFormEntry11) Load(lessonId int) {
 		FROM LessonCreateReportFormEntry11
 		WHERE lesson = $1`
 
-	err := Db.Database.QueryRow(query, lessonId).
+	err := Db.Database.QueryRow(query, lessonId,
+		akademicYearId).
 		Scan(&f.Field1,
 		&f.Field2,
 		&f.Field3,
