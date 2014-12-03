@@ -78,3 +78,16 @@ func getId(req *http.Request) (int, string) {
 
 	return res, id
 }
+
+func getAkademicYearId(req *http.Request) (int, string) {
+	vars := mux.Vars(req)
+	id, ok := vars["akademicYearId"]
+
+	res, err := strconv.Atoi(id)
+
+	if err != nil || !ok {
+		panic(err)
+	}
+
+	return res, id
+}
