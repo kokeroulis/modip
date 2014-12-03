@@ -48,7 +48,20 @@ add_teacher_akademic_year() {
     gofmt -w=true models/forms/teacher_entry${file_number}.go
 }
 
+
+add_lesson_akademic_year 1 3
+add_lesson_akademic_year 2 20
+add_lesson_akademic_year 3 6
+add_lesson_akademic_year 4 3
+add_lesson_akademic_year 5 7
+
+add_lesson_akademic_year 11 6
 add_lesson_akademic_year 12 4
+add_lesson_akademic_year 13 2
+add_lesson_akademic_year 14 8
+add_lesson_akademic_year 15 3
+add_lesson_akademic_year 16 2
 
 add_teacher_akademic_year 2 11
 add_teacher_akademic_year 3 5
+add_teacher_akademic_year 5 2
