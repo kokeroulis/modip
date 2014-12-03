@@ -37,6 +37,18 @@ BEGIN
 	INSERT INTO LessonCreateReportFormEntry5
 	(lesson) VALUES (lessonId);
 
+	INSERT INTO LessonCreateReportFormEntry6
+	(lesson) VALUES (lessonId);
+
+	INSERT INTO LessonCreateReportFormEntry7
+	(lesson) VALUES (lessonId);
+
+	INSERT INTO LessonCreateReportFormEntry8
+	(lesson) VALUES (lessonId);
+
+	INSERT INTO LessonCreateReportFormEntry9
+	(lesson) VALUES (lessonId);
+
 	INSERT INTO LessonCreateReportFormEntry11
 	(lesson) VALUES (lessonId);
 

@@ -8,7 +8,7 @@ type LessonCreateReportForm struct {
 	Entry4       LessonCreateReportFormEntry4
 	Entry5       LessonCreateReportFormEntry5
 
-    Entry6       LessonCreateReportFormEntry6
+        Entry6       LessonCreateReportFormEntry6
 	Entry7       LessonCreateReportFormEntry7
 	Entry8       LessonCreateReportFormEntry8
 	Entry9       LessonCreateReportFormEntry9
@@ -28,8 +28,10 @@ func (f *LessonCreateReportForm) Load() {
 	f.Entry3.Load(f.LessonId)
 	f.Entry4.Load(f.LessonId)
 	f.Entry5.Load(f.LessonId)
-
-
+	f.Entry6.Load(f.LessonId)
+	f.Entry7.Load(f.LessonId)
+	f.Entry8.Load(f.LessonId)
+	f.Entry9.Load(f.LessonId)
 	f.Entry11.Load(f.LessonId)
 	f.Entry12.Load(f.LessonId)
 	f.Entry13.Load(f.LessonId)
