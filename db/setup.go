@@ -61,6 +61,7 @@ func CreateDb() {
 		DbSchema.LessonCreateReportFormEntry7,
 		DbSchema.LessonCreateReportFormEntry8,
 		DbSchema.LessonCreateReportFormEntry9,
+		DbSchema.LessonCreateReportFormEntry10,
 		DbSchema.LessonCreateReportFormEntry11,
 		DbSchema.LessonCreateReportFormEntry12,
 		DbSchema.LessonCreateReportFormEntry13,

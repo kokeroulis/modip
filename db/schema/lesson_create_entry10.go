@@ -1,6 +1,6 @@
 package DbSchema
 
-const LessonCreateReportFormEntryi10 = `
+const LessonCreateReportFormEntry10 = `
 CREATE TABLE LessonCreateReportFormEntry10 (
         lesson int references lesson(id) on delete cascade,
         dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_ai8ouses_didaskalias_pou_xrisimopoiountai text default ' ',
