@@ -43,8 +43,8 @@ func setupRoutes(n *negroni.Negroni) {
 	router.Handle("/teacher/report/list", authorize{GetTeacherListReport}).Methods("GET")
 	router.Handle("/teacher/report/{akademicYearId:[0-9]+}", authorize{GetTeacherCreateReport}).Methods("GET")
 	router.Handle("/teacher/report/1", authorize{TeacherCreateReport1}).Methods("POST")
-    router.Handle("/teacher/report/1/edit/{id:[0-9],akademicYearId:[0-9]+}", authorize{GetTeacherCreateReport1Edit}).Methods("GET")
-	router.Handle("/teacher/report/1/edit/{id:[0-9],akademicYearId:[0-9]+}", authorize{TeacherCreateReport1Edit}).Methods("POST")
+    router.Handle("/teacher/report/1/edit/{id:[0-9]}/{akademicYearId:[0-9]+}", authorize{GetTeacherCreateReport1Edit}).Methods("GET")
+	router.Handle("/teacher/report/1/edit/{id:[0-9]}/{/akademicYearId:[0-9]+}", authorize{TeacherCreateReport1Edit}).Methods("POST")
 
 
 	router.Handle("/teacher/report/{id:[2-5]}/{akademicYearId:[0-9]+}", authorize{TeacherCreateReport}).Methods("POST")

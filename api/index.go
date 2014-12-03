@@ -15,7 +15,7 @@ func Index(resp http.ResponseWriter, req *http.Request) {
 	teacherId := models.GetTeacherFromSession(req).Id
 
 	if teacherId != 0 {
-		http.Redirect(resp, req, "/teacher/report", http.StatusMovedPermanently)
+		http.Redirect(resp, req, "/teacher/report/list", http.StatusMovedPermanently)
 		return
 	}
 
@@ -48,7 +48,7 @@ func teacherLogin(l *LoginForm, resp http.ResponseWriter, req *http.Request) {
 		session := models.GetSession(req)
 		session.Values["teacher"] = &t
 		session.Save(req, resp)
-		http.Redirect(resp, req, "/teacher/report", http.StatusMovedPermanently)
+		http.Redirect(resp, req, "/teacher/report/list", http.StatusMovedPermanently)
 	} else {
 		var helpers []string
 		data := make(map[string]string)

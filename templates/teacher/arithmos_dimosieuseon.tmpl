@@ -12,6 +12,7 @@
     </tr>
   </thead>
   <tbody>
+    {{$akademicYearId := .akademicYearId}}
     {{range .t.Entry1}}
       <tr>
         <td>{{.Field1}}</td>
@@ -20,7 +21,7 @@
         <td>{{.Field4}}</td>
         <td>{{.Field5}}</td>
         <td>{{.Field6}}</td>
-        <td><a href="/teacher/report/1/edit/{{.Id}}">Επεξεργασία</a></td>
+        <td><a href="/teacher/report/1/edit/{{.Id}}/{{$akademicYearId}}">Επεξεργασία</a></td>
       </tr>
     {{end}}
   </tbody>
