@@ -1,6 +1,6 @@
 start:
 	@./scripts/helper.sh run
-.PHONY: install
+.PHONY: start
 
 install:
 	@./scripts/helper.sh install
