@@ -50,8 +50,21 @@ func GetTeacherCreateReport(resp http.ResponseWriter, req *http.Request) {
 	}
 
 	t.Load()
+    akademicYearId, _ := getAkademicYearId(req)
 
-	RenderTemplate("teacher/report", helpers, resp, t)
+    data := map[string]interface{}{
+        "t": t,
+        "akademicYearId": akademicYearId,
+    }
+
+	RenderTemplate("teacher/report", helpers, resp, data)
+}
+
+func GetTeacherListReport(resp http.ResponseWriter, req *http.Request) {
+    var helpers []string
+    akademicYears := models.ListAkademicYears()
+
+	RenderTemplate("teacher/report_list", helpers, resp, akademicYears)
 }
 
 func TeacherCreateReport1(resp http.ResponseWriter, req *http.Request) {
@@ -64,7 +77,7 @@ func TeacherCreateReport1(resp http.ResponseWriter, req *http.Request) {
 
 	form.Create(teacherId)
 
-    http.Redirect(resp, req, "/teacher/report", http.StatusMovedPermanently)
+    http.Redirect(resp, req, "/teacher/report/list", http.StatusMovedPermanently)
 }
 
 func TeacherCreateReport(resp http.ResponseWriter, req *http.Request) {
@@ -101,7 +114,7 @@ func TeacherCreateReport(resp http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-    http.Redirect(resp, req, "/teacher/report", http.StatusMovedPermanently)
+    http.Redirect(resp, req, "/teacher/report/list", http.StatusMovedPermanently)
 }
 
 func GetTeacherCreateReport1Edit(resp http.ResponseWriter, req *http.Request) {

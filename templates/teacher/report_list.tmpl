@@ -1,0 +1,18 @@
+{{template "header.tmpl"}}
+
+<form method="POST">
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Τμήμα
+        <select id="lessonMoveToDepartment" name="lesson_code_create_lesson_department">
+          <option selected>-- Παρακαλώ Διαλέξτε Έτος για το Απογραφικό Δελτίο</option>
+          {{range .}}
+            <option value="/teacher/report/{{.Id}}">{{.Name}}</option>
+          {{end}}
+        </select>
+      </label>
+    </div>
+  </div>
+</form>
+
+{{template "footer.tmpl"}}
