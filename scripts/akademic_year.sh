@@ -19,6 +19,7 @@ add_lesson_akademic_year() {
     sed -i 's/Load(lessonId int)/Load(lessonId int, akademicYearId int)/' models/forms/lesson_entry${file_number}.go
     sed -i 's/Update(lessonId int)/Update(lessonId int, akademicYearId int)/' models/forms/lesson_entry${file_number}.go
     sed -i 's/lessonId)/lessonId,\n\takademicYearId)/' models/forms/lesson_entry${file_number}.go
+    sed -i 's/lesson                      int references lesson(id) on delete cascade,/lesson                      int references lesson(id) on delete cascade,\n\takademic_year int references akademic_year(id) on delete cascade,/' db/schema/lesson_create_entry${file_number}.go
 
     gofmt -w=true models/forms/lesson_entry${file_number}.go
 }
