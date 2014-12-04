@@ -30,7 +30,7 @@ func (f *LessonCreateReportFormEntry1) Load(lessonId int, akademicYearId int) {
 			  lesson_perigrafi_periexomeno_ma8imatos,
 			  lesson_perigrafi_ma8isiakoi_stoxoi
 			  FROM LessonCreateReportFormEntry1
-			  WHERE lesson = $1`
+			  WHERE lesson = $1 AND akademic_year = $2`
 
 	err := Db.Database.QueryRow(query, lessonId,
 		akademicYearId).
