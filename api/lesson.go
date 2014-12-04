@@ -62,13 +62,15 @@ func GetLessonPreDegreeCreateReport (resp http.ResponseWriter, req *http.Request
 		panic(paramErr)
 	}
 
+	  akademicYearId, _ := getAkademicYearId(req)
+
 	l := forms.LessonCreateReportForm{
-		LessonId: lessonId,
+		LessonId:     lessonId,
+		AkademicYearId: akademicYearId,
 	}
 
 	l.Load()
 
-    akademicYearId, _ := getAkademicYearId(req)
     data := map[string]interface{}{
         "lessons": l,
         "akademicYearId": akademicYearId,
