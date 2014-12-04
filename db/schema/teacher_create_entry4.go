@@ -4,8 +4,9 @@ const TeacherCreateReportFormEntry4 =`
 CREATE SEQUENCE seq_TeacherCreateReportFormEntry4Ids;
 
 CREATE TABLE TeacherCreateReportFormEntry4 (
-	id      int primary key default nextval('seq_TeacherCreateReportFormEntry4Ids'),
-	teacher int references teacher(id) on delete cascade,
+	id            int primary key default nextval('seq_TeacherCreateReportFormEntry4Ids'),
+	teacher       int references teacher(id) on delete cascade,
+	akademic_year int references akademic_year(id) on delete cascade,
 
 	ereunitikes_ypodomes_arithmos_kai_xwritikotita_ereunitikon_ergasthrion_pou_xrisimopoieitai    text default ' ',
 	ereunitikes_ypodomes_eparkeia_katalilotita_kai_poiotita_ton_ereunitikon_ergasthrion           text default ' ',
