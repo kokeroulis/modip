@@ -44,13 +44,14 @@ func GetTeacherCreateReport(resp http.ResponseWriter, req *http.Request) {
         "templates/teacher/eureunitika_programmata_kai_erga.tmpl",
         "templates/teacher/sundesi_me_tin_koinonia.tmpl",
     }
+    akademicYearId, _ := getAkademicYearId(req)
 
 	t := forms.TeacherCreateReportForm{
 		TeacherId: models.GetTeacherFromSession(req).Id,
+        AkademicYearId: akademicYearId,
 	}
 
 	t.Load()
-    akademicYearId, _ := getAkademicYearId(req)
 
     data := map[string]interface{}{
         "t": t,

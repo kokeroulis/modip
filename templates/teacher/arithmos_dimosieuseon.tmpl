@@ -1,4 +1,5 @@
 <div class="large-6 columns">
+{{.akademicYearId}}
 <table>
   <thead>
     <tr>
@@ -28,7 +29,7 @@
 </table>
 
 <h2 class="subheader">Προσθήκη Καινούργιου</h2>
-<form method="POST" action="/teacher/report/1">
+<form method="POST" action="/teacher/report/1/{{$akademicYearId}}">
   <div class="row">
     <div class="large-12 columns">
       <label>Συγγραφέας
