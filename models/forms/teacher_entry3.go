@@ -38,7 +38,7 @@ func (f *TeacherCreateReportFormEntry3) Load(teacherId int, akademicYearId int) 
 		ereunikita_programmata_kai_erga_summetoxi_eksoterikon_sunergaton,
 		ereunikita_programmata_kai_erga_summetoxi_foithton
 		FROM TeacherCreateReportFormEntry3
-		WHERE teacher = $1`
+		WHERE teacher = $1 AND akademic_year = $2`
 
 	err := Db.Database.QueryRow(query, teacherId,
 		akademicYearId).

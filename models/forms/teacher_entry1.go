@@ -18,7 +18,7 @@ type TeacherCreateReportFormEntry1 struct {
 func (f *TeacherCreateReportFormEntry1) Create(teacherId int, akademicYearId int) {
 	query := `INSERT INTO TeacherCreateReportFormEntry1
 			  (author, title, is_magazine, publisher,
-			   publication_date, type, teacher)
+			   publication_date, type, teacher, akademic_year)
 			  VALUES($1, $2, $3, $4, $5, $6, $7, $8)`
 
 	_, err := Db.Database.Exec(query,

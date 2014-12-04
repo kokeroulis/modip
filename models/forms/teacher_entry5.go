@@ -26,7 +26,7 @@ func (f *TeacherCreateReportFormEntry5) Load(teacherId int, akademicYearId int) 
 	query := `SELECT
 			sundesi_me_thn_koinonia_sundesi_me_tin_koinonia
 			FROM TeacherCreateReportFormEntry5
-			WHERE teacher = $1`
+			WHERE teacher = $1 AND akademic_year = $2`
 
 	err := Db.Database.QueryRow(query, teacherId,
 		akademicYearId).
