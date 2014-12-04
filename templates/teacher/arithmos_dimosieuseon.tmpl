@@ -12,7 +12,8 @@
     </tr>
   </thead>
   <tbody>
-    {{range .Entry1}}
+    {{$akademicYearId := .akademicYearId}}
+    {{range .t.Entry1}}
       <tr>
         <td>{{.Field1}}</td>
         <td>{{.Field2}}</td>
@@ -20,14 +21,14 @@
         <td>{{.Field4}}</td>
         <td>{{.Field5}}</td>
         <td>{{.Field6}}</td>
-        <td><a href="/teacher/report/1/edit/{{.Id}}">Επεξεργασία</a></td>
+        <td><a href="/teacher/report/1/edit/{{.Id}}/{{$akademicYearId}}">Επεξεργασία</a></td>
       </tr>
     {{end}}
   </tbody>
 </table>
 
 <h2 class="subheader">Προσθήκη Καινούργιου</h2>
-<form method="POST" action="/teacher/report/1">
+<form method="POST" action="/teacher/report/1/{{$akademicYearId}}">
   <div class="row">
     <div class="large-12 columns">
       <label>Συγγραφέας

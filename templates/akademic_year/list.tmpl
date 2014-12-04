@@ -1,0 +1,29 @@
+{{template "header.tmpl"}}
+{{if .}}
+  <table>
+    <thead>
+      <tr>
+        <th >A/A</th>
+        <th>Ονομα</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{range $index, $element := .}}
+        <tr>
+          <td>{{add $index 1}}</td>
+          <td>{{.Name}}</td>
+          <td>
+            <a href="/akademic/year/edit/{{.Id}}">Επεξεργασία</a>
+          </td>
+        </tr>
+      {{end}}
+    </tbody>
+  </table>
+{{else}}
+  <div data-alert="" class="alert-box alert round">
+    <p class="text-center">Δεν υπάρχουνε ακαδημαϊκά έτη.</p>
+  </div>
+{{end}}
+
+<a class="button" href="/akademic/year/create">Νέα Εγγραφή</a>
+{{template "footer.tmpl"}}

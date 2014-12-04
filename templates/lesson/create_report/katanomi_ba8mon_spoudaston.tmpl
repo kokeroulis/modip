@@ -1,6 +1,6 @@
 <div class="large-6 columns">
 
-<form method="POST" action="/lesson/pre/degree/create/report/14/{{.LessonId}}">
+<form method="POST" action="/lesson/pre/degree/create/report/14/{{.lessons.LessonId}}/{{.akademicYearId}}">
   <div class="row">
     <div class="large-12 columns">
       <label>Συμπληρώστε με το επί τις εκατό ποσοστό (%) των σπουδαστών που αξιολογήθηκαν σε κάθε ομάδα βαθμολογίας: (Δεκαδικοί αριθμοί από 0 ως 100)
@@ -12,7 +12,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>0-3.9
-        <input value="{{.Entry14.Field1}}" name="katanomi_ba8mon_spoudaston_0_39" type="number" placeholder=""/>
+        <input value="{{.lessons.Entry14.Field1}}" name="katanomi_ba8mon_spoudaston_0_39" type="number" placeholder=""/>
       </label>
     </div>
   </div>
@@ -21,7 +21,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>4-4.9
-        <input value="{{.Entry14.Field2}}" name="katanomi_ba8mon_spoudaston_4_49" type="number" placeholder=""/>
+        <input value="{{.lessons.Entry14.Field2}}" name="katanomi_ba8mon_spoudaston_4_49" type="number" placeholder=""/>
       </label>
     </div>
   </div>
@@ -29,7 +29,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>5-5.9
-        <input value="{{.Entry14.Field3}}" name="katanomi_ba8mon_spoudaston_5_59" type="number" placeholder=""/>
+        <input value="{{.lessons.Entry14.Field3}}" name="katanomi_ba8mon_spoudaston_5_59" type="number" placeholder=""/>
       </label>
     </div>
   </div>
@@ -38,7 +38,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>6-6.9
-        <input value="{{.Entry14.Field4}}" name="katanomi_ba8mon_spoudaston_6_69" type="number" placeholder=""/>
+        <input value="{{.lessons.Entry14.Field4}}" name="katanomi_ba8mon_spoudaston_6_69" type="number" placeholder=""/>
       </label>
     </div>
   </div>
@@ -46,7 +46,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>7-8.4
-        <input value="{{.Entry14.Field5}}" name="katanomi_ba8mon_spoudaston_7_84" type="number" placeholder=""/>
+        <input value="{{.lessons.Entry14.Field5}}" name="katanomi_ba8mon_spoudaston_7_84" type="number" placeholder=""/>
       </label>
     </div>
   </div>
@@ -55,7 +55,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>8.5-10
-        <input value="{{.Entry14.Field6}}" name="katanomi_ba8mon_spoudaston_85_10" type="number" placeholder=""/>
+        <input value="{{.lessons.Entry14.Field6}}" name="katanomi_ba8mon_spoudaston_85_10" type="number" placeholder=""/>
       </label>
     </div>
   </div>
@@ -64,7 +64,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Μέσος όρος βαθμολογίας (σύνολο σπουδαστών)
-        <input value="{{.Entry14.Field7}}" name="katanomi_ba8mon_spoudaston_mesos_oros_ba8mologias_sunolo_spoudaston" type="number" placeholder=""/>
+        <input value="{{.lessons.Entry14.Field7}}" name="katanomi_ba8mon_spoudaston_mesos_oros_ba8mologias_sunolo_spoudaston" type="number" placeholder=""/>
       </label>
       <small>Δεκαδικός αριθμός από 0 ως 10</small>
     </div>

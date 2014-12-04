@@ -1,15 +1,15 @@
 package DbApi
 
-const LessonCreate = `
-CREATE OR REPLACE FUNCTION lesson_create(lessonName text, departmentId int,
-                                         is_post_degree boolean, courseCodeLesson text,
-										 cdCode text, OUT alreadyExists boolean) AS $$
+const AkademicYear = `
+CREATE OR REPLACE FUNCTION akademic_year_create(akademic_year_name text,
+										 out alreadyExists boolean) AS $$
 DECLARE
-	lessonId int;
 	akademic_year_id int;
+	lessonId int;
+	teacherId int;
 BEGIN
-	PERFORM * FROM lesson
-	WHERE name = lessonName AND department = departmentId;
+	PERFORM * FROM akademic_year
+	WHERE name = akademic_year_name;
 
 	IF FOUND THEN
 		alreadyExists := TRUE;
@@ -18,12 +18,12 @@ BEGIN
 		alreadyExists := FALSE;
 	END IF;
 
-	INSERT INTO lesson
-	(name, department, isPostDegree, courseCode, cardisoftCode)
-	VALUES (lessonName, departmentId, is_post_degree, courseCodeLesson, cdCode)
-	RETURNING id INTO lessonId;
+	INSERT INTO akademic_year
+	(name)
+	VALUES (akademic_year_name)
+	RETURNING id INTO akademic_year_id;
 
-	FOR akademic_year_id IN SELECT id FROM akademic_year LOOP
+	FOR lessonId IN SELECT id FROM lesson LOOP
 		INSERT INTO LessonCreateReportFormEntry1
 		(lesson, akademic_year) VALUES (lessonId, akademic_year_id);
 
@@ -58,7 +58,20 @@ BEGIN
 		INSERT INTO LessonCreateReportFormEntry16
 		(lesson, akademic_year) VALUES (lessonId, akademic_year_id);
 	END LOOP;
+
+	FOR teacherId IN SELECT id FROM teacher LOOP
+		INSERT INTO TeacherCreateReportFormEntry2
+		(teacher, akademic_year) VALUES (teacherId, akademic_year_id);
+
+		INSERT INTO TeacherCreateReportFormEntry3
+		(teacher, akademic_year) VALUES (teacherId, akademic_year_id);
+
+		INSERT INTO TeacherCreateReportFormEntry4
+		(teacher, akademic_year) VALUES (teacherId, akademic_year_id);
+
+		INSERT INTO TeacherCreateReportFormEntry5
+		(teacher, akademic_year) VALUES (teacherId, akademic_year_id);
+	END LOOP;
 END;
 $$ LANGUAGE plpgsql;
 `
-

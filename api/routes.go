@@ -33,13 +33,20 @@ func setupRoutes(n *negroni.Negroni) {
 
 	router.Handle("/category/save", authorize{CategorySave}).Methods("POST")
 
-	// Α.Δ. Εκπ. Προσωπικού
-	router.Handle("/teacher/report", authorize{GetTeacherCreateReport}).Methods("GET")
-	router.Handle("/teacher/report/1", authorize{TeacherCreateReport1}).Methods("POST")
-	router.Handle("/teacher/report/1/edit", authorize{GetTeacherCreateReport1Edit}).Methods("GET")
-	router.Handle("/teacher/report/1/edit/{id:[1-9]+}", authorize{TeacherCreateReport1Edit}).Methods("POST")
+    router.Handle("/akademic/year/list", authorize{GetAkademicYearList}).Methods("GET")
+    router.Handle("/akademic/year/create", authorize{GetAkademicYearCreate}).Methods("GET")
+    router.Handle("/akademic/year/create", authorize{AkademicYearCreate}).Methods("POST")
+    router.Handle("/akademic/year/edit/{id:[1-9]+}", authorize{GetAkademicYearEdit}).Methods("GET")
+    router.Handle("/akademic/year/edit", authorize{AkademicYearEdit}).Methods("POST")
 
-	router.Handle("/teacher/report/{id:[2-5]}", authorize{TeacherCreateReport}).Methods("POST")
+	// Α.Δ. Εκπ. Προσωπικού
+	router.Handle("/teacher/report/list", authorize{GetTeacherListReport}).Methods("GET")
+	router.Handle("/teacher/report/{akademicYearId:[0-9]+}", authorize{GetTeacherCreateReport}).Methods("GET")
+	router.Handle("/teacher/report/1/{akademicYearId:[0-9]+}", authorize{TeacherCreateReport1}).Methods("POST")
+    router.Handle("/teacher/report/1/edit/{id:[0-9]}/{akademicYearId:[0-9]+}", authorize{GetTeacherCreateReport1Edit}).Methods("GET")
+	router.Handle("/teacher/report/1/edit/{id:[0-9]}/{akademicYearId:[0-9]+}", authorize{TeacherCreateReport1Edit}).Methods("POST")
+
+	router.Handle("/teacher/report/{id:[2-5]}/{akademicYearId:[0-9]+}", authorize{TeacherCreateReport}).Methods("POST")
 
 	// Α.Δ. Ερευν. Προγραμ.
 	router.Handle("/research/program", authorize{GetResearchProgram}).Methods("GET")
@@ -51,9 +58,9 @@ func setupRoutes(n *negroni.Negroni) {
 
 	// Α.Δ. Μαθημάτων Π.Π.Σ.
 	router.Handle("/lesson/list/pre/degree", authorize{LessonListPreDegree}).Methods("GET")
-	router.Handle("/lesson/list/pre/degree/{id:[1-9]+}", authorize{LessonListPreDegreeDepartment}).Methods("GET")
-	router.Handle("/lesson/pre/degree/create/report/{lesson_id:[1-9]+}", authorize{GetLessonPreDegreeCreateReport}).Methods("GET")
-	router.Handle("/lesson/pre/degree/create/report/{id:[1-9]+}/{lesson_id:[1-9]+}", authorize{LessonPreDegreeCreateReport}).Methods("POST")
+	router.Handle("/lesson/list/pre/degree/{id:[1-9]+}/{akademicYearId:[1-9]+}", authorize{LessonListPreDegreeDepartment}).Methods("GET")
+	router.Handle("/lesson/pre/degree/create/report/{lesson_id:[0-9]+}/{akademicYearId:[1-9]+}", authorize{GetLessonPreDegreeCreateReport}).Methods("GET")
+	router.Handle("/lesson/pre/degree/create/report/{id:[0-9]+}/{lesson_id:[0-9]+}/{akademicYearId:[1-9]+}", authorize{LessonPreDegreeCreateReport}).Methods("POST")
 
 	router.Handle("/lesson/list/post/degree", authorize{LessonListPostDegree}).Methods("GET")
 

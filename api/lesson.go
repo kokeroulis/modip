@@ -12,7 +12,13 @@ import (
 
 func LessonListPreDegree(resp http.ResponseWriter, req *http.Request) {
 	var helpers []string
-	RenderTemplate("lesson/list", helpers, resp, models.ListAllDepartments(false))
+
+    data := map[string]interface{}{
+        "Departments": models.ListAllDepartments(false),
+        "AkademicYears": models.ListAkademicYears(),
+    }
+
+	RenderTemplate("lesson/list", helpers, resp, data)
 }
 
 func LessonListPreDegreeDepartment(resp http.ResponseWriter, req *http.Request) {
@@ -31,8 +37,14 @@ func LessonListPreDegreeDepartment(resp http.ResponseWriter, req *http.Request) 
 
 	d.LoadLessons(false)
 
+    akademicYearId, _ := getAkademicYearId(req)
+    data := map[string]interface{}{
+        "lessons": d.Lessons,
+        "akademicYearId": akademicYearId,
+    }
+
 	var helpers []string
-	RenderTemplate("lesson/list_department", helpers, resp, d.Lessons)
+	RenderTemplate("lesson/list_department", helpers, resp, data)
 }
 
 func LessonListPostDegree(resp http.ResponseWriter, req *http.Request) {
@@ -50,11 +62,19 @@ func GetLessonPreDegreeCreateReport (resp http.ResponseWriter, req *http.Request
 		panic(paramErr)
 	}
 
+	  akademicYearId, _ := getAkademicYearId(req)
+
 	l := forms.LessonCreateReportForm{
-		LessonId: lessonId,
+		LessonId:     lessonId,
+		AkademicYearId: akademicYearId,
 	}
 
 	l.Load()
+
+    data := map[string]interface{}{
+        "lessons": l,
+        "akademicYearId": akademicYearId,
+    }
 
 	helpers := []string{
 		"templates/lesson/create_report/perigrafi.tmpl",
@@ -75,7 +95,7 @@ func GetLessonPreDegreeCreateReport (resp http.ResponseWriter, req *http.Request
         "templates/lesson/create_report/sxolia.tmpl",
 	}
 
-	RenderTemplate("lesson/create_report/create_report", helpers, resp, l)
+	RenderTemplate("lesson/create_report/create_report", helpers, resp, data)
 }
 
 func GetLessonEdit (resp http.ResponseWriter, req *http.Request) {
@@ -113,16 +133,22 @@ func LessonPreDegreeCreateReport (resp http.ResponseWriter, req *http.Request) {
 	vars := mux.Vars(req)
 	id, ok := vars["id"]
 	id2, ok2 := vars["lesson_id"]
+	id3, ok3 := vars["akademicYearId"]
 
 	formNumber, paramErr := strconv.Atoi(id)
 	lessonId, paramErr2 := strconv.Atoi(id2)
+    akademicYearId, paramErr3 := strconv.Atoi(id3)
 
 	if paramErr != nil || !ok {
 		panic(paramErr)
 	}
 
 	if !ok2 || paramErr2 != nil {
-		panic(paramErr)
+		panic(paramErr2)
+	}
+
+	if !ok3 || paramErr3 != nil {
+		panic(paramErr3)
 	}
 
 	decoder := schema.NewDecoder()
@@ -134,47 +160,47 @@ func LessonPreDegreeCreateReport (resp http.ResponseWriter, req *http.Request) {
 	case 1:
 		form := &forms.LessonCreateReportFormEntry1{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId, akademicYearId)
 	case 2:
 		form := &forms.LessonCreateReportFormEntry2{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId, akademicYearId)
 	case 3:
 		form := &forms.LessonCreateReportFormEntry3{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId, akademicYearId)
 	case 4:
 		form := &forms.LessonCreateReportFormEntry4{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId, akademicYearId)
 	case 5:
 		form := &forms.LessonCreateReportFormEntry5{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId, akademicYearId)
 	case 11:
 		form := &forms.LessonCreateReportFormEntry11{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId, akademicYearId)
 	case 12:
 		form := &forms.LessonCreateReportFormEntry12{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId, akademicYearId)
 	case 13:
 		form := &forms.LessonCreateReportFormEntry13{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId, akademicYearId)
 	case 14:
 		form := &forms.LessonCreateReportFormEntry14{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId, akademicYearId)
 	case 15:
 		form := &forms.LessonCreateReportFormEntry15{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId, akademicYearId)
 	case 16:
 		form := &forms.LessonCreateReportFormEntry16{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(lessonId)
+		form.Update(lessonId, akademicYearId)
 	default:
 		unknownErr := "Unknown form: " + id
 		panic(unknownErr)
@@ -184,7 +210,7 @@ func LessonPreDegreeCreateReport (resp http.ResponseWriter, req *http.Request) {
 		panic(err)
 	}
 
-	url := "/lesson/pre/degree/create/report/" + id2
+	url := "/lesson/pre/degree/create/report/" + id2 + "/" + id3
 	http.Redirect(resp, req, url , http.StatusMovedPermanently)
 }
 

@@ -1,11 +1,11 @@
 <div class="large-6 columns">
 
-<form method="POST" action="/teacher/report/2">
+<form method="POST" action="/teacher/report/2/{{.akademicYearId}}">
 
   <div class="row">
     <div class="large-12 columns">
       <label>Ετεροαναφορές
-        <input name="anagnorish_tou_episthmonikou_kai_allou_ergou_eteroanafores" value="{{.Entry2.Field1}}" type="number" placeholder="">
+        <input name="anagnorish_tou_episthmonikou_kai_allou_ergou_eteroanafores" value="{{.t.Entry2.Field1}}" type="number" placeholder="">
       </label>
       <small>Ακέραιος αριθμός</small>
     </div>
@@ -15,7 +15,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Αναφορές του Ειδικού / Επιστημονικού Τύπου
-        <input name="anagnorish_tou_episthmonikou_kai_allou_ergou_anafores_tou_eidikou_episthmonikou_typou" value="{{.Entry2.Field2}}" type="number" placeholder="">
+        <input name="anagnorish_tou_episthmonikou_kai_allou_ergou_anafores_tou_eidikou_episthmonikou_typou" value="{{.t.Entry2.Field2}}" type="number" placeholder="">
       </label>
       <small>Ακέραιος αριθμός</small>
     </div>
@@ -25,7 +25,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Συμμετοχές σε Επιτροπές Επιστημονικών Συνεδρίων
-        <input name="anagnorish_tou_episthmonikou_kai_allou_ergou_summetoxes_se_epitropes_episthmonikon_sunedrion" value="{{.Entry2.Field3}}" type="number" placeholder="">
+        <input name="anagnorish_tou_episthmonikou_kai_allou_ergou_summetoxes_se_epitropes_episthmonikon_sunedrion" value="{{.t.Entry2.Field3}}" type="number" placeholder="">
       </label>
       <small>Ακέραιος αριθμός</small>
     </div>
@@ -35,7 +35,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Συμμετοχές σε συντακτικές επιτροπές επιστημονικών περιοδικών
-      <input name="anagnorish_tou_episthmonikou_kai_allou_ergou_summetoxes_se_suntaktikes_epitropes_episthmonikon_sunedrion" value="{{.Entry2.Field4}}" type="number" placeholder="">
+      <input name="anagnorish_tou_episthmonikou_kai_allou_ergou_summetoxes_se_suntaktikes_epitropes_episthmonikon_sunedrion" value="{{.t.Entry2.Field4}}" type="number" placeholder="">
       </label>
       <small>Ακέραιος αριθμός</small>
     </div>
@@ -45,7 +45,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Κριτής σε Επιστημονικά Περιοδικά
-        <input name="anagnorish_tou_episthmonikou_kai_allou_ergou_kritis_se_episthmonika_periodika" value="{{.Entry2.Field5}}" type="number" placeholder="">
+        <input name="anagnorish_tou_episthmonikou_kai_allou_ergou_kritis_se_episthmonika_periodika" value="{{.t.Entry2.Field5}}" type="number" placeholder="">
       </label>
       <small>Ακέραιος αριθμός</small>
     </div>
@@ -55,7 +55,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Προσκλήσεις για διαλέξεις σε διεθνή συνέδρια
-        <input name="anagnorish_tou_episthmonikou_kai_allou_ergou_proskliseis_gia_dialekseis_se_die8nh_sunedria" value="{{.Entry2.Field6}}" type="number" placeholder="">
+        <input name="anagnorish_tou_episthmonikou_kai_allou_ergou_proskliseis_gia_dialekseis_se_die8nh_sunedria" value="{{.t.Entry2.Field6}}" type="number" placeholder="">
       </label>
       <small>Ακέραιος αριθμός</small>
     </div>
@@ -65,7 +65,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Διπλώματα ευρεσιτεχνίας
-        <input name="anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_euresitexnias" value="{{.Entry2.Field7}}" type="number" placeholder="">
+        <input name="anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_euresitexnias" value="{{.t.Entry2.Field7}}" type="number" placeholder="">
       </label>
       <small>Ακέραιος αριθμός</small>
     </div>
@@ -75,7 +75,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Βραβεία
-        <input name="anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_brabeia" value="{{.Entry2.Field8}}" type="number" placeholder="">
+        <input name="anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_brabeia" value="{{.t.Entry2.Field8}}" type="number" placeholder="">
       </label>
       <small>Ακέραιος αριθμός</small>
     </div>
@@ -85,7 +85,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Τιμητικοί τίτλοι
-        <input name="anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_timitikoi_titloi" value="{{.Entry2.Field9}}" type="number" placeholder="">
+        <input name="anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_timitikoi_titloi" value="{{.t.Entry2.Field9}}" type="number" placeholder="">
       </label>
       <small>Ακέραιος αριθμός</small>
     </div>
@@ -95,7 +95,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Επεξηγήσεις
-        <textarea rows="4" name="anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_epeksigiseis" placeholder="">{{.Entry2.Field10}}</textarea>
+        <textarea rows="4" name="anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_epeksigiseis" placeholder="">{{.t.Entry2.Field10}}</textarea>
       </label>
       <small>Επεξηγήσεις: Διπλώματα ευρεσιτεχνίας, Βραβεία, Τιμητικοί τίτλοι (επίτιμοι διδάκτορες, επισκέπτες καθηγητές, ακαδημαϊκοί, αντεπιστέλλοντα μέλη ακαδημιών κλπ)</small>
     </div>

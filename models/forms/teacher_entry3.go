@@ -12,34 +12,36 @@ type TeacherCreateReportFormEntry3 struct {
 	Field4 string `schema:"ereunikita_programmata_kai_erga_summetoxi_foithton"`
 }
 
-func (f *TeacherCreateReportFormEntry3) Update(teacherId int) {
+func (f *TeacherCreateReportFormEntry3) Update(teacherId int, akademicYearId int) {
 	query := `UPDATE TeacherCreateReportFormEntry3 SET
 		ereunikita_programmata_kai_erga_episthmonikos_ypeu8inos = $1,
 		ereunikita_programmata_kai_erga_apli_summetoxi = $2,
 		ereunikita_programmata_kai_erga_summetoxi_eksoterikon_sunergaton = $3,
 		ereunikita_programmata_kai_erga_summetoxi_foithton = $4
-		WHERE teacher = $5`
+		 WHERE teacher = $5 AND akademic_year = $6`
 
 	_, err := Db.Database.Exec(query,
 		f.Field1,
 		f.Field2,
 		f.Field3,
 		f.Field4,
-		teacherId)
+		teacherId,
+		akademicYearId)
 
 	Db.CheckQueryWithNoRows(err, query)
 }
 
-func (f *TeacherCreateReportFormEntry3) Load(teacherId int) {
+func (f *TeacherCreateReportFormEntry3) Load(teacherId int, akademicYearId int) {
 	query := `SELECT
 		ereunikita_programmata_kai_erga_episthmonikos_ypeu8inos,
 		ereunikita_programmata_kai_erga_apli_summetoxi,
 		ereunikita_programmata_kai_erga_summetoxi_eksoterikon_sunergaton,
 		ereunikita_programmata_kai_erga_summetoxi_foithton
 		FROM TeacherCreateReportFormEntry3
-		WHERE teacher = $1`
+		WHERE teacher = $1 AND akademic_year = $2`
 
-	err := Db.Database.QueryRow(query, teacherId).
+	err := Db.Database.QueryRow(query, teacherId,
+		akademicYearId).
 		Scan(&f.Field1,
 		&f.Field2,
 		&f.Field3,

@@ -1,11 +1,11 @@
 <div class="large-6 columns">
 
-<form method="POST" action="/lesson/pre/degree/create/report/3/{{.LessonId}}">
+<form method="POST" action="/lesson/pre/degree/create/report/3/{{.lessons.LessonId}}/{{.akademicYearId}}">
 
   <div class="row">
     <div class="large-12 columns">
       <label>Σελίδα Οδηγού Σπουδών
-        <input type="number" value="{{.Entry3.Field1}}" name="lesson_enhmerwsi_selida_odigou_spoudon" placeholder="">
+        <input type="number" value="{{.lessons.Entry3.Field1}}" name="lesson_enhmerwsi_selida_odigou_spoudon" placeholder="">
       </label>
       <small>Αφήστε κενό το πεδίο αν δεν περιλαμβάνεται στον Οδηγό Σπουδών</small>
     </div>
@@ -16,7 +16,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Ιστότοπος Μαθήματος (Διεύθυνση URL)
-        <input type="text" value="{{.Entry3.Field2}}" name="lesson_enhmerwsi_website" placeholder="">
+        <input type="text" value="{{.lessons.Entry3.Field2}}" name="lesson_enhmerwsi_website" placeholder="">
       </label>
       <small>Αφήστε το πεδίο κενό αν δεν υπάρχει Ιστότοπος του Μαθήματος</small>
     </div>
@@ -25,8 +25,8 @@
 <br/>
   <div class="row">
     <div class="large-12 columns">
-      <label for="checkbox1"><input type="checkbox" {{if .Entry3.Field3}} checked {{end}} name="lesson_enhmerwsi_aksiologisi_E" > Αξιολόγηση από Σπουδαστή Θ</label>
-      <label for="checkbox1"><input type="checkbox" {{if .Entry3.Field4}} checked {{end}} name="lesson_enhmerwsi_aksiologisi_8"> Αξιολόγηση από Σπουδαστή E</label>
+      <label for="checkbox1"><input type="checkbox" {{if .lessons.Entry3.Field3}} checked {{end}} name="lesson_enhmerwsi_aksiologisi_E" > Αξιολόγηση από Σπουδαστή Θ</label>
+      <label for="checkbox1"><input type="checkbox" {{if .lessons.Entry3.Field4}} checked {{end}} name="lesson_enhmerwsi_aksiologisi_8"> Αξιολόγηση από Σπουδαστή E</label>
     </div>
   </div>
 
@@ -35,7 +35,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Αριθμός Σπουδαστών που Αξιολόγησαν το Μάθημα
-        <input type="number" value="{{.Entry3.Field5}}" name="lesson_enhmerwsi_ari8mos_spoudaston_pou_aksiologisan_to_ma8ima" placeholder="">
+        <input type="number" value="{{.lessons.Entry3.Field5}}" name="lesson_enhmerwsi_ari8mos_spoudaston_pou_aksiologisan_to_ma8ima" placeholder="">
       </label>
       <small>Αφήστε το πεδίο κενό αν το μάθημα δεν αξιολογήθηκε καθόλου από τους φοιτητές</small>
     </div>

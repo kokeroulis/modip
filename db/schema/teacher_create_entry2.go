@@ -2,7 +2,8 @@ package DbSchema
 
 const TeacherCreateReportFormEntry2 = `
 CREATE TABLE TeacherCreateReportFormEntry2 (
-	teacher                                                                    int references teacher(id) on delete cascade,
+	teacher int references teacher(id) on delete cascade,
+	akademic_year int references akademic_year(id) on delete cascade,
 	anagnorish_tou_episthmonikou_kai_allou_ergou_eteroanafores                                                int default 0,
 	anagnorish_tou_episthmonikou_kai_allou_ergou_anafores_tou_eidikou_episthmonikou_typou                     int default 0,
 	anagnorish_tou_episthmonikou_kai_allou_ergou_summetoxes_se_epitropes_episthmonikon_sunedrion              int default 0,

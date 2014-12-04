@@ -1,11 +1,11 @@
 <div class="large-6 columns">
 
-<form method="POST" action="/lesson/pre/degree/create/report/11/{{.LessonId}}">
+<form method="POST" action="/lesson/pre/degree/create/report/11/{{.lessons.LessonId}}/{{.akademicYearId}}">
 
   <div class="row">
     <div class="large-12 columns">
       <label>Χρησιμοποιούνται Τεχνολογίες Πληροφορικής και Επικοινωνιών στη διδασκαλία του μαθήματος και πώς;
-        <textarea rows="4" name="aksiopoihsh_texnologion_pliroforikhs_kai_epikoinonion_xrhsimopoiountai_TPE_sth_didaskalia_tou_ma8imatos" type="text" placeholder="">{{.Entry11.Field1}}</textarea>
+        <textarea rows="4" name="aksiopoihsh_texnologion_pliroforikhs_kai_epikoinonion_xrhsimopoiountai_TPE_sth_didaskalia_tou_ma8imatos" type="text" placeholder="">{{.lessons.Entry11.Field1}}</textarea>
       </label>
     </div>
   </div>
@@ -13,7 +13,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Χρησιμοποιούνται μαθησιακά βοηθήματα βασισμένα σε ΤΠΕ; (Αναφέρατε παραδείγματα)
-        <textarea rows="4" name="aksiopoihsh_texnologion_pliroforikhs_kai_epikoinonion_xrhsimopoiountai_ma8isiaka_boh8imata_basismena_se_TPE" type="text" placeholder="">{{.Entry11.Field2}}</textarea>
+        <textarea rows="4" name="aksiopoihsh_texnologion_pliroforikhs_kai_epikoinonion_xrhsimopoiountai_ma8isiaka_boh8imata_basismena_se_TPE" type="text" placeholder="">{{.lessons.Entry11.Field2}}</textarea>
       </label>
     </div>
   </div>
@@ -21,7 +21,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Χρησιμοποιούνται ΤΠΕ στην εργαστηριακή εκπαίδευση; Πώς;
-        <textarea rows="4" name="aksiopoihsh_texnologion_pliroforikhs_kai_epikoinonion_xrhsimopoiountai_TPE_sthn_ergasthriaki_ekpedeusi" type="text" placeholder="">{{.Entry11.Field3}}</textarea>
+        <textarea rows="4" name="aksiopoihsh_texnologion_pliroforikhs_kai_epikoinonion_xrhsimopoiountai_TPE_sthn_ergasthriaki_ekpedeusi" type="text" placeholder="">{{.lessons.Entry11.Field3}}</textarea>
       </label>
     </div>
   </div>
@@ -29,7 +29,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Χρησιμοποιείτε ΤΠΕ στην αξιολόγηση των σπουδαστών; Πώς;
-        <textarea rows="4" name="aksiopoihsh_texnologion_pliroforikhs_kai_epikoinonion_xrhsimopoiountai_TPE_sthn_aksiologisi_ton_spoudaston_pws" type="text" placeholder="">{{.Entry11.Field4}}</textarea>
+        <textarea rows="4" name="aksiopoihsh_texnologion_pliroforikhs_kai_epikoinonion_xrhsimopoiountai_TPE_sthn_aksiologisi_ton_spoudaston_pws" type="text" placeholder="">{{.lessons.Entry11.Field4}}</textarea>
       </label>
     </div>
   </div>
@@ -37,7 +37,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Χρησιμοποιείτε ΤΠΕ στην επικοινωνία σας με τους σπουδαστές; Πώς;
-        <textarea rows="4" name="aksiopoihsh_texnologion_pliroforikhs_kai_epikoinonion_xrhsimopoiountai_TPT_sthn_epikoinonia_sas_me_tous_spoudastes_pws" type="text" placeholder="">{{.Entry11.Field5}}</textarea>
+        <textarea rows="4" name="aksiopoihsh_texnologion_pliroforikhs_kai_epikoinonion_xrhsimopoiountai_TPT_sthn_epikoinonia_sas_me_tous_spoudastes_pws" type="text" placeholder="">{{.lessons.Entry11.Field5}}</textarea>
       </label>
     </div>
   </div>

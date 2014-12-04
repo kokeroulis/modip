@@ -3,6 +3,7 @@ package DbSchema
 const LessonCreateReportFormEntry2 = `
 CREATE TABLE LessonCreateReportFormEntry2 (
 	lesson                              int  references lesson(id) on delete cascade,
+	akademic_year int references akademic_year(id) on delete cascade,
 	lesson_didaskalia_typos_ma8iomatos1 text default ' ',
 	lesson_didaskalia_typos_ma8iomatos2 text default ' ',
 	lesson_didaskalia_typos_ma8iomatos3 text default ' ',

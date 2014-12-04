@@ -23,7 +23,7 @@ type TeacherCreateReportFormEntry4 struct {
 	Helpers []TeacherCreateReportFormEntry4Helper
 }
 
-func (f *TeacherCreateReportFormEntry4) Update(teacherId int) {
+func (f *TeacherCreateReportFormEntry4) Update(teacherId int, akademicYearId int) {
 	query := `UPDATE TeacherCreateReportFormEntry4
 			  SET
 				ereunitikes_ypodomes_arithmos_kai_xwritikotita_ereunitikon_ergasthrion_pou_xrisimopoieitai = $1,
@@ -35,7 +35,7 @@ func (f *TeacherCreateReportFormEntry4) Update(teacherId int) {
 				ereunitikes_ypodomes_ananeosi_ereunitikon_ypodomon = $7,
 				ereunitikes_ypodomes_pws_epidiokete_th_xrimatodothsh_gia_promi8eia = $8,
 				ereunitikes_ypodomes_praktiki_akiopoihsh_ton_ereunitikon_apotelesmaton = $9
-			 WHERE id = $10 AND teacher = $11`
+			 WHERE id = $10 AND teacher = $11 AND akademic_year = $12`
 
 	_, err := Db.Database.Exec(query,
 							f.Field1,
@@ -48,7 +48,8 @@ func (f *TeacherCreateReportFormEntry4) Update(teacherId int) {
 							f.Field8,
 							f.Field9,
 							f.Id,
-							teacherId)
+							teacherId,
+                            akademicYearId)
 
 	Db.CheckQueryWithNoRows(err, query)
 
@@ -65,7 +66,7 @@ func (f *TeacherCreateReportFormEntry4) Update(teacherId int) {
 	}
 }
 
-func (f *TeacherCreateReportFormEntry4) Load(teacherId int) {
+func (f *TeacherCreateReportFormEntry4) Load(teacherId int, akademicYearId int) {
 	query := `SELECT
 				ereunitikes_ypodomes_arithmos_kai_xwritikotita_ereunitikon_ergasthrion_pou_xrisimopoieitai,
 				ereunitikes_ypodomes_eparkeia_katalilotita_kai_poiotita_ton_ereunitikon_ergasthrion,
@@ -77,9 +78,9 @@ func (f *TeacherCreateReportFormEntry4) Load(teacherId int) {
 				ereunitikes_ypodomes_pws_epidiokete_th_xrimatodothsh_gia_promi8eia,
 				ereunitikes_ypodomes_praktiki_akiopoihsh_ton_ereunitikon_apotelesmaton
 			  FROM TeacherCreateReportFormEntry4
-			  WHERE id = $1 AND teacher = $2`
+			  WHERE id = $1 AND teacher = $2 AND akademic_year = $3`
 
-	err := Db.Database.QueryRow(query, f.Id, teacherId).
+	err := Db.Database.QueryRow(query, f.Id, teacherId, akademicYearId).
 			Scan(&f.Field1,
 				&f.Field2,
 				&f.Field3,

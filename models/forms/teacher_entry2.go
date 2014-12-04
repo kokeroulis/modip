@@ -18,7 +18,7 @@ type TeacherCreateReportFormEntry2 struct {
 	Field10 string `schema:"anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_epeksigiseis"`
 }
 
-func (f *TeacherCreateReportFormEntry2) Update(teacherId int) {
+func (f *TeacherCreateReportFormEntry2) Update(teacherId int, akademicYearId int) {
 	query := `UPDATE TeacherCreateReportFormEntry2 SET
 	anagnorish_tou_episthmonikou_kai_allou_ergou_eteroanafores = $1,
 	anagnorish_tou_episthmonikou_kai_allou_ergou_anafores_tou_eidikou_episthmonikou_typou = $2,
@@ -30,7 +30,7 @@ func (f *TeacherCreateReportFormEntry2) Update(teacherId int) {
 	anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_brabeia = $8,
 	anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_timitikoi_titloi = $9,
 	anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_epeksigiseis = $10
-	WHERE teacher = $11`
+	 WHERE teacher = $11 AND akademic_year = $12`
 
 	_, err := Db.Database.Exec(query,
 		f.Field1,
@@ -43,12 +43,13 @@ func (f *TeacherCreateReportFormEntry2) Update(teacherId int) {
 		f.Field8,
 		f.Field9,
 		f.Field10,
-		teacherId)
+		teacherId,
+		akademicYearId)
 
 	Db.CheckQueryWithNoRows(err, query)
 }
 
-func (f *TeacherCreateReportFormEntry2) Load(teacherId int) {
+func (f *TeacherCreateReportFormEntry2) Load(teacherId int, akademicYearId int) {
 	query := `SELECT
 	anagnorish_tou_episthmonikou_kai_allou_ergou_eteroanafores,
 	anagnorish_tou_episthmonikou_kai_allou_ergou_anafores_tou_eidikou_episthmonikou_typou,
@@ -61,9 +62,10 @@ func (f *TeacherCreateReportFormEntry2) Load(teacherId int) {
 	anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_timitikoi_titloi,
 	anagnorish_tou_episthmonikou_kai_allou_ergou_diplomata_epeksigiseis
 	FROM TeacherCreateReportFormEntry2
-	WHERE teacher = $1`
+	WHERE teacher = $1 AND akademic_year = $2`
 
-	err := Db.Database.QueryRow(query, teacherId).
+	err := Db.Database.QueryRow(query, teacherId,
+		akademicYearId).
 		Scan(&f.Field1,
 		&f.Field2,
 		&f.Field3,

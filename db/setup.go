@@ -47,6 +47,8 @@ func CreateDb() {
 		DbSchema.CategoryData,
 		DbSchema.CategoryGroup,
 
+		DbSchema.AkademicYear,
+
 		DbSchema.Lesson,
         DbSchema.ResearchProgram,
 		DbSchema.LessonCreateReportForm,
@@ -78,6 +80,7 @@ func CreateDb() {
 		DbApi.CategoryGroupAdd,
 		DbApi.CategorySave,
 		DbApi.LessonCreate,
+		DbApi.AkademicYear,
 	}
 
 	runQuery(schemaList)

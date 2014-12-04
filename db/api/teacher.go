@@ -50,6 +50,7 @@ CREATE OR REPLACE FUNCTION teacher_create(teacherName text,
 										  OUT alreadyExists boolean) AS $$
 DECLARE
 	teacherId int;
+	akademic_year_id int;
 BEGIN
 	PERFORM * FROM teacher
 	WHERE name = teacherName;
@@ -66,17 +67,19 @@ BEGIN
 	VALUES (teacherName, teacherPassword, teacherEmail, departmentId)
 	RETURNING id INTO teacherId;
 
-	INSERT INTO TeacherCreateReportFormEntry2
-	(teacher) VALUES (teacherId);
+	FOR akademic_year_id IN SELECT id FROM akademic_year LOOP
+		INSERT INTO TeacherCreateReportFormEntry2
+		(teacher, akademic_year) VALUES (teacherId, akademic_year_id);
 
-	INSERT INTO TeacherCreateReportFormEntry3
-	(teacher) VALUES (teacherId);
+		INSERT INTO TeacherCreateReportFormEntry3
+		(teacher, akademic_year) VALUES (teacherId, akademic_year_id);
 
-	INSERT INTO TeacherCreateReportFormEntry4
-	(teacher) VALUES (teacherId);
+		INSERT INTO TeacherCreateReportFormEntry4
+		(teacher, akademic_year) VALUES (teacherId, akademic_year_id);
 
-	INSERT INTO TeacherCreateReportFormEntry5
-	(teacher) VALUES (teacherId);
+		INSERT INTO TeacherCreateReportFormEntry5
+		(teacher, akademic_year) VALUES (teacherId, akademic_year_id);
+	END LOOP;
 END;
 $$ LANGUAGE plpgsql;
 `

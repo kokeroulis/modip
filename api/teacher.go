@@ -44,27 +44,42 @@ func GetTeacherCreateReport(resp http.ResponseWriter, req *http.Request) {
         "templates/teacher/eureunitika_programmata_kai_erga.tmpl",
         "templates/teacher/sundesi_me_tin_koinonia.tmpl",
     }
+    akademicYearId, _ := getAkademicYearId(req)
 
 	t := forms.TeacherCreateReportForm{
 		TeacherId: models.GetTeacherFromSession(req).Id,
+        AkademicYearId: akademicYearId,
 	}
 
 	t.Load()
 
-	RenderTemplate("teacher/report", helpers, resp, t)
+    data := map[string]interface{}{
+        "t": t,
+        "akademicYearId": akademicYearId,
+    }
+
+	RenderTemplate("teacher/report", helpers, resp, data)
+}
+
+func GetTeacherListReport(resp http.ResponseWriter, req *http.Request) {
+    var helpers []string
+    akademicYears := models.ListAkademicYears()
+
+	RenderTemplate("teacher/report_list", helpers, resp, akademicYears)
 }
 
 func TeacherCreateReport1(resp http.ResponseWriter, req *http.Request) {
 	teacherId := models.GetTeacherFromSession(req).Id
+    akademicYearId, _ := getAkademicYearId(req)
 
 	req.ParseForm()
 
 	form := &forms.TeacherCreateReportFormEntry1{}
 	parseTeacherCreateReportFormEntry1(form, req)
 
-	form.Create(teacherId)
+	form.Create(teacherId, akademicYearId)
 
-    http.Redirect(resp, req, "/teacher/report", http.StatusMovedPermanently)
+    http.Redirect(resp, req, "/teacher/report/list", http.StatusMovedPermanently)
 }
 
 func TeacherCreateReport(resp http.ResponseWriter, req *http.Request) {
@@ -72,6 +87,7 @@ func TeacherCreateReport(resp http.ResponseWriter, req *http.Request) {
 
 	formNumber, id := getId(req)
 	teacherId := models.GetTeacherFromSession(req).Id
+    akademicYearId,_ := getAkademicYearId(req)
 
 	decoder := schema.NewDecoder()
 
@@ -80,19 +96,19 @@ func TeacherCreateReport(resp http.ResponseWriter, req *http.Request) {
 	case 2:
 		form := &forms.TeacherCreateReportFormEntry2{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(teacherId)
+		form.Update(teacherId, akademicYearId)
 	case 3:
 		form := &forms.TeacherCreateReportFormEntry3{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(teacherId)
+		form.Update(teacherId, akademicYearId)
 	case 4:
 		form := &forms.TeacherCreateReportFormEntry4{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(teacherId)
+		form.Update(teacherId, akademicYearId)
 	case 5:
 		form := &forms.TeacherCreateReportFormEntry5{}
 		err = decoder.Decode(form, req.PostForm)
-		form.Update(teacherId)
+		form.Update(teacherId, akademicYearId)
 	default:
 		unknownErr := "Unknown form: " + id
 		panic(unknownErr)
@@ -101,13 +117,14 @@ func TeacherCreateReport(resp http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-    http.Redirect(resp, req, "/teacher/report", http.StatusMovedPermanently)
+    http.Redirect(resp, req, "/teacher/report/list", http.StatusMovedPermanently)
 }
 
 func GetTeacherCreateReport1Edit(resp http.ResponseWriter, req *http.Request) {
     entryId, _ := getId(req)
+    akademicYearId, _ := getAkademicYearId(req)
 	var helpers []string
-    formsList := forms.ListAllTeacherCreateReportForm1(models.GetTeacherFromSession(req).Id)
+    formsList := forms.ListAllTeacherCreateReportForm1(models.GetTeacherFromSession(req).Id, akademicYearId)
 
     var data interface{}
 
@@ -125,9 +142,11 @@ func TeacherCreateReport1Edit(resp http.ResponseWriter, req *http.Request) {
 	parseTeacherCreateReportFormEntry1(form, req)
 
 	id, _ := getId(req)
+    akademicYearId, _ := getAkademicYearId(req)
+
 	form.Id = id
-	form.Update()
-    http.Redirect(resp, req, "/teacher/report", http.StatusMovedPermanently)
+	form.Update(akademicYearId)
+    http.Redirect(resp, req, "/teacher/report/list", http.StatusMovedPermanently)
 }
 
 func parseTeacherCreateReportFormEntry1(form *forms.TeacherCreateReportFormEntry1,

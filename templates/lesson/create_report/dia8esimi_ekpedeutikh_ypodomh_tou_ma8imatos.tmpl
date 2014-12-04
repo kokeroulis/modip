@@ -1,11 +1,11 @@
 <div class="large-6 columns">
 
-<form method="POST" action="/lesson/pre/degree/create/report/10/{{.LessonId}}">
+<form method="POST" action="/lesson/pre/degree/create/report/10/{{.lessons.LessonId}}/{{.akademicYearId}}">
 
   <div class="row">
     <div class="large-12 columns">
       <label>Αίθουσες διδασκαλίας που χρησιμοποιούνται για το συγκεκριμένο μάθημα
-        <textarea rows="4" name="dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_ai8ouses_didaskalias_pou_xrisimopoiountai" type="text" placeholder="">{{.Entry10.Field1}}</textarea>
+        <textarea rows="4" name="dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_ai8ouses_didaskalias_pou_xrisimopoiountai" type="text" placeholder="">{{.lessons.Entry10.Field1}}</textarea>
       </label>
         <small>Αναφερθείτε στην επάρκεια, καταλληλότητα, ποιότητα των αιθουσών και του υποστηρικτικού εξοπλισμού και τη διαθεσιμότητά τους</small>
     </div>
@@ -15,7 +15,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Εργαστήρια που χρησιμοποιούνται για το συγκεκριμένο μάθημα
-        <textarea rows="4" name="dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_ergasthria_pou_xrhsimopoiountai_gia_to_sugkekrimeno_ma8ima" type="text" placeholder="">{{.Entry10.Field2}}</textarea>
+        <textarea rows="4" name="dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_ergasthria_pou_xrhsimopoiountai_gia_to_sugkekrimeno_ma8ima" type="text" placeholder="">{{.lessons.Entry10.Field2}}</textarea>
       </label>
         <small>Αναφερθείτε στην επάρκεια, καταλληλότητα, ποιότητα των εργαστηριακών χώρων, του εργαστηριακού εξοπλισμού και της διαθεσιμότητάς του</small>
     </div>
@@ -25,7 +25,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Είναι διαθέσιμα τα εργαστήρια του μαθήματος για χρήση εκτός προγραμματισμένων ωρών;
-        <textarea rows="4" name="dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_einai_dia8esima_ta_ergasthria_tou_ma8imatos_gia_xrisi_ektos_programmatismenon_wrwn" type="text" placeholder="">{{.Entry10.Field3}}</textarea>
+        <textarea rows="4" name="dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_einai_dia8esima_ta_ergasthria_tou_ma8imatos_gia_xrisi_ektos_programmatismenon_wrwn" type="text" placeholder="">{{.lessons.Entry10.Field3}}</textarea>
       </label>
     </div>
   </div>
@@ -34,7 +34,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Σπουδαστήρια
-        <textarea rows="4" name="dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_spoudasthria" type="text" placeholder="">{{.Entry10.Field4}}</textarea>
+        <textarea rows="4" name="dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_spoudasthria" type="text" placeholder="">{{.lessons.Entry10.Field4}}</textarea>
       </label>
         <small>Αναφερθείτε στην επάρκεια, καταλληλότητα, ποιότητα των χώρων, του εξοπλισμού και της διαθεσιμότητάς τους</small>
     </div>
@@ -44,7 +44,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Χρησιμοποιείτε Εκπαιδευτικό Λογισμικό και ποιο; (περιγράψτε συνοπτικά)
-        <textarea rows="4" name="dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_xrhsimopoihtai_ekpedeutiko_logismiko_kai_poio" type="text" placeholder="">{{.Entry10.Field5}}</textarea>
+        <textarea rows="4" name="dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_xrhsimopoihtai_ekpedeutiko_logismiko_kai_poio" type="text" placeholder="">{{.lessons.Entry10.Field5}}</textarea>
       </label>
     </div>
   </div>
@@ -53,7 +53,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Υπάρχει ικανοποιητική υποστήριξη του μαθήματος από τη βιβλιοθήκη (βιβλιογραφία και άλλοι μαθησιακοί πόροι);
-        <textarea rows="4" name="dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_yparxei_ikanopoihtiki_ypostiriksi_tou_ma8imatos_apo_tin_biblio8iki" type="text" placeholder="">{{.Entry10.Field6}}</textarea>
+        <textarea rows="4" name="dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_yparxei_ikanopoihtiki_ypostiriksi_tou_ma8imatos_apo_tin_biblio8iki" type="text" placeholder="">{{.lessons.Entry10.Field6}}</textarea>
       </label>
     </div>
   </div>
@@ -62,7 +62,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Πώς κρίνετε συνολικά τη διαθέσιμη εκπαιδευτική υποδομή;
-        <textarea rows="4" name="dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_pws_krinete_sunolika_tin_dia8esimi_ekpedeutiki_ypodomi" type="text" placeholder="">{{.Entry10.Field7}}</textarea>
+        <textarea rows="4" name="dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_pws_krinete_sunolika_tin_dia8esimi_ekpedeutiki_ypodomi" type="text" placeholder="">{{.lessons.Entry10.Field7}}</textarea>
       </label>
         <small>Αν η απάντηση είναι αρνητική, σχολιάστε συνοπτικά τυχόν ελλείψεις και καταγράψτε τις αναγκαίες βελτιώσεις σύμφωνα με τις παραπάνω κατηγορίες</small>
     </div>
@@ -72,7 +72,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Αίθουσες διδασκαλίας που χρησιμοποιούνται για το συγκεκριμένο μάθημα
-        <textarea rows="4" name="dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_" type="text" placeholder="">{{.Entry10.Field8}}</textarea>
+        <textarea rows="4" name="dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_" type="text" placeholder="">{{.lessons.Entry10.Field8}}</textarea>
       </label>
         <small>Αναφερθείτε στην επάρκεια, καταλληλότητα, ποιότητα των αιθουσών και του υποστηρικτικού εξοπλισμού και τη διαθεσιμότητά τους</small>
     </div>
