@@ -3,6 +3,7 @@ package DbSchema
 const LessonCreateReportFormEntry9 = `
 CREATE TABLE LessonCreateReportFormEntry9 (
         lesson int references lesson(id) on delete cascade,
+        akademic_year int references akademic_year(id) on delete cascade,
         lesson_aksiologisi_ths_epidosis_grapti_eksetasi                         bool default false,
         lesson_aksiologisi_ths_epidosis_proforiki_eksetasi                      bool default false,
         lesson_aksiologisi_ths_epidosis_proodos                                 bool default false,

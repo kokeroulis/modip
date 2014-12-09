@@ -39,6 +39,21 @@ BEGIN
 		INSERT INTO LessonCreateReportFormEntry5
 		(lesson, akademic_year) VALUES (lessonId, akademic_year_id);
 
+		INSERT INTO LessonCreateReportFormEntry6
+		(lesson, akademic_year) VALUES (lessonId, akademic_year_id);
+
+		INSERT INTO LessonCreateReportFormEntry7
+		(lesson, akademic_year) VALUES (lessonId, akademic_year_id);
+
+		INSERT INTO LessonCreateReportFormEntry8
+		(lesson, akademic_year) VALUES (lessonId, akademic_year_id);
+
+		INSERT INTO LessonCreateReportFormEntry9
+		(lesson, akademic_year) VALUES (lessonId, akademic_year_id);
+
+		INSERT INTO LessonCreateReportFormEntry10
+		(lesson, akademic_year) VALUES (lessonId, akademic_year_id);
+
 		INSERT INTO LessonCreateReportFormEntry11
 		(lesson, akademic_year) VALUES (lessonId, akademic_year_id);
 
@@ -50,7 +65,6 @@ BEGIN
 
 		INSERT INTO LessonCreateReportFormEntry14
 		(lesson, akademic_year) VALUES (lessonId, akademic_year_id);
-
 
 		INSERT INTO LessonCreateReportFormEntry15
 		(lesson, akademic_year) VALUES (lessonId, akademic_year_id);
