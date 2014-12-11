@@ -2,6 +2,10 @@ start:
 	@./scripts/helper.sh run
 .PHONY: start
 
+drupal-importer:
+	@./scripts/helper.sh drupal-importer
+.PHONY: drupal-importer
+
 install:
 	@./scripts/helper.sh install
 .PHONY: install

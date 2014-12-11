@@ -68,6 +68,15 @@ run() {
     GOPATH=$gopath go run modip.go --start
 }
 
+drupal_importer() {
+    clean
+    p=tools/drupal_importer
+    GOPATH=$gopath:$PWD/$p/vendor go run $p/drupal_migrator.go \
+                                         $p/department.go \
+                                         $p/db.go \
+                                         $p/globals.go
+}
+
 function readConfigurationValue()
 {
     local key=$1
@@ -108,6 +117,8 @@ fi
 
 if [ $1 == "install" ]; then
     install
+elif [ $1 == "drupal-importer" ]; then
+    drupal_importer
 elif [ $1 == "run" ]; then
     run
 elif [ $1 == "testdata" ]; then
