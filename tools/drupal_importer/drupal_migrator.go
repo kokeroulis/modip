@@ -22,14 +22,8 @@ func createAkademicYears() {
 func main() {
 	Db.Connect()
 
-	connectDb()
+//	connectDb()
 
-	//query := "SELECT mail FROM dep_users where name = ?;"
-	//var email string
-	//err := MySQLDb.QueryRow(query, "hartonas").
-	//Scan(&email)
-
-	//Db.CheckQuery(err, query)
 	createAkademicYears()
 	exportDepartments()
 }

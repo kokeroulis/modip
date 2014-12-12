@@ -9,6 +9,9 @@ import (
 var departments []*models.Department
 var MySQLDb *sql.DB
 
+const departmentsFile = "exported_dep_prosopiko.txt"
+const lessonsFile = "exported_dep_pps_mathimata.txt"
+
 var L1  map[string]string
 var L2  map[string]string
 var L3  map[string]string
