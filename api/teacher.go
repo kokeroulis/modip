@@ -63,9 +63,34 @@ func GetTeacherCreateReport(resp http.ResponseWriter, req *http.Request) {
 
 func GetTeacherListReport(resp http.ResponseWriter, req *http.Request) {
     var helpers []string
-    akademicYears := models.ListAkademicYears()
 
-	RenderTemplate("teacher/report_list", helpers, resp, akademicYears)
+    teacher := models.GetTeacherFromSession(req)
+    akademicYears := models.ListAkademicYears()
+    akademicYearsLen := len(akademicYears)
+    lastFiveYears := make([]models.AkademicYear, 0)
+
+    //TODO Wood 5 code. What we want to do here is to pass only the last five
+    //years into to an array in order to print them into our template.
+    //Instead of that we are iterating everything, and we are appending only
+    //the last five. Patches are always welcome :)
+    if akademicYearsLen > 5 {
+        for index, it := range akademicYears {
+            if index + 5 >= akademicYearsLen {
+                lastFiveYears = append(lastFiveYears, it)
+            }
+        }
+    } else {
+        //we have less than 5 akademic reports, so show everything
+        lastFiveYears = akademicYears
+    }
+
+    data := map[string]interface{}{
+        "t": teacher,
+        "akademicYears": akademicYears,
+        "lastFiveYears": lastFiveYears,
+    }
+
+	RenderTemplate("teacher/report_list", helpers, resp, data)
 }
 
 func TeacherCreateReport1(resp http.ResponseWriter, req *http.Request) {

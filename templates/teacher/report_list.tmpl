@@ -3,10 +3,10 @@
 <form method="POST">
   <div class="row">
     <div class="large-12 columns">
-      <label>Τμήμα
+      <label>Έτος Απογραφικού Δελτίου
         <select id="lessonMoveToDepartment" name="lesson_code_create_lesson_department">
           <option selected>-- Παρακαλώ Διαλέξτε Έτος για το Απογραφικό Δελτίο</option>
-          {{range .}}
+          {{range .akademicYears}}
             <option value="/teacher/report/{{.Id}}">{{.Name}}</option>
           {{end}}
         </select>
@@ -14,5 +14,33 @@
     </div>
   </div>
 </form>
+
+{{if .lastFiveYears}}
+  <table>
+    <thead>
+      <tr>
+        <th >A/A</th>
+        <th>Τίτλος</th>
+        <th>Τύπος</th>
+        <th>Έτος Απογραφικού Δελτίου</th>
+        <th>Ενέργειες</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{$t := .t}}
+      {{range $index, $element := .lastFiveYears}}
+        <tr>
+          <td>{{add $index 1}}</td>
+          <td>{{$t.Name}}</td>
+          <td>- Απογραφικό Δελτίο Εκπ. Προσωπικού</th>
+          <td>{{.Name}}</td>
+          <td>
+            <a href="/teacher/report/{{.Id}}">Επεξεργασία</a>
+          </td>
+        </tr>
+      {{end}}
+    </tbody>
+  </table>
+{{end}}
 
 {{template "footer.tmpl"}}
