@@ -104,6 +104,11 @@ ModipApp.arithmosDimosieuseon = function() {
         //this is a td element, so we must go into
         //the input element, so we must dig deeper.
         type = _self.children().data('type');
+
+        //still empty? then it the select....
+        if (type === undefined) {
+          type = _self.children('select').data('type');
+        }
       }
 
       switch (type) {
@@ -123,7 +128,7 @@ ModipApp.arithmosDimosieuseon = function() {
           dataPostObject.publication_date = _self.children().val();
           break;
         case "type":
-          dataPostObject.type = _self.text();
+          dataPostObject.type = _self.children('select').val();
           break;
       }
     });
