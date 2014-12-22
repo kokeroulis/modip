@@ -35,7 +35,11 @@ ModipApp.arithmosDimosieuseon = function() {
   var originalValue;
   $('[contenteditable]').click(function(event) {
     originalValue = $(this).text();
-  })
+  });
+
+  $('[contenteditable]').focusout(function(event) {
+    ajaxRequest($(this))
+  });
 
   $('[contenteditable]').keydown(function(event) {
     //keycode 27 === esc
