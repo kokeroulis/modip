@@ -19,7 +19,7 @@
         <td><input id="teacherInput" value={{.Field3}} {{if .Field3}} checked {{end}} type="checkbox" data-type="is_magazine" data-id="{{.Id}}" data-akademicyearid="{{$akademicYearId}}"/></td>
         <td contenteditable="true"data-type="publisher" data-id="{{.Id}}" data-akademicyearid="{{$akademicYearId}}">{{.Field4}}</td>
         <td><input id="teacherInput" type="date" data-type="publication_date" data-id="{{.Id}}" data-akademicyearid="{{$akademicYearId}}" value="{{.Field5}}"/></td>
-        <td id="toggleUI">
+        <td class="toggleUI">
         <p id="field6">{{.Field6}}</p>
         <select id="selectType" hidden name="type" data-type="type" data-id="{{.Id}}" data-akademicyearid="{{$akademicYearId}}">
           <option value="Βιβλία-Mονογραφίες">Βιβλία-Mονογραφίες</option>

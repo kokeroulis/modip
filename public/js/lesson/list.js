@@ -68,29 +68,32 @@ ModipApp.arithmosDimosieuseon = function() {
     ajaxRequest($(this))
   });
 
-  $('#toggleUI').click(function(event) {
+  //toggleUI is a virtual dumb class just for the selector
+  $('.toggleUI').click(function(event) {
     var defaultType = $(this).text();
+    var selectTypeElement = $(this).children('#selectType');
+    var field6Element = $(this).children('#field6');
 
     //toggle the UI
-    if ($('#selectType').is(':hidden') && $('#field6').is(':visible')) {
-      $('#selectType').show();
-      $('#field6').hide();
+    if (selectTypeElement.is(':hidden') && field6Element.is(':visible')) {
+      selectTypeElement.show();
+      field6Element.hide();
     } else {
-      $('#field6').show();
-      $('#selectType').hide();
+      field6Element.show();
+      selectTypeElement.hide();
     }
 
-    $('#selectType').on('change', function() {
-      $('#field6').text($(this).val())
-      $('#field6').show();
+    selectTypeElement.on('change', function() {
+      field6Element.text($(this).val())
+      field6Element.show();
       //ajax call here
       ajaxRequest($(this))
     });
-  });
 
-  $('#selectType').focusout(function(event) {
-      $('#field6').show();
-      $('#selectType').hide();
+    selectTypeElement.focusout(function(event) {
+      field6Element.show();
+      selectTypeElement.hide();
+    });
   });
 
   var ajaxRequest = function(_this) {
