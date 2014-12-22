@@ -34,14 +34,41 @@ func (f *TeacherCreateReportFormEntry1) Create(teacherId int, akademicYearId int
 	Db.CheckQueryWithNoRows(err, query)
 }
 
-func (f *TeacherCreateReportFormEntry1) Update(akademicYearId int) {
-	query := `UPDATE TeacherCreateReportFormEntry1
+func (f *TeacherCreateReportFormEntry1) Update(teacherId int, akademicYearId int) {
+
+    alreadyExists := `SELECT author FROM TeacherCreateReportFormEntry1 where id = $1`
+    rows, err := Db.Database.Query(alreadyExists, f.Id)
+
+    if err != nil {
+        panic(err)
+    }
+
+    it := TeacherCreateReportFormEntry1{}
+    it.Id = -1;
+    for rows.Next() {
+        it = TeacherCreateReportFormEntry1{}
+
+		rows.Scan(&it.Id,
+							&it.Field1,
+							&it.Field2,
+							&it.Field3,
+							&it.Field4,
+							&it.Field5,
+                            &it.Field6)
+    }
+
+    if it.Id == -1 {
+        //our entry doesn't exist so we must create it.
+        f.Create(teacherId, akademicYearId)
+    } else {
+        //our entry exists so we have to update it now.
+        query := `UPDATE TeacherCreateReportFormEntry1
 			  SET author = $1, title = $2, is_magazine = $3,
 			  publisher = $4,
 			  publication_date = $5, type = $6
 			  WHERE id = $7 and akademic_year = $8`
 
-	_, err := Db.Database.Exec(query,
+        _, err2 := Db.Database.Exec(query,
 							f.Field1,
 							f.Field2,
 							f.Field3,
@@ -51,7 +78,8 @@ func (f *TeacherCreateReportFormEntry1) Update(akademicYearId int) {
 							f.Id,
                             akademicYearId)
 
-	Db.CheckQueryWithNoRows(err, query)
+        Db.CheckQueryWithNoRows(err2, query)
+    }
 }
 
 func ListAllTeacherCreateReportForm1(teacherId int, akademicYearId int) []TeacherCreateReportFormEntry1 {

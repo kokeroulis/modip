@@ -182,9 +182,10 @@ func TeacherCreateReport1Edit(resp http.ResponseWriter, req *http.Request) {
 
 	id, _ := getId(req)
     akademicYearId, _ := getAkademicYearId(req)
+    teacherId := models.GetTeacherFromSession(req).Id
 
 	form.Id = id
-	form.Update(akademicYearId)
+	form.Update(teacherId, akademicYearId)
     http.Redirect(resp, req, "/teacher/report/list", http.StatusMovedPermanently)
 }
 
