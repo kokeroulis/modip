@@ -12,8 +12,9 @@
   </thead>
   <tbody>
     {{$akademicYearId := .akademicYearId}}
+    {{$biggestId := .biggestId}}
     {{range .t.Entry1}}
-      <tr>
+      <tr class="arithmosDimosieuseonRow">
         <td contenteditable="true" data-type="author" data-id="{{.Id}}" data-akademicyearid="{{$akademicYearId}}">{{.Field1}}</td>
         <td contenteditable="true"data-type="title" data-id="{{.Id}}" data-akademicyearid="{{$akademicYearId}}">{{.Field2}}</td>
         <td><input id="teacherInput" value={{.Field3}} {{if .Field3}} checked {{end}} type="checkbox" data-type="is_magazine" data-id="{{.Id}}" data-akademicyearid="{{$akademicYearId}}"/></td>
@@ -33,11 +34,34 @@
           <option value="Άλλα">Άλλα</option>
         </select>
         </td>
-
       </tr>
     {{end}}
+    <tr class="arithmosDimosieuseonRow">
+      <td contenteditable="true" data-type="author" data-id="{{$biggestId}}" data-akademicyearid="{{$akademicYearId}}">{{.Field1}}</td>
+      <td contenteditable="true"data-type="title" data-id="{{$biggestId}}" data-akademicyearid="{{$akademicYearId}}">{{.Field2}}</td>
+      <td><input id="teacherInput" type="checkbox" data-type="is_magazine" data-id="{{$biggestId}}" data-akademicyearid="{{$akademicYearId}}"/></td>
+      <td contenteditable="true"data-type="publisher" data-id="{{$biggestId}}" data-akademicyearid="{{$akademicYearId}}">{{.Field4}}</td>
+      <td><input id="teacherInput" type="date" data-type="publication_date" data-id="{{$biggestId}}" data-akademicyearid="{{$akademicYearId}}" value="{{.Field5}}"/></td>
+      <td class="toggleUI">
+        <p id="field6">{{.Field6}}</p>
+        <select id="selectType" hidden name="type" data-type="type" data-id="{{$biggestId}}" data-akademicyearid="{{$akademicYearId}}">
+          <option value="Βιβλία-Mονογραφίες">Βιβλία-Mονογραφίες</option>
+          <option value="Επιστημονικά Περιοδικά με Κριτές">Επιστημονικά Περιοδικά με Κριτές</option>
+          <option value="Επιστημονικά Περιοδικά Χωρίς Κριτές">Επιστημονικά Περιοδικά Χωρίς Κριτές</option>
+          <option value="Πρακτικά Διεθνών Συνεδρίων με Kριτές">Πρακτικά Διεθνών Συνεδρίων με Kριτές</option>
+          <option value="Ανακοινώσεις σε Διεθνή Επιστημονικά Συνέδρια">Ανακοινώσεις σε Διεθνή Επιστημονικά Συνέδρια</option>
+          <option value="Ανακοινώσεις σε Εθνικά Επιστημονικά Συνέδρια">Ανακοινώσεις σε Εθνικά Επιστημονικά Συνέδρια</option>
+          <option value="Άλλες Εργασίες">Άλλες Εργασίες</option>
+          <option value="Κεφάλαια σε Συλλογικούς Τόμους">Κεφάλαια σε Συλλογικούς Τόμους</option>
+          <option value="Άλλα">Άλλα</option>
+        </select>
+      </td>
+    </tr>
+
   </tbody>
 </table>
+
+<a class="button cloneRow">Προσθήκη Καινούργιου</a>
 
 <h2 class="subheader">Προσθήκη Καινούργιου</h2>
 <form method="POST" action="/teacher/report/1/{{$akademicYearId}}">

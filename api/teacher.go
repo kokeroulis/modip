@@ -53,9 +53,23 @@ func GetTeacherCreateReport(resp http.ResponseWriter, req *http.Request) {
 
 	t.Load()
 
+    //TODO FIXME
+    //Why are we doing this?
+    //In order to create a new entry, we need the biggest Id
+    //of all of the elements. Unfortunatly we cannot do that inside the
+    //template of the go, so we are doing it here.
+    var biggestId int
+    for _, it := range t.Entry1 {
+        if it.Id > biggestId {
+            biggestId = it.Id
+        }
+    }
+
+    biggestId = biggestId + 1;
     data := map[string]interface{}{
         "t": t,
         "akademicYearId": akademicYearId,
+        "biggestId": biggestId,
     }
 
 	RenderTemplate("teacher/report", helpers, resp, data)

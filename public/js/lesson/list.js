@@ -146,6 +146,78 @@ ModipApp.arithmosDimosieuseon = function() {
     })
   }
 
+  $('.cloneRow.button').click(function() {
+    //TODO For realtime cloning look below...
+    //Just reload the page in order to copy the button
+    //in the server side mode.
+    location.reload();
+  });
+    /*$('.cloneRow.button').click(function(event) {
+      //TODO This for the very brave people.....
+      //Over 9000 work for the time being. Just do the "clone"
+      //on server side mode.
+      //http://stackoverflow.com/questions/20260222/jquery-remove-doesnt-work-on-clone
+      //take the last row
+      var lastRow = $('.arithmosDimosieuseonRow').last();
+      //copy the last row
+      var newRow = lastRow.clone();
+      //append the cloned row into the end of the table
+      newRow.insertAfter(lastRow)
+
+      //Clear the cloned values from our previous row
+      var tdElements = newRow.find('td');
+      $.each(tdElements, function(index, element) {
+        var _self = $(this)
+        var type =_self.data('type');
+        //increment the data-id by 1, otherwise data-id++
+        var previousRowId = _self.data('id');
+        if (previousRowId !== undefined) {
+          var previousRowId = previousRowId + 1;
+          _self.attr('data-id', previousRowId);
+        }
+        if (type === undefined) {
+          //this is a td element, so we must go into
+          //the input element, so we must dig deeper.
+          type = _self.children().data('type');
+          previousRowId = _self.children().data('id');
+          previousRowId = previousRowId + 1;
+          _self.children().attr('data-id', previousRowId);
+
+          //still empty? then it the select....
+          if (type === undefined) {
+            type = _self.children('select').data('type');
+            previousRowId =_self.children('select').data('id');
+            previousRowId = previousRowId + 1;
+            _self.children('select').attr('data-id', previousRowId);
+
+          }
+        }
+
+        switch (type) {
+          case "author":
+            _self.text('');
+            break;
+          case "title":
+            _self.text('');
+            break;
+          case "is_magazine":
+            _self.children().prop('checked', false);
+            break;
+          case "publisher":
+            _self.text('');
+            break;
+          case "publication_date":
+            _self.children().val('');
+            break;
+          case "type":
+            //DON'T REMOVE THIS.
+            //there is no reason for our combobox to reset it to its
+            //default value
+            //_self.children('select').val('');
+            break;
+        }
+      });
+    });*/
 }
 
 ModipApp.lessonMoveToDepartment();
