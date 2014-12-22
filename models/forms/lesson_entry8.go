@@ -6,6 +6,8 @@ import (
 
 type LessonCreateReportFormEntry8 struct {
 	// Συμμετοχή Σπουδαστών
-	Field1 string `schema:"lesson_summetoxi_spoudaston_summetoxi_stin_kanoniki_eksetasi"`
-	Field2 int `schema:"lesson_summetoxi_spoudaston_summetoxi_stin_epanaliptikh_eksetasi"`
+
+	Field1 string `schema:"lesson_summetoxi_spoudaston_sto_mathima"`
+	Field2 string `schema:"lesson_summetoxi_spoudaston_summetoxi_stin_kanoniki_eksetasi"`
+	Field3 int `schema:"lesson_summetoxi_spoudaston_summetoxi_stin_epanaliptikh_eksetasi"`
 }
