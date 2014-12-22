@@ -1,0 +1,726 @@
+<?php
+
+// $Id$
+
+/** 
+* Implementation of hook_menu().
+*/
+function myexportimport_menu() {
+  $items['exportall'] = array(
+    'title' => 'Exporting',
+	'page callback' => '_myexportimport_exportall',
+	'access callback' => TRUE, 
+	'type' => MENU_CALLBACK,
+  );
+  $items['importall'] = array(
+    'title' => 'Importing',
+	'page callback' => '_myexportimport_importall',
+	'access callback' => TRUE,
+	'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+
+function _myexportimport_exportall() {
+   $s1=_myexportimport_export_taxonomy();
+   $s2=_myexportimport_export_users();
+   $s3=_myexportimport_export_nodes('dep_pps_mathimata');
+   $s4=_myexportimport_export_nodes('dep_pms_mathimata');
+   $s5=_myexportimport_export_nodes('dep_prosopiko');   
+   return $s1."<hr>".$s2."<hr>".$s3."<hr>".$s4."<hr>".$s5;
+}
+
+
+function _myexportimport_importall() {
+   $s0=_myexportimport_import_taxonomy_vocabularies();
+   $s1=_myexportimport_import_taxonomy_terms_and_hierarchy();
+   $s2=_myexportimport_import_nodes('dep_pps_mathimata');
+   $s3=_myexportimport_import_nodes('dep_pms_mathimata');
+   $s4=_myexportimport_import_nodes('dep_prosopiko');   
+   $s5=_myexportimport_import_users();
+   return $s0."<hr>".$s1."<hr>".$s2."<hr>".$s3."<hr>".$s4."<hr>".$s5;
+}
+
+// EXPORT USERS
+
+function _myexportimport_export_users() {
+// Best EXPORT USER
+
+//Input
+
+$file = "exported_users.txt";
+
+
+// print "<pre>";
+// print_r(is_null($fields[2]['type']));
+// print "</pre>";
+//print_r($fields);
+  $sql ="SELECT uid FROM dep_users where uid>1;";
+
+  $result = db_query($sql);
+  $uids=array();
+  foreach($result as $row) {
+    $uids[]=$row->uid;
+ }
+//  print "<pre>";
+// print_r($nids);
+// print "</pre>";
+//exit; 
+
+ $result=user_load_multiple($uids);
+ //print "<pre>";
+ //print_r($result[479]);
+ //print "</pre>";
+ //exit;
+  
+  foreach($result as $row) {
+   $str = 
+	          $row->uid.";".
+			  $row->name.";".
+			 // $row->pass.";".
+			  $row->mail.";";
+	if (count($row->roles)>0) {		  
+	    foreach($row->roles as $roleid => $rolenm) {
+	          $str .=  $roleid."-".$rolenm.",";
+	    }
+	    $str=substr($str,0,-1);
+	}
+	else
+	{ 
+	  $str .= 'null';
+	}
+	 $str .= ";" .
+         	 $row->field_user_sortfield[und][0][value].";";
+			  if (count($row->field_user_pms)>0) {
+			     $str .= $row->field_user_pms[und][0][tid].";";
+			  }
+			  else {
+			  $str .= "null;";
+			  }
+			  if (count($row->field_user_pps)>0) {
+			     $str .= $row->field_user_pps[und][0][tid];
+			  }
+			  else {
+			  $str .= "null";
+			  }
+			 
+	
+	$output .=  $str."<br>";
+	$output_file .= $str."\r\n";
+  }
+
+
+
+  $dir=getcwd();
+  echo $dir;
+//  exit;
+
+
+$newfile=$dir."/".$file;
+$file = fopen ($newfile, "w");
+fwrite($file, $output_file);
+fclose ($file);  
+
+  return $output;
+}
+
+
+
+
+
+
+// EXPORT TAXONOMY
+
+function _myexportimport_export_taxonomy() {
+// BEST EXPORT TAXONOMY
+  $dir=getcwd();
+
+$file1 = "exported_vocabulary.txt";
+$file2 = "exported_taxonomy.txt";
+$file3 = "exported_hierarchy.txt";
+
+// Export Vocabulary
+  $sql ="SELECT * FROM {taxonomy_vocabulary};";
+
+  $result = db_query($sql);
+  $str='';
+  foreach($result as $row) {
+    $str = 
+	   $row -> vid. ",'".
+	   $row -> name. "','".
+	   $row -> machine_name. "','".
+	   $row -> description. "',".
+	   $row -> hierarchy. ",'".
+	   $row -> module. "',".
+	   $row -> weight;
+      $output1 .=  $str."<br>";
+	  $output_file1 .= $str."\r\n";
+  }
+$newfile1=$dir."/".$file1;
+$file1 = fopen ($newfile1, "w");
+fwrite($file1, $output_file1);
+fclose ($file1);
+
+
+// Export taxonomy terms
+
+// print "<pre>";
+// print_r(is_null($fields[2]['type']));
+// print "</pre>";
+//print_r($fields);
+  $sql ="SELECT tid FROM {taxonomy_term_data};";
+
+  $result = db_query($sql);
+  $tids=array();
+//print 'ok';
+//exit; 
+ foreach($result as $row) {
+    $tids[]=$row->tid;
+ }
+ // print "<pre>";
+// print_r($tids);
+// print "</pre>";
+//exit; 
+
+ $result=taxonomy_term_load_multiple($tids);
+ //print "<pre>";
+ //print_r($result[66]);
+ //print "</pre>";
+ //exit;
+  $str='';
+  foreach($result as $row) {
+   $str = 
+	          $row->tid.";".
+			  $row->vid.";".
+			  $row->name.";".
+			  $row->description.";".
+			  $row->format.";".
+			  $row->weight.";";
+	//		  print_r($row->field__pms_tmima_tm);
+		//	  exit;
+		$temp = array_keys($row->field__pms_tmima_tm);
+        $lang = $temp[0];   //get lang of field
+
+	    $term=taxonomy_term_load($row->field__pms_tmima_tm[$lang][0][tid]);
+	    $str .=  $term->name;
+			 
+	
+	$output2 .=  $str."<br>";
+	$output_file2 .= $str."\r\n";
+  }
+
+
+
+
+  //echo $dir;
+//  exit;
+
+
+$newfile2=$dir."/".$file2;
+$file2 = fopen ($newfile2, "w");
+fwrite($file2, $output_file2);
+fclose ($file2);  
+
+
+
+// Export Hierarchy
+  $sql ="SELECT * FROM {taxonomy_term_hierarchy};";
+
+  $result = db_query($sql);
+  $str='';
+  foreach($result as $row) {
+    $str = 
+	   $row -> tid. ",".
+	   $row -> parent;
+      $output3 .=  $str."<br>";
+	  $output_file3 .= $str."\r\n";
+  }
+$newfile3=$dir."/".$file3;
+$file3 = fopen ($newfile3, "w");
+fwrite($file3, $output_file3);
+fclose ($file3);
+
+
+
+  return "<h1>TAXONOMY</h1><br>".$output1."<hr>".$output2."<hr>".$output3;
+}
+
+
+
+
+// EXPORT NODES
+
+
+
+function _myexportimport_export_nodes($type) {
+// Best EXPORT 2
+// Handles also multi node references in a field
+
+
+//Input
+$fields=array();
+
+if ($type=='dep_pps_mathimata') {
+
+$fields[]=array('name'=>'nid','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'type','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'field_dep_pps_antist','type'=>'tid','lang'=>'el','getterm'=>1);
+$fields[]=array('name'=>'field_dep_pps_aketos','type'=>'tid','lang'=>'el','getterm'=>1);
+$fields[]=array('name'=>'title','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'field_dep_pps_mathima','type'=>'value','lang'=>'el','getterm'=>0);
+//$fields[]=array('name'=>'field_dep_pps_exam','type'=>'value','lang'=>'el','getterm'=>0);
+//$fields[]=array('name'=>'name','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'uid','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'language','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'field_dep_pps_proapait','type'=>'multinode','lang'=>'und','getterm'=>null);
+
+}
+elseif($type=='dep_pms_mathimata') {
+
+$fields[]=array('name'=>'nid','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'type','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'field_dep_pms_antist','type'=>'tid','lang'=>'el','getterm'=>1);
+$fields[]=array('name'=>'field_dep_pms_aketos','type'=>'tid','lang'=>'el','getterm'=>1);
+$fields[]=array('name'=>'title','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'field_dep_pms_mathima','type'=>'value','lang'=>'el','getterm'=>0);
+//$fields[]=array('name'=>'field_dep_pms_exam','type'=>'value','lang'=>'el','getterm'=>0);
+//$fields[]=array('name'=>'name','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'uid','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'language','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'field_dep_pms_proapait','type'=>'multinode','lang'=>'und','getterm'=>null);
+}
+elseif ($type=='dep_prosopiko') {
+
+$fields[]=array('name'=>'type','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'title','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'field_dep_prosop_vath','type'=>'tid','lang'=>'el','getterm'=>1);
+$fields[]=array('name'=>'field_dep_prosop_email','type'=>'value','lang'=>'el','getterm'=>0);
+$fields[]=array('name'=>'name','type'=>null,'lang'=>null,'getterm'=>null);
+}
+else
+{
+return 'NOT AVAILABLE';
+}
+
+$file = "exported_".$type.".txt";
+// No need to touch anything below
+
+// print "<pre>";
+// print_r(is_null($fields[2]['type']));
+// print "</pre>";
+//print_r($fields);
+  $sql ="SELECT distinct dep_node.nid
+FROM dep_node
+WHERE dep_node.type = '".$type."'";
+
+  $result = db_query($sql);
+  $nids=array();
+  foreach($result as $row) {
+    $nids[]=$row->nid;
+ }
+//  print "<pre>";
+// print_r($nids);
+// print "</pre>";
+//exit; 
+
+ $result=node_load_multiple($nids);
+ //print "<pre>";
+ //print_r($result[355]);
+ //print "</pre>";
+ //exit;
+  
+  foreach($result as $row) {
+  /*  $str = 
+	          //$row->nid.";".
+			  $row->type.";".
+			  $row->field_dep_pps_antist[el][0][tid].";".
+	          $row->field_dep_pps_aketos[el][0][tid].";".
+			  $row->title.";".
+			  $row->field_dep_pps_mathima[el][0][value].";".
+			  $row->field_dep_pps_exam[el][0][value].";".
+			  $row->name; */
+	$str='';
+	foreach($fields as $field) {
+	   if (is_null($field['type'])) {
+	    $str .= $row->{$field['name']} . ";";
+	   }
+       elseif ($field['type']=='value' || ($field['type']=='tid' && $field['getterm']==0)) { 		
+	    $str .= $row->{$field['name']}[$field['lang']][0][$field['type']] . ";";
+	   }
+	   elseif ($field['type']=='tid' && $field['getterm']==1) {
+         $term = taxonomy_term_load($row->{$field['name']}[$field['lang']][0]['tid']); 
+		 $str .= $term->name .";";
+	   }
+	   elseif ($field['type']=='multinode') {
+	 //    print('ok');
+	   //  exit;
+	     $deltas=$row->{$field['name']}[$field['lang']];
+         if (count($deltas)>0) {
+		 foreach($deltas as $delta) {
+		   $str .= $delta['nid'] . ',';
+		 }
+		 $str=substr($str,0,-1).";";
+        }
+		else {
+		  $str .= 'null;';
+		}
+	   }
+	}
+	$str=substr($str,0,-1);
+	
+	$output .=  $str."<br>";
+	$output_file .= $str."\r\n";
+  }	 
+
+
+
+  $dir=getcwd();
+  //echo $dir;
+//  exit;
+
+
+$newfile=$dir."/".$file;
+$file = fopen ($newfile, "w");
+fwrite($file, $output_file);
+fclose ($file);  
+
+  return $output;
+
+}
+
+
+
+///////////////////////////////////////////// IMPORT FUNCTIONS
+
+
+function _myexportimport_import_taxonomy_vocabularies() {
+//  IMPORT TAXONOMY Vocabularies
+
+//Input
+
+$file = "exported_vocabulary.txt";
+// No need to touch anything below
+
+$sql='delete from {taxonomy_vocabulary}';
+ db_query($sql);
+
+  $dir=getcwd();
+ $newfile=$dir."/".$file;
+
+ $input_lines = file($newfile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+ 
+ 
+ foreach($input_lines as $line) {
+ 
+//  $values = str_replace(';',',',$line);
+ // print $values;
+  $sql='insert into {taxonomy_vocabulary} values ('.$line.')';
+  //print $sql;
+  db_query($sql);
+   }    
+ 
+  
+  return 'ok importing vocabularies';
+}
+
+
+
+
+function _myexportimport_import_taxonomy_terms_and_hierarchy() {
+
+ //First Delete all existing taxonomy terms
+$sql ="SELECT tid FROM {taxonomy_term_data};";
+
+  $result = db_query($sql);
+ 
+ foreach($result as $row) {
+   taxonomy_term_delete($row->tid);
+ }
+ 
+ //exit;
+ $file = "exported_taxonomy.txt";
+  $dir=getcwd();
+ $newfile=$dir."/".$file;
+
+ $input_lines = file($newfile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+ $tids_relation=array(); 
+ $tids_relation[0]=0;
+ foreach($input_lines as $line) {
+
+
+  $values = explode(";",$line);
+  
+ // print_r($values)."<br>";
+ 
+
+ $term = new stdClass(); // We create a new term object    
+  $term->vid=$values[1];  
+  $term->name=$values[2];
+  $term->description=$values[3];
+  $term->format=$values[4];
+  $term->weight=$values[5];
+  if (trim($values[6])!='') {
+       $term_tid_array = taxonomy_get_term_by_name($values[6]); //Prosoxh: tha doulepsei mono an den yparxoyn diples eggrafes sto taxonomy etos
+       // print_r($term_tid_array);
+		//exit;
+		$temp = array_keys($term_tid_array);  
+        $term_tid = $term_tid_array[$temp[0]]->tid;
+		$term->field__pms_tmima_tm[und][0][tid]=$term_tid;
+  }
+  taxonomy_term_save($term);
+  $old_tid=$values[0];
+  $new_tid=$term->tid;
+  //print $new_tid."ppp";
+  $tids_relation[$old_tid] = $new_tid; 
+  
+	}
+  
+  //Now create hierarchies
+  //First Delete existing data
+  $sql ="delete FROM {taxonomy_term_hierarchy};";
+  $result = db_query($sql);
+
+ $file = "exported_hierarchy.txt";
+  $dir=getcwd();
+ $newfile=$dir."/".$file;
+ 
+ $input_lines = file($newfile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+ foreach($input_lines as $line) {
+  $values = explode(",",$line);
+  
+  $sql='insert into {taxonomy_term_hierarchy} values ('.$tids_relation[$values[0]].','.$tids_relation[$values[1]].')';
+ // print $sql;
+ // exit;
+  db_query($sql);
+  }
+  return 'ok importing taxonomy terms and hierarchy';
+}
+
+
+
+
+
+
+
+
+
+
+
+//Import Node
+
+function _myexportimport_import_nodes($type) {
+//  IMPORT NODE (based on EXPORT NODE 2)
+
+//Input
+
+$fields=array();
+
+if ($type=='dep_pps_mathimata') {
+
+$fields[]=array('name'=>'nid','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'type','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'field_dep_pps_antist','type'=>'tid','lang'=>'el','getterm'=>1);
+$fields[]=array('name'=>'field_dep_pps_aketos','type'=>'tid','lang'=>'el','getterm'=>1);
+$fields[]=array('name'=>'title','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'field_dep_pps_mathima','type'=>'value','lang'=>'el','getterm'=>0);
+//$fields[]=array('name'=>'field_dep_pps_exam','type'=>'value','lang'=>'el','getterm'=>0);
+//$fields[]=array('name'=>'name','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'uid','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'language','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'field_dep_pps_proapait','type'=>'multinode','lang'=>'und','getterm'=>null);
+
+}
+elseif($type=='dep_pms_mathimata') {
+
+$fields[]=array('name'=>'nid','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'type','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'field_dep_pms_antist','type'=>'tid','lang'=>'el','getterm'=>1);
+$fields[]=array('name'=>'field_dep_pms_aketos','type'=>'tid','lang'=>'el','getterm'=>1);
+$fields[]=array('name'=>'title','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'field_dep_pms_mathima','type'=>'value','lang'=>'el','getterm'=>0);
+//$fields[]=array('name'=>'field_dep_pms_exam','type'=>'value','lang'=>'el','getterm'=>0);
+//$fields[]=array('name'=>'name','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'uid','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'language','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'field_dep_pms_proapait','type'=>'multinode','lang'=>'und','getterm'=>null);
+}
+elseif ($type=='dep_prosopiko') {
+
+$fields[]=array('name'=>'type','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'title','type'=>null,'lang'=>null,'getterm'=>null);
+$fields[]=array('name'=>'field_dep_prosop_vath','type'=>'tid','lang'=>'el','getterm'=>1);
+$fields[]=array('name'=>'field_dep_prosop_email','type'=>'value','lang'=>'el','getterm'=>0);
+$fields[]=array('name'=>'name','type'=>null,'lang'=>null,'getterm'=>null);
+}
+else
+{
+return 'NOT AVAILABLE';
+}
+
+$file = "exported_".$type.".txt";
+// No need to touch anything below
+
+  $dir=getcwd();
+ $newfile=$dir."/".$file;
+
+ $input_lines = file($newfile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+  $nids_relation=array();  //array to store new and old nids for use in multinode reference fields
+ 
+ foreach($input_lines as $line) {
+ $node = new stdClass(); // We create a new node object  
+
+  $values = explode(";",$line);
+ // print_r($values);
+  foreach($values as $nv=>$value) {   //Find nid and store it as $old_id
+     if ($fields[$nv]['name'] == 'nid' ) {
+	    $old_id = $value;
+	 }
+  }
+ // print_r($old_id);
+  
+  foreach($values as $nv=>$value) {   //Set basic node fields
+    
+	 if ($fields[$nv]['name'] != 'nid' && is_null($fields[$nv]['type'])) {
+	    $node->{$fields[$nv]['name']} = $value;
+	 }
+  }    
+
+  node_object_prepare($node); 	
+
+  foreach($values as $nv=>$value) {  //Set CCK Fields
+   //print_r($fields[$nv]['name']);
+	 //print "----".$value;
+	 //print "-->--".$fields[$nv]['type'];
+  
+     if ($fields[$nv]['type']=='value' || ($fields[$nv]['type']=='tid' && $fields[$nv]['getterm']==0) && trim($value)!='') { 	
+	    $node->{$fields[$nv]['name']}[$fields[$nv]['lang']][0][$fields[$nv]['type']] =$value;
+	 }
+	  elseif ($fields[$nv]['type']=='tid' && $fields[$nv]['getterm']==1 && trim($value)!='') {  //Taxonomy terms given by name (not tid)
+      //  print($fields[$nv]['name'])."<br>".$value;	   
+	//	exit;
+	   $term_tid_array = taxonomy_get_term_by_name($value); //Prosoxh: tha doulepsei mono an den yparxoyn diples eggrafes sto taxonomy etos
+       // print_r($term_tid_array);
+		//exit;
+		$temp = array_keys($term_tid_array);  
+        $term_tid = $term_tid_array[$temp[0]]->tid;
+		$node->{$fields[$nv]['name']}[$fields[$nv]['lang']][0]['tid'] = $term_tid ;
+	 }
+  }  	
+ 
+  $node = node_submit($node); // Prepare node for a submit
+//dprint_r($node);
+//exit;
+  node_save($node); // After this call we'll get a nid 
+
+ $new_id = $node->nid;
+ //print($new_id);
+  //exit;
+  $nids_relation[$old_id] = $new_id; 
+  
+	}
+  // Now handle multinode reference fields
+  foreach($input_lines as $line) {
+    $values = explode(";",$line);
+	foreach($values as $nv=>$value) {   //Find nid and store it as $old_id
+     if ($fields[$nv]['name'] == 'nid' ) {
+	    $old_id = $value;
+	 }
+	}
+	//print_r($nids_relation);
+	//exit;
+	$node=node_load($nids_relation[$old_id]);
+	$updated=0;
+	foreach($values as $nv=>$value) {
+	  if ($fields[$nv]['type']=='multinode') {
+	    $nids = explode(",",$value);
+        foreach($nids as $delta=>$nid) {
+           $node->{$fields[$nv]['name']}[$fields[$nv]['lang']][$delta]['nid']=$nids_relation[$nid];
+		   $updated=1;
+        }		
+	  }
+	
+	}
+	if ($updated==1) {
+	  node_save($node);
+    }  
+  }
+  
+  
+  return 'ok importing nodes of type' . $type;
+}
+
+//////////////////// USER IMPORT /////////////
+
+function _myexportimport_import_users() {
+
+ 
+ //IMPORT USERS
+ $file = "exported_users.txt";
+  $dir=getcwd();
+ $newfile=$dir."/".$file;
+
+ $input_lines = file($newfile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+ 
+ foreach($input_lines as $line) {
+
+
+//448;geandrea;a@a.d;2-authenticated user,4-Διδάσκων;Ανδρεάδης Γιώργος;null;10
+  $values = explode(";",$line);
+  
+ // print_r($values)."<br>";
+  $user = new stdClass();
+  $user->name=$values[1];
+  $user->pass='123';
+  $user->mail=$values[2];
+  $user->status=1;
+  $user->signature_format='filtered_html';
+  $user->language='el';
+  if (trim($values[4])!='') {
+  $sql="select nid from {node} where title='".$values[4]."'"; 
+ // print $sql;
+  $result=db_query($sql);
+ // print_r($result);
+  foreach($result as $row) {
+     print_r($row);
+     $user->field_user_reference[und][0][nid]=$row->nid;
+  }
+  $user->field_user_sortfield[und][0][value]=$values[4];
+  }
+  if ($values[6]!='null') {
+  $user->field_user_pps[und][0][tid]=$values[6];
+  }
+  if ($values[5]!='null') {
+  $user->field_user_pms[und][0][tid]=$values[5];
+  }
+  $roles_str=$values[3];
+  $roles_to_store=array();
+  $roles_array=explode(",",$roles_str);
+  foreach($roles_array as $role2){
+    $role_parts=explode('-',$role2);
+    $roles_to_store[$role_parts[0]]=$role_parts[1];
+	}
+   $user->roles=$roles_to_store;
+ // print "<pre>";
+  //print_r($user);
+  //print "</pre>";
+  
+  $sql="select uid from {users} where name='".$values[1]."'";
+ // print $sql;
+  $res=db_query($sql);
+  $exists=0;
+  foreach($res as $row){
+  $exists=1;
+  }
+ // print $exists."ppppppppppppppppppppppppppppppppppppp";
+  if(!$exists) {
+   user_save($user);
+  }
+  }
+  
+  return 'ok users inmport';
+}
