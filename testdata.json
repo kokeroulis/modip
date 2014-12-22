@@ -6,12 +6,16 @@
                 {
                     "name": "superteacher1",
                     "password": "superteacher1",
-                    "email": "superteacher1@teilar.gr"
+                    "email": "superteacher1@teilar.gr",
+                    "username": "superteacher1_username",
+                    "type": "kathigiths"
                 },
                 {
                     "name": "superteacher2",
                     "password": "superteacher2",
-                    "email": "superteacher2@teilar.gr"
+                    "email": "superteacher2@teilar.gr",
+                    "username": "superteacher1_username",
+                    "type": "kathigiths"
                 }
             ]
         }

@@ -54,7 +54,7 @@ func (d *Department) LoadLessons(postDegree bool) {
 }
 
 func (d *Department) LoadStuff() {
-	query := `SELECT id, name, email
+	query := `SELECT id, name, email, username, type
 			  FROM teacher
 			  WHERE department = $1`
 
@@ -71,7 +71,9 @@ func (d *Department) LoadStuff() {
 
 		if err := rows.Scan(&it.Id,
 							&it.Name,
-							&it.Email); err != nil {
+							&it.Email,
+                            &it.Username,
+                            &it.Type); err != nil {
 			panic(err)
 		} else {
 			d.AddTeacher(it)

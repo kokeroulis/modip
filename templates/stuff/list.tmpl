@@ -6,6 +6,8 @@
     <thead>
       <tr>
         <th >A/A</th>
+        <th>Όνομα Χρήστη</th>
+        <th>Βαθμίδα</th>
         <th>Ονοματεπώνυμο</th>
         <th>Email Επικοινωνίας</th>
         <th>Ενέργειες</th>
@@ -15,6 +17,8 @@
       {{range $index, $element2 := $element.Teachers}}
         <tr>
           <td>{{add $index 1}}</td>
+          <td>{{.Username}}</td>
+          <td>{{.Type}}</td>
           <td>{{.Name}}</td>
           <td>{{.Email}}</td>
           <td>

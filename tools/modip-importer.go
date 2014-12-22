@@ -14,6 +14,8 @@ type teacher struct {
 	Name     string
 	Email    string
 	Password string
+    Username string
+    Type     string
 }
 
 type teacherDb struct {
@@ -74,11 +76,13 @@ func createTeachers(db *sql.DB, teachers []teacher, departmentId int) {
 		var teacherPassword string
 		var teacherDepartment int
 		var teacherId int
+        var teacherUsername string
+        var teacherType string
 
-		query := `SELECT id, name, email, password, department
+		query := `SELECT id, name, email, password, department, username, type
 				  FROM teacher WHERE name=$1`
 
-		err := db.QueryRow(query, teacher.Name).Scan(&teacherId, &teacherName, &teacherEmail, &teacherPassword, &teacherDepartment)
+		err := db.QueryRow(query, teacher.Name).Scan(&teacherId, &teacherName, &teacherEmail, &teacherPassword, &teacherDepartment, &teacherUsername, &teacherType)
 
 		if !checkQuery(err) {
 			// teacher doesn't exist, create one
@@ -90,6 +94,8 @@ func createTeachers(db *sql.DB, teachers []teacher, departmentId int) {
 			t := models.Teacher{
 				Name:       teacher.Name,
 				Email:      teacher.Email,
+                Username:   teacher.Username,
+                Type:       teacher.Type,
 				Department: d,
 			}
 

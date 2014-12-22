@@ -9,6 +9,8 @@ CREATE TABLE teacher
     name       text not null,
     email      text not null,
     password   text not null,
-    department int  not null references department(id) on delete cascade
+    department int  not null references department(id) on delete cascade,
+    username   text not null,
+    type       text not null
 );
 `
