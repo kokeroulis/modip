@@ -56,14 +56,39 @@ func (f *TeacherCreateReportFormEntry4) Update(teacherId int, akademicYearId int
 	if len(f.Helpers) > 0 {
 		// we have helpers lets add them
 		for _, it := range f.Helpers {
-			query = `INSERT INTO TeacherCreateReportFormEntry4Helper
-					 (form, content) VALUES ($1, $2)`
+			var query string
 
+            if it.AlreadyExists(f.Id, it.Content) {
+                query = `UPDATE TeacherCreateReportFormEntry4Helper
+                         SET content = $2 where form = $1 and content = $2`
+            } else {
+                query = `INSERT INTO TeacherCreateReportFormEntry4Helper
+					 (form, content) VALUES ($1, $2)`
+            }
 			_, err := Db.Database.Exec(query, f.Id, it.Content)
 
 			Db.CheckQueryWithNoRows(err, query)
 		}
 	}
+}
+
+func (h *TeacherCreateReportFormEntry4Helper) AlreadyExists(id int, content string) (bool) {
+    query := `SELECT form, content from TeacherCreateReportFormEntry4Helper
+              where form = $1 and content = $2`
+
+    rows, err := Db.Database.Query(query, id, content)
+
+    if err != nil {
+		panic(err)
+	}
+
+    alreadyExists := false
+
+    for rows.Next() {
+        alreadyExists = true
+    }
+
+    return alreadyExists
 }
 
 func (f *TeacherCreateReportFormEntry4) Load(teacherId int, akademicYearId int) {
