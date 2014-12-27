@@ -220,6 +220,40 @@ ModipApp.arithmosDimosieuseon = function() {
     });*/
 }
 
+ModipApp.ereunitikes_Ypodomes = function() {
+  $('.button.cloneEntry').click(function(event) {
+
+    //clone and append the new entry
+    var trLastEntry =  $('.trEntry').last();
+    var newTrEntry = trLastEntry.clone();
+    newTrEntry.insertAfter(trLastEntry);
+
+    var trEntries = $('.trEntry');
+    var biggestIdHelper = -1;
+
+    //find the biggerst Id.
+    $.each(trEntries, function(index, element) {
+      var _self =  $(this);
+      var currentTextArea = _self.find('textarea');
+      var currentNameAttr = currentTextArea.attr('name');
+      var nameId = currentNameAttr.split('.')[1]
+      if (nameId > biggestIdHelper) {
+        biggestIdHelper = nameId
+      }
+    });
+
+    var newId = parseInt(biggestIdHelper);
+    newId += 1;
+    var textArea = newTrEntry.find('textarea');
+    //empty our field, since this is a new entry
+    //remove the cloned value
+    textArea.text('');
+    //add a proper name to our new entry.
+    textArea.attr('name','Helpers.' + newId + '.Content');
+  });
+}
+
+ModipApp.ereunitikes_Ypodomes();
 ModipApp.lessonMoveToDepartment();
 ModipApp.akademicLesson();
 ModipApp.arithmosDimosieuseon();
