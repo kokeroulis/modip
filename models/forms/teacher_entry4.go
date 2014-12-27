@@ -10,7 +10,7 @@ type TeacherCreateReportFormEntry4Helper struct {
 
 type TeacherCreateReportFormEntry4 struct {
 	// Αριθμός Δημοσιεύσεων
-	Id      int    `schema:-`
+	Id      int    `schema:"id"`
 	Field1  string `schema:"ereunitikes_ypodomes_arithmos_kai_xwritikotita_ereunitikon_ergasthrion_pou_xrisimopoieitai"`
 	Field2  string `schema:"ereunitikes_ypodomes_eparkeia_katalilotita_kai_poiotita_ton_ereunitikon_ergasthrion"`
 	Field3  string `schema:"ereunitikes_ypodomes_eparkeia_katallilotita_kai_poithta_tou_ergasthriakou_eksoplismou"`
@@ -76,11 +76,12 @@ func (f *TeacherCreateReportFormEntry4) Load(teacherId int, akademicYearId int) 
 				ereunitikes_ypodomes_poso_entatiki_xrish_kanete_ton_sugkrekrimenon_ereunitikon_ypodomon,
 				ereunitikes_ypodomes_ananeosi_ereunitikon_ypodomon,
 				ereunitikes_ypodomes_pws_epidiokete_th_xrimatodothsh_gia_promi8eia,
-				ereunitikes_ypodomes_praktiki_akiopoihsh_ton_ereunitikon_apotelesmaton
+				ereunitikes_ypodomes_praktiki_akiopoihsh_ton_ereunitikon_apotelesmaton,
+                id
 			  FROM TeacherCreateReportFormEntry4
-			  WHERE id = $1 AND teacher = $2 AND akademic_year = $3`
+			  WHERE teacher = $1 AND akademic_year = $2`
 
-	err := Db.Database.QueryRow(query, f.Id, teacherId, akademicYearId).
+	err := Db.Database.QueryRow(query, teacherId, akademicYearId).
 			Scan(&f.Field1,
 				&f.Field2,
 				&f.Field3,
@@ -89,7 +90,8 @@ func (f *TeacherCreateReportFormEntry4) Load(teacherId int, akademicYearId int) 
 				&f.Field6,
 				&f.Field7,
 				&f.Field8,
-				&f.Field9)
+				&f.Field9,
+                &f.Id)
 
 	Db.CheckQueryWithNoRows(err, query)
 

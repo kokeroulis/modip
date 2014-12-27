@@ -1,12 +1,19 @@
 <div class="large-6 columns">
 
-<form method="POST" action="/teacher/report/3/{{.akademicYearId}}">
+<form method="POST" action="/teacher/report/4/{{.akademicYearId}}">
 
   <div class="row">
     <div class="large-12 columns">
       <label>Συμμετοχή εξωτερικών συνεργατών στα ερευνητικά έργα
-        <textarea rows="4" name="ereunitikes_ypodomes_arithmos_kai_xwritikotita_ereunitikon_ergasthrion_pou_xrisimopoieitai" placeholder="">{{.Entry4.Field1}}</textarea>
+        <textarea rows="4" name="ereunitikes_ypodomes_arithmos_kai_xwritikotita_ereunitikon_ergasthrion_pou_xrisimopoieitai" placeholder="">{{.t.Entry4.Field1}}</textarea>
       </label>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="large-12 columns">
+        <input  type="hidden" name="id" value="{{.t.Entry4.Id}}"/>
     </div>
   </div>
   <br/>
@@ -14,7 +21,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Συμμετοχή εξωτερικών συνεργατών στα ερευνητικά έργα
-        <textarea rows="4" name="ereunitikes_ypodomes_eparkeia_katalilotita_kai_poiotita_ton_ereunitikon_ergasthrion" placeholder="">{{.Entry4.Field1}}</textarea>
+        <textarea rows="4" name="ereunitikes_ypodomes_eparkeia_katalilotita_kai_poiotita_ton_ereunitikon_ergasthrion" placeholder="">{{.t.Entry4.Field2}}</textarea>
       </label>
     </div>
   </div>
@@ -23,7 +30,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label> Επάρκεια, καταλληλότητα και ποιότητα του εργαστηριακού εξοπλισμού
-        <textarea rows="4" name="ereunitikes_ypodomes_eparkeia_katallilotita_kai_poithta_tou_ergasthriakou_eksoplismou" placeholder="">{{.Entry4.Field1}}</textarea>
+        <textarea rows="4" name="ereunitikes_ypodomes_eparkeia_katallilotita_kai_poithta_tou_ergasthriakou_eksoplismou" placeholder="">{{.t.Entry4.Field3}}</textarea>
       </label>
     </div>
   </div>
@@ -32,7 +39,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Καλύπτουν οι διαθέσιμες υποδομές τις ανάγκες της ερευνητικής διαδικασίας
-        <textarea rows="4" name="ereunitikes_ypodomes_kalyptoun_oi_dia8esimes_ypodomes_tis_anagkes_tis_ereunhtikis_diadikasias" placeholder="">{{.Entry4.Field1}}</textarea>
+        <textarea rows="4" name="ereunitikes_ypodomes_kalyptoun_oi_dia8esimes_ypodomes_tis_anagkes_tis_ereunhtikis_diadikasias" placeholder="">{{.t.Entry4.Field4}}</textarea>
       </label>
     </div>
   </div>
@@ -41,7 +48,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Ποιά από τα ερευνητικά σας αντικείμενα δεν καλύπτονται από τις διαθέσιμες υποδομές
-        <textarea rows="4" name="ereunitikes_ypodomes_poia_apo_ta_ereunitika_sas_antikeimena_den_kalyptontai_apo_tis_ypodomes" placeholder="">{{.Entry4.Field1}}</textarea>
+        <textarea rows="4" name="ereunitikes_ypodomes_poia_apo_ta_ereunitika_sas_antikeimena_den_kalyptontai_apo_tis_ypodomes" placeholder="">{{.t.Entry4.Field5}}</textarea>
       </label>
     </div>
   </div>
@@ -50,7 +57,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Πόσο εντατική χρήση κάνετε των συγκεκριμένων ερευνητικών υποδομών
-        <textarea rows="4" name="ereunitikes_ypodomes_poso_entatiki_xrish_kanete_ton_sugkrekrimenon_ereunitikon_ypodomon" placeholder="">{{.Entry4.Field1}}</textarea>
+        <textarea rows="4" name="ereunitikes_ypodomes_poso_entatiki_xrish_kanete_ton_sugkrekrimenon_ereunitikon_ypodomon" placeholder="">{{.t.Entry4.Field6}}</textarea>
       </label>
     </div>
   </div>
@@ -59,7 +66,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Ανανέωση ερευνητικών υποδομών
-        <textarea rows="4" name="ereunitikes_ypodomes_ananeosi_ereunitikon_ypodomon" placeholder="">{{.Entry4.Field1}}</textarea>
+        <textarea rows="4" name="ereunitikes_ypodomes_ananeosi_ereunitikon_ypodomon" placeholder="">{{.t.Entry4.Field7}}</textarea>
       </label>
       <small>Πόσο συχνά ανανεώνονται οι ερευνητικές υποδομές; Είναι σύγχρονος ο υπάρχων εξοπλισμός και ποια η λειτουργική του κατάσταση ή ποιες οι τυχόν ανάγκες ανανέωσης/εκσυγχρονισμού του;</small>
     </div>
@@ -70,7 +77,7 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Πώς επιδιώκετε τη χρηματοδότηση για προμήθεια, συντήρηση και ανανέωση των ερευνητικών υποδομών
-        <textarea rows="4" name="ereunitikes_ypodomes_pws_epidiokete_th_xrimatodothsh_gia_promi8eia" placeholder="">{{.Entry4.Field1}}</textarea>
+        <textarea rows="4" name="ereunitikes_ypodomes_pws_epidiokete_th_xrimatodothsh_gia_promi8eia" placeholder="">{{.t.Entry4.Field8}}</textarea>
       </label>
     </div>
   </div>
@@ -83,33 +90,42 @@
     </tr>
   </thead>
   <tbody>
+
+    {{$helpersLen := len .t.Entry4.Helpers}}
+    <!--helper entry when we have no helpers -->
+    {{if eq $helpersLen 0}}
+      <tr>
+        <td>
+          <div class="row">
+            <div class="large-12 columns">
+              <textarea rows="4" name="Helpers.0.Content" placeholder=""></textarea>
+            </div>
+          </div>
+        </td>
+      </tr>
+    {{end}}
+    <!--helper entry end -->
+
     <!--first entry of the table form -->
+    {{range $index, $element := .t.Entry4.Helpers}}
     <tr>
       <td>
         <div class="row">
           <div class="large-12 columns">
-            <textarea rows="4" name="Helpers.0.Content" placeholder="">{{.Entry4.Field1}}</textarea>
+            <textarea rows="4" name="Helpers.{{$index}}.Content" placeholder="">{{$element.Content}}</textarea>
           </div>
         </div>
       </td>
     </tr>
-    <!--second entry of the table form -->
-    <tr>
-      <td>
-        <div class="row">
-          <div class="large-12 columns">
-            <textarea rows="4" name="Helpers.1.Content" placeholder="">{{.Entry4.Field1}}</textarea>
-          </div>
-        </div>
-      </td>
-    </tr>
+    {{end}}
+    <!--first entry of the table form ends here -->
   </tbody>
 </table>
 
   <div class="row">
     <div class="large-12 columns">
       <label>Πρακτική αξιοποίηση των ερευνητικών σας αποτελεσμάτων
-        <textarea rows="4" name="ereunitikes_ypodomes_praktiki_akiopoihsh_ton_ereunitikon_apotelesmaton" placeholder="">{{.Entry4.Field1}}</textarea>
+        <textarea rows="4" name="ereunitikes_ypodomes_praktiki_akiopoihsh_ton_ereunitikon_apotelesmaton" placeholder="">{{.t.Entry4.Field9}}</textarea>
       </label>
       <small>Υπάρχει πρακτική αξιοποίηση των ερευνητικών σας αποτελεσμάτων; Αναφέρατε παραδείγματα</small>
     </div>
