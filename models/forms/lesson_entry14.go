@@ -6,13 +6,13 @@ import (
 
 type LessonCreateReportFormEntry14 struct {
 	// Κατανομή Βαθμών Σπουδαστών (%)
-	Field1 int `schema:"katanomi_ba8mon_spoudaston_0_39"`
-	Field2 int `schema:"katanomi_ba8mon_spoudaston_4_49"`
-	Field3 int `schema:"katanomi_ba8mon_spoudaston_5_59"`
-	Field4 int `schema:"katanomi_ba8mon_spoudaston_6_69"`
-	Field5 int `schema:"katanomi_ba8mon_spoudaston_7_84"`
-	Field6 int `schema:"katanomi_ba8mon_spoudaston_85_10"`
-	Field7 int `schema:"katanomi_ba8mon_spoudaston_mesos_oros_ba8mologias_sunolo_spoudaston"`
+	Field1 string `schema:"katanomi_ba8mon_spoudaston_0_39"`
+	Field2 string `schema:"katanomi_ba8mon_spoudaston_4_49"`
+	Field3 string `schema:"katanomi_ba8mon_spoudaston_5_59"`
+	Field4 string `schema:"katanomi_ba8mon_spoudaston_6_69"`
+	Field5 string `schema:"katanomi_ba8mon_spoudaston_7_84"`
+	Field6 string `schema:"katanomi_ba8mon_spoudaston_85_10"`
+	Field7 string `schema:"katanomi_ba8mon_spoudaston_mesos_oros_ba8mologias_sunolo_spoudaston"`
 }
 
 func (f *LessonCreateReportFormEntry14) Update(lessonId int, akademicYearId int) {

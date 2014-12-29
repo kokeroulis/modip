@@ -10,8 +10,7 @@ type LessonCreateReportFormEntry5 struct {
 	Field2 string `schema:"lesson_didaktika_boi8imata_epikairopoihsh_ton_boh8imaton"`
 	Field3 string `schema:"lesson_didaktika_boi8imata_pososto_didaskomenis_ylis_pou_kaliptete"`
 	Field4 string `schema:"lesson_didaktika_boi8imata_prostheti_bibliografia"`
-	Field5 string `schema:"lesson_didaktika_boi8imata_epikairopoihsh_ylis"`
-	Field6 string `schema:"lesson_didaktika_boi8imata_gnostopoihsh_ylis_stous_foithtes"`
+	Field5 string `schema:"lesson_didaktika_boi8imata_gnostopoihsh_ylis_stous_foithtes"`
 }
 
 func (f *LessonCreateReportFormEntry5) Update(lessonId int, akademicYearId int) {
@@ -20,9 +19,8 @@ func (f *LessonCreateReportFormEntry5) Update(lessonId int, akademicYearId int) 
 			lesson_didaktika_boi8imata_epikairopoihsh_ton_boh8imaton = $2,
 			lesson_didaktika_boi8imata_pososto_didaskomenis_ylis_pou_kaliptete = $3,
 			lesson_didaktika_boi8imata_prostheti_bibliografia = $4,
-			lesson_didaktika_boi8imata_epikairopoihsh_ylis = $5,
-			lesson_didaktika_boi8imata_gnostopoihsh_ylis_stous_foithtes = $6
-			 WHERE lesson = $7 AND akademic_year = $8`
+			lesson_didaktika_boi8imata_gnostopoihsh_ylis_stous_foithtes = $5
+			 WHERE lesson = $6 AND akademic_year = $7`
 
 	_, err := Db.Database.Exec(query,
 		f.Field1,
@@ -30,7 +28,6 @@ func (f *LessonCreateReportFormEntry5) Update(lessonId int, akademicYearId int) 
 		f.Field3,
 		f.Field4,
 		f.Field5,
-		f.Field6,
 		lessonId,
 		akademicYearId)
 
@@ -43,7 +40,6 @@ func (f *LessonCreateReportFormEntry5) Load(lessonId int, akademicYearId int) {
 			lesson_didaktika_boi8imata_epikairopoihsh_ton_boh8imaton,
 			lesson_didaktika_boi8imata_pososto_didaskomenis_ylis_pou_kaliptete,
 			lesson_didaktika_boi8imata_prostheti_bibliografia,
-			lesson_didaktika_boi8imata_epikairopoihsh_ylis,
 			lesson_didaktika_boi8imata_gnostopoihsh_ylis_stous_foithtes
 			FROM LessonCreateReportFormEntry5
 			WHERE lesson = $1 AND akademic_year = $2`
@@ -54,8 +50,7 @@ func (f *LessonCreateReportFormEntry5) Load(lessonId int, akademicYearId int) {
 		&f.Field2,
 		&f.Field3,
 		&f.Field4,
-		&f.Field5,
-		&f.Field6)
+		&f.Field5)
 
 	Db.CheckQueryWithNoRows(err, query)
 }
