@@ -6,11 +6,11 @@ import (
 
 type LessonCreateReportFormEntry2 struct {
 	// Διδασκαλίας
-	Field1  string `schema:"lesson_didaskalia_typos_ma8iomatos1"`
-	Field2  string `schema:"lesson_didaskalia_typos_ma8iomatos2"`
-	Field3  string `schema:"lesson_didaskalia_typos_ma8iomatos3"`
-	Field4  string `schema:"lesson_didaskalia_typos_ma8iomatos4"`
-	Field5  string `schema:"lesson_didaskalia_typos_ma8iomatos5"`
+	Field1  bool   `schema:"lesson_didaskalia_typos_ma8iomatos1"`
+	Field2  bool   `schema:"lesson_didaskalia_typos_ma8iomatos2"`
+	Field3  bool   `schema:"lesson_didaskalia_typos_ma8iomatos3"`
+	Field4  bool   `schema:"lesson_didaskalia_typos_ma8iomatos4"`
+	Field5  bool   `schema:"lesson_didaskalia_typos_ma8iomatos5"`
 	Field6  string `schema:"lesson_didaskalia_wres_didaskaliasi_8"`
 	Field7  string `schema:"lesson_didaskalia_wres_didaskalias_AP"`
 	Field8  string `schema:"lesson_didaskalia_wres_didaskalias_E"`
@@ -29,7 +29,7 @@ type LessonCreateReportFormEntry2 struct {
 
 func (f *LessonCreateReportFormEntry2) Update(lessonId int, akademicYearId int) {
 	query := `UPDATE LessonCreateReportFormEntry2 SET
-             lesson_didaskalia_typos_ma8iomatos1 = $ 1,
+             lesson_didaskalia_typos_ma8iomatos1 = $1,
              lesson_didaskalia_typos_ma8iomatos2 = $2,
              lesson_didaskalia_typos_ma8iomatos3 = $3,
              lesson_didaskalia_typos_ma8iomatos4 = $4,
