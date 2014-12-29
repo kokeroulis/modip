@@ -10,7 +10,7 @@ type TeacherCreateReportFormEntry4Helper struct {
 
 type TeacherCreateReportFormEntry4 struct {
 	// Αριθμός Δημοσιεύσεων
-	Id      int    `schema:-`
+	Id      int    `schema:"id"`
 	Field1  string `schema:"ereunitikes_ypodomes_arithmos_kai_xwritikotita_ereunitikon_ergasthrion_pou_xrisimopoieitai"`
 	Field2  string `schema:"ereunitikes_ypodomes_eparkeia_katalilotita_kai_poiotita_ton_ereunitikon_ergasthrion"`
 	Field3  string `schema:"ereunitikes_ypodomes_eparkeia_katallilotita_kai_poithta_tou_ergasthriakou_eksoplismou"`
@@ -56,14 +56,39 @@ func (f *TeacherCreateReportFormEntry4) Update(teacherId int, akademicYearId int
 	if len(f.Helpers) > 0 {
 		// we have helpers lets add them
 		for _, it := range f.Helpers {
-			query = `INSERT INTO TeacherCreateReportFormEntry4Helper
-					 (form, content) VALUES ($1, $2)`
+			var query string
 
+            if it.AlreadyExists(f.Id, it.Content) {
+                query = `UPDATE TeacherCreateReportFormEntry4Helper
+                         SET content = $2 where form = $1 and content = $2`
+            } else {
+                query = `INSERT INTO TeacherCreateReportFormEntry4Helper
+					 (form, content) VALUES ($1, $2)`
+            }
 			_, err := Db.Database.Exec(query, f.Id, it.Content)
 
 			Db.CheckQueryWithNoRows(err, query)
 		}
 	}
+}
+
+func (h *TeacherCreateReportFormEntry4Helper) AlreadyExists(id int, content string) (bool) {
+    query := `SELECT form, content from TeacherCreateReportFormEntry4Helper
+              where form = $1 and content = $2`
+
+    rows, err := Db.Database.Query(query, id, content)
+
+    if err != nil {
+		panic(err)
+	}
+
+    alreadyExists := false
+
+    for rows.Next() {
+        alreadyExists = true
+    }
+
+    return alreadyExists
 }
 
 func (f *TeacherCreateReportFormEntry4) Load(teacherId int, akademicYearId int) {
@@ -76,11 +101,12 @@ func (f *TeacherCreateReportFormEntry4) Load(teacherId int, akademicYearId int) 
 				ereunitikes_ypodomes_poso_entatiki_xrish_kanete_ton_sugkrekrimenon_ereunitikon_ypodomon,
 				ereunitikes_ypodomes_ananeosi_ereunitikon_ypodomon,
 				ereunitikes_ypodomes_pws_epidiokete_th_xrimatodothsh_gia_promi8eia,
-				ereunitikes_ypodomes_praktiki_akiopoihsh_ton_ereunitikon_apotelesmaton
+				ereunitikes_ypodomes_praktiki_akiopoihsh_ton_ereunitikon_apotelesmaton,
+                id
 			  FROM TeacherCreateReportFormEntry4
-			  WHERE id = $1 AND teacher = $2 AND akademic_year = $3`
+			  WHERE teacher = $1 AND akademic_year = $2`
 
-	err := Db.Database.QueryRow(query, f.Id, teacherId, akademicYearId).
+	err := Db.Database.QueryRow(query, teacherId, akademicYearId).
 			Scan(&f.Field1,
 				&f.Field2,
 				&f.Field3,
@@ -89,7 +115,8 @@ func (f *TeacherCreateReportFormEntry4) Load(teacherId int, akademicYearId int) 
 				&f.Field6,
 				&f.Field7,
 				&f.Field8,
-				&f.Field9)
+				&f.Field9,
+                &f.Id)
 
 	Db.CheckQueryWithNoRows(err, query)
 
