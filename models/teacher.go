@@ -78,15 +78,14 @@ func (t *Teacher) Update() {
 	}
 
 	query := `UPDATE teacher SET
-			  name = $1, email = $2,
-              username = $4, type = $5
-			  WHERE id = $3`
+			  email = $1, name = $3,
+              type = $4
+			  WHERE id = $2`
 
 	_, err := Db.Database.Exec(query,
-								t.Name,
 								t.Email,
 								t.Id,
-                                t.Username,
+                                t.Name,
                                 t.Type)
 
 	Db.CheckQueryWithNoRows(err, query)

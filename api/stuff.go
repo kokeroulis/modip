@@ -29,7 +29,14 @@ func GetStuffEdit(resp http.ResponseWriter, req *http.Request) {
 	}
 
 	t.Load()
-    RenderTemplate("stuff/edit", helpers, resp, t)
+    teacherType := models.TeacherType
+
+    data := map[string]interface{}{
+        "t": t,
+        "teacherType": teacherType,
+    }
+
+    RenderTemplate("stuff/edit", helpers, resp, data)
 }
 
 func StuffEdit(resp http.ResponseWriter, req *http.Request) {
@@ -44,7 +51,7 @@ func StuffEdit(resp http.ResponseWriter, req *http.Request) {
 		panic(err)
 	}
 
-	t.Update()
+    t.Update()
 
 	url := "/stuff/edit/" + strconv.Itoa(t.Id)
 	http.Redirect(resp, req, url, http.StatusMovedPermanently)
