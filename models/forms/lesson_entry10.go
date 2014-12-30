@@ -34,7 +34,6 @@ _, err := Db.Database.Exec(query,
 	f.Field5,
 	f.Field6,
 	f.Field7,
-	f.Field8,
 	lessonId,
         akademicYearId)
 
