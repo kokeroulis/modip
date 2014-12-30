@@ -10,7 +10,7 @@ CREATE TABLE LessonCreateReportFormEntry10 (
         dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_spoudasthria text default ' ',
         dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_xrhsimopoihtai_ekpedeutiko_logismiko_kai_poio text default ' ',
         dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_yparxei_ikanopoihtiki_ypostiriksi_tou_ma8imatos_apo_tin_biblio8iki text default ' ',
-        dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_pws_krinete_sunolika_tin_dia8esimi_ekpedeutiki_ypodomi text default ' ',
+        dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_pws_krinete_sunolika_tin_dia8esimi_ekpedeutiki_ypodomi text default ' '
 )
 `
 
