@@ -85,7 +85,6 @@ func StuffCreate(resp http.ResponseWriter, req *http.Request) {
         Name:       f.Name,
         Email:      f.Email,
         Department: d,
-
     }
 
 	t.Create(f.Password)

@@ -76,6 +76,7 @@ func (d *Department) LoadStuff() {
                             &it.Type); err != nil {
 			panic(err)
 		} else {
+            it.TypeName = TeacherType[it.Type]
 			d.AddTeacher(it)
 		}
 	}

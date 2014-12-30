@@ -8,7 +8,7 @@ CREATE OR REPLACE FUNCTION teacher_auth(teacherEmail text, passwordCandidate tex
                                                                                    OUT departmentId int,
                                                                                    OUT auth boolean,
                                                                                    OUT username text,
-                                                                                   OUT type text) AS $$
+                                                                                   OUT type int) AS $$
 DECLARE
     teacherPassword text;
     teacherRecord record;
@@ -53,7 +53,7 @@ CREATE OR REPLACE FUNCTION teacher_create(teacherName text,
 										  teacherEmail text,
 										  departmentId int,
                                           teacherUsername text,
-                                          teacherType text,
+                                          teacherType int,
 										  OUT alreadyExists boolean) AS $$
 DECLARE
 	teacherId int;

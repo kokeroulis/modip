@@ -8,7 +8,20 @@ type Teacher struct {
 	Email      string     `schema:"email"`
 	Department Department `schema:"department"`
     Username   string     `schema:"username"`
-    Type       string     `schema:"type"`
+    Type       int        `schema:"type"`
+    TypeName   string     //we only need it in the html
+}
+
+var TeacherType map[int]string
+
+func init() {
+    TeacherType = map[int]string{
+        1: "aaa",
+        2: "bbb",
+        3: "ccc",
+        4: "ddd",
+        5: "eee",
+    }
 }
 
 func (t *Teacher) Login(username string, password string) bool {
@@ -17,6 +30,13 @@ func (t *Teacher) Login(username string, password string) bool {
 			  FROM teacher_auth($1, $2)`
 	err := Db.Database.QueryRow(query, username, password).
 		Scan(&t.Id, &t.Name, &t.Email, &t.Department.Id, &t.Department.Name, &auth, &t.Username, &t.Type)
+
+
+    if auth {
+        //populate our string type
+        //we need it for the html
+        t.TypeName = TeacherType[t.Type]
+    }
 
 	Db.CheckQuery(err, query)
 
@@ -45,6 +65,9 @@ func (t *Teacher) Load() {
 			  WHERE id = $1`
 	err := Db.Database.QueryRow(query, t.Id).
 		Scan(&t.Name, &t.Email, &t.Username, &t.Type)
+
+    //populate our string type
+    t.TypeName = TeacherType[t.Type]
 
 	Db.CheckQuery(err, query)
 }

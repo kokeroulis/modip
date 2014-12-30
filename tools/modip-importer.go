@@ -15,7 +15,7 @@ type teacher struct {
 	Email    string
 	Password string
     Username string
-    Type     string
+    Type     int
 }
 
 type teacherDb struct {
