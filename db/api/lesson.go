@@ -63,7 +63,6 @@ BEGIN
 		INSERT INTO LessonCreateReportFormEntry14
 		(lesson, akademic_year) VALUES (lessonId, akademic_year_id);
 
-
 		INSERT INTO LessonCreateReportFormEntry15
 		(lesson, akademic_year) VALUES (lessonId, akademic_year_id);
 
