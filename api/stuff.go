@@ -15,7 +15,15 @@ func GetStuffList(resp http.ResponseWriter, req *http.Request) {
 
 func GetStuffCreate(resp http.ResponseWriter, req *http.Request) {
     var helpers []string
-    data := models.ListAllDepartments(false)
+    d := models.ListAllDepartments(false)
+
+    teacherType := models.TeacherType
+
+    data := map[string]interface{}{
+        "d": d,
+        "teacherType": teacherType,
+    }
+
     RenderTemplate("stuff/create", helpers, resp, data)
 }
 
@@ -63,6 +71,8 @@ type TeacherCreateForm struct {
 	Email        string  `schema:"email"`
 	DepartmentId string  `schema:"department_id"`
     Password     string  `schema:"password"`
+    Username   string     `schema:"username"`
+    Type       int        `schema:"type"`
 }
 
 func StuffCreate(resp http.ResponseWriter, req *http.Request) {
@@ -92,6 +102,8 @@ func StuffCreate(resp http.ResponseWriter, req *http.Request) {
         Name:       f.Name,
         Email:      f.Email,
         Department: d,
+        Username:   f.Username,
+        Type:       f.Type,
     }
 
 	t.Create(f.Password)
