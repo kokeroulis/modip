@@ -21,7 +21,7 @@ func (auth authorize) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
         auth.handler(resp, req)
         return
     } else if teacherId != 1 && teacherId != 2 && teacherId != 3 && teacherId != 4 && teacherId != 5 && teacherId != 6 && teacherId != 10 {
-        panic("secretary shouldn't have access here")
+        http.Redirect(resp, req, "/lesson/list/pre/degree", http.StatusMovedPermanently)
         return
     }
 
@@ -42,7 +42,7 @@ func (auth authorizeSecretary) ServeHTTP(resp http.ResponseWriter, req *http.Req
         auth.handler(resp, req)
         return
     } else if teacherId != 7 && teacherId != 8 && teacherId != 9 && teacherId != 11 {
-        panic("teacher shouldn't have access here")
+        http.Redirect(resp, req, "/teacher/report/list", http.StatusMovedPermanently)
         return
     }
 
