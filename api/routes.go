@@ -13,10 +13,38 @@ type authorize struct {
 
 func (auth authorize) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 	teacher := models.GetTeacherFromSession(req)
+    teacherId := teacher.Id
+	if teacherId == 0 {
+		panic("TODO!!!!!!!!!!!!!!1")
+		return
+    } else if teacherId == 12 {
+        auth.handler(resp, req)
+        return
+    } else if teacherId != 1 && teacherId != 2 && teacherId != 3 && teacherId != 4 && teacherId != 5 && teacherId != 6 && teacherId != 10 {
+        panic("secretary shouldn't have access here")
+        return
+    }
+
+	auth.handler(resp, req)
+}
+
+type authorizeSecretary struct {
+	handler func(resp http.ResponseWriter, req *http.Request)
+}
+
+func (auth authorizeSecretary) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
+	teacher := models.GetTeacherFromSession(req)
+    teacherId := teacher.Id
 	if teacher.Id == 0 {
 		panic("TODO!!!!!!!!!!!!!!1")
 		return
-	}
+    } else if teacherId == 12 {
+        auth.handler(resp, req)
+        return
+    } else if teacherId != 7 && teacherId != 8 && teacherId != 9 && teacherId != 11 {
+        panic("teacher shouldn't have access here")
+        return
+    }
 
 	auth.handler(resp, req)
 }
@@ -33,11 +61,11 @@ func setupRoutes(n *negroni.Negroni) {
 
 	router.Handle("/category/save", authorize{CategorySave}).Methods("POST")
 
-    router.Handle("/akademic/year/list", authorize{GetAkademicYearList}).Methods("GET")
-    router.Handle("/akademic/year/create", authorize{GetAkademicYearCreate}).Methods("GET")
-    router.Handle("/akademic/year/create", authorize{AkademicYearCreate}).Methods("POST")
-    router.Handle("/akademic/year/edit/{id:[1-9]+}", authorize{GetAkademicYearEdit}).Methods("GET")
-    router.Handle("/akademic/year/edit", authorize{AkademicYearEdit}).Methods("POST")
+    router.Handle("/akademic/year/list", authorizeSecretary{GetAkademicYearList}).Methods("GET")
+    router.Handle("/akademic/year/create", authorizeSecretary{GetAkademicYearCreate}).Methods("GET")
+    router.Handle("/akademic/year/create", authorizeSecretary{AkademicYearCreate}).Methods("POST")
+    router.Handle("/akademic/year/edit/{id:[1-9]+}", authorizeSecretary{GetAkademicYearEdit}).Methods("GET")
+    router.Handle("/akademic/year/edit", authorizeSecretary{AkademicYearEdit}).Methods("POST")
 
 	// Α.Δ. Εκπ. Προσωπικού
 	router.Handle("/teacher/report/list", authorize{GetTeacherListReport}).Methods("GET")
@@ -57,28 +85,28 @@ func setupRoutes(n *negroni.Negroni) {
 	router.Handle("/research/program/edit/report/{id:[1-9]+}", authorize{ResearchProgramEditReport}).Methods("POST")
 
 	// Α.Δ. Μαθημάτων Π.Π.Σ.
-	router.Handle("/lesson/list/pre/degree", authorize{LessonListPreDegree}).Methods("GET")
-	router.Handle("/lesson/list/pre/degree/{id:[1-9]+}/{akademicYearId:[1-9]+}", authorize{LessonListPreDegreeDepartment}).Methods("GET")
-	router.Handle("/lesson/pre/degree/create/report/{lesson_id:[0-9]+}/{akademicYearId:[1-9]+}", authorize{GetLessonPreDegreeCreateReport}).Methods("GET")
-	router.Handle("/lesson/pre/degree/create/report/{id:[0-9]+}/{lesson_id:[0-9]+}/{akademicYearId:[1-9]+}", authorize{LessonPreDegreeCreateReport}).Methods("POST")
+	router.Handle("/lesson/list/pre/degree", authorizeSecretary{LessonListPreDegree}).Methods("GET")
+	router.Handle("/lesson/list/pre/degree/{id:[1-9]+}/{akademicYearId:[1-9]+}", authorizeSecretary{LessonListPreDegreeDepartment}).Methods("GET")
+	router.Handle("/lesson/pre/degree/create/report/{lesson_id:[0-9]+}/{akademicYearId:[1-9]+}", authorizeSecretary{GetLessonPreDegreeCreateReport}).Methods("GET")
+	router.Handle("/lesson/pre/degree/create/report/{id:[0-9]+}/{lesson_id:[0-9]+}/{akademicYearId:[1-9]+}", authorizeSecretary{LessonPreDegreeCreateReport}).Methods("POST")
 
-	router.Handle("/lesson/list/post/degree", authorize{LessonListPostDegree}).Methods("GET")
+	router.Handle("/lesson/list/post/degree", authorizeSecretary{LessonListPostDegree}).Methods("GET")
 
 
 	// Κωδ. Μαθημάτων Π.Π.Σ.
-	router.Handle("/lesson/code/list", authorize{GetLessonCodeList}).Methods("GET")
-	router.Handle("/lesson/code/list/{id:[0-9]+}", authorize{GetLessonCodeListDepartment}).Methods("GET")
-	router.Handle("/lesson/code/create", authorize{GetLessonCodeCreate}).Methods("GET")
-	router.Handle("/lesson/code/create", authorize{LessonCodeCreate}).Methods("POST")
-	router.Handle("/lesson/edit/{id:[0-9]+}", authorize{GetLessonEdit}).Methods("GET")
-	router.Handle("/lesson/edit", authorize{LessonEdit}).Methods("POST")
+	router.Handle("/lesson/code/list", authorizeSecretary{GetLessonCodeList}).Methods("GET")
+	router.Handle("/lesson/code/list/{id:[0-9]+}", authorizeSecretary{GetLessonCodeListDepartment}).Methods("GET")
+	router.Handle("/lesson/code/create", authorizeSecretary{GetLessonCodeCreate}).Methods("GET")
+	router.Handle("/lesson/code/create", authorizeSecretary{LessonCodeCreate}).Methods("POST")
+	router.Handle("/lesson/edit/{id:[0-9]+}", authorizeSecretary{GetLessonEdit}).Methods("GET")
+	router.Handle("/lesson/edit", authorizeSecretary{LessonEdit}).Methods("POST")
 
     //Προσωπικό Μονάδας
-    router.Handle("/stuff/list", authorize{GetStuffList}).Methods("GET")
-    router.Handle("/stuff/create", authorize{GetStuffCreate}).Methods("GET")
-    router.Handle("/stuff/create", authorize{StuffCreate}).Methods("POST")
-    router.Handle("/stuff/edit/{id:[1-9]+}", authorize{GetStuffEdit}).Methods("GET")
-    router.Handle("/stuff/edit", authorize{StuffEdit}).Methods("POST")
+    router.Handle("/stuff/list", authorizeSecretary{GetStuffList}).Methods("GET")
+    router.Handle("/stuff/create", authorizeSecretary{GetStuffCreate}).Methods("GET")
+    router.Handle("/stuff/create", authorizeSecretary{StuffCreate}).Methods("POST")
+    router.Handle("/stuff/edit/{id:[1-9]+}", authorizeSecretary{GetStuffEdit}).Methods("GET")
+    router.Handle("/stuff/edit", authorizeSecretary{StuffEdit}).Methods("POST")
 
 	n.UseHandler(router)
 }
