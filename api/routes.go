@@ -56,6 +56,8 @@ func setupRoutes(n *negroni.Negroni) {
 	router.HandleFunc("/", Index).Methods("GET")
 	router.HandleFunc("/login", Login).Methods("POST")
 	router.HandleFunc("/logout", Logout).Methods("GET")
+    //we need this one in order to manipulate the sidebar
+    router.HandleFunc("/userType", UserType).Methods("GET")
 
 	router.Handle("/category/list", authorize{CategoryList}).Methods("GET")
 	router.Handle("/category/list/{id:[1-9]+}", authorize{CategoryList}).Methods("GET")
