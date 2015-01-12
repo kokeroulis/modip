@@ -14,13 +14,14 @@ type authorize struct {
 func (auth authorize) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 	teacher := models.GetTeacherFromSession(req)
     teacherId := teacher.Id
+    teacherType := teacher.Type
 	if teacherId == 0 {
 		panic("TODO!!!!!!!!!!!!!!1")
 		return
-    } else if teacherId == 12 {
+    } else if teacherType == 12 {
         auth.handler(resp, req)
         return
-    } else if teacherId != 1 && teacherId != 2 && teacherId != 3 && teacherId != 4 && teacherId != 5 && teacherId != 6 && teacherId != 10 {
+    } else if teacherType != 1 && teacherType != 2 && teacherType != 3 && teacherType != 4 && teacherType != 5 && teacherType != 6 && teacherType != 10 {
         http.Redirect(resp, req, "/lesson/list/pre/degree", http.StatusMovedPermanently)
         return
     }
@@ -34,14 +35,14 @@ type authorizeSecretary struct {
 
 func (auth authorizeSecretary) ServeHTTP(resp http.ResponseWriter, req *http.Request) {
 	teacher := models.GetTeacherFromSession(req)
-    teacherId := teacher.Id
+    teacherType := teacher.Type
 	if teacher.Id == 0 {
 		panic("TODO!!!!!!!!!!!!!!1")
 		return
-    } else if teacherId == 12 {
+    } else if teacherType == 12 {
         auth.handler(resp, req)
         return
-    } else if teacherId != 7 && teacherId != 8 && teacherId != 9 && teacherId != 11 {
+    } else if teacherType != 7 && teacherType != 8 && teacherType != 9 && teacherType != 11 {
         http.Redirect(resp, req, "/teacher/report/list", http.StatusMovedPermanently)
         return
     }
