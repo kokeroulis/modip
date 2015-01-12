@@ -47,9 +47,14 @@ func (t *Teacher) Login(username string, password string) bool {
         t.TypeName = TeacherType[t.Type]
     }
 
-	Db.CheckQuery(err, query)
-
-	return auth
+    //wrong data. The user doesn't exists
+    if t.Id == 0 {
+        auth = false
+        return auth
+    } else {
+        Db.CheckQuery(err, query)
+        return auth
+    }
 }
 
 func (t *Teacher) Create(password string) bool {
