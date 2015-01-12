@@ -15,7 +15,15 @@ func GetStuffList(resp http.ResponseWriter, req *http.Request) {
 
 func GetStuffCreate(resp http.ResponseWriter, req *http.Request) {
     var helpers []string
-    data := models.ListAllDepartments(false)
+    d := models.ListAllDepartments(false)
+
+    teacherType := models.TeacherType
+
+    data := map[string]interface{}{
+        "d": d,
+        "teacherType": teacherType,
+    }
+
     RenderTemplate("stuff/create", helpers, resp, data)
 }
 
@@ -29,7 +37,14 @@ func GetStuffEdit(resp http.ResponseWriter, req *http.Request) {
 	}
 
 	t.Load()
-    RenderTemplate("stuff/edit", helpers, resp, t)
+    teacherType := models.TeacherType
+
+    data := map[string]interface{}{
+        "t": t,
+        "teacherType": teacherType,
+    }
+
+    RenderTemplate("stuff/edit", helpers, resp, data)
 }
 
 func StuffEdit(resp http.ResponseWriter, req *http.Request) {
@@ -44,7 +59,7 @@ func StuffEdit(resp http.ResponseWriter, req *http.Request) {
 		panic(err)
 	}
 
-	t.Update()
+    t.Update()
 
 	url := "/stuff/edit/" + strconv.Itoa(t.Id)
 	http.Redirect(resp, req, url, http.StatusMovedPermanently)
@@ -56,6 +71,8 @@ type TeacherCreateForm struct {
 	Email        string  `schema:"email"`
 	DepartmentId string  `schema:"department_id"`
     Password     string  `schema:"password"`
+    Username   string     `schema:"username"`
+    Type       int        `schema:"type"`
 }
 
 func StuffCreate(resp http.ResponseWriter, req *http.Request) {
@@ -85,7 +102,8 @@ func StuffCreate(resp http.ResponseWriter, req *http.Request) {
         Name:       f.Name,
         Email:      f.Email,
         Department: d,
-
+        Username:   f.Username,
+        Type:       f.Type,
     }
 
 	t.Create(f.Password)

@@ -8,7 +8,29 @@ type Teacher struct {
 	Email      string     `schema:"email"`
 	Department Department `schema:"department"`
     Username   string     `schema:"username"`
-    Type       string     `schema:"type"`
+    Type       int        `schema:"type"`
+    TypeName   string     //we only need it in the html
+}
+
+var TeacherType map[int]string
+
+func init() {
+    //teacher == 1,2,3,4,5,6,10
+    //secretary == 7,8,9,11
+    TeacherType = map[int]string{
+        1 :"Ομότιμος Καθηγητής",
+        2: "Καθηγητής",
+        3: "Αναπληρωτής Καθηγητής",
+        4: "Επίκουρος Καθηγητής",
+        5: "Καθηγητής Εφαρμογών",
+        6: "Έκτακτος Καθηγητής",
+        7: "Ειδικό Τεχνικό Προσωπικό",
+        8: "Διοικητικό Προσωπικό",
+        9: "Ι.Δ.Α.Χ.",
+        10: "Συμβασιούχος Π.Δ. 407",
+        11: "Επιστημονικός Συνεργάτης",
+        12: "Υπευθινος Προγράμματος", //super admin
+    }
 }
 
 func (t *Teacher) Login(username string, password string) bool {
@@ -18,9 +40,21 @@ func (t *Teacher) Login(username string, password string) bool {
 	err := Db.Database.QueryRow(query, username, password).
 		Scan(&t.Id, &t.Name, &t.Email, &t.Department.Id, &t.Department.Name, &auth, &t.Username, &t.Type)
 
-	Db.CheckQuery(err, query)
 
-	return auth
+    if auth {
+        //populate our string type
+        //we need it for the html
+        t.TypeName = TeacherType[t.Type]
+    }
+
+    //wrong data. The user doesn't exists
+    if t.Id == 0 {
+        auth = false
+        return auth
+    } else {
+        Db.CheckQuery(err, query)
+        return auth
+    }
 }
 
 func (t *Teacher) Create(password string) bool {
@@ -46,6 +80,9 @@ func (t *Teacher) Load() {
 	err := Db.Database.QueryRow(query, t.Id).
 		Scan(&t.Name, &t.Email, &t.Username, &t.Type)
 
+    //populate our string type
+    t.TypeName = TeacherType[t.Type]
+
 	Db.CheckQuery(err, query)
 }
 
@@ -55,15 +92,14 @@ func (t *Teacher) Update() {
 	}
 
 	query := `UPDATE teacher SET
-			  name = $1, email = $2,
-              username = $4, type = $5
-			  WHERE id = $3`
+			  email = $1, name = $3,
+              type = $4
+			  WHERE id = $2`
 
 	_, err := Db.Database.Exec(query,
-								t.Name,
 								t.Email,
 								t.Id,
-                                t.Username,
+                                t.Name,
                                 t.Type)
 
 	Db.CheckQueryWithNoRows(err, query)

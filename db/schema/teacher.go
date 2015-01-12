@@ -11,6 +11,6 @@ CREATE TABLE teacher
     password   text not null,
     department int  not null references department(id) on delete cascade,
     username   text not null,
-    type       text not null
+    type       int  not null
 );
 `

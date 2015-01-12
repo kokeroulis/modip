@@ -3,14 +3,14 @@
 
   <div class="row">
     <div class="large-12 columns">
-      <input type="hidden" name="id" value="{{.Id}}" placeholder="" required />
+      <input type="hidden" name="id" value="{{.t.Id}}" placeholder="" required />
     </div>
   </div>
 
   <div class="row">
     <div class="large-12 columns">
       <label>Ονοματεπώνυμο
-        <input type="text" name="name" value="{{.Name}}" placeholder="" required />
+        <input type="text" name="name" value="{{.t.Name}}" placeholder="" required />
       </label>
     </div>
   </div>
@@ -18,7 +18,19 @@
   <div class="row">
     <div class="large-12 columns">
       <label>Email Χρήστη
-        <input type="email" name="email" value="{{.Email}}" placeholder="" required />
+        <input type="email" name="email" value="{{.t.Email}}" placeholder="" required />
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <label>Βαθμίδα
+        <select name="type">
+          {{range $index, $element := .teacherType}}
+            <option value="{{$index}}">{{$element}}</option>
+          {{end}}
+        </select>
       </label>
     </div>
   </div>

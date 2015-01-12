@@ -253,7 +253,49 @@ ModipApp.ereunitikes_Ypodomes = function() {
   });
 }
 
+ModipApp.fixSidebar = function() {
+  //this is a nasty hack in order to hide the
+  //teacher entries to the secretary and vice versa.
+  //on the sidebar
+
+  //when the page has been loaded.
+  $(document).ready(function() {
+    //get request to userType, use getJSON in order
+    //to convert our data into json
+    $.getJSON("/userType", function(data, status) {
+      //do something with the callback
+
+      //find all teacher li
+      var teacherLi = $('.teacherType');
+      //find all secretary li
+      var secretaryLi = $('.secretaryType');
+
+      if (data.isTeacher && data.isSecretary) {
+        //for admin we need to show both,
+        //so do nothing here
+        return;
+      } else if (data.isTeacher) {
+        //since we are the teacher, we hide all of the secretary
+        //entries
+        $.each(secretaryLi, function(index, element) {
+          var _self = $(this)
+          _self.hide();
+        });
+      } else if (data.isSecretary) {
+        //since we are the secretary, we hide all of the teacher
+        //entries
+        $.each(teacherLi, function(index, element) {
+          var _self = $(this)
+          _self.hide();
+        });
+      }
+    });
+  });
+}
+
+
 ModipApp.ereunitikes_Ypodomes();
 ModipApp.lessonMoveToDepartment();
 ModipApp.akademicLesson();
 ModipApp.arithmosDimosieuseon();
+ModipApp.fixSidebar();
