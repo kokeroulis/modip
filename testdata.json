@@ -11,11 +11,18 @@
                     "type": 1
                 },
                 {
-                    "name": "superteacher2",
-                    "password": "superteacher2",
-                    "email": "superteacher2@teilar.gr",
-                    "username": "superteacher1_username",
-                    "type": 2
+                    "name": "secretary",
+                    "password": "secretary",
+                    "email": "secretary@teilar.gr",
+                    "username": "secretary_username",
+                    "type": 7
+                },
+                {
+                    "name": "hartonas",
+                    "password": "123",
+                    "email": "hartonas@teilar.gr",
+                    "username": "Takis Hartonas",
+                    "type": 12
                 }
             ]
         }
