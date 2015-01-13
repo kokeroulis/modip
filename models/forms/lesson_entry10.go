@@ -23,7 +23,7 @@ query := `UPDATE LessonCreateReportFormEntry10 SET
 	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_spoudasthria = $4,
 	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_xrhsimopoihtai_ekpedeutiko_logismiko_kai_poio = $5,
 	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_yparxei_ikanopoihtiki_ypostiriksi_tou_ma8imatos_apo_tin_biblio8iki = $6,
-	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_pws_krinete_sunolika_tin_dia8esimi_ekpedeutiki_ypodomi = $7,
+	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_pws_krinete_sunolika_tin_dia8esimi_ekpedeutiki_ypodomi = $7
         WHERE lesson = $8 AND akademic_year=$9`
 
 _, err := Db.Database.Exec(query,
@@ -48,7 +48,7 @@ query := `SELECT
 	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_spoudasthria,
 	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_xrhsimopoihtai_ekpedeutiko_logismiko_kai_poio,
 	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_yparxei_ikanopoihtiki_ypostiriksi_tou_ma8imatos_apo_tin_biblio8iki,
-	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_pws_krinete_sunolika_tin_dia8esimi_ekpedeutiki_ypodomi,
+	dia8esimi_ekpedeutikh_ypodomh_tou_ma8imatos_pws_krinete_sunolika_tin_dia8esimi_ekpedeutiki_ypodomi
 FROM LessonCreateReportFormEntry10
 WHERE lesson = $1 AND akademic_year = $2`
 
