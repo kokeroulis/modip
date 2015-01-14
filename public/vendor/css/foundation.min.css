@@ -9072,6 +9072,7 @@ th.hide-for-touch {
   background-image: -moz-linear-gradient(-90deg, #a9d1f9, black);
   max-width: 100%;
   color: #fff;
+  margin-bottom: 20px;
 }
 /* line 172, ../bower_components/foundation/scss/foundation/components/_global.scss */
 .modipHeader:before, .modipHeader:after {
@@ -9083,7 +9084,7 @@ th.hide-for-touch {
   clear: both;
 }
 
-/* line 16, ../scss/app.scss */
+/* line 18, ../scss/app.scss */
 .wrapFooter {
   width: 100%;
   margin-left: auto;
@@ -9104,13 +9105,23 @@ th.hide-for-touch {
   clear: both;
 }
 
-/* line 22, ../scss/app.scss */
+/* line 25, ../scss/app.scss */
 .fullWidth {
-  width: 55rem;
-  max-width: 100%;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: initial;
 }
 
-/* line 27, ../scss/app.scss */
+/* line 34, ../scss/app.scss */
+.sidebarColumn {
+  padding-left: 0.9375rem;
+  padding-right: 0.9375rem;
+  float: left;
+  max-width: 12%;
+}
+
+/* line 39, ../scss/app.scss */
 .modipFooter {
   width: 100%;
   margin-left: auto;
@@ -9134,13 +9145,13 @@ th.hide-for-touch {
   clear: both;
 }
 
-/* line 36, ../scss/app.scss */
+/* line 48, ../scss/app.scss */
 .tabs.vertical.lesson-tab-fix-size {
-  max-width: 27%;
-  width: 27%;
+  max-width: 17%;
+  width: 17%;
 }
 
-/* line 41, ../scss/app.scss */
+/* line 53, ../scss/app.scss */
 .tabs.lesson-tab dd.active a {
   background-color: #008cba;
   color: white;

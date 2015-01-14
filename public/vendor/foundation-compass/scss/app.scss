@@ -11,6 +11,8 @@
 
   //Make the letters white.
   color: #fff;
+  //leave some space
+  margin-bottom: 20px;
 }
 
 .wrapFooter {
@@ -19,9 +21,19 @@
   /* Negative indent footer by it's height */
 }
 
+//full width page..
 .fullWidth {
-    width: 55rem;
-  max-width: 100%;
+   width: 100%;
+   margin-left: auto;
+   margin-right: auto;
+   max-width: initial;
+}
+
+//make the sidebar small.
+//Visually it is the same thing, but it frees column space for the rest of our page
+.sidebarColumn {
+    @include grid-column();
+    max-width: 12%;
 }
 
 .modipFooter {
@@ -34,8 +46,8 @@
 }
 
 .tabs.vertical.lesson-tab-fix-size {
-    max-width: 27%;
-    width: 27%;
+    max-width: 17%;
+    width: 17%;
 }
 
 .tabs.lesson-tab dd.active a {
