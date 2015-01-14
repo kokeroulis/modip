@@ -9118,10 +9118,21 @@ th.hide-for-touch {
   padding-left: 0.9375rem;
   padding-right: 0.9375rem;
   float: left;
-  max-width: 12%;
+}
+@media only screen and (min-width: 64.063em) and (max-width: 90em) {
+  /* line 34, ../scss/app.scss */
+  .sidebarColumn {
+    max-width: 20%;
+  }
+}
+@media only screen and (min-width: 90.063em) and (max-width: 120em) {
+  /* line 34, ../scss/app.scss */
+  .sidebarColumn {
+    max-width: 11%;
+  }
 }
 
-/* line 39, ../scss/app.scss */
+/* line 42, ../scss/app.scss */
 .modipFooter {
   width: 100%;
   margin-left: auto;
@@ -9145,13 +9156,13 @@ th.hide-for-touch {
   clear: both;
 }
 
-/* line 48, ../scss/app.scss */
+/* line 51, ../scss/app.scss */
 .tabs.vertical.lesson-tab-fix-size {
   max-width: 17%;
   width: 17%;
 }
 
-/* line 53, ../scss/app.scss */
+/* line 56, ../scss/app.scss */
 .tabs.lesson-tab dd.active a {
   background-color: #008cba;
   color: white;

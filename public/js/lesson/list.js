@@ -293,9 +293,35 @@ ModipApp.fixSidebar = function() {
   });
 }
 
+ModipApp.fixFooter = function() {
+  //try to position footer at the end of the screen.
+  $(document).ready(function() {
+    $(window).bind("load", function () {
+      var footer = $(".modipFooter");
+      var pos = footer.position();
+      var height = $(window).height();
+      height = height - pos.top;
+      height = height - footer.height();
+      if (pos.top > height) {
+        //something went teribly wrong with the footer.
+        //All hope has been gone.
+        //just hide it for the time being.
+        footer.hide()
+        //height =  $(window).height() - pos.top + footer.height() * 1.6
+      }
+      if (height > 0) {
+          footer.css({
+              'margin-top': height + 'px'
+          });
+      }
+    });
+  });
+}
+
 
 ModipApp.ereunitikes_Ypodomes();
 ModipApp.lessonMoveToDepartment();
 ModipApp.akademicLesson();
 ModipApp.arithmosDimosieuseon();
 ModipApp.fixSidebar();
+ModipApp.fixFooter();

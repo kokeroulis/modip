@@ -33,7 +33,8 @@
 //Visually it is the same thing, but it frees column space for the rest of our page
 .sidebarColumn {
     @include grid-column();
-    max-width: 12%;
+     @media #{$large-only} { max-width: 20%; }
+     @media #{$xlarge-only} { max-width: 11%; }
 }
 
 .modipFooter {
