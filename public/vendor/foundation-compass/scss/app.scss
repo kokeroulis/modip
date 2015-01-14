@@ -8,9 +8,6 @@
   background-image: -moz-linear-gradient(-90deg, #A9D1F9, #000);
   //Make the row full width. It will cover all of the row
   max-width: 100%;
-  position: fixed;
-  top: 0;
-  z-index: 99;
 
   //Make the letters white.
   color: #fff;
@@ -18,8 +15,7 @@
 
 .wrapFooter {
     @include grid-row();
-    margin-top: 120px;
-    margin-bottom: 80px;
+    margin-top: 20px;
   /* Negative indent footer by it's height */
 }
 
@@ -34,7 +30,6 @@
   background: #333;
   //stay at the bottom of the screen
   bottom: 0;
-  position: fixed;
   height: 60px; /* choose any height */
 }
 
