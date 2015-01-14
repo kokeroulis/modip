@@ -2,13 +2,13 @@
 <form method="POST" action="/stuff/edit">
 
   <div class="row">
-    <div class="large-12 columns">
+    <div class="large-6 columns">
       <input type="hidden" name="id" value="{{.t.Id}}" placeholder="" required />
     </div>
   </div>
 
   <div class="row">
-    <div class="large-12 columns">
+    <div class="large-6 columns">
       <label>Ονοματεπώνυμο
         <input type="text" name="name" value="{{.t.Name}}" placeholder="" required />
       </label>
@@ -16,7 +16,7 @@
   </div>
 
   <div class="row">
-    <div class="large-12 columns">
+    <div class="large-6 columns">
       <label>Email Χρήστη
         <input type="email" name="email" value="{{.t.Email}}" placeholder="" required />
       </label>
@@ -24,7 +24,7 @@
   </div>
 
   <div class="row">
-    <div class="large-12 columns">
+    <div class="large-6 columns">
       <label>Βαθμίδα
         <select name="type">
           {{range $index, $element := .teacherType}}
