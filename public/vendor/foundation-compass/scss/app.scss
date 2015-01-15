@@ -8,24 +8,33 @@
   background-image: -moz-linear-gradient(-90deg, #A9D1F9, #000);
   //Make the row full width. It will cover all of the row
   max-width: 100%;
-  position: fixed;
-  top: 0;
-  z-index: 99;
 
   //Make the letters white.
   color: #fff;
+  //leave some space
+  margin-bottom: 20px;
 }
 
 .wrapFooter {
     @include grid-row();
-    margin-top: 120px;
-    margin-bottom: 80px;
+    margin-top: 20px;
   /* Negative indent footer by it's height */
 }
 
+//full width page..
 .fullWidth {
-    width: 55rem;
-  max-width: 100%;
+   width: 100%;
+   margin-left: auto;
+   margin-right: auto;
+   max-width: initial;
+}
+
+//make the sidebar small.
+//Visually it is the same thing, but it frees column space for the rest of our page
+.sidebarColumn {
+    @include grid-column();
+     @media #{$large-only} { max-width: 20%; }
+     @media #{$xlarge-only} { max-width: 11%; }
 }
 
 .modipFooter {
@@ -34,13 +43,12 @@
   background: #333;
   //stay at the bottom of the screen
   bottom: 0;
-  position: fixed;
   height: 60px; /* choose any height */
 }
 
 .tabs.vertical.lesson-tab-fix-size {
-    max-width: 27%;
-    width: 27%;
+    max-width: 17%;
+    width: 17%;
 }
 
 .tabs.lesson-tab dd.active a {

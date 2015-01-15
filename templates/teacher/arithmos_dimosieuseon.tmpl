@@ -1,4 +1,4 @@
-<div class="large-6 columns">
+<div class="large-9 columns">
 <table>
   <thead>
     <tr>
@@ -25,13 +25,8 @@
         <select id="selectType" hidden name="type" data-type="type" data-id="{{.Id}}" data-akademicyearid="{{$akademicYearId}}">
           <option value="Βιβλία-Mονογραφίες">Βιβλία-Mονογραφίες</option>
           <option value="Επιστημονικά Περιοδικά με Κριτές">Επιστημονικά Περιοδικά με Κριτές</option>
-          <option value="Επιστημονικά Περιοδικά Χωρίς Κριτές">Επιστημονικά Περιοδικά Χωρίς Κριτές</option>
           <option value="Πρακτικά Διεθνών Συνεδρίων με Kριτές">Πρακτικά Διεθνών Συνεδρίων με Kριτές</option>
-          <option value="Ανακοινώσεις σε Διεθνή Επιστημονικά Συνέδρια">Ανακοινώσεις σε Διεθνή Επιστημονικά Συνέδρια</option>
-          <option value="Ανακοινώσεις σε Εθνικά Επιστημονικά Συνέδρια">Ανακοινώσεις σε Εθνικά Επιστημονικά Συνέδρια</option>
-          <option value="Άλλες Εργασίες">Άλλες Εργασίες</option>
           <option value="Κεφάλαια σε Συλλογικούς Τόμους">Κεφάλαια σε Συλλογικούς Τόμους</option>
-          <option value="Άλλα">Άλλα</option>
         </select>
         </td>
       </tr>
@@ -62,73 +57,5 @@
 </table>
 
 <a class="button cloneRow">Προσθήκη Καινούργιου</a>
-
-<h2 class="subheader">Προσθήκη Καινούργιου</h2>
-<form method="POST" action="/teacher/report/1/{{$akademicYearId}}">
-  <div class="row">
-    <div class="large-12 columns">
-      <label>Συγγραφέας
-        <input name="author" type="text" placeholder="">
-      </label>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="large-12 columns">
-      <label>Τίτλος
-        <input name="title" type="text" placeholder="">
-      </label>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="large-12 columns">
-      <label>Περιοδικό
-        <input name="is_magazine" type="checkbox" placeholder="">
-      </label>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="large-12 columns">
-      <label>Εκδότης
-        <input name="publisher" type="text" placeholder="">
-      </label>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="large-12 columns">
-      <label>Ημερομηνία Δημοσίευσης
-        <input name="publication_date" type="date" placeholder="">
-      </label>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="large-12 columns">
-      <label>Τύπος
-        <select name="type">
-          <option value="Βιβλία-Mονογραφίες">Βιβλία-Mονογραφίες</option>
-          <option value="Επιστημονικά Περιοδικά με Κριτές">Επιστημονικά Περιοδικά με Κριτές</option>
-          <option value="Επιστημονικά Περιοδικά Χωρίς Κριτές">Επιστημονικά Περιοδικά Χωρίς Κριτές</option>
-          <option value="Πρακτικά Διεθνών Συνεδρίων με Kριτές">Πρακτικά Διεθνών Συνεδρίων με Kριτές</option>
-          <option value="Ανακοινώσεις σε Διεθνή Επιστημονικά Συνέδρια">Ανακοινώσεις σε Διεθνή Επιστημονικά Συνέδρια</option>
-          <option value="Ανακοινώσεις σε Εθνικά Επιστημονικά Συνέδρια">Ανακοινώσεις σε Εθνικά Επιστημονικά Συνέδρια</option>
-          <option value="Άλλες Εργασίες">Άλλες Εργασίες</option>
-          <option value="Κεφάλαια σε Συλλογικούς Τόμους">Κεφάλαια σε Συλλογικούς Τόμους</option>
-          <option value="Άλλα">Άλλα</option>
-        </select>
-      </label>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="large-12 columns">
-      <button type="submit">Αποθήκευση</a>
-    </div>
-  </div>
-</form>
-
 
 </div>

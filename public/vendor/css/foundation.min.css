@@ -9071,10 +9071,8 @@ th.hide-for-touch {
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#a9d1f9), to(black));
   background-image: -moz-linear-gradient(-90deg, #a9d1f9, black);
   max-width: 100%;
-  position: fixed;
-  top: 0;
-  z-index: 99;
   color: #fff;
+  margin-bottom: 20px;
 }
 /* line 172, ../bower_components/foundation/scss/foundation/components/_global.scss */
 .modipHeader:before, .modipHeader:after {
@@ -9086,7 +9084,7 @@ th.hide-for-touch {
   clear: both;
 }
 
-/* line 19, ../scss/app.scss */
+/* line 18, ../scss/app.scss */
 .wrapFooter {
   width: 100%;
   margin-left: auto;
@@ -9094,8 +9092,7 @@ th.hide-for-touch {
   margin-top: 0;
   margin-bottom: 0;
   max-width: 62.5rem;
-  margin-top: 120px;
-  margin-bottom: 80px;
+  margin-top: 20px;
   /* Negative indent footer by it's height */
 }
 /* line 172, ../bower_components/foundation/scss/foundation/components/_global.scss */
@@ -9108,13 +9105,34 @@ th.hide-for-touch {
   clear: both;
 }
 
-/* line 26, ../scss/app.scss */
+/* line 25, ../scss/app.scss */
 .fullWidth {
-  width: 55rem;
-  max-width: 100%;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: initial;
 }
 
-/* line 31, ../scss/app.scss */
+/* line 34, ../scss/app.scss */
+.sidebarColumn {
+  padding-left: 0.9375rem;
+  padding-right: 0.9375rem;
+  float: left;
+}
+@media only screen and (min-width: 64.063em) and (max-width: 90em) {
+  /* line 34, ../scss/app.scss */
+  .sidebarColumn {
+    max-width: 20%;
+  }
+}
+@media only screen and (min-width: 90.063em) and (max-width: 120em) {
+  /* line 34, ../scss/app.scss */
+  .sidebarColumn {
+    max-width: 11%;
+  }
+}
+
+/* line 42, ../scss/app.scss */
 .modipFooter {
   width: 100%;
   margin-left: auto;
@@ -9125,7 +9143,6 @@ th.hide-for-touch {
   max-width: 100%;
   background: #333;
   bottom: 0;
-  position: fixed;
   height: 60px;
   /* choose any height */
 }
@@ -9139,13 +9156,13 @@ th.hide-for-touch {
   clear: both;
 }
 
-/* line 41, ../scss/app.scss */
+/* line 51, ../scss/app.scss */
 .tabs.vertical.lesson-tab-fix-size {
-  max-width: 27%;
-  width: 27%;
+  max-width: 17%;
+  width: 17%;
 }
 
-/* line 46, ../scss/app.scss */
+/* line 56, ../scss/app.scss */
 .tabs.lesson-tab dd.active a {
   background-color: #008cba;
   color: white;
